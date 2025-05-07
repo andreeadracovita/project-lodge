@@ -8,11 +8,11 @@ function App() {
   const [isList, setIsList] = useState(true)
 
   return (
-    <>
+    <div className="container">
       <Header />
       {isList ? <ListView /> : <MapView />}
       {isList && <Footer />}
-    </>
+    </div>
   )
 }
 
