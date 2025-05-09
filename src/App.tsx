@@ -14,11 +14,17 @@ function App() {
   }
 
   return (
-    <div className="container position-relative">
+    <>
       <Header />
-      {isList ? <><ListView /> <ViewToggleButton isList={true} buttonClick={toggleView} /></> : <><MapView /><ViewToggleButton isList={false} buttonClick={toggleView} /></>}
+      <main>
+        {
+          isList ?
+            <><ListView /> <ViewToggleButton isList={true} buttonClick={toggleView} /></> :
+            <><MapView /><ViewToggleButton isList={false} buttonClick={toggleView} /></>
+        }
+      </main>
       {isList && <Footer />}
-    </div>
+    </>
   )
 }
 

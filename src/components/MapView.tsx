@@ -11,7 +11,14 @@ import Point from 'ol/geom/Point.js';
 import Overlay from 'ol/Overlay.js';
 import Feature from 'ol/Feature.js';
 
+import "./MapView.css";
+
 function MapView() {
+	const pinStyle = {
+        'circle-radius': 9,
+		'circle-fill-color': 'red',
+	}
+
 	useEffect(() => {
 		useGeographic();
 
@@ -33,12 +40,9 @@ function MapView() {
 		      source: new VectorSource({
 		        features: [new Feature(point)],
 		      }),
-		      style: {
-		        'circle-radius': 9,
-		        'circle-fill-color': 'red',
-		      },
-		    }),
-		  ],
+		      style: pinStyle
+		    })
+		  ]
 		});
 
 		const element = document.getElementById('popup');
@@ -54,15 +58,9 @@ function MapView() {
 	    };
 	  }, []);
 
-	const mapStyle = {
-		width: "100%",
-		height: "600px"
-	};
-
 	return (
-		<div id="map" style={mapStyle}></div>
+		<div id="map"></div>
 	)
-	
 }
 
-export default MapView
+export default MapView;

@@ -4,8 +4,8 @@ import * as Icon from "react-bootstrap-icons";
 function Header() {
 	
 	return (
-		<header className="py-3 mb-3 border-bottom">
-			<div>
+		<header className="py-3 mb-3 border-bottom fixed-top">
+			<div className="container">
 				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 					<a href="/" className="col-lg-6 d-flex mb-3 mb-md-0 link-body-emphasis text-decoration-none">
 						<object data="/icon.svg" type="image/svg+xml" width="40" height="32" role="img" aria-label="Lodge"></object>
