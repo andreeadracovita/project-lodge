@@ -16,7 +16,7 @@ import "./MapView.css";
 function MapView() {
 	const pinStyle = {
         'circle-radius': 9,
-		'circle-fill-color': 'red',
+		'circle-fill-color': 'white'
 	}
 
 	useEffect(() => {

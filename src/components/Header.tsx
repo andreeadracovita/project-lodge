@@ -2,6 +2,10 @@ import Search from "./Search";
 import * as Icon from "react-bootstrap-icons";
 
 function Header() {
+
+	function signoutClicked() {
+		console.log("Sign out");
+	}
 	
 	return (
 		<header className="py-3 mb-3 border-bottom fixed-top">
@@ -20,10 +24,10 @@ function Header() {
 							</div>
 							
 							<ul className="dropdown-menu text-small">
-								<li><a className="dropdown-item" href="#">Settings</a></li>
-								<li><a className="dropdown-item" href="#">Profile</a></li>
+								<li><a className="dropdown-item" href="/user?settings">Settings</a></li>
+								<li><a className="dropdown-item" href="/user">Profile</a></li>
 								<li><hr className="dropdown-divider" /></li>
-								<li><a className="dropdown-item" href="#">Sign out</a></li>
+								<li><a className="dropdown-item" href="/" onClick={signoutClicked}>Sign out</a></li>
 							</ul>
 						</div>
 					</div>
