@@ -14,6 +14,17 @@
 	border-radius: 8%;
 }
 
+.heart-icon {
+	top: 20px;
+	right: 20px;
+	stroke: white;
+	transition: 0.3s;
+}
+
+.heart-icon:hover {
+	fill: pink;
+}
+
 a {
 	text-decoration: none;
 	color: black;
