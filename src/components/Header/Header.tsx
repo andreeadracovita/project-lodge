@@ -4,6 +4,10 @@ import "./Header.css";
 
 function Header() {
 
+	const userId = 1;
+
+	const profilePath = `/users/${userId}`;
+
 	function logoutClicked() {
 		console.log("Log out");
 	}
@@ -28,11 +32,11 @@ function Header() {
 							</div>
 							
 							<ul className="dropdown-menu dropdown-menu-end text-small">
-								<li><a className="dropdown-item" href="/user/profile">Profile</a></li>
-								<li><a className="dropdown-item" href="/user/trips">Trips</a></li>
-								<li><a className="dropdown-item" href="/user/wishlist">Wishlist</a></li>
+								<li><a className="dropdown-item" href={profilePath}>Profile</a></li>
+								<li><a className="dropdown-item" href="/trips">Trips</a></li>
+								<li><a className="dropdown-item" href="/wishlist">Wishlist</a></li>
 								<li><hr className="dropdown-divider" /></li>
-								<li><a className="dropdown-item" href="/user/settings">Account settings</a></li>
+								<li><a className="dropdown-item" href="/account-settings">Account settings</a></li>
 								<li><a className="dropdown-item" href="/" onClick={logoutClicked}>Log out</a></li>
 							</ul>
 						</div>
