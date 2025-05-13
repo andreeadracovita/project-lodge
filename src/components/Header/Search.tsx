@@ -1,9 +1,10 @@
 import * as Icon from "react-bootstrap-icons";
+import "./Search.css";
 
 function Search() {
 	return (
 		<div className="d-flex justify-content-center">
-			<form className="col-6 mb-3 mb-lg-0 d-flex align-items-center" role="search">
+			<form className="mb-3 mb-lg-0 d-flex align-items-center" role="search">
 				<div id="search-bar" className="me-2 rounded-pill d-flex p-1">
 					<input type="search" className="form-control search-field rounded-pill" placeholder="Where?" aria-label="destination" />
 					<div className="vr"></div>
