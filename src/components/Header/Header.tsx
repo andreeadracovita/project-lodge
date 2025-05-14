@@ -8,7 +8,7 @@ function Header({showSearch}) {
 
 	const profilePath = `/users/${userId}`;
 
-	const isHost = true;
+	const hasListings = true;
 
 	function logoutClicked() {
 		console.log("Log out");
@@ -26,11 +26,7 @@ function Header({showSearch}) {
 						{showSearch && <Search />}
 					</div>
 					<div className="col-lg-3 d-flex justify-content-end">
-						{
-							isHost ?
-							<a className="btn btn-light rounded-pill me-2" href="/hosting">Switch to hosting</a> :
-							<a className="btn btn-light rounded-pill me-2" href="/become-a-host">Become a host</a>
-						}
+						<a className="btn btn-light rounded-pill me-2" href="/hosting/listing/add">List a property</a>
 						<div className="dropdown">
 							<div id="dropdown-button" role="button" className="d-flex rounded-pill user-account-button px-2 py-1" data-bs-toggle="dropdown">
 								<object data="/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
@@ -41,6 +37,8 @@ function Header({showSearch}) {
 								<li><a className="dropdown-item" href={profilePath}>Profile</a></li>
 								<li><a className="dropdown-item" href="/trips">Trips</a></li>
 								<li><a className="dropdown-item" href="/wishlist">Wishlist</a></li>
+								<li><hr className="dropdown-divider" /></li>
+								{hasListings && <li><a className="dropdown-item" href="/hosting">Property manager</a></li>}
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="/account-settings">Account settings</a></li>
 								<li><a className="dropdown-item" href="/" onClick={logoutClicked}>Log out</a></li>

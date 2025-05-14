@@ -12,7 +12,6 @@ import Wishlist from './pages/Wishlist';
 import Messages from './pages/Messages';
 import AccountSettings from './pages/AccountSettings';
 
-import BecomeHost from './pages/BecomeHost';
 import Hosting from './pages/Hosting';
 import Listings from './pages/Listings';
 import ListingEdit from './pages/ListingEdit';
@@ -38,10 +37,9 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/account-settings" element={<AccountSettings />} />
 
-          <Route path="/become-a-host" element={<BecomeHost />} />
           <Route path="/hosting" element={<Hosting />} />
           <Route path="/hosting/listings" element={<Listings />} />
-          <Route path="/hosting/listings/add" element={<ListingEdit editMode={false} />} />
+          <Route path="/hosting/listing/add" element={<ListingEdit editMode={false} />} />
           <Route path="/hosting/listing/edit/:id" element={<ListingEdit editMode={true} />} />
           <Route path="/hosting/calendar" element={<Calendar />} />
 
