@@ -2,11 +2,13 @@ import * as Icon from "react-bootstrap-icons";
 import Search from "./Search";
 import "./Header.css";
 
-function Header() {
+function Header({showSearch}) {
 
 	const userId = 1;
 
 	const profilePath = `/users/${userId}`;
+
+	const isHost = true;
 
 	function logoutClicked() {
 		console.log("Log out");
@@ -21,10 +23,14 @@ function Header() {
 						<span className="fs-3 brand-font brand-color-text">Lodge</span>
 					</a>
 					<div className="col-lg-6">
-						<Search />
+						{showSearch && <Search />}
 					</div>
-					<div className="col-lg-3 d-flex flex-wrap justify-content-end">
-						<button type="button" className="btn btn-light rounded-pill me-2">Lodge your place</button>
+					<div className="col-lg-3 d-flex justify-content-end">
+						{
+							isHost ?
+							<a className="btn btn-light rounded-pill me-2" href="/hosting">Switch to hosting</a> :
+							<a className="btn btn-light rounded-pill me-2" href="/become-a-host">Become a host</a>
+						}
 						<div className="dropdown">
 							<div id="dropdown-button" role="button" className="d-flex rounded-pill user-account-button px-2 py-1" data-bs-toggle="dropdown">
 								<object data="/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
@@ -38,6 +44,7 @@ function Header() {
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="/account-settings">Account settings</a></li>
 								<li><a className="dropdown-item" href="/" onClick={logoutClicked}>Log out</a></li>
+								<li><a className="dropdown-item" href="/signup-login">Sign up or log in</a></li>
 							</ul>
 						</div>
 					</div>
