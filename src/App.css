@@ -9,19 +9,6 @@ body {
   min-height: 100%;
 }
 
-header {
-  background-color: white;
-}
-
-main {
-  padding-top: 140px;
-  padding-bottom: 70px;
-}
-
-footer {
-  background-color: white;
-}
-
 .lato-bold {
   font-family: "Lato", sans-serif;
   font-weight: 700;

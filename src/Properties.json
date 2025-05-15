@@ -1,0 +1,106 @@
+[
+	{
+		"id": 1,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2024-10-05",
+		"title": "Apartment Forest",
+		"images_url_array": [
+			"/property_img/00000001_1.jpg",
+			"/property_img/00000001_2.jpg",
+			"/property_img/00000001_3.jpg",
+			"/property_img/00000001_4.jpg"
+		]
+	},
+	{
+		"id": 2,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2023-09-01",
+		"title": "Cabin Sea Retreat",
+		"images_url_array": [
+			"/property_img/00000002_1.jpg",
+			"/property_img/00000002_2.jpg",
+			"/property_img/00000002_3.jpg",
+			"/property_img/00000002_4.jpg"
+		]
+	},
+	{
+		"id": 3,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2023-09-01",
+		"title": "Apartment Forest",
+		"images_url_array": [
+			"/property_img/00000002_1.jpg",
+			"/property_img/00000002_2.jpg",
+			"/property_img/00000002_3.jpg",
+			"/property_img/00000002_4.jpg"
+		]
+	},
+	{
+		"id": 4,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2023-09-01",
+		"title": "Cabin Sea Retreat",
+		"images_url_array": [
+			"/property_img/00000002_1.jpg",
+			"/property_img/00000002_2.jpg",
+			"/property_img/00000002_3.jpg",
+			"/property_img/00000002_4.jpg"
+		]
+	},
+	{
+		"id": 5,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2024-10-05",
+		"title": "Apartment Forest",
+		"images_url_array": [
+			"/property_img/00000001_1.jpg",
+			"/property_img/00000001_2.jpg",
+			"/property_img/00000001_3.jpg",
+			"/property_img/00000001_4.jpg"
+		]
+	},
+	{
+		"id": 6,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2023-09-01",
+		"title": "Cabin Sea Retreat",
+		"images_url_array": [
+			"/property_img/00000002_1.jpg",
+			"/property_img/00000002_2.jpg",
+			"/property_img/00000002_3.jpg",
+			"/property_img/00000002_4.jpg"
+		]
+	},
+	{
+		"id": 7,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2023-09-01",
+		"title": "Cabin Sea Retreat",
+		"images_url_array": [
+			"/property_img/00000002_1.jpg",
+			"/property_img/00000002_2.jpg",
+			"/property_img/00000002_3.jpg",
+			"/property_img/00000002_4.jpg"
+		]
+	},
+	{
+		"id": 8,
+		"host_id": 1,
+		"location": [8.5410422, 47.3744489],
+		"created_at": "2023-09-01",
+		"title": "Cabin Sea Retreat",
+		"images_url_array": [
+			"/property_img/00000002_1.jpg",
+			"/property_img/00000002_2.jpg",
+			"/property_img/00000002_3.jpg",
+			"/property_img/00000002_4.jpg"
+		]
+	}
+]

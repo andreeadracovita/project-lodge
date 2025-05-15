@@ -9,4 +9,4 @@ function HostingHeader() {
 	);
 }
 
-export default Hosting;
+export default HostingHeader;

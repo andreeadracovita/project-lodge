@@ -1,20 +1,41 @@
 import ListItem from "./ListItem";
+import properties from "../Properties.json";
 
 function ListView() {
+	// Today
+	const checkIn = new Date();
+	let checkOut = new Date();
+	checkOut.setDate(checkOut.getDate() + 3);
+
+	function getCity(location) {
+		const city = "Zürich";
+		return city;
+	}
+
+	function getCountry(location) {
+		const country = "Switzerland";
+		return country;
+	}
+
+	function getPrice(property_id) {
+		return 170;
+	}
 	
 	return (
-		<div className="container position-relative">
+		<div className="position-relative">
 			<div className="row cols-1 cols-sm-2 cols-md-4">
-				<ListItem id={1} />
-				<ListItem id={2} />
-				<ListItem id={3} />
-				<ListItem id={4} />
-				<ListItem id={5} />
-				<ListItem id={6} />
-				<ListItem id={7} />
-				<ListItem id={8} />
-				<ListItem id={9} />
-				<ListItem id={10} />
+				{properties.map((p, i) =>
+					<ListItem
+						key={i}
+						id={p.id}
+						img_url={p.images_url_array[0]}
+						title={p.title}
+						city={getCity(p.location)}
+						country={getCountry(p.location)}
+						price={getPrice(p.id)}
+						checkIn={checkIn}
+						checkOut={checkOut}
+					/>)}
 			</div>
 		</div>
 	)

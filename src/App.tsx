@@ -6,11 +6,10 @@ import Home from './pages/Home';
 import Stay from './pages/Stay';
 
 import SignupLogin from './pages/SignupLogin';
-import User from './pages/User';
+import Account from './pages/Account';
 import Trips from './pages/Trips';
 import Wishlist from './pages/Wishlist';
 import Messages from './pages/Messages';
-import AccountSettings from './pages/AccountSettings';
 
 import Hosting from './pages/Hosting';
 import Listings from './pages/Listings';
@@ -31,11 +30,10 @@ function App() {
           <Route path="/stay/:id" element={<Stay />} />
 
           <Route path="/signup-login" element={<SignupLogin />} />
-          <Route path="/users/:id" element={<User />} />
+          <Route path="/myaccount" element={<Account />} />
           <Route path="/trips" element={<Trips />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/messages" element={<Messages />} />
-          <Route path="/account-settings" element={<AccountSettings />} />
 
           <Route path="/hosting" element={<Hosting />} />
           <Route path="/hosting/listings" element={<Listings />} />

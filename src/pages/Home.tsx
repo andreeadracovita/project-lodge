@@ -1,28 +1,15 @@
-import { useState } from 'react';
 import ListView from '../components/ListView';
-import MapView from '../components/MapView';
-import ViewToggleButton from '../components/ViewToggleButton';
+import Search from '../components/Header/Search';
 
 function Home() {
-	const [isList, setIsList] = useState(true)
-
-	function toggleView() {
-		setIsList(!isList);
-	}
 	return (
-		<>
-			{
-	          isList ?
-	            <>
-	              <ListView />
-	              <ViewToggleButton isList={true} buttonClick={toggleView} />
-	            </> :
-	            <>
-	              <MapView />
-	              <ViewToggleButton isList={false} buttonClick={toggleView} />
-	            </>
-	        }
-		</>
+		<div className="container mt-5">
+			<h1 className="brand-color-text brand-font">Where to next, name?</h1>
+			<Search />
+			<div className="mt-3">
+	        	<ListView />
+	        </div>
+		</div>
 	);
 }
 
