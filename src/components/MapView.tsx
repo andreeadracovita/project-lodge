@@ -13,7 +13,7 @@ import Feature from 'ol/Feature.js';
 
 import "./MapView.css";
 
-function MapView() {
+function MapView({width, height, center}) {
 	const pinStyle = {
         'circle-radius': 9,
 		'circle-fill-color': 'white'
@@ -22,9 +22,7 @@ function MapView() {
 	useEffect(() => {
 		useGeographic();
 
-		const place = [8.5410422, 47.3744489];
-
-		const point = new Point(place);
+		const point = new Point(center);
 
 		const map = new Map({
 		  target: 'map',
@@ -58,8 +56,13 @@ function MapView() {
 	    };
 	  }, []);
 
+	const mapStyle = {
+		width: width ?? "100%",
+		height: height ?? "1000px"
+	};
+
 	return (
-		<div id="map"></div>
+		<div id="map" style={mapStyle}></div>
 	)
 }
 

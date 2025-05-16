@@ -14,7 +14,7 @@ import Messages from './pages/Messages';
 import Hosting from './pages/Hosting';
 import Listings from './pages/Listings';
 import ListingEdit from './pages/ListingEdit';
-import Calendar from './pages/Calendar';
+import HostingCalendar from './pages/HostingCalendar';
 
 import NoMatch from './pages/NoMatch';
 
@@ -27,7 +27,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/stay/:id" element={<Stay />} />
+          <Route path="/stay" element={<Stay />} />
 
           <Route path="/signup-login" element={<SignupLogin />} />
           <Route path="/myaccount" element={<Account />} />
@@ -39,7 +39,7 @@ function App() {
           <Route path="/hosting/listings" element={<Listings />} />
           <Route path="/hosting/listing/add" element={<ListingEdit editMode={false} />} />
           <Route path="/hosting/listing/edit/:id" element={<ListingEdit editMode={true} />} />
-          <Route path="/hosting/calendar" element={<Calendar />} />
+          <Route path="/hosting/calendar" element={<HostingCalendar />} />
 
           <Route path="*" element={<NoMatch />} />
         </Routes>

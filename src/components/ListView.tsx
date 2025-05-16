@@ -7,11 +7,13 @@ function ListView() {
 	let checkOut = new Date();
 	checkOut.setDate(checkOut.getDate() + 3);
 
+	// Include in REST API
 	function getCity(location) {
 		const city = "Zürich";
 		return city;
 	}
 
+	// Include in REST API
 	function getCountry(location) {
 		const country = "Switzerland";
 		return country;

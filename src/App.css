@@ -1,5 +1,8 @@
 :root {
   --brand-color: #7ed957;
+  --bright-red: #ff3131;
+  --light-grey: #d9d9d9;
+  --medium-grey: #bebbbb;
 }
 
 body {
@@ -37,4 +40,26 @@ body {
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
+}
+
+.heading {
+  color: var(--brand-color);
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.page-title {
+  font-size: calc(1.3rem + 0.6vw);
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+}
+
+.section-heading {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.25rem;
 }

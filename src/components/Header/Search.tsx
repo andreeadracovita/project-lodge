@@ -25,7 +25,6 @@ function Search() {
 						Search
 					</button>
 				</div>
-				
 			</form>
 		</div>
 	)

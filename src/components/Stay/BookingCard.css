@@ -1,0 +1,9 @@
+#booking-card {
+	border: 1px solid #bebbbb;
+	border-radius: 28px;
+	padding: 1rem;
+}
+
+#booking-card .form-field {
+	border: 1px solid #adb5bd;
+}

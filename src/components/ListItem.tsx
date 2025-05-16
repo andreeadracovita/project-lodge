@@ -1,7 +1,8 @@
-import * as Icon from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Rating from "./Rating";
+import * as Icon from "react-bootstrap-icons";
 
-import './ListItem.css';
+import "./ListItem.css";
 
 function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut }) {
 
@@ -24,19 +25,19 @@ function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut 
 		<div className="col-12 col-sm-6 col-md-3 gy-3">
 			<Link
 				to={{
-					pathname: `/stay/${id}`,
-					search: `?adults=1&children=1&check_in=${checkInParam}&check_out=${checkOutParam}`
+					pathname: `/stay`,
+					search: `?id=${id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
 				}}
 			>
 				<div className="position-relative">
 					<img src={img_url} className="card-img mb-2" />
-					<Icon.HeartFill size={24} color={isFavorite ? "#e3480a" : "#9d9794"} className="bi bi-heart-fill heart-icon position-absolute" />
+					<Icon.HeartFill size={24} color={isFavorite ? "#ff3131" : "#9d9794"} className="bi bi-heart-fill heart-icon position-absolute" />
 					<div>
 						<p className="mb-0">{title}</p>
 						<p className="lato-bold">{city}, {country}</p>
 						<p className="text-muted">{displayDate}</p>
 						<p><span className="lato-bold">{price}</span> currency night</p>
-						<p><Icon.StarFill color="black" size={16} /> <span className="lato-bold">4.95</span></p>
+						<Rating score={4.95} />
 					</div>
 				</div>
 			</Link>
