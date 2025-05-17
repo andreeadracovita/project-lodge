@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import Rating from "./Rating";
 import * as Icon from "react-bootstrap-icons";
 
+import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import Rating from "./Rating";
 import "./ListItem.css";
 
 function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut }) {
@@ -10,16 +11,9 @@ function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut 
 
 	const displayDate = checkIn.getDate() + " " + checkIn.toLocaleString('default', {month: 'long'}) +
 		" - " + checkOut.getDate() + " " + checkOut.toLocaleString('default', {month: 'long'}); // 1 May - 2 May (Year if not current)
-
-	// 2025-05-01 year-month-day
-	function formatDate(date) {
-		return date.getFullYear().toString() + "-" +
-			(date.getMonth() + 1).toString().padStart(2, '0') + "-" +
-			date.getDate().toString().padStart(2, '0');
-	}
 	
-	const checkInParam = formatDate(checkIn);
-	const checkOutParam = formatDate(checkOut);
+	const checkInParam = yearDashMonthDashDay(checkIn);
+	const checkOutParam = yearDashMonthDashDay(checkOut);
 
 	return (
 		<div className="col-12 col-sm-6 col-md-3 gy-3">

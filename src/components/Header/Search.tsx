@@ -21,7 +21,7 @@ function Search() {
 						<label htmlFor="guests" className="ms-2">Guests</label>
 						<input id="guests" type="number" className="form-control search-field rounded-pill" placeholder="Guests" aria-label="number of guests" />
 					</div>
-					<button type="button" className="btn btn-light rounded-pill brand-color-background ms-3">
+					<button id="search-button" type="button" className="btn btn-light rounded-pill brand-color-background">
 						Search
 					</button>
 				</div>

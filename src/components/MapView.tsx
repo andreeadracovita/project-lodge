@@ -13,7 +13,7 @@ import Feature from 'ol/Feature.js';
 
 import "./MapView.css";
 
-function MapView({width, height, center}) {
+function MapView({width, height, center, zoom}) {
 	const pinStyle = {
         'circle-radius': 9,
 		'circle-fill-color': 'white'
@@ -27,8 +27,8 @@ function MapView({width, height, center}) {
 		const map = new Map({
 		  target: 'map',
 		  view: new View({
-		    center: place,
-		    zoom: 8,
+		    center: center,
+		    zoom: zoom,
 		  }),
 		  layers: [
 		    new TileLayer({
