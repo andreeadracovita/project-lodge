@@ -1,4 +1,4 @@
-import HostingHeader from "../components/Header/HostingHeader";
+import HostingHeader from "/src/components/Header/HostingHeader";
 
 function Hosting() {
 	return (
