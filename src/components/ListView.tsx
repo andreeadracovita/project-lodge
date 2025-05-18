@@ -1,7 +1,6 @@
 import ListItem from "./ListItem";
-import properties from "../Properties.json";
 
-function ListView() {
+function ListView({properties}) {
 	// Today
 	const checkIn = new Date();
 	let checkOut = new Date();

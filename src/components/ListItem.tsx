@@ -16,7 +16,7 @@ function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut 
 	const checkOutParam = yearDashMonthDashDay(checkOut);
 
 	return (
-		<div className="col-12 col-sm-6 col-md-3 gy-3">
+		<div className="col-12 col-sm-6 col-md-3 mb-3">
 			<Link
 				to={{
 					pathname: `/stay`,

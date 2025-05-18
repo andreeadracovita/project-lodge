@@ -6,7 +6,7 @@ function Header() {
 
 	const userId = 1;
 
-	const profilePath = `/myaccount?id=${userId}`;
+	const profilePath = `/myaccount`;
 
 	function logoutClicked() {
 		console.log("Log out");
@@ -32,13 +32,14 @@ function Header() {
 							
 							<ul className="dropdown-menu dropdown-menu-end text-small">
 								<li><a className="dropdown-item" href={profilePath}>My account</a></li>
-								<li><a className="dropdown-item" href="/trips">Trips</a></li>
 								<li><a className="dropdown-item" href="/wishlist">Wishlist</a></li>
+								<li><a className="dropdown-item" href="/trips">Trips</a></li>
+								<li><a className="dropdown-item" href="/messages">Messages</a></li>
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="/hosting">Property manager</a></li>
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="/" onClick={logoutClicked}>Log out</a></li>
-								<li><a className="dropdown-item" href="/signup-login">Sign up or log in</a></li>
+								<li><a className="dropdown-item" href="/signuplogin">Sign up or log in</a></li>
 							</ul>
 						</div>
 					</div>

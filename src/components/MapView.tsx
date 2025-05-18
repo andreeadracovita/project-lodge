@@ -13,16 +13,25 @@ import Feature from 'ol/Feature.js';
 
 import "./MapView.css";
 
-function MapView({width, height, center, zoom}) {
+// Center = [long, lat]
+// Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
+function MapView({width, height, center, zoom, points}) {
 	const pinStyle = {
-        'circle-radius': 9,
-		'circle-fill-color': 'white'
+        'circle-radius': 5,
+		'circle-fill-color': 'red'
 	}
 
 	useEffect(() => {
 		useGeographic();
 
-		const point = new Point(center);
+		const features = [];
+		if (points) {
+			points.forEach((p) => {
+				console.log(p);
+				const point = new Point([p[1], p[0]]);
+				features.push(new Feature(point));
+			});
+		}
 
 		const map = new Map({
 		  target: 'map',
@@ -36,7 +45,7 @@ function MapView({width, height, center, zoom}) {
 		    }),
 		    new VectorLayer({
 		      source: new VectorSource({
-		        features: [new Feature(point)],
+		        features: features,
 		      }),
 		      style: pinStyle
 		    })
@@ -54,7 +63,7 @@ function MapView({width, height, center, zoom}) {
 	    return () => {
 	      map.setTarget(null);
 	    };
-	  }, []);
+	  }, [center]);
 
 	const mapStyle = {
 		width: width ?? "100%",

@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import Stay from "./pages/Stay";
+import SearchResults from "./pages/SearchResults";
 import SignupLogin from "./pages/SignupLogin";
 
 import Account from "./pages/account/Account";
@@ -27,8 +28,9 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/searchresults" element={<SearchResults />} />
           <Route path="/stay" element={<Stay />} />
-          <Route path="/signup-login" element={<SignupLogin />} />
+          <Route path="/signuplogin" element={<SignupLogin />} />
 
           {/* Guarded by authentication */}
           <Route path="/myaccount" element={<Account />} />

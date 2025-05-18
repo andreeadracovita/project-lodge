@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [64.00430605896098, -21.294883564194244],
 		"created_at": "2024-10-05",
 		"title": "Apartment Forest",
 		"images_url_array": [
@@ -15,7 +15,7 @@
 	{
 		"id": 2,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [64.00210123436948, -17.053060684800393],
 		"created_at": "2023-09-01",
 		"title": "Cabin Sea Retreat",
 		"images_url_array": [
@@ -28,7 +28,7 @@
 	{
 		"id": 3,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [65.63564710440708, -18.4225219813595],
 		"created_at": "2023-09-01",
 		"title": "Apartment Forest",
 		"images_url_array": [
@@ -41,7 +41,7 @@
 	{
 		"id": 4,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [63.87889403558507, -22.442302644319245],
 		"created_at": "2023-09-01",
 		"title": "Cabin Sea Retreat",
 		"images_url_array": [
@@ -54,7 +54,7 @@
 	{
 		"id": 5,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [46.53566419590551, 7.953066418205519],
 		"created_at": "2024-10-05",
 		"title": "Apartment Forest",
 		"images_url_array": [
@@ -67,7 +67,7 @@
 	{
 		"id": 6,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [47.33362446925113, 8.576307440901925],
 		"created_at": "2023-09-01",
 		"title": "Cabin Sea Retreat",
 		"images_url_array": [
@@ -80,7 +80,7 @@
 	{
 		"id": 7,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [46.951935465438154, 7.483478385472737],
 		"created_at": "2023-09-01",
 		"title": "Cabin Sea Retreat",
 		"images_url_array": [
@@ -93,7 +93,7 @@
 	{
 		"id": 8,
 		"host_id": 1,
-		"location": [8.5410422, 47.3744489],
+		"location": [46.672891099371526, 7.868488916795715],
 		"created_at": "2023-09-01",
 		"title": "Cabin Sea Retreat",
 		"images_url_array": [
