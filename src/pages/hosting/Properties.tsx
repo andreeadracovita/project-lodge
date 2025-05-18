@@ -1,13 +1,13 @@
 import HostingHeader from "../components/Header/HostingHeader";
 
-function Listings() {
+function Properties() {
 	return (
 		<div className="container">
 			<HostingHeader />
 
-			<h1>Listings</h1>
+			<h1>Properties</h1>
 		</div>
 	);
 }
 
-export default Listings;
+export default Properties;
