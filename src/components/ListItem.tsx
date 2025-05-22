@@ -5,7 +5,7 @@ import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "./Rating";
 import "./ListItem.css";
 
-function ListItem({ isLink, id, img_url, title, city, country, price, currency, checkIn, checkOut }) {
+function ListItem({ isLink, id, img_url, title, city, country, price, currency, rating, checkIn, checkOut }) {
 
 	const isFavorite = true;
 
@@ -35,7 +35,7 @@ function ListItem({ isLink, id, img_url, title, city, country, price, currency, 
 						<p className="lato-bold">{city}, {country}</p>
 						<p className="text-muted">{displayDate}</p>
 						<p><span className="lato-bold">{price}</span> {currency} night</p>
-						<Rating score={4.95} />
+						<Rating score={rating} />
 					</div>
 				</div>
 			</Link>

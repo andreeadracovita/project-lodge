@@ -24,7 +24,7 @@ function AddPropertyForm() {
 		guests: 1,
 		beds: 1,
 		bathrooms: 1,
-		features: [],
+		features_ids: [],
 		photos: [],
 		pricePerNight: "" // price per night converted from session/account currency to eur as it is stored in db
 	});
@@ -76,18 +76,19 @@ function AddPropertyForm() {
 	}
 
 	function handleChangeMultiselect(event) {
-		const selected = event.target.id;
+		const selected = parseInt(event.target.id);
 
-		let newFeaturesValue = input.features;
+		let newFeaturesValue = input.features_ids;
 		if (newFeaturesValue.includes(selected)) {
 			newFeaturesValue = newFeaturesValue.filter(f => f !== selected);
 		} else {
 			newFeaturesValue.push(selected);
 		}
+		console.log(newFeaturesValue);
 		setInput((prevValue) => {
 			return {
 				...prevValue,
-				features: newFeaturesValue
+				features_ids: newFeaturesValue
 			}
 		});
 	}

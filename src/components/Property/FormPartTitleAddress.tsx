@@ -1,10 +1,33 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
 function FormPartTitleAddress({isEditable, showButton, input, handleChange, onButtonClicked}) {
+	const [buildingTypes, setBuildingTypes] = useState([]);
+	const [rentalTypes, setRentalTypes] = useState([]);
 
-	const buildingTypes = ["Cabin", "Ryokan", "Hotel", "Apartment", "Villa", "Cottage", "Bnb"];
-	const rentalTypes = ["Room", "Entire place"];
+	useEffect(() => {
+		axios.get("http://localhost:3000/building_types")
+			.then(response => {
+				if (response.data.length > 0) {
+					setBuildingTypes(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+
+		axios.get("http://localhost:3000/rental_types")
+			.then(response => {
+				if (response.data.length > 0) {
+					setRentalTypes(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, []);
 
 	const stylingFormControl100 = classNames(
 		"form-control",
@@ -38,8 +61,8 @@ function FormPartTitleAddress({isEditable, showButton, input, handleChange, onBu
 				onChange={isEditable ? handleChange : undefined}
 			>
 				{
-					buildingTypes.map((type, i) => 
-						<option key={i} value={i}>{type}</option>
+					buildingTypes.map(type => 
+						<option key={type.id} value={type.id}>{type.name}</option>
 					)
 				}
 				
@@ -55,8 +78,8 @@ function FormPartTitleAddress({isEditable, showButton, input, handleChange, onBu
 				onChange={isEditable ? handleChange : undefined}
 			>
 				{
-					rentalTypes.map((type, i) => 
-						<option key={i} value={i}>{type}</option>
+					rentalTypes.map(type => 
+						<option key={type.id} value={type.id}>{type.name}</option>
 					)
 				}
 			</select>

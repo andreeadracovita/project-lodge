@@ -1,8 +1,25 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import ListView from "/src/components/ListView";
 import Search from "/src/components/Header/Search";
 import properties from "../Properties.json";
 
 function Home() {
+	const [properties, setProperties] = useState([]);
+
+	useEffect(() => {
+		axios.get("http://localhost:3000/properties")
+			.then(response => {
+				if (response.data.length > 0) {
+					setProperties(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}, []);
+
 	return (
 		<div className="container">
 			<h1 className="heading">Where to next, name?</h1>

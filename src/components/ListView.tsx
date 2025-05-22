@@ -6,37 +6,23 @@ function ListView({properties}) {
 	let checkOut = new Date();
 	checkOut.setDate(checkOut.getDate() + 3);
 
-	// Include in REST API
-	function getCity(location) {
-		const city = "Zürich";
-		return city;
-	}
-
-	// Include in REST API
-	function getCountry(location) {
-		const country = "Switzerland";
-		return country;
-	}
-
-	function getPrice(property_id) {
-		return 170;
-	}
+	const propertyImgPathPrefix = "/property_img/";
 	
 	return (
 		<div className="position-relative">
 			<div className="row cols-1 cols-sm-2 cols-md-4">
-				{properties.map((p, i) =>
-					<div className="col-12 col-sm-6 col-md-3">
+				{properties.map(p =>
+					<div key={p.id} className="col-12 col-sm-6 col-md-3">
 						<ListItem
-							key={i}
 							isLink={true}
 							id={p.id}
-							img_url={p.images_url_array[0]}
+							img_url={propertyImgPathPrefix + p.img_url}
 							title={p.title}
-							city={getCity(p.location)}
-							country={getCountry(p.location)}
-							price={getPrice(p.id)}
+							city={p.city}
+							country={p.country}
+							price={p.price}
 							currency={"currency"}
+							rating={p.rating.toFixed(2)}
 							checkIn={checkIn}
 							checkOut={checkOut}
 						/>

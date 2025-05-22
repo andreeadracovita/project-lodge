@@ -1,13 +1,27 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
 import "./FormPartDescription.css";
 
 function FormPartDescription({isEditable, showButton, showUnselectedFeatures, input, handleChange, onButtonClicked, handleChangeMultiselect}) {
-	const features = ["Free WiFi", "Free parking", "Kitchen", "Lake view", "Sea view", "Mountain view", "BBQ grill", "Gym equipment", "TV"];
+	const [features, setFeatures] = useState([]);
 
-	function isFeatureSelected(feature) {
-		return input.features.includes(feature);
+	useEffect(() => {
+		axios.get("http://localhost:3000/features")
+			.then(response => {
+				if (response.data.length > 0) {
+					setFeatures(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, []);
+
+	function isFeatureIdSelected(featureId) {
+		return input.features_ids.includes(featureId);
 	}
 
 	const stylingFormTextArea = classNames(
@@ -97,42 +111,45 @@ function FormPartDescription({isEditable, showButton, showUnselectedFeatures, in
 				<h2 className="mt-3">Features</h2>
 				<div id="selected-features" className="d-flex flex-wrap">
 					{
-						input.features.map((feature, i) => 
-							<span
-								key={i}
-								id={feature}
-								className={classNames(
-									"features-list-item",
-									"selectable-item",
-									{
-										"selected-feature": isFeatureSelected(feature)
-									}
-								)}
-								onClick={isEditable ? handleChangeMultiselect : undefined}
-							>
-								{feature}
-							</span>
-						)	
+						input.features_ids.map((id) => {
+							const foundFeature = features.find(feature => feature.id == id);
+							if (foundFeature) {
+								return <span
+									key={foundFeature.id}
+									id={foundFeature.id}
+									className={classNames(
+										"features-list-item",
+										"selectable-item",
+										{
+											"selected-feature": isFeatureIdSelected(foundFeature.id)
+										}
+									)}
+									onClick={isEditable ? handleChangeMultiselect : undefined}
+								>
+									{foundFeature.name}
+								</span>
+							}
+						})	
 					}
 				</div>
 				{
 					showUnselectedFeatures &&
 					<div id="unselected-features" className="d-flex flex-wrap">
 						{
-							features.map((feature, i) => 
+							features.map(feature => 
 								<span
-									key={i}
-									id={feature}
+									key={feature.id}
+									id={feature.id}
 									className={classNames(
 										"features-list-item",
 										"selectable-item",
 										{
-											"d-none": isFeatureSelected(feature)
+											"d-none": isFeatureIdSelected(feature.id)
 										}
 									)}
 									onClick={handleChangeMultiselect}
 								>
-									{feature}
+									{feature.name}
 								</span>
 							)	
 						}
