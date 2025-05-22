@@ -26,17 +26,22 @@ function ListView({properties}) {
 		<div className="position-relative">
 			<div className="row cols-1 cols-sm-2 cols-md-4">
 				{properties.map((p, i) =>
-					<ListItem
-						key={i}
-						id={p.id}
-						img_url={p.images_url_array[0]}
-						title={p.title}
-						city={getCity(p.location)}
-						country={getCountry(p.location)}
-						price={getPrice(p.id)}
-						checkIn={checkIn}
-						checkOut={checkOut}
-					/>)}
+					<div className="col-12 col-sm-6 col-md-3">
+						<ListItem
+							key={i}
+							isLink={true}
+							id={p.id}
+							img_url={p.images_url_array[0]}
+							title={p.title}
+							city={getCity(p.location)}
+							country={getCountry(p.location)}
+							price={getPrice(p.id)}
+							currency={"currency"}
+							checkIn={checkIn}
+							checkOut={checkOut}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	)

@@ -1,3 +1,5 @@
+import AddPropertyForm from "/src/components/property/AddPropertyForm";
+
 function PropertyEdit({editMode}) {
 
 	return (

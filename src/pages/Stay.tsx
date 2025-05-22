@@ -29,7 +29,7 @@ function Stay() {
 	return (
 		<div className="container">
 			<div>
-				<p className="page-title">{item.title}</p>
+				<h1>{item.title}</h1>
 				<p><Icon.GeoAltFill size={24}/> [Address from Geo Api], {getCity(item.location)}, {getCountry(item.location)}</p>
 				<Rating score={4.95} />
 			</div>

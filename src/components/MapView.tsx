@@ -27,7 +27,6 @@ function MapView({width, height, center, zoom, points}) {
 		const features = [];
 		if (points) {
 			points.forEach((p) => {
-				console.log(p);
 				const point = new Point([p[1], p[0]]);
 				features.push(new Feature(point));
 			});

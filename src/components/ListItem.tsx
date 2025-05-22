@@ -5,23 +5,27 @@ import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "./Rating";
 import "./ListItem.css";
 
-function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut }) {
+function ListItem({ isLink, id, img_url, title, city, country, price, currency, checkIn, checkOut }) {
 
 	const isFavorite = true;
 
-	const displayDate = checkIn.getDate() + " " + checkIn.toLocaleString('default', {month: 'long'}) +
+	let displayDate = "";
+	let checkInParam = "";
+	let checkOutParam = "";
+	if (checkIn && checkOut) {
+		displayDate = checkIn.getDate() + " " + checkIn.toLocaleString('default', {month: 'long'}) +
 		" - " + checkOut.getDate() + " " + checkOut.toLocaleString('default', {month: 'long'}); // 1 May - 2 May (Year if not current)
-	
-	const checkInParam = yearDashMonthDashDay(checkIn);
-	const checkOutParam = yearDashMonthDashDay(checkOut);
+		checkInParam = yearDashMonthDashDay(checkIn);
+		checkOutParam = yearDashMonthDashDay(checkOut);
+	}
 
 	return (
-		<div className="col-12 col-sm-6 col-md-3 mb-3">
+		<div className="mb-3">
 			<Link
-				to={{
+				to={isLink ? {
 					pathname: `/stay`,
 					search: `?id=${id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
-				}}
+				} : {}}
 			>
 				<div className="position-relative">
 					<img src={img_url} className="card-img mb-2" />
@@ -30,7 +34,7 @@ function ListItem({ id, img_url, title, city, country, price, checkIn, checkOut 
 						<p className="mb-0">{title}</p>
 						<p className="lato-bold">{city}, {country}</p>
 						<p className="text-muted">{displayDate}</p>
-						<p><span className="lato-bold">{price}</span> currency night</p>
+						<p><span className="lato-bold">{price}</span> {currency} night</p>
 						<Rating score={4.95} />
 					</div>
 				</div>

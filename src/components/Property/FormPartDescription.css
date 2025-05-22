@@ -1,0 +1,15 @@
+:root {
+  --brand-color: #7ed957;
+  --light-green: #d6f2ca;
+  --bright-red: #ff3131;
+  --light-grey: #d9d9d9;
+  --medium-grey: #bebbbb;
+}
+
+.selected-feature {
+	background-color: var(--light-green);
+}
+
+.selectable-item {
+  cursor: pointer;
+}

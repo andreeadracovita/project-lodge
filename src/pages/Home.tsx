@@ -1,13 +1,14 @@
-import ListView from '../components/ListView';
-import Search from '../components/Header/Search';
+import ListView from "/src/components/ListView";
+import Search from "/src/components/Header/Search";
+import properties from "../Properties.json";
 
 function Home() {
 	return (
-		<div className="container mt-5">
+		<div className="container">
 			<h1 className="heading">Where to next, name?</h1>
 			<Search />
 			<div className="mt-3">
-	        	<ListView />
+	        	<ListView properties={properties} />
 	        </div>
 		</div>
 	);

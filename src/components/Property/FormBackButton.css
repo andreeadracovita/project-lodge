@@ -1,0 +1,7 @@
+.back-button {
+	text-decoration: underline;
+}
+
+.back-button:hover {
+	cursor: pointer;
+}

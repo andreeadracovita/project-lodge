@@ -38,10 +38,10 @@ function SearchResults() {
 	}, [location]);
 
 	return (
-		<div className="container mt-3">
+		<div className="container">
 			<Search />
 			<div className="mt-3">
-				<h1 className="page-title">{location}: {propertiesNo} properties found</h1>
+				<h1>{location}: {propertiesNo} properties found</h1>
 				<div className="row">
 					<div className="col-8">
 	        			<ListView properties={properties} />

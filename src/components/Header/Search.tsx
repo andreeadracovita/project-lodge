@@ -28,7 +28,7 @@ function Search() {
 				...prevValue,
 				[name]: value
 			}
-		})
+		});
 	}
 
 	return (

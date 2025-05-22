@@ -1,6 +1,7 @@
 /* Grass green: #7ed957 */
 :root {
   --brand-color: #7ed957;
+  --light-green: #d6f2ca;
   --bright-red: #ff3131;
   --light-grey: #d9d9d9;
   --medium-grey: #bebbbb;
@@ -43,24 +44,29 @@ body {
   font-style: normal;
 }
 
-.heading {
-  color: var(--brand-color);
-  font-family: "League Spartan", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.page-title {
+h1 {
   font-size: calc(1.3rem + 0.6vw);
   font-family: "League Spartan", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
 }
 
-.section-heading {
+h2 {
+  font-size: 1.25rem;
   font-family: "Lato", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1.25rem;
+}
+
+.heading {
+  color: var(--brand-color);
+}
+
+main {
+  margin-top: 2rem;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
 }
