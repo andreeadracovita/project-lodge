@@ -6,6 +6,7 @@ function ListView({properties}) {
 	let checkOut = new Date();
 	checkOut.setDate(checkOut.getDate() + 3);
 
+	// Todo: extract to config file
 	const propertyImgPathPrefix = "/property_img/";
 	
 	return (

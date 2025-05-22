@@ -23,8 +23,8 @@ function BookingCard({price}) {
 	const addedTax = Math.ceil(priceBeforeTax * taxPercentage);
 	const total = priceBeforeTax + addedTax;
 
-	return(
-		<div id="booking-card">
+	return (
+		<div id="booking-card" className="sticky">
 			<p className="section-heading">{total} {currency}</p>
 			<p>
 				{guests} {guests > 1 ? <span>guests</span> : <span>guest</span>}, {nights} {nights > 1 ? <span>nights</span> : <span>night</span>}

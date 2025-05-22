@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import ListView from "/src/components/ListView";
 import Search from "/src/components/Header/Search";
-import properties from "../Properties.json";
 
 function Home() {
 	const [properties, setProperties] = useState([]);

@@ -27,7 +27,7 @@ function AvailabilitySection() {
 
 	return (
 		<>
-			<p className="section-heading">Availability</p>
+			<h2>Availability</h2>
 			<p className="text-muted">{checkIn.toLocaleString("en-GB", option)} - {checkOut.toLocaleString("en-GB", option)}</p>
 			<Calendar />
 		</>

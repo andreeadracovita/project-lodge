@@ -10,7 +10,7 @@ import properties from "../Properties.json";
 function SearchResults() {
 	const propertiesNo = 100;
 	const [location, setLocation] = useState("");
-	const [locationGeo, setLocationGeo] = useState([0, 0]); // [long, lat]
+	const [locationGeo, setLocationGeo] = useState([0, 0]); // [lat, lon]
 	const [points, setPoints] = useState([]);
 
 	const [searchParams, setSearchParams] = useSearchParams();

@@ -18,7 +18,7 @@ import "./MapView.css";
 function MapView({width, height, center, zoom, points}) {
 	const pinStyle = {
         'circle-radius': 5,
-		'circle-fill-color': 'red'
+		'circle-fill-color': 'blue'
 	}
 
 	useEffect(() => {
@@ -26,7 +26,7 @@ function MapView({width, height, center, zoom, points}) {
 
 		const features = [];
 		if (points) {
-			points.forEach((p) => {
+			points.forEach(p => {
 				const point = new Point([p[1], p[0]]);
 				features.push(new Feature(point));
 			});
@@ -35,7 +35,7 @@ function MapView({width, height, center, zoom, points}) {
 		const map = new Map({
 		  target: 'map',
 		  view: new View({
-		    center: center,
+		    center: [center[1], center[0]],
 		    zoom: zoom,
 		  }),
 		  layers: [
