@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
+import Calendar from "../Calendar/Calendar";
+import { dayMonYear } from "/src/utils/DateFormatUtils";
 import "./Search.css";
 
 function Search() {
@@ -15,6 +17,24 @@ function Search() {
 		checkOut: searchParams.get("check_out") ?? "",
 		guests: searchParams.get("guests") ?? ""
 	});
+
+	useEffect(() => {
+		setInput(prevValue => {
+			return {
+				...prevValue,
+				checkIn: searchParams.get("check_in")
+			}
+		});
+	}, [searchParams.get("check_in")]);
+
+	useEffect(() => {
+		setInput(prevValue => {
+			return {
+				...prevValue,
+				checkOut: searchParams.get("check_out")
+			}
+		});
+	}, [searchParams.get("check_out")]);
 
 	function onSearchClicked() {
 		navigate(`/searchresults?destination=${input.destination}&check_in=${input.checkIn}&check_out=${input.checkOut}&guests=${input.guests}`);
@@ -31,6 +51,10 @@ function Search() {
 		});
 	}
 
+	function onCalendarClick(event) {
+		event.stopPropagation();
+	}
+
 	return (
 		<div>
 			<form className="mb-3 mb-lg-0 d-flex align-items-center" role="search">
@@ -45,40 +69,29 @@ function Search() {
 						value={input.destination}
 						onChange={handleChange}
 					/>
+
 					<div className="vr"></div>
-					<div className="w-25">
-						<label htmlFor="check-in" className="ms-2">Check-in</label>
-						<input
-							id="check-in"
-							type="date"
-							className="form-control search-field rounded-pill"
-							placeholder="Check-in"
-							aria-label="check-in"
-							name="checkIn"
-							value={input.checkIn}
-							onChange={handleChange}
-						/>
+
+					<div className="dropdown-center w-50 d-flex align-items-center justify-content-center cursor-pointer">
+						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown">
+							<span className="me-2">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>
+							—
+							<span className="ms-2">{input.checkOut ? dayMonYear(new Date(input.checkOut)) : "Check-out"}</span>
+						</div>
+						
+						<div className="dropdown-menu p-3" onClick={onCalendarClick}>
+							<Calendar />
+						</div>
 					</div>
-					<div>
-						<label htmlFor="check-out" className="ms-2">Check-out</label>
-						<input
-							id="check-out"
-							type="date"
-							className="form-control search-field rounded-pill"
-							placeholder="Check-out"
-							aria-label="check-out"
-							name="checkOut"
-							value={input.checkOut}
-							onChange={handleChange}
-						/>
-					</div>
+
 					<div className="vr"></div>
+
 					<div className="w-50">
 						<label htmlFor="guests" className="ms-2">Guests</label>
 						<input
 							id="guests"
 							type="number"
-							className="form-control search-field rounded-pill"
+							className="form-control search-field rounded-pill w-25"
 							placeholder="Guests"
 							aria-label="number of guests"
 							name="guests"

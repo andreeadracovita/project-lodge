@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 
 import Calendar from "/src/components/Calendar/Calendar";
+import { dayMonYear } from "/src/utils/DateFormatUtils";
 
 function AvailabilitySection() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -19,16 +20,10 @@ function AvailabilitySection() {
 		}
 	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
 
-	const option = {
-		month: "short",
-		day: "numeric",
-		year: "numeric"
-	}
-
 	return (
 		<>
 			<h2>Availability</h2>
-			<p className="text-muted">{checkIn.toLocaleString("en-GB", option)} - {checkOut.toLocaleString("en-GB", option)}</p>
+			<p className="text-muted">{dayMonYear(checkIn)} — {dayMonYear(checkOut)}</p>
 			<Calendar />
 		</>
 	);

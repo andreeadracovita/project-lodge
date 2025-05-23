@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import CalendarMonth from "./CalendarMonth";
+import "./Calendar.css";
 
 function Calendar() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -57,7 +58,7 @@ function Calendar() {
 	}
 		
 	return (
-		<div className="row g-5">
+		<div id="calendar" className="row g-5">
 			<div className="col-6">
 				<CalendarMonth
 					month={firstDate.getMonth()}
