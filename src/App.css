@@ -7,11 +7,20 @@
   --medium-grey: #bebbbb;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
-  min-height: 100%;
 }
 
 .lato-bold {
@@ -79,4 +88,8 @@ main {
 .error-font {
   font-size: 0.75rem;
   margin-bottom: 0px;
+}
+
+.sign-in-container {
+  width: 450px;
 }

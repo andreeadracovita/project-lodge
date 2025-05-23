@@ -34,7 +34,7 @@ function Header() {
 								<li><a className="dropdown-item" href="/hosting">Property manager</a></li>
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="/" onClick={logoutClicked}>Log out</a></li>
-								<li><a className="dropdown-item cursor-pointer" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up or log in</a></li>
+								<li><a className="dropdown-item" href="/signuplogin">Sign up or log in</a></li>
 							</ul>
 						</div>
 					</div>

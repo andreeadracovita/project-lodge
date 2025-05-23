@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
-import SignupLoginModal from "./components/SignupLoginModal";
 
 import Home from "./pages/Home";
 import Stay from "./pages/Stay";
@@ -26,12 +25,12 @@ function App() {
   return (
     <>
       <Header showSearch={true}/>
-      <SignupLoginModal />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/searchresults" element={<SearchResults />} />
           <Route path="/stay" element={<Stay />} />
+          <Route path="/signuplogin" element={<SignupLogin />} />
 
           {/* Guarded by authentication */}
           <Route path="/myaccount" element={<Account />} />
