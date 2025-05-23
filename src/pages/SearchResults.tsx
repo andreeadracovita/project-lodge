@@ -8,20 +8,31 @@ import MapView from "/src/components/MapView";
 import properties from "../Properties.json";
 
 function SearchResults() {
-	const propertiesNo = 100;
+	const [properties, setProperties] = useState([]);
 	const [location, setLocation] = useState("");
-	const [locationGeo, setLocationGeo] = useState([0, 0]); // [lat, lon]
+	const [locationGeo, setLocationGeo] = useState([0, 0]);
 	const [points, setPoints] = useState([]);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
+		axios.get("http://localhost:3000/properties")
+			.then(response => {
+				if (response.data.length > 0) {
+					setProperties(response.data);
+
+					const points = [];
+					properties.map(p => {
+						points.push(p.geo);
+					});
+					console.log(points);
+					setPoints(points);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			})
 		setLocation(searchParams.get("destination"));
-		const points = [];
-		properties.map((p) => {
-			points.push(p["location"]);
-		});
-		setPoints(points);
 	}, [searchParams.get("destination")]);
 
 	useEffect(() => {
@@ -29,7 +40,7 @@ function SearchResults() {
 			.then(response => {
 				if (response.data.length > 0) {
 					const data = response.data[0];
-					setLocationGeo([Number(data.lon), Number(data.lat)]);
+					setLocationGeo([data.lat, data.lon]);
 				}
 			})
 			.catch(error => {
@@ -41,10 +52,10 @@ function SearchResults() {
 		<div className="container">
 			<Search />
 			<div className="mt-3">
-				<h1>{location}: {propertiesNo} properties found</h1>
+				<h1>{location}: {properties.length} properties found</h1>
 				<div className="row">
 					<div className="col-8">
-	        			<ListView properties={properties} />
+	        			<ListView properties={properties} cols={3} />
 	        		</div>
 	        		<div className="col-4">
 	        			<MapView height={"650px"} center={locationGeo} zoom={6} points={points} />

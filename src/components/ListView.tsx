@@ -1,6 +1,8 @@
+import classNames from "classnames";
+
 import ListItem from "./ListItem";
 
-function ListView({properties}) {
+function ListView({properties, cols}) {
 	// Today
 	const checkIn = new Date();
 	let checkOut = new Date();
@@ -8,12 +10,19 @@ function ListView({properties}) {
 
 	// Todo: extract to config file
 	const propertyImgPathPrefix = "/property_img/";
+
+	const gridClassNames = classNames(
+		"row",
+		"row-cols-1",
+		"row-cols-sm-2",
+		`row-cols-md-${cols}`
+	);
 	
 	return (
 		<div className="position-relative">
-			<div className="row cols-1 cols-sm-2 cols-md-4">
+			<div className={gridClassNames}>
 				{properties.map(p =>
-					<div key={p.id} className="col-12 col-sm-6 col-md-3">
+					<div key={p.id} className="col">
 						<ListItem
 							isLink={true}
 							id={p.id}

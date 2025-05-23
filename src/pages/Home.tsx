@@ -24,7 +24,7 @@ function Home() {
 			<h1 className="heading">Where to next, name?</h1>
 			<Search />
 			<div className="mt-3">
-	        	<ListView properties={properties} />
+	        	<ListView properties={properties} cols={4} />
 	        </div>
 		</div>
 	);
