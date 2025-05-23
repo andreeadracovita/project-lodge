@@ -71,3 +71,12 @@ main {
   position: sticky;
   top: 0;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.error-font {
+  font-size: 0.75rem;
+  margin-bottom: 0px;
+}

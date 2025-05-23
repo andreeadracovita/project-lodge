@@ -3,11 +3,6 @@ import Search from "./Search";
 import "./Header.css";
 
 function Header() {
-
-	const userId = 1;
-
-	const profilePath = `/myaccount`;
-
 	function logoutClicked() {
 		console.log("Log out");
 	}
@@ -26,12 +21,12 @@ function Header() {
 						<a className="me-4" href="/hosting/property/add">List a property</a>
 						<div className="dropdown">
 							<div id="dropdown-button" role="button" className="d-flex rounded-pill user-account-button px-2 py-1" data-bs-toggle="dropdown">
-								<object data="/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
+								<object data="/icons/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
 								<img src="https://burst.shopifycdn.com/photos/happy-husky.jpg?width=373&format=pjpg&exif=0&iptc=0" alt="mdo" width="32" height="32" className="rounded-circle object-fit-cover" />
 							</div>
 							
 							<ul className="dropdown-menu dropdown-menu-end text-small">
-								<li><a className="dropdown-item" href={profilePath}>My account</a></li>
+								<li><a className="dropdown-item" href="/myaccount">My account</a></li>
 								<li><a className="dropdown-item" href="/wishlist">Wishlist</a></li>
 								<li><a className="dropdown-item" href="/trips">Trips</a></li>
 								<li><a className="dropdown-item" href="/messages">Messages</a></li>
@@ -39,7 +34,7 @@ function Header() {
 								<li><a className="dropdown-item" href="/hosting">Property manager</a></li>
 								<li><hr className="dropdown-divider" /></li>
 								<li><a className="dropdown-item" href="/" onClick={logoutClicked}>Log out</a></li>
-								<li><a className="dropdown-item" href="/signuplogin">Sign up or log in</a></li>
+								<li><a className="dropdown-item cursor-pointer" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign up or log in</a></li>
 							</ul>
 						</div>
 					</div>
