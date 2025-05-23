@@ -8,7 +8,6 @@ import "./PropertyDescription.css";
 
 function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
-	const [point, setPoint] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const checkIn = searchParams.get("check_in");
@@ -19,9 +18,6 @@ function PropertyDescription({property}) {
 			.then(response => {
 				if (response.data) {
 					setFeatures(response.data);
-					const array = [];
-					array.push(response.data.geo);
-					setPoint(array);
 				}
 			})
 			.catch(error => {
@@ -57,7 +53,7 @@ function PropertyDescription({property}) {
 			<h2>[Reviews here]</h2>
 			<hr />
 			<h2>Area</h2>
-			<MapView height={"350px"} center={property.geo} zoom={14} points={point} />
+			<MapView height={"350px"} center={property.geo} zoom={14} points={[property.geo]} />
 		</>
 	);
 }

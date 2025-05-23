@@ -21,7 +21,6 @@ function Stay() {
 		axios.get(`http://localhost:3000/properties/${id}`)
 			.then(response => {
 				if (response.data) {
-					console.log(response.data);
 					setProperty(response.data);
 				}
 			})

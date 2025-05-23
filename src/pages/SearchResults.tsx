@@ -20,20 +20,25 @@ function SearchResults() {
 			.then(response => {
 				if (response.data.length > 0) {
 					setProperties(response.data);
-
-					const points = [];
-					properties.map(p => {
-						points.push(p.geo);
-					});
-					console.log(points);
-					setPoints(points);
 				}
 			})
 			.catch(error => {
 				console.error(error);
 			})
+	}, []);
+
+	useEffect(() => {
 		setLocation(searchParams.get("destination"));
 	}, [searchParams.get("destination")]);
+
+	useEffect(() => {
+		const points = [];
+		properties.map(p => {
+			points.push(p.geo);
+		});
+		setPoints(points);
+		console.log(points);
+	}, [properties]);
 
 	useEffect(() => {
 		axios.get(`https://geocode.maps.co/search?q=${location}&api_key=6829981227127748709913iypd29e39`)
