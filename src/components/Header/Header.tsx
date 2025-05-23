@@ -17,7 +17,7 @@ function Header() {
 			<div className="container">
 				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 					<a href="/" className="col-lg-6 d-flex mb-3 mb-md-0 link-body-emphasis text-decoration-none">
-						<object data="/icon.svg" type="image/svg+xml" width="40" height="32" role="img" aria-label="Lodge"></object>
+						<object data="/icons/icon.svg" type="image/svg+xml" width="40" height="32" role="img" aria-label="brand icon"></object>
 						<span className="fs-3 brand-font brand-color-text">Lodge</span>
 					</a>
 					<div className="col-lg-6 d-flex justify-content-end align-items-center">
