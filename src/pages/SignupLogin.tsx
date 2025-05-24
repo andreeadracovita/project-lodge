@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
@@ -10,11 +11,14 @@ function SignupLogin() {
 		lastName: "",
 		password: ""
 	});
+	const [doesUserExist, setDoesUserExist] = useState(false);
 
 	const [showEmailInput, setShowEmailInput] = useState(true);
 	const [showPasswordInput, setShowPasswordInput] = useState(false);
 	const [showSignupForm, setShowSignupForm] = useState(false);
 	const [passwordStrength, setPasswordStrength] = useState("weak");
+
+	const [showLoginError, setShowLoginError] = useState(false);
 
 	const errorsText = [
 		`Password strength: ${passwordStrength}`,
@@ -23,8 +27,6 @@ function SignupLogin() {
 		"Contains a number or a symbol"
 	];
 
-	const doesUserExist = false;
-
 	function onBackClicked() {
 		setShowPasswordInput(false);
 		setShowSignupForm(false);
@@ -32,30 +34,22 @@ function SignupLogin() {
 	}
 
 	function onContinueClicked() {
-		if (showEmailInput) {
-			// Continue after email input
-			if (doesUserExist) {
+		// 1. Input email and press Continue
+		axios.get(`http://localhost:3000/user/${input.email}`)
+			.then(response => {
 				setShowEmailInput(false);
 				setShowPasswordInput(true);
-			} else {
+			})
+			.catch(error => {
 				setShowEmailInput(false);
 				setShowSignupForm(true);
-			}
-		} else if (showPasswordInput) {
-			// Continue after password input
-			console.log("Validate input");
-			console.log("Authenticate user if correct");
-		} else if (showSignupForm) {
-			// Continue after sign up form
-			console.log("Validate input");
-			console.log("Post add user to db API");
-			console.log("Sign in user with current data");
-		}	
+			});
 	}
 
 	function handleChange(event) {
 		const { value, name } = event.target;
-
+		setShowLoginError(false);
+		
 		setInput((prevValue) => {
 			return {
 				...prevValue,
@@ -66,8 +60,27 @@ function SignupLogin() {
 
 	function onFormSubmit(event) {
 		event.preventDefault();
-		console.log(input);
-		navigate("/");
+
+		if (showPasswordInput) {
+			// Continue after password input
+			const userData = {
+				email: input.email,
+				password: input.password
+			};
+			axios.post("http://localhost:3000/user/login", userData)
+				.then(response => {
+					navigate("/");
+				})
+				.catch(error => {
+					console.error(error);
+					setShowLoginError(true);
+				});
+		} else if (showSignupForm) {
+			// Continue after sign up form
+			console.log("Validate input");
+			console.log("Post add user to db API");
+			console.log("Sign in user with current data");
+		}
 	}
 
 	return (
@@ -130,6 +143,12 @@ function SignupLogin() {
 							onChange={handleChange}
 							placeholder="Password"
 						/>
+						{
+							showLoginError &&
+							<div>
+								<p style={{"color": "red"}}>Incorrect email and password combination</p>
+							</div>
+						}
 						<button
 							type="submit"
 							className="btn btn-light rounded-pill brand-color-background w-100 mt-3"
