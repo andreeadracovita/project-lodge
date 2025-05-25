@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+
+import AuthProvider from "./components/security/AuthContext";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 
@@ -24,30 +26,32 @@ import "./App.css";
 function App() {
   return (
     <>
-      <Header showSearch={true}/>
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/searchresults" element={<SearchResults />} />
-          <Route path="/stay" element={<Stay />} />
-          <Route path="/signuplogin" element={<SignupLogin />} />
+      <AuthProvider>
+        <Header showSearch={true}/>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/searchresults" element={<SearchResults />} />
+            <Route path="/stay" element={<Stay />} />
+            <Route path="/signuplogin" element={<SignupLogin />} />
 
-          {/* Guarded by authentication */}
-          <Route path="/myaccount" element={<Account />} />
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/messages" element={<Messages />} />
+            {/* Guarded by authentication */}
+            <Route path="/myaccount" element={<Account />} />
+            <Route path="/trips" element={<Trips />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/messages" element={<Messages />} />
 
-          <Route path="/hosting" element={<Hosting />} />
-          <Route path="/hosting/properties" element={<Properties />} />
-          <Route path="/hosting/property/add" element={<PropertyEdit editMode={false} />} />
-          <Route path="/hosting/property/edit/:id" element={<PropertyEdit editMode={true} />} />
-          <Route path="/hosting/calendar" element={<HostingCalendar />} />
+            <Route path="/hosting" element={<Hosting />} />
+            <Route path="/hosting/properties" element={<Properties />} />
+            <Route path="/hosting/property/add" element={<PropertyEdit editMode={false} />} />
+            <Route path="/hosting/property/edit/:id" element={<PropertyEdit editMode={true} />} />
+            <Route path="/hosting/calendar" element={<HostingCalendar />} />
 
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </main>
-      <Footer />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </main>
+        <Footer />
+      </AuthProvider>
     </>
   )
 }

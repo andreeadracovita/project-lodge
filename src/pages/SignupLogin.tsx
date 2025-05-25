@@ -3,8 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
+import { useAuth } from "/src/components/security/AuthContext";
+
 function SignupLogin() {
 	const navigate = useNavigate();
+	const authContext = useAuth();
+
 	const [input, setInput] = useState({
 		email: "",
 		firstName: "",
@@ -17,7 +21,6 @@ function SignupLogin() {
 	const [showPasswordInput, setShowPasswordInput] = useState(false);
 	const [showSignupForm, setShowSignupForm] = useState(false);
 	const [passwordStrength, setPasswordStrength] = useState("weak");
-
 	const [showLoginError, setShowLoginError] = useState(false);
 
 	const errorsText = [
@@ -49,7 +52,7 @@ function SignupLogin() {
 	function handleChange(event) {
 		const { value, name } = event.target;
 		setShowLoginError(false);
-		
+
 		setInput((prevValue) => {
 			return {
 				...prevValue,
@@ -58,23 +61,31 @@ function SignupLogin() {
 		});
 	}
 
-	function onFormSubmit(event) {
+	async function onFormSubmit(event) {
 		event.preventDefault();
 
 		if (showPasswordInput) {
 			// Continue after password input
-			const userData = {
-				email: input.email,
-				password: input.password
-			};
-			axios.post("http://localhost:3000/user/login", userData)
-				.then(response => {
-					navigate("/");
-				})
-				.catch(error => {
-					console.error(error);
-					setShowLoginError(true);
-				});
+			if (await authContext.login(input.email, input.password)) {
+				setShowLoginError(false);
+				navigate("/");
+			} else {
+				setShowLoginError(true);
+			}
+
+			// const userData = {
+			// 	email: input.email,
+			// 	password: input.password
+			// };
+			// axios.post("http://localhost:3000/user/login", userData)
+			// 	.then(response => {
+			// 		console.log(response);
+			// 		navigate("/");
+			// 	})
+			// 	.catch(error => {
+			// 		console.error(error);
+			// 		setShowLoginError(true);
+			// 	});
 		} else if (showSignupForm) {
 			// Continue after sign up form
 			console.log("Validate input");
