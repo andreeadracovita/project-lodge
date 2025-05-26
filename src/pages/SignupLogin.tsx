@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
+import { checkUserExists } from "/src/components/api/AuthenticationApiService";
 
 function SignupLogin() {
 	const navigate = useNavigate();
@@ -36,17 +37,20 @@ function SignupLogin() {
 		setShowEmailInput(true);
 	}
 
-	function onContinueClicked() {
-		// 1. Input email and press Continue
-		axios.get(`http://localhost:3000/user/${input.email}`)
-			.then(response => {
+	async function onContinueClicked() {
+		try {
+			const response = await checkUserExists(input.email);
+
+			if (response.data?.userExists) {
 				setShowEmailInput(false);
 				setShowPasswordInput(true);
-			})
-			.catch(error => {
+			} else {
 				setShowEmailInput(false);
 				setShowSignupForm(true);
-			});
+			}
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function handleChange(event) {
@@ -72,20 +76,6 @@ function SignupLogin() {
 			} else {
 				setShowLoginError(true);
 			}
-
-			// const userData = {
-			// 	email: input.email,
-			// 	password: input.password
-			// };
-			// axios.post("http://localhost:3000/user/login", userData)
-			// 	.then(response => {
-			// 		console.log(response);
-			// 		navigate("/");
-			// 	})
-			// 	.catch(error => {
-			// 		console.error(error);
-			// 		setShowLoginError(true);
-			// 	});
 		} else if (showSignupForm) {
 			// Continue after sign up form
 			console.log("Validate input");
