@@ -14,7 +14,7 @@ function PropertyDescription({property}) {
 	const checkOut = searchParams.get("check_out");
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/features")
+		axios.get("http://localhost:3000/types/feature")
 			.then(response => {
 				if (response.data) {
 					setFeatures(response.data);

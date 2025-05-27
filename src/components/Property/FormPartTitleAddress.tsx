@@ -8,7 +8,7 @@ function FormPartTitleAddress({isEditable, showButton, input, handleChange, onBu
 	const [rentalTypes, setRentalTypes] = useState([]);
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/building_types")
+		axios.get("http://localhost:3000/types/building")
 			.then(response => {
 				if (response.data.length > 0) {
 					setBuildingTypes(response.data);
@@ -18,7 +18,7 @@ function FormPartTitleAddress({isEditable, showButton, input, handleChange, onBu
 				console.error(error);
 			});
 
-		axios.get("http://localhost:3000/rental_types")
+		axios.get("http://localhost:3000/types/rental")
 			.then(response => {
 				if (response.data.length > 0) {
 					setRentalTypes(response.data);

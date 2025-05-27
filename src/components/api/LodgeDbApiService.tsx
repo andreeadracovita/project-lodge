@@ -1,3 +1,7 @@
 import { apiClient } from "./ApiClient";
 
-// CRUD
+// User
+export const getUserConfig
+	= () => apiClient.get(`/user/config`);
+
+// Property

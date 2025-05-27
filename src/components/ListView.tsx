@@ -31,7 +31,6 @@ function ListView({properties, cols}) {
 							city={p.city}
 							country={p.country}
 							price={p.price}
-							currency={"currency"}
 							rating={p.rating.toFixed(2)}
 							checkIn={checkIn}
 							checkOut={checkOut}

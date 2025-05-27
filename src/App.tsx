@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <Header showSearch={true}/>
+        <Header/>
         <main>
           <Routes>
             <Route path="/" element={<Home />} />

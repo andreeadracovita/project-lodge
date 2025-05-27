@@ -9,7 +9,7 @@ function FormPartDescription({isEditable, showButton, showUnselectedFeatures, in
 	const [features, setFeatures] = useState([]);
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/features")
+		axios.get("http://localhost:3000/types/feature")
 			.then(response => {
 				if (response.data.length > 0) {
 					setFeatures(response.data);

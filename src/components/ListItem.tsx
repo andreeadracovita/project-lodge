@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
+import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "./Rating";
 import "./ListItem.css";
 
-function ListItem({ isLink, id, img_url, title, city, country, price, currency, rating, checkIn, checkOut }) {
-
+function ListItem({ isLink, id, img_url, title, city, country, price, rating, checkIn, checkOut }) {
+	const authContext = useAuth();
 	const isFavorite = true;
 
 	let displayDate = "";
@@ -34,7 +35,7 @@ function ListItem({ isLink, id, img_url, title, city, country, price, currency, 
 						<p className="mb-0">{title}</p>
 						<p className="lato-bold">{city}, {country}</p>
 						<p className="text-muted">{displayDate}</p>
-						<p><span className="lato-bold">{price}</span> {currency} night</p>
+						<p><span className="lato-bold">{price}</span> {authContext.currency} night</p>
 						<Rating score={rating} />
 					</div>
 				</div>
