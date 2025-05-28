@@ -5,6 +5,15 @@
   --bright-red: #ff3131;
   --light-grey: #d9d9d9;
   --medium-grey: #bebbbb;
+  
+  --body-font-size: 14px;
+  --nav-font-size: 16px; /* Navbar links */
+  --welcome-message-font-size: 48px; /* Message on home page */
+  --headline-1-font-size: 32px; /* Account page title */
+  --headline-2-font-size: 24px; /* Property page title, home sections heading */
+  --headline-3-font-size: 20px; /* Search results title + bold, property price on card */
+  --strong-font-size: 16px; /* Property card heading */
+  --small-font-size: 12px; /* Property card details */
 }
 
 #root {
