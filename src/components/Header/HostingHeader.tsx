@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 function HostingHeader() {
 	return (
-		<div className="d-flex">
-			<a className="btn btn-light rounded-pill me-2" href="/hosting">Dashboard</a>
-			<a className="btn btn-light rounded-pill me-2" href="/hosting/calendar">Calendar</a>
-			<a className="btn btn-light rounded-pill me-2" href="/hosting/listings">Listings</a>
-			<a className="btn btn-light rounded-pill me-2" href="/messages">Messages</a>
+		<div className="d-flex justify-content-center">
+			<Link to="/hosting" className="btn btn-light me-2">Dashboard</Link>
+			<Link to="/hosting/calendar" className="btn btn-light me-2">Calendar</Link>
+			<Link to="/hosting/listings" className="btn btn-light me-2">Listings</Link>
+			<Link to="/messages" className="btn btn-light me-2">Messages</Link>
 		</div>
 	);
 }
