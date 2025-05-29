@@ -8,12 +8,13 @@
   
   --body-font-size: 14px;
   --nav-font-size: 16px; /* Navbar links */
-  --welcome-message-font-size: 48px; /* Message on home page */
+  --greeting-message-font-size: 48px; /* Message on home page */
   --headline-1-font-size: 32px; /* Account page title */
   --headline-2-font-size: 24px; /* Property page title, home sections heading */
   --headline-3-font-size: 20px; /* Search results title + bold, property price on card */
   --strong-font-size: 16px; /* Property card heading */
   --small-font-size: 12px; /* Property card details */
+  --optical-mult: 0.0625rem;
 }
 
 #root {
@@ -33,11 +34,11 @@ body {
 }
 
 main {
-  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
 h1 {
+  padding-top: 2rem;
   font-size: calc(1.3rem + 0.6vw);
   font-family: "League Spartan", sans-serif;
   font-optical-sizing: auto;
@@ -89,8 +90,32 @@ h2 {
 }
 
 /* Headings, headlines, font types */
+.greeting-message {
+  padding-top: 3rem;
+  color: white;
+  font-size: var(--greeting-message-font-size);
+  /*font-size: calc(var(--optical-mult) * var(--greeting-message-font-size));*/
+}
+
 .heading {
   color: var(--brand-color);
+}
+
+/* Page title */
+.page-heading {
+  margin-top: 2rem;
+  font-size: var(--headline-1-font-size);
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Property page title, home sections heading */
+.section-heading {
+  margin-top: 2rem;
+  font-size: var(--headline-2-font-size);
+  font-weight: 700;
 }
 
 .sticky {
@@ -119,4 +144,21 @@ h2 {
   margin-inline-end: 0.25rem;
   text-align: center;
   padding: 6px 10px;
+}
+
+#landing-greeting-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+}
+
+#landing-greeting-section-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#home-search-bar {
+  margin-top: auto;
 }

@@ -110,7 +110,7 @@ function AddPropertyForm() {
 							/>
 						</div>
 						<div className="col-6">
-							<img src="/images/add-property-house.jpg" className="add-property-img" />
+							<img src="/graphics/add-property-house.jpg" className="add-property-img" />
 						</div>
 					</div>
 				}
@@ -131,7 +131,7 @@ function AddPropertyForm() {
 							/>
 						</div>
 						<div className="col-6">
-							<img src="/images/add-property-room.jpg" className="add-property-img" />
+							<img src="/graphics/add-property-room.jpg" className="add-property-img" />
 						</div>
 					</div>
 				}
@@ -165,7 +165,7 @@ function AddPropertyForm() {
 							/>
 						</div>
 						<div className="col-6">
-							<img src="/images/add-property-pricing-1.jpg" className="add-property-img" />
+							<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
 						</div>
 					</div>
 				}

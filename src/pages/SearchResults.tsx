@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import axios from "axios";
 
-import Search from "/src/components/Header/Search";
+import Search from "/src/components/search/Search";
 import ListView from "/src/components/ListView";
 import MapView from "/src/components/MapView";
 import properties from "../Properties.json";

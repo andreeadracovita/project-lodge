@@ -1,0 +1,9 @@
+#search-bar {
+  border: 1px solid #adb5bd;
+  background-color: white;
+}
+
+.search-field {
+  border: none;
+  background-color: transparent;
+}

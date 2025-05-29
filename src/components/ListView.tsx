@@ -15,7 +15,9 @@ function ListView({properties, cols}) {
 		"row",
 		"row-cols-1",
 		"row-cols-sm-2",
-		`row-cols-md-${cols}`
+		"row-cols-md-3",
+		// "row-cols-lg-4",
+		`row-cols-lg-${cols}`
 	);
 	
 	return (
@@ -27,7 +29,7 @@ function ListView({properties, cols}) {
 							isLink={true}
 							id={p.id}
 							img_url={propertyImgPathPrefix + p.img_url}
-							title={p.title}
+							title={p.title+" very long title span"}
 							city={p.city}
 							country={p.country}
 							price={p.price}
