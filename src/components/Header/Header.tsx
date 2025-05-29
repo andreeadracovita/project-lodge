@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
@@ -8,10 +8,12 @@ import "./Header.css";
 
 function Header() {
 	const authContext = useAuth();
+	const navigate = useNavigate();
 
 	const userPhotoPathPrefix = "/user_img/";
 
 	function logoutClicked() {
+		navigate("/"); // TODO: wire properly
 		authContext.logout();
 	}
 	

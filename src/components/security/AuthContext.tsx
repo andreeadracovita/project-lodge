@@ -8,21 +8,28 @@ export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
+	const defaultCurrency = "EUR";
+	const defaultLanguage = "en-GB";
+
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [currency, setCurrency] = useState("EUR");
-	const [language, setLanguage] = useState("en-GB");
-	const [username, setUsername] = useState();
 	const [token, setToken] = useState();
+
+	// User details
+	const [firstName, setFirstName] = useState();
 	const [avatar, setAvatar] = useState();
+
+	// User configs
+	const [currency, setCurrency] = useState(defaultCurrency);
+	const [language, setLanguage] = useState(defaultLanguage);
 
 	useEffect(() => {
 		const tempIsAuthenticated = sessionStorage.getItem("lodgeIsAuthenticated");
 		if (tempIsAuthenticated !== null) {
 			setIsAuthenticated(tempIsAuthenticated);
-			setUsername(sessionStorage.getItem("lodgeUsername"));
 			setCurrency(sessionStorage.getItem("lodgeCurrency"));
 			setLanguage(sessionStorage.getItem("lodgeLanguage"));
 			setAvatar(sessionStorage.getItem("lodgeAvatar"));
+			setFirstName(sessionStorage.getItem("lodgeFirstName"));
 
 			setToken(sessionStorage.getItem("lodgeToken"));
 			apiClient.interceptors.request.use(
@@ -38,11 +45,14 @@ export default function AuthProvider({ children }) {
 		try {
 			const response = await getUserConfig();
 			if (response.status === 200) {
-				setCurrency(response.data.currency);
-				sessionStorage.setItem("lodgeCurrency", response.data.currency);
+				setFirstName(response.data.first_name);
+				sessionStorage.setItem("lodgeFirstName", response.data.first_name);
 
 				setAvatar(response.data.img_url);
 				sessionStorage.setItem("lodgeAvatar", response.data.img_url);
+
+				setCurrency(response.data.currency);
+				sessionStorage.setItem("lodgeCurrency", response.data.currency);
 
 				setLanguage(response.data.language);
 				sessionStorage.setItem("lodgeLanguage", response.data.language);
@@ -61,9 +71,6 @@ export default function AuthProvider({ children }) {
 
 				setIsAuthenticated(true);
 				sessionStorage.setItem("lodgeIsAuthenticated", true);
-
-				setUsername(email);
-				sessionStorage.setItem("lodgeUsername", email);
 
 				setToken(jwtToken);
 				sessionStorage.setItem("lodgeToken", jwtToken);
@@ -85,18 +92,24 @@ export default function AuthProvider({ children }) {
 	}
 
 	function logout() {
-		setAuthenticated(false);
+		setIsAuthenticated(false);
 		sessionStorage.removeItem("lodgeIsAuthenticated");
-
-		setUsername(null);
-		sessionStorage.removeItem("lodgeUsername");
 
 		setToken(null);
 		sessionStorage.removeItem("lodgeToken");
+
+		setFirstName(null);
+		sessionStorage.removeItem("lodgeFirstName");
+
+		setAvatar(null);
+		sessionStorage.removeItem("lodgeAvatar");
+
+		// User config?
+
 	}
 
 	return (
-		<AuthContext.Provider value={ { isAuthenticated, login, logout, username, token, currency, language, avatar } }>
+		<AuthContext.Provider value={ { isAuthenticated, login, logout, firstName, token, currency, language, avatar } }>
 			{ children }
 		</AuthContext.Provider>
 	);
