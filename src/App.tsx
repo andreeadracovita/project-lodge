@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import AuthProvider from "./components/security/AuthContext";
+import RequireAuth from "./components/security/RequireAuth";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 
@@ -36,16 +37,16 @@ function App() {
             <Route path="/signuplogin" element={<SignupLogin />} />
 
             {/* Guarded by authentication */}
-            <Route path="/myaccount" element={<Account />} />
-            <Route path="/trips" element={<Trips />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/messages" element={<Messages />} />
+            <Route path="/myaccount" element={<RequireAuth><Account /></RequireAuth>} />
+            <Route path="/trips" element={<RequireAuth><Trips /></RequireAuth>} />
+            <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
+            <Route path="/messages" element={<RequireAuth><Messages /></RequireAuth>} />
 
-            <Route path="/hosting" element={<Hosting />} />
-            <Route path="/hosting/properties" element={<Properties />} />
-            <Route path="/hosting/property/add" element={<PropertyEdit editMode={false} />} />
-            <Route path="/hosting/property/edit/:id" element={<PropertyEdit editMode={true} />} />
-            <Route path="/hosting/calendar" element={<HostingCalendar />} />
+            <Route path="/hosting" element={<RequireAuth><Hosting /></RequireAuth>} />
+            <Route path="/hosting/properties" element={<RequireAuth><Properties /></RequireAuth>} />
+            <Route path="/hosting/property/add" element={<RequireAuth><PropertyEdit editMode={false} /></RequireAuth>} />
+            <Route path="/hosting/property/edit/:id" element={<RequireAuth><PropertyEdit editMode={true} /></RequireAuth>} />
+            <Route path="/hosting/calendar" element={<RequireAuth><HostingCalendar /></RequireAuth>} />
 
             <Route path="*" element={<NoMatch />} />
           </Routes>
