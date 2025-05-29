@@ -4,8 +4,6 @@ import { useSearchParams } from "react-router";
 import MapView from "/src/components/MapView";
 import AvailabilitySection from "./AvailabilitySection";
 
-import "./PropertyDescription.css";
-
 function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();

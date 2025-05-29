@@ -3,14 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
-import Search from "./Search";
+import Avatar from "/src/components/user/Avatar";
 import "./Header.css";
+import { siteName } from "/src/constants";
 
 function Header() {
 	const authContext = useAuth();
 	const navigate = useNavigate();
-
-	const userPhotoPathPrefix = "/user_img/";
 
 	function logoutClicked() {
 		navigate("/"); // TODO: wire properly
@@ -23,7 +22,7 @@ function Header() {
 				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 					<Link to="/" className="col-lg-6 d-flex mb-3 mb-md-0 link-body-emphasis text-decoration-none">
 						<object data="/icons/icon.svg" type="image/svg+xml" width="40" height="32" role="img" aria-label="brand icon"></object>
-						<span className="fs-3 brand-font brand-color-text">Lodge</span>
+						<span className="fs-3 brand-font brand-color-text">{ siteName }</span>
 					</Link>
 					<div className="col-lg-6 d-flex justify-content-end align-items-center">
 						<span className="me-4">{authContext.currency}</span>
@@ -38,7 +37,7 @@ function Header() {
 							<div className="dropdown">
 								<div id="dropdown-button" role="button" className="d-flex rounded-pill user-account-button px-2 py-1" data-bs-toggle="dropdown">
 									<object data="/icons/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
-									<img src={authContext.avatar ? userPhotoPathPrefix + authContext.avatar : userPhotoPathPrefix + "default.jpg"} alt="mdo" width="32" height="32" className="rounded-circle object-fit-cover" />
+									<Avatar size={32} />
 								</div>
 								
 								<ul className="dropdown-menu dropdown-menu-end text-small">

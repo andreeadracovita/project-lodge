@@ -32,6 +32,27 @@ body {
   font-style: normal;
 }
 
+main {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: calc(1.3rem + 0.6vw);
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin-bottom: 1.5rem;
+}
+
+/* Used across multiple components */
 .lato-bold {
   font-family: "Lato", sans-serif;
   font-weight: 700;
@@ -62,27 +83,14 @@ body {
   font-style: normal;
 }
 
-h1 {
-  font-size: calc(1.3rem + 0.6vw);
-  font-family: "League Spartan", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
+/* Spacing */
+.section-container {
+  margin-top: 2rem;
 }
 
-h2 {
-  font-size: 1.25rem;
-  font-family: "Lato", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  margin-bottom: 1.5rem;
-}
-
+/* Headings, headlines, font types */
 .heading {
   color: var(--brand-color);
-}
-
-main {
-  margin-top: 2rem;
 }
 
 .sticky {
@@ -101,4 +109,14 @@ main {
 
 .sign-in-container {
   width: 450px;
+}
+
+.features-list-item {
+  border: 1px solid var(--medium-grey);
+  border-radius: 50rem;
+  min-width: 60px;
+  margin: 0.25rem;
+  margin-inline-end: 0.25rem;
+  text-align: center;
+  padding: 6px 10px;
 }

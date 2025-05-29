@@ -25,10 +25,27 @@ export default function AuthProvider({ children }) {
 	useEffect(() => {
 		const tempIsAuthenticated = sessionStorage.getItem("lodgeIsAuthenticated");
 		if (tempIsAuthenticated !== null) {
+
 			setIsAuthenticated(tempIsAuthenticated);
-			setCurrency(sessionStorage.getItem("lodgeCurrency"));
-			setLanguage(sessionStorage.getItem("lodgeLanguage"));
-			setAvatar(sessionStorage.getItem("lodgeAvatar"));
+
+			// Optional field
+			const storedCurrency = sessionStorage.getItem("lodgeCurrency");
+			if (storedCurrency !== null) {
+				setCurrency(storedCurrency);
+			}
+			
+			// Optional field
+			const storedLanguage = sessionStorage.getItem("lodgeLanguage");
+			if (storedCurrency !== null) {
+				setLanguage(storedCurrency);
+			}
+
+			// Optional field
+			const storedAvatar = sessionStorage.getItem("lodgeAvatar");
+			if (storedAvatar !== null) {
+				setAvatar(storedAvatar);
+			}
+			
 			setFirstName(sessionStorage.getItem("lodgeFirstName"));
 
 			setToken(sessionStorage.getItem("lodgeToken"));
@@ -45,17 +62,25 @@ export default function AuthProvider({ children }) {
 		try {
 			const response = await getUserConfig();
 			if (response.status === 200) {
-				setFirstName(response.data.first_name);
-				sessionStorage.setItem("lodgeFirstName", response.data.first_name);
+				const { first_name, img_url, currency, language } = response.data;
 
-				setAvatar(response.data.img_url);
-				sessionStorage.setItem("lodgeAvatar", response.data.img_url);
+				setFirstName(first_name);
+				sessionStorage.setItem("lodgeFirstName", first_name);
 
-				setCurrency(response.data.currency);
-				sessionStorage.setItem("lodgeCurrency", response.data.currency);
+				if (img_url !== null) {
+					setAvatar(img_url);
+					sessionStorage.setItem("lodgeAvatar", img_url);
+				}
 
-				setLanguage(response.data.language);
-				sessionStorage.setItem("lodgeLanguage", response.data.language);
+				if (currency !== null) {
+					setCurrency(currency);
+					sessionStorage.setItem("lodgeCurrency", currency);
+				}
+
+				if (language !== null) {
+					setLanguage();
+					sessionStorage.setItem("lodgeLanguage", language);
+				}
 			}
 		} catch (error) { 
 			console.log(error)
@@ -82,6 +107,8 @@ export default function AuthProvider({ children }) {
 					}
 				)
 				await setUserConfig();
+
+				console.log(sessionStorage);
 				return true;
 			} else {
 				return false;
