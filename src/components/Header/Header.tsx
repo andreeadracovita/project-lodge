@@ -17,7 +17,7 @@ function Header() {
 	}
 	
 	return (
-		<header className="py-3 mb-3 border-bottom">
+		<header className="py-3 border-bottom">
 			<div className="container">
 				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 					<Link to="/" className="col-lg-6 d-flex mb-3 mb-md-0 link-body-emphasis text-decoration-none">
