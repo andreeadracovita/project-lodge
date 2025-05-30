@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function AccountCard({ icon, title, desc, url }) {
 	return (
 		<Link to={url}>
-			<div className="card p-3">
+			<div className="border-section p-3">
 				<div className="row">
 					<div className="col-10">
 						{ icon }

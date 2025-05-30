@@ -1,0 +1,15 @@
+.avatar-background {
+	background-color: #8c52ff;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.avatar-letter {
+	color: white;
+	font-family: "League Spartan", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 1;
+	position: relative;
+}

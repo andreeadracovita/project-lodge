@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
 import AccountCard from "/src/components/user/AccountCard";
+import { SettingsSection } from "/src/components/user/SettingsNav";
 
 function Account() {
 	const authContext = useAuth();
@@ -31,7 +32,7 @@ function Account() {
 							icon={<Icon.PersonGear size={iconSize} />}
 							title="Personal details"
 							desc="Update your contact information"
-							url="#"
+							url={`/myaccount/settings?section=${SettingsSection.Details}`}
 						/>
 					</div>
 					<div className="col-4">
@@ -39,7 +40,7 @@ function Account() {
 							icon={<Icon.ShieldLock size={iconSize} />}
 							title="Login and security"
 							desc="Update your contact information"
-							url="#"
+							url={`/myaccount/settings?section=${SettingsSection.Security}`}
 						/>
 					</div>
 					<div className="col-4">
@@ -47,7 +48,7 @@ function Account() {
 							icon={<Icon.Sliders size={iconSize} />}
 							title="Preferences"
 							desc="Change language, currency and experiences"
-							url="#"
+							url={`/myaccount/settings?section=${SettingsSection.Preferences}`}
 						/>
 					</div>
 				</div>
@@ -61,7 +62,7 @@ function Account() {
 							icon={<Icon.Suitcase size={iconSize} />}
 							title="Trips and bookings"
 							desc="Manage current and upcoming trips"
-							url="#"
+							url="/trips"
 						/>
 					</div>
 					<div className="col-4">
@@ -69,13 +70,13 @@ function Account() {
 							icon={<Icon.Heart size={iconSize} />}
 							title="Wishlist"
 							desc="Manage your saved destinations"
-							url="#"
+							url="/wishlist"
 						/>
 					</div>
 					<div className="col-4">
 						<AccountCard
 							icon={<Icon.ChatLeftText size={iconSize} />}
-							title="Reviews"
+							title="Reviews [TODO]"
 							desc="View and update posted reviews"
 							url="#"
 						/>

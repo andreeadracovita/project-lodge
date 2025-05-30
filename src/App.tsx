@@ -11,6 +11,7 @@ import SearchResults from "./pages/SearchResults";
 import SignupLogin from "./pages/SignupLogin";
 
 import Account from "./pages/account/Account";
+import Settings from "./pages/account/Settings";
 import Trips from "./pages/account/Trips";
 import Wishlist from "./pages/account/Wishlist";
 import Messages from "./pages/account/Messages";
@@ -38,6 +39,7 @@ function App() {
 
             {/* Guarded by authentication */}
             <Route path="/myaccount" element={<RequireAuth><Account /></RequireAuth>} />
+            <Route path="/myaccount/settings" element={<RequireAuth><Settings /></RequireAuth>} />
             <Route path="/trips" element={<RequireAuth><Trips /></RequireAuth>} />
             <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
             <Route path="/messages" element={<RequireAuth><Messages /></RequireAuth>} />

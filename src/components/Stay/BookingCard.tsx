@@ -24,7 +24,7 @@ function BookingCard({price}) {
 	const total = priceBeforeTax + addedTax;
 
 	return (
-		<div id="booking-card" className="sticky">
+		<div id="booking-card" className="border-section sticky">
 			<h2>{total} {currency}</h2>
 			<p>
 				{guests} {guests > 1 ? <span>guests</span> : <span>guest</span>}, {nights} {nights > 1 ? <span>nights</span> : <span>night</span>}

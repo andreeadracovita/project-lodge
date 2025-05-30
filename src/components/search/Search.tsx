@@ -68,7 +68,7 @@ function Search() {
 						name="destination"
 						value={input.destination}
 						onChange={handleChange}
-						autocomplete="off"
+						autoComplete="off"
 					/>
 
 					<div className="vr"></div>

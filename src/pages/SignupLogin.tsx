@@ -5,6 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
 import { checkUserExists } from "/src/components/api/AuthenticationApiService";
+import { createAccountApi } from "/src/components/api/LodgeDbApiService";
 
 function SignupLogin() {
 	const navigate = useNavigate();
@@ -65,22 +66,36 @@ function SignupLogin() {
 		});
 	}
 
+	async function handleLogin() {
+		if (await authContext.login(input.email, input.password)) {
+			setShowLoginError(false);
+			navigate("/");
+		} else {
+			setShowLoginError(true);
+		}
+	}
+
 	async function onFormSubmit(event) {
 		event.preventDefault();
 
 		if (showPasswordInput) {
-			// Continue after password input
-			if (await authContext.login(input.email, input.password)) {
-				setShowLoginError(false);
-				navigate("/");
-			} else {
-				setShowLoginError(true);
-			}
+			// Log in
+			handleLogin();
 		} else if (showSignupForm) {
-			// Continue after sign up form
-			console.log("Validate input");
-			console.log("Post add user to db API");
-			console.log("Sign in user with current data");
+			// Sign up
+			const payload = {
+				email: input.email,
+				password: input.password,
+				first_name: input.firstName,
+				last_name: input.lastName
+			};
+			createAccountApi(payload)
+				.then(() => {
+					handleLogin();
+				})
+				.catch(error => {
+					console.log(error);
+				})
 		}
 	}
 
