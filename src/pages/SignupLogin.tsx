@@ -5,7 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
 import { checkUserExists } from "/src/components/api/AuthenticationApiService";
-import { createAccountApi } from "/src/components/api/LodgeDbApiService";
+import { createAccount } from "/src/components/api/LodgeDbApiService";
 
 function SignupLogin() {
 	const navigate = useNavigate();
@@ -89,7 +89,7 @@ function SignupLogin() {
 				first_name: input.firstName,
 				last_name: input.lastName
 			};
-			createAccountApi(payload)
+			createAccount(payload)
 				.then(() => {
 					handleLogin();
 				})
@@ -158,6 +158,7 @@ function SignupLogin() {
 							value={input.password}
 							onChange={handleChange}
 							placeholder="Password"
+							autoComplete="off"
 						/>
 						{
 							showLoginError &&
@@ -212,6 +213,7 @@ function SignupLogin() {
 							value={input.password}
 							onChange={handleChange}
 							placeholder="Password"
+							autoComplete="off"
 						/>
 						<div className="mt-3">
 							{

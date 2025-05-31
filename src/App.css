@@ -5,10 +5,11 @@
   --bright-red: #ff3131;
   --light-grey: #d9d9d9;
   --medium-grey: #bebbbb;
+  --dark: #000000;
   
   --body-font-size: 14px;
   --nav-font-size: 16px; /* Navbar links */
-  --greeting-message-font-size: 48px; /* Message on home page */
+  --greeting-message-font-size: 64px; /* 48 Message on home page */
   --headline-1-font-size: 32px; /* Account page title */
   --headline-2-font-size: 24px; /* Property page title, home sections heading */
   --headline-3-font-size: 20px; /* Search results title + bold, property price on card */
@@ -83,10 +84,13 @@ h2 {
 
 /* Headings, headlines, font types */
 .greeting-message {
-  padding-top: 3rem;
+  padding-top: 6rem;
   color: white;
   font-size: var(--greeting-message-font-size);
-  /*font-size: calc(var(--optical-mult) * var(--greeting-message-font-size));*/
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .heading {
@@ -156,4 +160,16 @@ h2 {
 
 #home-search-bar {
   margin-top: auto;
+}
+
+/* Buttons */
+.btn-text-underline {
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+
+.btn-pill {
+
 }

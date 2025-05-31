@@ -1,19 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { getAllProperties } from "/src/components/api/LodgeDbApiService";
 import ListView from "/src/components/ListView";
 import Search from "/src/components/search/Search";
 
 import { greetingMessage } from "/src/constants";
 
-function Home() {
+export default function Home() {
 	const [backgroundImage, setBackgroundImage] = useState();
 	const [properties, setProperties] = useState([]);
 
 	useEffect(() => {
 		setBackgroundImage('/hero/polar.jpg');
 
-		axios.get("http://localhost:3000/properties")
+		getAllProperties()
 			.then(response => {
 				if (response.data.length > 0) {
 					setProperties(response.data);
@@ -21,14 +21,15 @@ function Home() {
 			})
 			.catch(error => {
 				console.error(error);
-			})
+			});
+
 	}, []);
 
 	return (
 		<>
 			<div id="landing-greeting-section" style={{ backgroundImage: `url(${backgroundImage})`}}>
 				<div id="landing-greeting-section-container" className="container">
-					<div className="greeting-message brand-font">{ greetingMessage }</div>
+					<div className="greeting-message">{ greetingMessage }</div>
 					<div id="home-search-bar" className="pb-4">
 						<Search />
 					</div>
@@ -62,5 +63,3 @@ function Home() {
 		</>
 	);
 }
-
-export default Home;

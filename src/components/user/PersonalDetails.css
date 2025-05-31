@@ -1,0 +1,14 @@
+:root {
+  --light-green: #d6f2ca;
+}
+
+.avatar-container {
+	aspect-ratio: 1 / 1;
+	border-radius: 12px;
+	padding: 1px;
+}
+
+.avatar-container:hover {
+	background-color: var(--light-green);
+	cursor: pointer;
+}

@@ -36,8 +36,8 @@ export default function AuthProvider({ children }) {
 			
 			// Optional field
 			const storedLanguage = sessionStorage.getItem("lodgeLanguage");
-			if (storedCurrency !== null) {
-				setLanguage(storedCurrency);
+			if (storedLanguage !== null) {
+				setLanguage(storedLanguage);
 			}
 
 			// Optional field
@@ -48,7 +48,8 @@ export default function AuthProvider({ children }) {
 			
 			setFirstName(sessionStorage.getItem("lodgeFirstName"));
 
-			setToken(sessionStorage.getItem("lodgeToken"));
+			const jwtToken = sessionStorage.getItem("lodgeToken");
+			setToken(jwtToken);
 			apiClient.interceptors.request.use(
 				(config) => {
 					config.headers.Authorization = jwtToken;
@@ -108,7 +109,6 @@ export default function AuthProvider({ children }) {
 				)
 				await setUserConfig();
 
-				console.log(sessionStorage);
 				return true;
 			} else {
 				return false;

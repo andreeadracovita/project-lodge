@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import axios from "axios";
 
+import { getAllProperties } from "/src/components/api/LodgeDbApiService";
 import Search from "/src/components/search/Search";
 import ListView from "/src/components/ListView";
 import MapView from "/src/components/MapView";
-import properties from "../Properties.json";
 
 function SearchResults() {
 	const [properties, setProperties] = useState([]);
@@ -16,7 +15,7 @@ function SearchResults() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/properties")
+		getAllProperties()
 			.then(response => {
 				if (response.data.length > 0) {
 					setProperties(response.data);

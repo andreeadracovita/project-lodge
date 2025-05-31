@@ -8,7 +8,7 @@ export default function Avatar({ size }) {
 	return (
 		<>
 			{
-				authContext.avatar
+				authContext.avatar !== undefined && authContext.avatar !== null
 					? <img
 						src={userPhotoPrefix + authContext.avatar}
 						alt="avatar"
@@ -20,7 +20,7 @@ export default function Avatar({ size }) {
 							className="avatar-letter"
 							style={{fontSize: size * 0.75, top: size / 6 }}
 						>
-							{authContext.firstName[0]}
+							{authContext.firstName ? authContext.firstName[0] : ""}
 						</span>
 					</div>
 			}
