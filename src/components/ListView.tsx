@@ -2,7 +2,12 @@ import classNames from "classnames";
 
 import ListItem from "./ListItem";
 
-function ListView({properties, cols}) {
+export enum ListItemType {
+	Property = "property",
+	Destination = "destination"
+}
+
+function ListView({listItemType, items, cols}) {
 	// Today
 	const checkIn = new Date();
 	let checkOut = new Date();
@@ -23,17 +28,17 @@ function ListView({properties, cols}) {
 	return (
 		<div className="position-relative">
 			<div className={gridClassNames}>
-				{properties.map(p =>
-					<div key={p.id} className="col">
+				{items.map(item =>
+					<div key={item.id} className="col">
 						<ListItem
 							isLink={true}
-							id={p.id}
-							img_url={propertyImgPathPrefix + p.img_url}
-							title={p.title+" very long title span"}
-							city={p.city}
-							country={p.country}
-							price={p.price}
-							rating={p.rating.toFixed(2)}
+							id={item.id}
+							img_url={item.images_url_array.length > 0 ? propertyImgPathPrefix + item.images_url_array[0] : null}
+							title={item.title+" very long title span"}
+							city={item.city}
+							country={item.country}
+							price={item.price}
+							rating={item.rating ? item.rating.toFixed(2) : ""}
 							checkIn={checkIn}
 							checkOut={checkOut}
 						/>

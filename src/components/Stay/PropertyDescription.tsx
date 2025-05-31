@@ -1,21 +1,34 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+
 import MapView from "/src/components/MapView";
 import AvailabilitySection from "./AvailabilitySection";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { getAllFeatures, getAllExperiences } from "/src/components/api/LodgeDbApiService";
 
 function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
+	const [experiences, setExperiences] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const checkIn = searchParams.get("check_in");
 	const checkOut = searchParams.get("check_out");
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/types/feature")
+		getAllFeatures()
 			.then(response => {
 				if (response.data) {
 					setFeatures(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+		getAllExperiences()
+			.then(response => {
+				if (response.data) {
+					console.log(response.data);
+					setExperiences(response.data);
 				}
 			})
 			.catch(error => {
@@ -35,10 +48,22 @@ function PropertyDescription({property}) {
 			<h2>Features</h2>
 			<div>
 				{
-					property.features_ids.map((feature, i) => {
-						const foundFeature = features.find(f => f.id == feature);
+					property.features_ids.map((id, i) => {
+						const foundFeature = features.find(feat => feat.id == id);
 						if (foundFeature) {
-							return <span key={i} className="features-list-item">{foundFeature.name}</span>
+							return <span key={i} className="features-list-item">{capitalizeFirstLetter(foundFeature.name)}</span>
+						}
+					})
+				}
+			</div>
+			<hr />
+			<h2>Experiences in the area</h2>
+			<div>
+				{
+					property.experiences_ids.map((id, i) => {
+						const foundExperience = experiences.find(exp => exp.id == id);
+						if (foundExperience) {
+							return <span key={i} className="features-list-item">{capitalizeFirstLetter(foundExperience.name)}</span>
 						}
 					})
 				}
@@ -51,7 +76,7 @@ function PropertyDescription({property}) {
 			<h2>[Reviews here]</h2>
 			<hr />
 			<h2>Area</h2>
-			<MapView height={"350px"} center={property.geo} zoom={14} points={[property.geo]} />
+			<MapView height={"350px"} center={[property.geo.x, property.geo.y]} zoom={14} points={[[property.geo.x, property.geo.y]]} />
 		</>
 	);
 }

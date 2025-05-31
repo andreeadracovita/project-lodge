@@ -1,7 +1,7 @@
 function Trips() {
 	return (
-		<div className="container">
-			<h1>Trips</h1>
+		<div className="container section-container">
+			<h1 className="page-heading">Trips</h1>
 		</div>
 	);
 }

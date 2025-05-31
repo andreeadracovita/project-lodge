@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
+import { getAllFeatures } from "/src/components/api/LodgeDbApiService";
 
 import "./FormPartDescription.css";
 
@@ -9,7 +10,7 @@ function FormPartDescription({isEditable, showButton, showUnselectedFeatures, in
 	const [features, setFeatures] = useState([]);
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/types/feature")
+		getAllFeatures()
 			.then(response => {
 				if (response.data.length > 0) {
 					setFeatures(response.data);

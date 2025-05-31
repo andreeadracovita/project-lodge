@@ -4,6 +4,9 @@ import { apiClient } from "./ApiClient";
 export const createAccount
 	= (payload) => apiClient.post("/auth/signup", payload);
 
+export const getUserId
+	= () => apiClient.get("/user/id");
+
 export const getUserConfig
 	= () => apiClient.get("/user/config");
 
@@ -39,6 +42,19 @@ export const getPropertiesByUserId
 // Filters: country, city, proximity, price, rental type, experiences, property type
 export const getPropertiesFilteredBy
 	= (payload) => apiClient.post(`/property/filter`, payload);
+
+// Types
+export const getAllFeatures
+	= () => apiClient.get("/types/feature");
+
+export const getAllRentalTypes
+	= () => apiClient.get("/types/rental");
+
+export const getAllBuildingTypes
+	= () => apiClient.get("/types/building");
+
+export const getAllExperiences
+	= () => apiClient.get("/types/experience");
 
 // Bookings
 export const getBookingById

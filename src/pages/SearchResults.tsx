@@ -59,7 +59,7 @@ function SearchResults() {
 				<h1>{location}: {properties.length} properties found</h1>
 				<div className="row">
 					<div className="col-8">
-	        			<ListView properties={properties} cols={3} />
+	        			<ListView items={properties} cols={3} />
 	        		</div>
 	        		<div className="col-4">
 	        			<MapView height={"650px"} center={locationGeo} zoom={6} points={points} />

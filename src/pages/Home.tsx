@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { getAllProperties } from "/src/components/api/LodgeDbApiService";
+import { getAllProperties, getAllExperiences } from "/src/components/api/LodgeDbApiService";
 import ListView from "/src/components/ListView";
 import Search from "/src/components/search/Search";
-
-import { greetingMessage } from "/src/constants";
+import { greetingMessage, trendingDestinations } from "/src/constants";
+import { experienceIconMap } from "/src/mappings";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 export default function Home() {
 	const [backgroundImage, setBackgroundImage] = useState();
+	const [experiences, setExperiences] = useState([]);
 	const [properties, setProperties] = useState([]);
 
 	useEffect(() => {
@@ -23,6 +25,15 @@ export default function Home() {
 				console.error(error);
 			});
 
+		getAllExperiences()
+			.then(response => {
+				if (response.data.length > 0) {
+					setExperiences(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}, []);
 
 	return (
@@ -35,28 +46,28 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
+
 			<div className="container">
-				<div id="experience">
+				<div id="experience" className="section-container">
 					<p className="section-heading">Explore by experience</p>
 					<div>
-						<span className="features-list-item">🥾 Adventure</span>
-						<span className="features-list-item">🏖️ Beach</span>
-						<span className="features-list-item">🏛️ Culture</span>
-						<span className="features-list-item">🎸 Entertainment</span>
-						<span className="features-list-item">🍝 Gastronomy</span>
-						<span className="features-list-item">🌲 Nature</span>
-						<span className="features-list-item">🍸 Nightlife</span>
-						<span className="features-list-item">⚽️ Sports</span>
+						{
+							experiences.map((exp, i) => 
+								<span key={i} className="features-list-item">
+									{ experienceIconMap.get(exp.name) } { capitalizeFirstLetter(exp.name) }
+								</span>
+							)
+						}
 					</div>
 					<div className="mt-4">
-						<ListView properties={properties} cols={5} />
+						<ListView items={properties} cols={5} />
 					</div>
 				</div>
 
-				<div id="trending">
-					<p className="section-heading">Trending destinations [Replace with list of destinations]</p>
+				<div id="trending" className="section-container">
+					<p className="section-heading">Trending destinations</p>
 					<div className="mt-4">
-						<ListView properties={properties} cols={5} />
+						{/*<ListView items={trendingDestinations} cols={5} />*/}
 					</div>
 				</div>
 			</div>

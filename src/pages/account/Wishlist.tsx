@@ -1,7 +1,7 @@
 function Wishlist() {
 	return (
-		<div className="container">
-			<h1>Wishlist</h1>
+		<div className="container section-container">
+			<h1 className="page-heading">Wishlist</h1>
 		</div>
 	);
 }

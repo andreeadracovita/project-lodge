@@ -15,10 +15,10 @@ export default function Account() {
 	const experiences = ["adventure", "culture", "nature", "entertainment", "food"];
 
 	return (
-		<div className="container">
+		<div className="container section-container">
 			<div className="d-flex align-items-center">
 				<Avatar size={60} />
-				<h1 className="p-0 m-0 ms-3 h1">Hi, {authContext.firstName}</h1>
+				<h1 className="p-0 m-0 ms-3 page-heading">Hi, {authContext.firstName}</h1>
 			</div>
 
 			<div className="section-container">
@@ -125,7 +125,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Manage your property"
 							desc="View and update your listed properties"
-							url="#"
+							url="/hosting"
 						/>
 					</div>
 				</div>

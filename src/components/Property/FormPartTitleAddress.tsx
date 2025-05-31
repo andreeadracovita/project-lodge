@@ -1,14 +1,15 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
+
+import { getAllBuildingTypes, getAllRentalTypes } from "/src/components/api/LodgeDbApiService";
 
 function FormPartTitleAddress({isEditable, showButton, input, handleChange, onButtonClicked}) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/types/building")
+		getAllBuildingTypes()
 			.then(response => {
 				if (response.data.length > 0) {
 					setBuildingTypes(response.data);
@@ -18,7 +19,7 @@ function FormPartTitleAddress({isEditable, showButton, input, handleChange, onBu
 				console.error(error);
 			});
 
-		axios.get("http://localhost:3000/types/rental")
+		getAllRentalTypes()
 			.then(response => {
 				if (response.data.length > 0) {
 					setRentalTypes(response.data);

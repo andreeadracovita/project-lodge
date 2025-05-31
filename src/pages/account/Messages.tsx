@@ -1,7 +1,7 @@
 function Messages() {
 	return (
-		<div className="container">
-			<h1>Messages</h1>
+		<div className="container section-container">
+			<h1 className="page-heading">Messages</h1>
 		</div>
 	);
 }

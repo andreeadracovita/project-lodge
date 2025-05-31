@@ -1,27 +1,25 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 
-import PropertyPhotoGrid from "../components/Stay/PropertyPhotoGrid";
-import PropertyDescription from "../components/Stay/PropertyDescription";
-import BookingCard from "../components/Stay/BookingCard";
-import Rating from "../components/Rating";
+import { getPropertyById } from "/src/components/api/LodgeDbApiService";
+import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
+import PropertyDescription from "/src/components/Stay/PropertyDescription";
+import BookingCard from "/src/components/Stay/BookingCard";
+import Rating from "/src/components/Rating";
+import { propertyPhotoPrefix } from "/src/constants";
 
-function Stay() {
-	// Todo: extract to config file
-	const propertyImgPathPrefix = "/property_img/";
-
+export default function Stay() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [property, setProperty] = useState();
 
 	const id = searchParams.get("id");
-	// DB query
+
 	useEffect(() => {
-		axios.get(`http://localhost:3000/properties/${id}`)
+		getPropertyById(id)
 			.then(response => {
-				if (response.data) {
-					setProperty(response.data);
+				if (response.data?.length > 0) {
+					setProperty(response.data[0]);
 				}
 			})
 			.catch(error => {
@@ -33,21 +31,21 @@ function Stay() {
 		<>
 			{
 				property &&
-				<div className="container">
+				<div className="container section-container">
 					<div>
-						<h1>{property.title}</h1>
+						<h1 className="page-heading">{property.title}</h1>
 						<p><Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {property.country}</p>
 						<Rating score={property.rating} />
 					</div>
 					<div className="mt-3">
-						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => propertyImgPathPrefix + url)} />
+						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => propertyPhotoPrefix + url)} />
 					</div>
 					<div className="mt-5 row">
 						<div className="col-8">
 							<PropertyDescription property={property} />
 						</div>
 						<div className="col-4">
-							<BookingCard price={property.price} />
+							<BookingCard price={property.price_per_night_eur} />
 						</div>
 					</div>
 				</div>
@@ -55,5 +53,3 @@ function Stay() {
 		</>
 	);
 }
-
-export default Stay;

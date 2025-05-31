@@ -94,13 +94,13 @@ function AddPropertyForm() {
 	}
 
 	return (
-		<>
+		<div className="section-container">
 			<form>
 				{
 					formState === 0 &&
 					<div id="state-title-address" className="row">
 						<div className="col-6">
-							<h1>List your property</h1>
+							<h1 className="page-heading">List your property</h1>
 							<FormPartTitleAddress
 								isEditable={true}
 								showButton={true}
@@ -119,7 +119,7 @@ function AddPropertyForm() {
 					<div id="state-describe" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1>Describe your property</h1>
+							<h1 className="page-heading">Describe your property</h1>
 							<FormPartDescription
 								isEditable={true}
 								showButton={true}
@@ -139,7 +139,7 @@ function AddPropertyForm() {
 					formState === 2 &&
 					<div id="state-photos">
 						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1>Showcase your property</h1>
+						<h1 className="page-heading">Showcase your property</h1>
 						<FormPartPhotos
 							isEditable={true}
 							showButton={true}
@@ -155,7 +155,7 @@ function AddPropertyForm() {
 					<div id="state-pricing" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1>Pricing</h1>
+							<h1 className="page-heading">Pricing</h1>
 							<FormPartPricing
 								isEditable={true}
 								showButton={true}
@@ -175,7 +175,7 @@ function AddPropertyForm() {
 						<div id="state-review" className="row">
 							<div className="col-6">
 								<FormBackButton onButtonClicked={onBackClicked} />
-								<h1>Review your property</h1>
+								<h1 className="page-heading">Review your property</h1>
 								<FormPartReview
 									input={input}
 									onButtonClicked={onButtonClicked}
@@ -203,7 +203,7 @@ function AddPropertyForm() {
 					</div>
 				}
 			</form>
-		</>
+		</div>
 	);
 }
 
