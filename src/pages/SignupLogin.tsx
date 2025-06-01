@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
@@ -10,6 +10,7 @@ import { createAccount } from "/src/api/LodgeDbApiService";
 export default function SignupLogin() {
 	const navigate = useNavigate();
 	const authContext = useAuth();
+	const { state } = useLocation();
 
 	const [input, setInput] = useState({
 		email: "",
@@ -69,7 +70,7 @@ export default function SignupLogin() {
 	async function handleLogin() {
 		if (await authContext.login(input.email, input.password)) {
 			setShowLoginError(false);
-			navigate("/");
+			navigate(state?.path || "/");
 		} else {
 			setShowLoginError(true);
 		}

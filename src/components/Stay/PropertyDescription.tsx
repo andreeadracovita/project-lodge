@@ -5,6 +5,7 @@ import AvailabilitySection from "./AvailabilitySection";
 import MapView from "/src/components/map/MapView";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
+import { experienceIconMap } from "/src/utils/mappings";
 
 export default function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
@@ -27,7 +28,6 @@ export default function PropertyDescription({property}) {
 		getAllExperiences()
 			.then(response => {
 				if (response.data) {
-					console.log(response.data);
 					setExperiences(response.data);
 				}
 			})
@@ -63,7 +63,9 @@ export default function PropertyDescription({property}) {
 					property.experiences_ids.map((id, i) => {
 						const foundExperience = experiences.find(exp => exp.id == id);
 						if (foundExperience) {
-							return <span key={i} className="features-list-item">{capitalizeFirstLetter(foundExperience.name)}</span>
+							return <span key={i} className="features-list-item">
+								{experienceIconMap.get(foundExperience.name)} {capitalizeFirstLetter(foundExperience.name)}
+							</span>
 						}
 					})
 				}

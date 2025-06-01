@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
@@ -36,7 +37,6 @@ export default function SearchResults() {
 			points.push(p.geo);
 		});
 		setPoints(points);
-		console.log(points);
 	}, [properties]);
 
 	useEffect(() => {
@@ -53,7 +53,7 @@ export default function SearchResults() {
 	}, [location]);
 
 	return (
-		<div className="container">
+		<div className="container section-container">
 			<Search />
 			<div className="mt-3">
 				<h1>{location}: {properties.length} properties found</h1>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getAllProperties, getAllExperiences } from "/src/api/LodgeDbApiService";
-import ListView from "/src/components/list/ListView";
+import ListView, { ListItemType } from "/src/components/list/ListView";
 import Search from "/src/components/search/Search";
 import { greetingMessage, trendingDestinations } from "/src/utils/constants";
 import { experienceIconMap } from "/src/utils/mappings";
@@ -60,14 +60,14 @@ export default function Home() {
 						}
 					</div>
 					<div className="mt-4">
-						<ListView items={properties} cols={5} />
+						<ListView listItemType={ListItemType.Property} items={properties} cols={5} />
 					</div>
 				</div>
 
 				<div id="trending" className="section-container">
 					<p className="section-heading">Trending destinations</p>
 					<div className="mt-4">
-						{/*<ListView items={trendingDestinations} cols={5} />*/}
+						<ListView listItemType={ListItemType.Destination} items={trendingDestinations} cols={5} />
 					</div>
 				</div>
 			</div>

@@ -20,17 +20,19 @@ export default function PropertyListItem({ isLink, id, img_url, title, city, cou
 		checkOutParam = yearDashMonthDashDay(checkOut);
 	}
 
+	const linkPath = isLink
+		? {
+			pathname: `/stay`,
+			search: `?id=${id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
+		}
+		: {};
+
 	return (
-		<Link
-				to={isLink ? {
-						pathname: `/stay`,
-						search: `?id=${id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
-					} : {}}
-			>
+		<Link to={linkPath}>
 			<div className="mb-3">
 				
 					<div className="position-relative">
-						<img src={img_url} className="card-img mb-2" />
+						<img src={img_url} className="list-item-photo mb-2" />
 						<Icon.HeartFill size={24} color={isFavorite ? "#ff3131" : "#9d9794"} className="bi bi-heart-fill heart-icon position-absolute" />
 						<div>
 							<p className="mb-0">{title}</p>

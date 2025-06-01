@@ -30,7 +30,7 @@ export default function Header() {
 						<Link to="/hosting/property/add" className="me-4">List a property</Link>
 						{
 							!authContext.isAuthenticated &&
-							<Link to="/signuplogin" className="me-4" >Sign up or log in</Link>
+							<Link to="/signup-login" className="me-4" >Sign up or log in</Link>
 						}
 						{
 							authContext.isAuthenticated &&

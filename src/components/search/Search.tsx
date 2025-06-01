@@ -37,7 +37,7 @@ export default function Search() {
 	}, [searchParams.get("check_out")]);
 
 	function onSearchClicked() {
-		navigate(`/searchresults?destination=${input.destination}&check_in=${input.checkIn}&check_out=${input.checkOut}&guests=${input.guests}`);
+		navigate(`/search-results?destination=${input.destination}&check_in=${input.checkIn}&check_out=${input.checkOut}&guests=${input.guests}`);
 	}
 
 	function handleChange(event) {

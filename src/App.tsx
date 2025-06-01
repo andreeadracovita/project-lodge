@@ -34,9 +34,9 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/searchresults" element={<SearchResults />} />
+            <Route path="/search-results" element={<SearchResults />} />
             <Route path="/stay" element={<Stay />} />
-            <Route path="/signuplogin" element={<SignupLogin />} />
+            <Route path="/signup-login" element={<SignupLogin />} />
 
             {/* Guarded by authentication */}
             <Route path="/myaccount" element={<RequireAuth><Account /></RequireAuth>} />
