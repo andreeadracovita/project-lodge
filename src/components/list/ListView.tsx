@@ -33,17 +33,11 @@ export default function ListView({ listItemType, items, cols }) {
 				listItemType === ListItemType.Property &&
 				<>
 					{
-						items.map(item =>
-							<div key={item.id} className="col">
+						items.map((item, i) =>
+							<div key={i} className="col">
 								<PropertyListItem
 									isLink={true}
-									id={item.id}
-									img_url={item.images_url_array.length > 0 ? propertyPhotoPrefix + item.images_url_array[0] : null}
-									title={item.title+" very long title span"}
-									city={item.city}
-									country={item.country}
-									price={item.price}
-									rating={item.rating ? item.rating.toFixed(2) : ""}
+									item={item}
 									checkIn={checkIn}
 									checkOut={checkOut}
 								/>

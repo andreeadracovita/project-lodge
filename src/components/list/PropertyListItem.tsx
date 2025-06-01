@@ -1,14 +1,26 @@
 import { Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
+import "./PropertyListItem.css";
 import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
-import "./PropertyListItem.css";
+import { propertyPhotoPrefix } from "/src/utils/constants";
 
-export default function PropertyListItem({ isLink, id, img_url, title, city, country, price, rating, checkIn, checkOut }) {
+type PropertyItem = {
+
+};
+
+type PropertyListItemProps = {
+	isLink: boolean;
+	item: PropertyItem;
+	checkIn: Date;
+	checkOut: Date;
+};
+
+export default function PropertyListItem({ isLink, item, checkIn, checkOut }: PropertyListItemProps) {
 	const authContext = useAuth();
-	const isFavorite = true;
+	const isFavorite = false;
 
 	let displayDate = "";
 	let checkInParam = "";
@@ -23,27 +35,36 @@ export default function PropertyListItem({ isLink, id, img_url, title, city, cou
 	const linkPath = isLink
 		? {
 			pathname: `/stay`,
-			search: `?id=${id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
+			search: `?id=${item.id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
 		}
 		: {};
 
+	const imgUrl = item.images_url_array.length > 0 ? propertyPhotoPrefix + item.images_url_array[0] : null;
+
+	function handleHeartClick() {
+		console.log("Heart ", item.id);
+	}
+
 	return (
-		<Link to={linkPath}>
-			<div className="mb-3">
-				
-					<div className="position-relative">
-						<img src={img_url} className="list-item-photo mb-2" />
-						<Icon.HeartFill size={24} color={isFavorite ? "#ff3131" : "#9d9794"} className="bi bi-heart-fill heart-icon position-absolute" />
-						<div>
-							<p className="mb-0">{title}</p>
-							<p className="lato-bold">{city}, {country}</p>
-							<p className="text-muted">{displayDate}</p>
-							<p><span className="lato-bold">{price}</span> {authContext.currency} night</p>
-							<Rating score={rating} />
-						</div>
+		<div className="mb-3">
+			<div className="position-relative">
+				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
+				<Icon.HeartFill
+					size={24}
+					color={isFavorite ? "#ff3131" : "#9d9794"}
+					className="bi bi-heart-fill heart-icon position-absolute"
+					onClick={handleHeartClick}
+				/>
+				<Link to={linkPath}>
+					<div>
+						<p className="mb-0">{item.title}</p>
+						<p className="lato-bold">{item.city}, {item.country}</p>
+						<p className="text-muted">{displayDate}</p>
+						<p><span className="lato-bold">{item.price}</span> {authContext.currency} total</p>
+						<Rating score={item.rating ? item.rating.toFixed(2) : ""} />
 					</div>
-				
+				</Link>
 			</div>
-		</Link>
+		</div>
 	);
 }
