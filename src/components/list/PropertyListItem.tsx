@@ -7,8 +7,21 @@ import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
 import { propertyPhotoPrefix } from "/src/utils/constants";
 
-type PropertyItem = {
+type Geo = {
+	x: number,
+	y: number
+}
 
+export type PropertyItem = {
+	id: string,
+	title: string,
+	city: string,
+	country: string,
+	geo: Geo,
+	is_listed: boolean,
+	price: string,
+	rating?: number,
+	images_url_array: Array[]
 };
 
 type PropertyListItemProps = {

@@ -1,13 +1,15 @@
 import classNames from "classnames";
 
-import PropertyListItem from "./PropertyListItem";
 import DestinationListItem from "./DestinationListItem";
+import HostingPropertyListItem from "./HostingPropertyListItem";
+import PropertyListItem from "./PropertyListItem";
 import { propertyPhotoPrefix } from "/src/utils/constants";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 export enum ListItemType {
-	Property = "property",
-	Destination = "destination"
+	Property,
+	Destination,
+	HostingProperty
 }
 
 export default function ListView({ listItemType, items, cols }) {
@@ -56,6 +58,18 @@ export default function ListView({ listItemType, items, cols }) {
 									item={item}
 									checkIn={yearDashMonthDashDay(checkIn)}
 									checkOut={yearDashMonthDashDay(checkOut)} />
+							</div>
+						)
+					}
+				</>
+			}
+			{
+				listItemType === ListItemType.HostingProperty &&
+				<>
+					{
+						items.map((item, i) =>
+							<div key={i} className="col">
+								<HostingPropertyListItem item={item} />
 							</div>
 						)
 					}
