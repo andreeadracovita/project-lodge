@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
+import "./AddPropertyForm.css";
 import FormBackButton from "./FormBackButton";
 import FormPartTitleAddress from "./FormPartTitleAddress";
 import FormPartDescription from "./FormPartDescription";
@@ -8,9 +9,10 @@ import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import FormPartReview from "./FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
-import "./AddPropertyForm.css";
+import { createNewProperty } from "/src/api/LodgeDbApiService";
 
 export default function AddPropertyForm() {
+	const [propertyId, setPropertyId] = useState();
 	const [input, setInput] = useState({
 		title: "",
 		city: "",
@@ -32,7 +34,7 @@ export default function AddPropertyForm() {
 	const [formState, setFormState] = useState(0);
 	const finalState = 4;
 
-	function onButtonClicked() {
+	function advanceState() {
 		// Validates input
 
 		// Remain on page if invalid input
@@ -47,6 +49,33 @@ export default function AddPropertyForm() {
 		} else {
 			console.log("Add property to db");
 		}
+	}
+
+	/**
+	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
+	 * 2. If back and edit, patch entry with new details.
+	 */
+	function onDescriptionSubmit() {
+		const payload = {
+			title: "",
+			geo: {x: 0, y:0 },
+			city: "",
+			country: "",
+			is_listed: false
+		};
+		if (!propertyId) {
+			// Create a new entry
+			createNewProperty(payload)
+				.then(response => {
+					console.log(response.data);
+				})
+				.catch(error => {
+					console.error(error);
+				})
+		} else {
+			// Update existing entry
+		}
+		advanceState();
 	}
 
 	function onBackClicked() {
@@ -106,7 +135,7 @@ export default function AddPropertyForm() {
 								showButton={true}
 								input={input}
 								handleChange={handleChange}
-								onButtonClicked={onButtonClicked}
+								onButtonClicked={onDescriptionSubmit}
 							/>
 						</div>
 						<div className="col-6">
@@ -126,7 +155,7 @@ export default function AddPropertyForm() {
 								showUnselectedFeatures={true}
 								input={input}
 								handleChange={handleChange}
-								onButtonClicked={onButtonClicked}
+								onButtonClicked={advanceState}
 								handleChangeMultiselect={handleChangeMultiselect}
 							/>
 						</div>
@@ -145,7 +174,7 @@ export default function AddPropertyForm() {
 							showButton={true}
 							input={input}
 							handleChange={handleChange}
-							onButtonClicked={onButtonClicked}
+							onButtonClicked={advanceState}
 							handleChangePhotoUpload={handleChangePhotoUpload}
 						/>
 					</div>
@@ -161,7 +190,7 @@ export default function AddPropertyForm() {
 								showButton={true}
 								input={input}
 								handleChange={handleChange}
-								onButtonClicked={onButtonClicked}
+								onButtonClicked={advanceState}
 							/>
 						</div>
 						<div className="col-6">
@@ -178,7 +207,7 @@ export default function AddPropertyForm() {
 								<h1 className="page-heading">Review your property</h1>
 								<FormPartReview
 									input={input}
-									onButtonClicked={onButtonClicked}
+									onButtonClicked={advanceState}
 									handleChange={handleChange}
 									handleChangeMultiselect={handleChangeMultiselect}
 								/>

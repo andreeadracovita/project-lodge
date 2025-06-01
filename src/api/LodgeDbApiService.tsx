@@ -40,6 +40,9 @@ export const getPropertyById
 export const getPropertiesFilteredBy
 	= (payload) => apiClient.post(`/property/filter`, payload);
 
+export const createNewProperty
+	= (payload) => apiClient.post("/user/properties/new", payload);
+
 // Types
 export const getAllFeatures
 	= () => apiClient.get("/types/feature");
