@@ -100,27 +100,27 @@ function SignupLogin() {
 	}
 
 	return (
-		<div className="container d-flex justify-content-center align-items-center">
-			<div className="sign-in-container">
-				<div className="row mb-3">
-					<div className="col-2 cursor-pointer" onClick={onBackClicked}>
+		<div className="container d-flex justify-content-center align-items-center section-container">
+			<div className="sign-in-container border-section p-3">
+				<div className="row mb-3 border-bottom">
+					<div className="col-2">
 						{
 							(showSignupForm || showPasswordInput) &&
-							<Icon.ChevronLeft />
+							<div className="cursor-pointer" onClick={onBackClicked}><Icon.ChevronLeft /></div>
 						}
 					</div>
 					<div className="col-8">
 						{
 							showEmailInput &&
-							<h1 className="text-center">Sign up or log in</h1>
+							<h1 className="page-heading text-center">Sign up or log in</h1>
 						}
 						{
 							showSignupForm &&
-							<h1 className="text-center">Create an account</h1>
+							<h1 className="page-heading text-center">Create an account</h1>
 						}
 						{
 							showPasswordInput &&
-							<h1 className="text-center">Log in</h1>
+							<h1 className="page-heading text-center">Log in</h1>
 						}
 					</div>
 				</div>
