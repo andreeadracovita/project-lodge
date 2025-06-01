@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import * as Icon from "react-bootstrap-icons";
 
 import { getAllProperties } from "/src/api/LodgeDbApiService";
 import Search from "/src/components/search/Search";
-import ListView from "/src/components/list/ListView";
+import ListView, { ListItemType } from "/src/components/list/ListView";
 import MapView from "/src/components/map/MapView";
+import Filter from "/src/components/filter/Filter";
 
 export default function SearchResults() {
 	const [properties, setProperties] = useState([]);
@@ -34,7 +36,7 @@ export default function SearchResults() {
 	useEffect(() => {
 		const points = [];
 		properties.map(p => {
-			points.push(p.geo);
+			points.push([p.geo.x, p.geo.y]);
 		});
 		setPoints(points);
 	}, [properties]);
@@ -55,16 +57,22 @@ export default function SearchResults() {
 	return (
 		<div className="container section-container">
 			<Search />
-			<div className="mt-3">
-				<h1>{location}: {properties.length} properties found</h1>
-				<div className="row">
-					<div className="col-8">
-	        			<ListView items={properties} cols={3} />
-	        		</div>
-	        		<div className="col-4">
-	        			<MapView height={"650px"} center={locationGeo} zoom={6} points={points} />
-	        		</div>
-	        	</div>
+			<div className="section-container row">
+				<div className="col-3">
+					<div className="position-relative">
+						<MapView height={"200px"} center={locationGeo} zoom={6} points={[]} />
+						<span className="btn btn-dark rounded-pill position-absolute top-50 start-50 translate-middle d-flex align-items-center">
+							<span className="me-2">Show map</span><Icon.Map color="white" />
+						</span>
+					</div>
+					<div className="section-container">
+						<Filter />
+					</div>
+				</div>
+				<div className="col-9">
+					<h1 className="page-heading">{location}: {properties.length} results found</h1>
+					<ListView listItemType={ListItemType.Property} items={properties} cols={3} />
+				</div>
 	        </div>
 		</div>
 	);
