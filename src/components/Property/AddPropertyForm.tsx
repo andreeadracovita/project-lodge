@@ -7,10 +7,10 @@ import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import FormPartReview from "./FormPartReview";
-import ListItem from "/src/components/ListItem";
+import PropertyListItem from "/src/components/list/PropertyListItem";
 import "./AddPropertyForm.css";
 
-function AddPropertyForm() {
+export default function AddPropertyForm() {
 	const [input, setInput] = useState({
 		title: "",
 		city: "",
@@ -186,7 +186,7 @@ function AddPropertyForm() {
 							<div className="col-6">
 								<div className="col-8 pt-5 ms-5 sticky">
 									<div id="preview">
-										<ListItem
+										<PropertyListItem
 											isLink={false}
 											id={-1}
 											img_url={input.photos && input.photos.length > 0 ? input.photos[0] : null}
@@ -206,5 +206,3 @@ function AddPropertyForm() {
 		</div>
 	);
 }
-
-export default AddPropertyForm;

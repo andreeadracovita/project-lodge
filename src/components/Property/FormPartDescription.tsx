@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
-import { getAllFeatures } from "/src/components/api/LodgeDbApiService";
+import { getAllFeatures } from "/src/api/LodgeDbApiService";
 
 import "./FormPartDescription.css";
 
-function FormPartDescription({isEditable, showButton, showUnselectedFeatures, input, handleChange, onButtonClicked, handleChangeMultiselect}) {
+export default function FormPartDescription({isEditable, showButton, showUnselectedFeatures, input, handleChange, onButtonClicked, handleChangeMultiselect}) {
 	const [features, setFeatures] = useState([]);
 
 	useEffect(() => {
@@ -172,5 +172,3 @@ function FormPartDescription({isEditable, showButton, showUnselectedFeatures, in
 		</div>
 	);
 }
-
-export default FormPartDescription;

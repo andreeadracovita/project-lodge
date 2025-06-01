@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 
-import { getPropertyById } from "/src/components/api/LodgeDbApiService";
-import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
-import PropertyDescription from "/src/components/Stay/PropertyDescription";
-import BookingCard from "/src/components/Stay/BookingCard";
-import Rating from "/src/components/Rating";
-import { propertyPhotoPrefix } from "/src/constants";
+import { getPropertyById } from "/src/api/LodgeDbApiService";
+import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
+import PropertyDescription from "/src/components/stay/PropertyDescription";
+import BookingCard from "/src/components/stay/BookingCard";
+import Rating from "/src/components/common/Rating";
+import { propertyPhotoPrefix } from "/src/utils/constants";
 
 export default function Stay() {
 	const [searchParams, setSearchParams] = useSearchParams();

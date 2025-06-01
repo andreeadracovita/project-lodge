@@ -9,7 +9,7 @@ import "./CalendarMonth.css";
 /*
 	Month: 0 - 11
 */
-function CalendarMonth({month, year, chevronLeft, chevronRight, onLeftChevronClicked, onRightChevronClicked, onDateClicked}) {
+export default function CalendarMonth({month, year, chevronLeft, chevronRight, onLeftChevronClicked, onRightChevronClicked, onDateClicked}) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 	const monthNames = [
 		"January",
@@ -133,5 +133,3 @@ function CalendarMonth({month, year, chevronLeft, chevronRight, onLeftChevronCli
 		</div>
 	);
 }
-
-export default CalendarMonth;

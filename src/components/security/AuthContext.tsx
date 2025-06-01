@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { apiClient } from "../api/ApiClient";
-import { executeJwtAuthenticationService } from "../api/AuthenticationApiService";
-import { getUserConfig } from "../api/LodgeDbApiService";
+import { apiClient } from "/src/api/ApiClient";
+import { executeJwtAuthenticationService } from "/src/api/AuthenticationApiService";
+import { getUserConfig } from "/src/api/LodgeDbApiService";
 
 export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);

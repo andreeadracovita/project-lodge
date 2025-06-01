@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { useAuth } from "/src/components/security/AuthContext";
-import HostingHeader from "/src/components/Header/HostingHeader";
-import { getUserId, getPropertiesByUserId } from "/src/components/api/LodgeDbApiService";
-import ListView from "/src/components/ListView";
+import HostingHeader from "/src/components/common/header/HostingHeader";
+import { getUserId, getPropertiesByUserId } from "/src/api/LodgeDbApiService";
+import ListView from "/src/components/list/ListView";
 
 export default function Properties() {
 	const authContext = useAuth();

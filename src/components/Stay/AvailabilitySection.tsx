@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 import Calendar from "/src/components/Calendar/Calendar";
 import { dayMonYear } from "/src/utils/DateFormatUtils";
 
-function AvailabilitySection() {
+export default function AvailabilitySection() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [checkIn, setCheckIn] = useState(new Date());
 	const [checkOut, setCheckOut] = useState(new Date());
@@ -28,5 +28,3 @@ function AvailabilitySection() {
 		</>
 	);
 }
-
-export default AvailabilitySection;

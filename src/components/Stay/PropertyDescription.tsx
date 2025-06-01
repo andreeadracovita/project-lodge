@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import MapView from "/src/components/MapView";
 import AvailabilitySection from "./AvailabilitySection";
+import MapView from "/src/components/map/MapView";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
-import { getAllFeatures, getAllExperiences } from "/src/components/api/LodgeDbApiService";
+import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
 
-function PropertyDescription({property}) {
+export default function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -80,5 +80,3 @@ function PropertyDescription({property}) {
 		</>
 	);
 }
-
-export default PropertyDescription;

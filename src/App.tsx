@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import AuthProvider from "./components/security/AuthContext";
 import RequireAuth from "./components/security/RequireAuth";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer";
+import Header from "./components/common/header/Header";
+import Footer from "./components/common/Footer";
 
 import Home from "./pages/Home";
 import Stay from "./pages/Stay";
@@ -20,12 +20,13 @@ import Hosting from "./pages/hosting/Hosting";
 import Properties from "./pages/hosting/Properties";
 import PropertyEdit from "./pages/hosting/PropertyEdit";
 import HostingCalendar from "./pages/hosting/HostingCalendar";
+import HostingMessages from "./pages/hosting/HostingMessages";
 
 import NoMatch from "./pages/NoMatch";
 
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <>
       <AuthProvider>
@@ -49,6 +50,7 @@ function App() {
             <Route path="/hosting/property/add" element={<RequireAuth><PropertyEdit editMode={false} /></RequireAuth>} />
             <Route path="/hosting/property/edit/:id" element={<RequireAuth><PropertyEdit editMode={true} /></RequireAuth>} />
             <Route path="/hosting/calendar" element={<RequireAuth><HostingCalendar /></RequireAuth>} />
+            <Route path="/hosting/messages" element={<RequireAuth><HostingMessages /></RequireAuth>} />
 
             <Route path="*" element={<NoMatch />} />
           </Routes>
@@ -58,5 +60,3 @@ function App() {
     </>
   )
 }
-
-export default App

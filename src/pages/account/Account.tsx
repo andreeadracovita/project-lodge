@@ -5,7 +5,7 @@ import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
 import AccountCard from "/src/components/user/AccountCard";
 import { SettingsSection } from "/src/components/user/SettingsNav";
-import { experienceIconMap } from "/src/mappings";
+import { experienceIconMap } from "/src/utils/mappings";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 export default function Account() {

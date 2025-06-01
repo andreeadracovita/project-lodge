@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import { getAllBuildingTypes, getAllRentalTypes } from "/src/components/api/LodgeDbApiService";
+import { getAllBuildingTypes, getAllRentalTypes } from "/src/api/LodgeDbApiService";
 
-function FormPartTitleAddress({isEditable, showButton, input, handleChange, onButtonClicked}) {
+export default function FormPartTitleAddress({isEditable, showButton, input, handleChange, onButtonClicked}) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
 
@@ -143,5 +143,3 @@ function FormPartTitleAddress({isEditable, showButton, input, handleChange, onBu
 		</div>
 	);
 }
-
-export default FormPartTitleAddress;

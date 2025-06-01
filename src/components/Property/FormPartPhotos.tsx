@@ -3,7 +3,7 @@ import * as Icon from "react-bootstrap-icons";
 
 import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
 
-function FormPartPhotos({input, handleChange, onButtonClicked, handleChangePhotoUpload}) {
+export default function FormPartPhotos({input, handleChange, onButtonClicked, handleChangePhotoUpload}) {
 
 	return (
 		<div>
@@ -31,5 +31,3 @@ function FormPartPhotos({input, handleChange, onButtonClicked, handleChangePhoto
 		</div>
 	);
 }
-
-export default FormPartPhotos;

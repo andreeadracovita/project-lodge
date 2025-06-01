@@ -1,6 +1,6 @@
 import * as Icon from "react-bootstrap-icons";
 
-function Footer() {
+export default function Footer() {
 
 	const now = new Date();
 	const currentYear = now.getFullYear();
@@ -17,5 +17,3 @@ function Footer() {
 		</footer>
 	)
 }
-
-export default Footer

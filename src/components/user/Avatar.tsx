@@ -1,5 +1,5 @@
 import { useAuth } from "/src/components/security/AuthContext";
-import { userPhotoPrefix } from "/src/constants";
+import { userPhotoPrefix } from "/src/utils/constants";
 import "./Avatar.css";
 
 export default function Avatar({ size }) {

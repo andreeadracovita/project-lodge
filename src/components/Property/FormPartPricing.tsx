@@ -1,7 +1,7 @@
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-function FormPartPricing({isEditable, showButton, input, handleChange, onButtonClicked}) {
+export default function FormPartPricing({isEditable, showButton, input, handleChange, onButtonClicked}) {
 	const currency = "CHF";
 
 	const stylingFormControl = classNames(
@@ -44,5 +44,3 @@ function FormPartPricing({isEditable, showButton, input, handleChange, onButtonC
 		</div>
 	);
 }
-
-export default FormPartPricing;

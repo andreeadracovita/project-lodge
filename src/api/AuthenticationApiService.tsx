@@ -1,4 +1,4 @@
-import { apiClient } from "./ApiClient";
+import { apiClient } from "/src/api/ApiClient";
 
 export const executeJwtAuthenticationService
 	= (email, password) => apiClient.post("/auth/login", { email, password });

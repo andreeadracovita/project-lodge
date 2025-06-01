@@ -15,7 +15,7 @@ import "./MapView.css";
 
 // Center = [long, lat]
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
-function MapView({width, height, center, zoom, points}) {
+export default function MapView({width, height, center, zoom, points}) {
 	const pinStyle = {
         'circle-radius': 5,
 		'circle-fill-color': 'blue'
@@ -73,5 +73,3 @@ function MapView({width, height, center, zoom, points}) {
 		<div id="map" style={mapStyle}></div>
 	)
 }
-
-export default MapView;

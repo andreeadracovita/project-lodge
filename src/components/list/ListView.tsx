@@ -1,13 +1,13 @@
 import classNames from "classnames";
 
-import ListItem from "./ListItem";
+import PropertyListItem from "./PropertyListItem";
 
 export enum ListItemType {
 	Property = "property",
 	Destination = "destination"
 }
 
-function ListView({listItemType, items, cols}) {
+export default function ListView({listItemType, items, cols}) {
 	// Today
 	const checkIn = new Date();
 	let checkOut = new Date();
@@ -30,7 +30,7 @@ function ListView({listItemType, items, cols}) {
 			<div className={gridClassNames}>
 				{items.map(item =>
 					<div key={item.id} className="col">
-						<ListItem
+						<PropertyListItem
 							isLink={true}
 							id={item.id}
 							img_url={item.images_url_array.length > 0 ? propertyImgPathPrefix + item.images_url_array[0] : null}
@@ -48,5 +48,3 @@ function ListView({listItemType, items, cols}) {
 		</div>
 	)
 }
-
-export default ListView;

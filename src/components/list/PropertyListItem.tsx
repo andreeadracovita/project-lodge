@@ -3,10 +3,10 @@ import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
-import Rating from "./Rating";
-import "./ListItem.css";
+import Rating from "/src/components/common/Rating";
+import "./PropertyListItem.css";
 
-function ListItem({ isLink, id, img_url, title, city, country, price, rating, checkIn, checkOut }) {
+export default function PropertyListItem({ isLink, id, img_url, title, city, country, price, rating, checkIn, checkOut }) {
 	const authContext = useAuth();
 	const isFavorite = true;
 
@@ -45,5 +45,3 @@ function ListItem({ isLink, id, img_url, title, city, country, price, rating, ch
 		</Link>
 	);
 }
-
-export default ListItem;

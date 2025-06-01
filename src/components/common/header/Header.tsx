@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
+import "./Header.css";
 import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
-import "./Header.css";
-import { siteName } from "/src/constants";
+import { siteName } from "/src/utils/constants";
 
-function Header() {
+export default function Header() {
 	const authContext = useAuth();
 	const navigate = useNavigate();
 
@@ -58,5 +58,3 @@ function Header() {
 		</header>
 	)
 }
-
-export default Header

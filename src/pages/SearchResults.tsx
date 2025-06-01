@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { getAllProperties } from "/src/components/api/LodgeDbApiService";
+import { getAllProperties } from "/src/api/LodgeDbApiService";
 import Search from "/src/components/search/Search";
-import ListView from "/src/components/ListView";
-import MapView from "/src/components/MapView";
+import ListView from "/src/components/list/ListView";
+import MapView from "/src/components/map/MapView";
 
-function SearchResults() {
+export default function SearchResults() {
 	const [properties, setProperties] = useState([]);
 	const [location, setLocation] = useState("");
 	const [locationGeo, setLocationGeo] = useState([0, 0]);
@@ -69,5 +69,3 @@ function SearchResults() {
 		</div>
 	);
 }
-
-export default SearchResults;

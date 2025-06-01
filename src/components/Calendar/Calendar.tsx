@@ -5,7 +5,7 @@ import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import CalendarMonth from "./CalendarMonth";
 import "./Calendar.css";
 
-function Calendar() {
+export default function Calendar() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	
 	// Left calendar sheet
@@ -82,5 +82,3 @@ function Calendar() {
 		</div>
 	);
 }
-
-export default Calendar;

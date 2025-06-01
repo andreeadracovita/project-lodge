@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { getAllProperties, getAllExperiences } from "/src/components/api/LodgeDbApiService";
-import ListView from "/src/components/ListView";
+import { getAllProperties, getAllExperiences } from "/src/api/LodgeDbApiService";
+import ListView from "/src/components/list/ListView";
 import Search from "/src/components/search/Search";
-import { greetingMessage, trendingDestinations } from "/src/constants";
-import { experienceIconMap } from "/src/mappings";
+import { greetingMessage, trendingDestinations } from "/src/utils/constants";
+import { experienceIconMap } from "/src/utils/mappings";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 export default function Home() {

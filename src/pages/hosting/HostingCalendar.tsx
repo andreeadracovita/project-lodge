@@ -1,6 +1,6 @@
-import HostingHeader from "/src/components/Header/HostingHeader";
+import HostingHeader from "/src/components/common/header/HostingHeader";
 
-function HostingCalendar() {
+export default function HostingCalendar() {
 	return (
 		<div className="container section-container">
 			<HostingHeader />
@@ -9,5 +9,3 @@ function HostingCalendar() {
 		</div>
 	);
 }
-
-export default HostingCalendar;

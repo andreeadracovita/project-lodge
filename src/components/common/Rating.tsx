@@ -1,6 +1,6 @@
 import * as Icon from "react-bootstrap-icons";
 
-function Rating({score}) {
+export default function Rating({score}) {
 	return (
 		<span className="d-flex align-items-center">
 			<Icon.StarFill color="black" size={16} />
@@ -8,5 +8,3 @@ function Rating({score}) {
 		</span>
 	);
 }
-
-export default Rating;

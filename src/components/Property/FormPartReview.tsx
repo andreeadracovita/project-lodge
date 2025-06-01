@@ -5,7 +5,7 @@ import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 
-function FormPartReview({input, onButtonClicked, handleChange, handleChangeMultiselect}) {
+export default function FormPartReview({input, onButtonClicked, handleChange, handleChangeMultiselect}) {
 	return (
 		<div>
 			<FormPartTitleAddress
@@ -47,5 +47,3 @@ function FormPartReview({input, onButtonClicked, handleChange, handleChangeMulti
 		</div>
 	)
 }
-
-export default FormPartReview;

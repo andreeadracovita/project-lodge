@@ -7,7 +7,7 @@ import Calendar from "../Calendar/Calendar";
 import { dayMonYear } from "/src/utils/DateFormatUtils";
 import "./Search.css";
 
-function Search() {
+export default function Search() {
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -113,5 +113,3 @@ function Search() {
 		</div>
 	)
 }
-
-export default Search

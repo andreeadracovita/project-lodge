@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router";
 
 import "./BookingCard.css";
 
-function BookingCard({price}) {
+export default function BookingCard({price}) {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const checkIn = searchParams.get("check_in");
 	const checkOut = searchParams.get("check_out");
@@ -53,5 +53,3 @@ function BookingCard({price}) {
 		</div>
 	)
 }
-
-export default BookingCard;

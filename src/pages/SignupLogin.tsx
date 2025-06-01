@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
-import { checkUserExists } from "/src/components/api/AuthenticationApiService";
-import { createAccount } from "/src/components/api/LodgeDbApiService";
+import { checkUserExists } from "/src/api/AuthenticationApiService";
+import { createAccount } from "/src/api/LodgeDbApiService";
 
-function SignupLogin() {
+export default function SignupLogin() {
 	const navigate = useNavigate();
 	const authContext = useAuth();
 
@@ -248,5 +248,3 @@ function SignupLogin() {
 		</div>
 	);
 }
-
-export default SignupLogin;

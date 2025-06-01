@@ -1,6 +1,6 @@
 import AddPropertyForm from "/src/components/property/AddPropertyForm";
 
-function PropertyEdit({editMode}) {
+export default function PropertyEdit({editMode}) {
 
 	return (
 		<div className="container">
@@ -8,5 +8,3 @@ function PropertyEdit({editMode}) {
 		</div>
 	);
 }
-
-export default PropertyEdit;
