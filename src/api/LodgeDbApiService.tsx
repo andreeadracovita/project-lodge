@@ -43,6 +43,9 @@ export const getPropertiesFilteredBy
 export const createNewProperty
 	= (payload) => apiClient.post("/user/properties/new", payload);
 
+export const createNewPropertyDetail
+	= (payload) => apiClient.post
+
 // Types
 export const getAllFeatures
 	= () => apiClient.get("/types/feature");

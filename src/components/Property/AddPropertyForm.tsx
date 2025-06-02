@@ -67,7 +67,8 @@ export default function AddPropertyForm() {
 			// Create a new entry
 			createNewProperty(payload)
 				.then(response => {
-					console.log(response.data);
+					setPropertyId(response.data.id);
+					console.log(response.data.id);
 				})
 				.catch(error => {
 					console.error(error);
