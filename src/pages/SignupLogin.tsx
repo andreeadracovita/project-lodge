@@ -5,7 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 
 import { useAuth } from "/src/components/security/AuthContext";
 import { checkUserExists } from "/src/api/AuthenticationApiService";
-import { createAccount } from "/src/api/LodgeDbApiService";
+import { createAccount } from "/src/api/AuthenticationApiService";
 
 export default function SignupLogin() {
 	const navigate = useNavigate();

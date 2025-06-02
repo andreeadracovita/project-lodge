@@ -58,7 +58,7 @@ export default function AddPropertyForm() {
 	function onDescriptionSubmit() {
 		const payload = {
 			title: "",
-			geo: {x: 0, y:0 },
+			geo: {x: 0, y:0 }, // compute geo using city, country, street, number
 			city: "",
 			country: "",
 			is_listed: false
@@ -72,7 +72,8 @@ export default function AddPropertyForm() {
 				})
 				.catch(error => {
 					console.error(error);
-				})
+				});
+
 		} else {
 			// Update existing entry
 		}

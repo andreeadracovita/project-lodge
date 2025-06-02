@@ -1,9 +1,6 @@
 import { apiClient } from "./ApiClient";
 
 // User
-export const createAccount
-	= (payload) => apiClient.post("/auth/signup", payload);
-
 export const getUserConfig
 	= () => apiClient.get("/user/config");
 
@@ -26,7 +23,7 @@ export const deleteAccount
 	= (userId) => apiClient.delete(`/user/${userId}`);
 
 export const getPropertiesByUserId
-	= () => apiClient.get(`/user/properties`);
+	= () => apiClient.get("/user/properties");
 
 // Property
 // Testing purposes: there will never be a case when we need to fetch all properties without a filter
@@ -36,15 +33,15 @@ export const getAllProperties
 export const getPropertyById
 	= (id) => apiClient.get(`/property/id/${id}`);
 
-// Filters: country, city, proximity, price, rental type, experiences, property type
-export const getPropertiesFilteredBy
-	= (payload) => apiClient.post(`/property/filter`, payload);
-
 export const createNewProperty
 	= (payload) => apiClient.post("/user/properties/new", payload);
 
 export const createNewPropertyDetail
 	= (payload) => apiClient.post
+
+// Filters: country, city, proximity, price, rental type, experiences, property type
+export const getPropertiesFilteredBy
+	= (payload) => apiClient.post(`/property/filter`, payload);
 
 // Types
 export const getAllFeatures
