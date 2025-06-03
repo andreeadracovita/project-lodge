@@ -4,23 +4,11 @@ import { apiClient } from "./ApiClient";
 export const getUserConfig
 	= () => apiClient.get("/user/config");
 
-export const updateUserName
-	= (payload) => apiClient.patch("/user/name", payload);
-
-export const updateUserEmail
-	= (payload) => apiClient.patch("/user/email", payload);
-
-export const updateUserNationality
-	= (payload) => apiClient.patch("/user/nationality", payload);
-
-export const updateUserPassword
-	= (payload) => apiClient.patch("/user/password", payload);
-
-export const updateUserExperiences
-	= (payload) => apiClient.patch("/user/experiences", payload);
+export const updateUser
+	= (payload) => apiClient.patch("/user", payload);
 
 export const deleteAccount
-	= (userId) => apiClient.delete(`/user/${userId}`);
+	= () => apiClient.delete("/user");
 
 export const getPropertiesByUserId
 	= () => apiClient.get("/user/properties");
@@ -33,15 +21,23 @@ export const getAllProperties
 export const getPropertyById
 	= (id) => apiClient.get(`/property/id/${id}`);
 
-export const createNewProperty
-	= (payload) => apiClient.post("/user/properties/new", payload);
-
-export const createNewPropertyDetailBase
-	= (payload) => apiClient.post("/user/property-details/new/base", payload);
-
 // Filters: country, city, proximity, price, rental type, experiences, property type
 export const getPropertiesFilteredBy
 	= (payload) => apiClient.post(`/property/filter`, payload);
+
+// Host
+// Protected routes
+export const createNewProperty
+	= (payload) => apiClient.post("/host/properties/new", payload);
+
+export const updateProperty
+	= (id, payload) => apiClient.patch(`/host/property/${id}`, payload);
+
+export const createNewPropertyDetailBase
+	= (payload) => apiClient.post("/host/property-details/new/base", payload);
+
+export const updatePropertyDetails
+	= (id, payload) => apiClient.patch(`/host/property-details/${id}`, payload);
 
 // Types
 export const getAllFeatures

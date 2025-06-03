@@ -10,7 +10,12 @@ import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import FormPartReview from "./FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
-import { createNewProperty, createNewPropertyDetailBase } from "/src/api/LodgeDbApiService";
+import {
+	createNewProperty,
+	createNewPropertyDetailBase,
+	updateProperty,
+	updatePropertyDetails
+} from "/src/api/LodgeDbApiService";
 
 export default function AddPropertyForm() {
 	const [propertyId, setPropertyId] = useState();
@@ -80,29 +85,24 @@ export default function AddPropertyForm() {
 			country: input.country,
 			is_listed: false
 		};
-		if (!propertyId) {
-			// Create a new entry
-			createNewProperty(payloadProp)
-				.then(responseProp => {
-					const propertyId = responseProp.data.id;
-					setPropertyId(propertyId);
+		// Create a new entry
+		createNewProperty(payloadProp)
+			.then(responseProp => {
+				const propertyId = responseProp.data.id;
+				setPropertyId(propertyId);
 
-					createPropertyDetail(propertyId);
-				})
-				.catch(error => {
-					console.error(error);
-				});
-
-		} else {
-			// Update existing entry
-		}
+				createPropertyDetail(propertyId);
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 
 	/**
 	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
 	 * 2. If back and edit, patch entry with new details.
 	 */
-	function onDescriptionSubmit() {
+	function onBaseSubmit() {
 		if (!input.title || !input.city || !input.country || !input.street || !input.streetNo) {
 			console.error("Must fill in all fields!");
 			return;
@@ -115,7 +115,13 @@ export default function AddPropertyForm() {
 				if (response.data.length > 0) {
 					const data = response.data[0];
 					const geo = { x: data.lat, y: data.lon };
-					createProperty(geo);
+					if (!propertyId) {
+						createProperty(geo);
+					} else {
+						// Update property
+						updateProperty(propertyId, { title: "This is a new title" });
+						updatePropertyDetails(propertyId, { description: "This is a new description "});
+					}
 				}
 			})
 			.catch(error => {
@@ -182,7 +188,7 @@ export default function AddPropertyForm() {
 								showButton={true}
 								input={input}
 								handleChange={handleChange}
-								onButtonClicked={onDescriptionSubmit}
+								onButtonClicked={onBaseSubmit}
 							/>
 						</div>
 						<div className="col-6">
