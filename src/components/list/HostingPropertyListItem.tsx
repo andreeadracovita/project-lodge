@@ -17,8 +17,21 @@ export default function HostingPropertyListItem({ item }: HostingPropertyListIte
 			<div className="col-6">
 				<p className="lato-bold">{item.title}</p>
 				<p>{item.city}, {item.country}</p>
-				<span className="btn btn-dark rounded-pill">Edit</span>
-				<span className="btn btn-outline-dark rounded-pill">View</span>
+				{
+					item.is_listed &&
+					<p className="lato-bold">Listed</p>
+				}
+				{
+					item.is_listed
+					? <div>
+						<span className="btn btn-dark rounded-pill">Edit</span>
+						<span className="btn btn-outline-dark rounded-pill">View property page</span>
+					</div>
+					: <div>
+						<span className="btn btn-dark rounded-pill">Edit to publish</span>
+						<span className="btn btn-outline-dark rounded-pill">Preview property page</span>
+					</div>
+				}
 			</div>
 		</div>
 	)

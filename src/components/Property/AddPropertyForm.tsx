@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
@@ -9,7 +10,7 @@ import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import FormPartReview from "./FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
-import { createNewProperty } from "/src/api/LodgeDbApiService";
+import { createNewProperty, createNewPropertyDetailBase } from "/src/api/LodgeDbApiService";
 
 export default function AddPropertyForm() {
 	const [propertyId, setPropertyId] = useState();
@@ -17,17 +18,20 @@ export default function AddPropertyForm() {
 		title: "",
 		city: "",
 		country: "",
-
 		street: "",
 		streetNo: "",
+
 		description: "",
 		buildingType: "0",
 		rentalType: "0",
 		guests: 1,
 		beds: 1,
+		bedrooms: 1,
 		bathrooms: 1,
 		features_ids: [],
+
 		photos: [],
+
 		pricePerNight: "" // price per night converted from session/account currency to eur as it is stored in db
 	});
 
@@ -51,24 +55,39 @@ export default function AddPropertyForm() {
 		}
 	}
 
-	/**
-	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
-	 * 2. If back and edit, patch entry with new details.
-	 */
-	function onDescriptionSubmit() {
-		const payload = {
-			title: "",
-			geo: {x: 0, y:0 }, // compute geo using city, country, street, number
-			city: "",
-			country: "",
+	async function createPropertyDetail(propertyId: int) {
+		// Create details
+		const payloadPropDetail = {
+			property_id: propertyId,
+			street: input.street,
+			street_no: input.streetNo
+		}
+		createNewPropertyDetailBase(payloadPropDetail)
+			.then(responsePropDetail => {
+				console.log(responsePropDetail);
+				advanceState();
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}
+
+	async function createProperty(geo) {
+		const payloadProp = {
+			title: input.title,
+			geo,
+			city: input.city,
+			country: input.country,
 			is_listed: false
 		};
 		if (!propertyId) {
 			// Create a new entry
-			createNewProperty(payload)
-				.then(response => {
-					setPropertyId(response.data.id);
-					console.log(response.data.id);
+			createNewProperty(payloadProp)
+				.then(responseProp => {
+					const propertyId = responseProp.data.id;
+					setPropertyId(propertyId);
+
+					createPropertyDetail(propertyId);
 				})
 				.catch(error => {
 					console.error(error);
@@ -77,7 +96,33 @@ export default function AddPropertyForm() {
 		} else {
 			// Update existing entry
 		}
-		advanceState();
+	}
+
+	/**
+	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
+	 * 2. If back and edit, patch entry with new details.
+	 */
+	function onDescriptionSubmit() {
+		if (!input.title || !input.city || !input.country || !input.street || !input.streetNo) {
+			console.error("Must fill in all fields!");
+			return;
+		}
+
+		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + input.country;
+		axios.get(`https://geocode.maps.co/search?q=${address}&api_key=6829981227127748709913iypd29e39`)
+			.then(response => {
+				console.log(response.data);
+				if (response.data.length > 0) {
+					const data = response.data[0];
+					const geo = { x: data.lat, y: data.lon };
+					createProperty(geo);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+
+		
 	}
 
 	function onBackClicked() {

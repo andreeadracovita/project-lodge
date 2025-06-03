@@ -36,8 +36,8 @@ export const getPropertyById
 export const createNewProperty
 	= (payload) => apiClient.post("/user/properties/new", payload);
 
-export const createNewPropertyDetail
-	= (payload) => apiClient.post
+export const createNewPropertyDetailBase
+	= (payload) => apiClient.post("/user/property-details/new/base", payload);
 
 // Filters: country, city, proximity, price, rental type, experiences, property type
 export const getPropertiesFilteredBy
