@@ -10,9 +10,6 @@ export const updateUser
 export const deleteAccount
 	= () => apiClient.delete("/user");
 
-export const getPropertiesByUserId
-	= () => apiClient.get("/user/properties");
-
 // Property
 // Testing purposes: there will never be a case when we need to fetch all properties without a filter
 export const getAllProperties
@@ -27,6 +24,9 @@ export const getPropertiesFilteredBy
 
 // Host
 // Protected routes
+export const getPropertiesByUserId
+	= () => apiClient.get("/host/properties");
+
 export const createNewProperty
 	= (payload) => apiClient.post("/host/properties/new", payload);
 

@@ -34,22 +34,22 @@ export default function AddPropertyForm() {
 		bedrooms: 1,
 		bathrooms: 1,
 		features_ids: [],
+		experiences_ids: [],
 
 		photos: [],
 
-		pricePerNight: "" // price per night converted from session/account currency to eur as it is stored in db
+		pricePerNight: ""
 	});
 
 	const [formState, setFormState] = useState(0);
 	const finalState = 4;
 
+	const [showError, setShowError] = useState(false);
+
 	function advanceState() {
 		// Validates input
-
 		// Remain on page if invalid input
-
 		// Call DB API to Create property entry
-
 		// Navigate to Manage Properties page to see the newly added entry
 		// navigate("//hosting/properties");
 
@@ -90,7 +90,6 @@ export default function AddPropertyForm() {
 			.then(responseProp => {
 				const propertyId = responseProp.data.id;
 				setPropertyId(propertyId);
-
 				createPropertyDetail(propertyId);
 			})
 			.catch(error => {
@@ -103,8 +102,8 @@ export default function AddPropertyForm() {
 	 * 2. If back and edit, patch entry with new details.
 	 */
 	function onBaseSubmit() {
-		if (!input.title || !input.city || !input.country || !input.street || !input.streetNo) {
-			console.error("Must fill in all fields!");
+		if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
+			setShowError(true);
 			return;
 		}
 
@@ -118,17 +117,63 @@ export default function AddPropertyForm() {
 					if (!propertyId) {
 						createProperty(geo);
 					} else {
+						let check = 0;
 						// Update property
-						updateProperty(propertyId, { title: "This is a new title" });
-						updatePropertyDetails(propertyId, { description: "This is a new description "});
+						updateProperty(propertyId, {
+							title: input.title,
+							city: input.city,
+							country: input.country
+						})
+							.then(() => {
+								check++;
+								if (check === 2) {
+									advanceState();
+								}
+							})
+							.catch((error) => {
+								console.error(error);
+							});
+						updatePropertyDetails(propertyId, {
+							building_type_id: parseInt(input.buildingType),
+							rental_type_id: parseInt(input.rentalType),
+							street: input.street,
+							street_no: input.streetNo
+						})
+							.then(() => {
+								check++;
+								if (check === 2) {
+									advanceState();
+								}
+							})
+							.catch((error) => {
+								console.error(error);
+							});
 					}
+				} else {
+					setShowError(true);
 				}
 			})
 			.catch(error => {
 				console.error(error);
 			});
+	}
 
-		
+	function onDescriptionSubmit() {
+		updatePropertyDetails(propertyId, {
+			description: input.description,
+			guests: input.guests,
+			beds: input.beds,
+			bedrooms: input.bedrooms,
+			bathrooms: input.bathrooms,
+			features_ids: input.features_ids,
+			experiences_ids: input.experiences_ids
+		})
+			.then(() => {
+				advanceState();
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	}
 
 	function onBackClicked() {
@@ -138,6 +183,7 @@ export default function AddPropertyForm() {
 	function handleChange(event) {
 		const { value, name } = event.target;
 
+		setShowError(false);
 		setInput((prevValue) => {
 			return {
 				...prevValue,
@@ -157,7 +203,7 @@ export default function AddPropertyForm() {
 		})
 	}
 
-	function handleChangeMultiselect(event) {
+	function handleChangeFeatureMultiselect(event) {
 		const selected = parseInt(event.target.id);
 
 		let newFeaturesValue = input.features_ids;
@@ -166,11 +212,27 @@ export default function AddPropertyForm() {
 		} else {
 			newFeaturesValue.push(selected);
 		}
-		console.log(newFeaturesValue);
 		setInput((prevValue) => {
 			return {
 				...prevValue,
 				features_ids: newFeaturesValue
+			}
+		});
+	}
+
+	function handleChangeExperienceMultiselect(event) {
+		const selected = parseInt(event.target.id);
+
+		let newExperiencesValue = input.experiences_ids;
+		if (newExperiencesValue.includes(selected)) {
+			newExperiencesValue = newExperiencesValue.filter(e => e !== selected);
+		} else {
+			newExperiencesValue.push(selected);
+		}
+		setInput((prevValue) => {
+			return {
+				...prevValue,
+				experiences_ids: newExperiencesValue
 			}
 		});
 	}
@@ -183,6 +245,7 @@ export default function AddPropertyForm() {
 					<div id="state-title-address" className="row">
 						<div className="col-6">
 							<h1 className="page-heading">List your property</h1>
+							{ showError && <span className="error-text">ERROR!</span>}
 							<FormPartTitleAddress
 								isEditable={true}
 								showButton={true}
@@ -208,8 +271,9 @@ export default function AddPropertyForm() {
 								showUnselectedFeatures={true}
 								input={input}
 								handleChange={handleChange}
-								onButtonClicked={advanceState}
-								handleChangeMultiselect={handleChangeMultiselect}
+								onButtonClicked={onDescriptionSubmit}
+								handleChangeFeatureMultiselect={handleChangeFeatureMultiselect}
+								handleChangeExperienceMultiselect={handleChangeExperienceMultiselect}
 							/>
 						</div>
 						<div className="col-6">
@@ -261,8 +325,6 @@ export default function AddPropertyForm() {
 								<FormPartReview
 									input={input}
 									onButtonClicked={advanceState}
-									handleChange={handleChange}
-									handleChangeMultiselect={handleChangeMultiselect}
 								/>
 							</div>
 							<div className="col-6">

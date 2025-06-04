@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
-
-import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
-import { getAllFeatures } from "/src/api/LodgeDbApiService";
+import * as Icon from "react-bootstrap-icons";
 
 import "./FormPartDescription.css";
+import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { experienceIconMap } from "/src/utils/mappings";
 
-export default function FormPartDescription({isEditable, showButton, showUnselectedFeatures, input, handleChange, onButtonClicked, handleChangeMultiselect}) {
+export default function FormPartDescription({
+	isEditable,
+	showButton,
+	showUnselectedFeatures,
+	input,
+	handleChange,
+	onButtonClicked,
+	handleChangeFeatureMultiselect,
+	handleChangeExperienceMultiselect
+}) {
 	const [features, setFeatures] = useState([]);
+	const [experiences, setExperiences] = useState([]);
 
 	useEffect(() => {
 		getAllFeatures()
@@ -19,10 +30,24 @@ export default function FormPartDescription({isEditable, showButton, showUnselec
 			.catch(error => {
 				console.error(error);
 			});
+
+		getAllExperiences()
+			.then(response => {
+				if (response.data.length > 0) {
+					setExperiences(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			})
 	}, []);
 
 	function isFeatureIdSelected(featureId) {
 		return input.features_ids.includes(featureId);
+	}
+
+	function isExperienceIdSelected(experienceId) {
+		return input.experiences_ids.includes(experienceId);
 	}
 
 	const stylingFormTextArea = classNames(
@@ -93,6 +118,23 @@ export default function FormPartDescription({isEditable, showButton, showUnselec
 
 			<div className="row mt-2">
 				<div className="col-2">
+					<label htmlFor="bedrooms">Bedrooms</label>
+				</div>
+				<div className="col-4">
+					<input
+						id="bedrooms"
+						type="number"
+						className={stylingFormControl}
+						name="bedrooms"
+						value={input.bedrooms}
+						readOnly={!isEditable}
+						onChange={isEditable ? handleChange : undefined}
+					/>
+				</div>
+			</div>
+
+			<div className="row mt-2">
+				<div className="col-2">
 					<label htmlFor="bathrooms">Bathrooms</label>
 				</div>
 				<div className="col-4">
@@ -125,7 +167,7 @@ export default function FormPartDescription({isEditable, showButton, showUnselec
 											"selected-feature": isFeatureIdSelected(foundFeature.id)
 										}
 									)}
-									onClick={isEditable ? handleChangeMultiselect : undefined}
+									onClick={isEditable ? handleChangeFeatureMultiselect : undefined}
 								>
 									{foundFeature.name}
 								</span>
@@ -148,9 +190,59 @@ export default function FormPartDescription({isEditable, showButton, showUnselec
 											"d-none": isFeatureIdSelected(feature.id)
 										}
 									)}
-									onClick={handleChangeMultiselect}
+									onClick={handleChangeFeatureMultiselect}
 								>
 									{feature.name}
+								</span>
+							)	
+						}
+					</div>
+				}
+			</div>
+
+			<div id="experiences">
+				<label htmlFor="experiences" className="mt-3">What experiences can guests have in the area?</label>
+				<div id="selected-features" className="d-flex flex-wrap">
+					{
+						input.experiences_ids.map((id) => {
+							const foundExp = experiences.find(exp => exp.id == id);
+							if (foundExp) {
+								return <span
+									key={foundExp.id}
+									id={foundExp.id}
+									className={classNames(
+										"features-list-item",
+										"selectable-item",
+										{
+											"selected-feature": isExperienceIdSelected(foundExp.id)
+										}
+									)}
+									onClick={isEditable ? handleChangeExperienceMultiselect : undefined}
+								>
+									{foundExp.name}
+								</span>
+							}
+						})	
+					}
+				</div>
+				{
+					showUnselectedFeatures &&
+					<div id="unselected-experiences" className="d-flex flex-wrap">
+						{
+							experiences.map(exp => 
+								<span
+									key={exp.id}
+									id={exp.id}
+									className={classNames(
+										"features-list-item",
+										"selectable-item",
+										{
+											"d-none": isExperienceIdSelected(exp.id)
+										}
+									)}
+									onClick={handleChangeExperienceMultiselect}
+								>
+									{ experienceIconMap.get(exp.name) } { capitalizeFirstLetter(exp.name) }
 								</span>
 							)	
 						}

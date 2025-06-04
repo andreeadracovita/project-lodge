@@ -112,6 +112,15 @@ h2 {
   font-weight: 700;
 }
 
+.error-text {
+  color: red;
+}
+
+.error-font {
+  font-size: 0.75rem;
+  margin-bottom: 0px;
+}
+
 .border-section {
   border: 1px solid #bebbbb;
   border-radius: 12px;
@@ -124,11 +133,6 @@ h2 {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.error-font {
-  font-size: 0.75rem;
-  margin-bottom: 0px;
 }
 
 .sign-in-container {

@@ -5,14 +5,14 @@ import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 
-export default function FormPartReview({input, onButtonClicked, handleChange, handleChangeMultiselect}) {
+export default function FormPartReview({input, onButtonClicked}) {
 	return (
 		<div>
 			<FormPartTitleAddress
 				isEditable={false}
 				showButton={false}
 				input={input}
-				handleChange={handleChange}
+				handleChange={() => {}}
 				onButtonClicked={onButtonClicked}
 			/>
 
@@ -22,9 +22,9 @@ export default function FormPartReview({input, onButtonClicked, handleChange, ha
 				showButton={false}
 				showUnselectedFeatures={false}
 				input={input}
-				handleChange={handleChange}
+				handleChange={() => {}}
 				onButtonClicked={onButtonClicked}
-				handleChangeMultiselect={handleChangeMultiselect}
+				handleChangeMultiselect={() => {}}
 			/>
 
 			<h2 className="mt-3">Pricing</h2>
@@ -32,7 +32,7 @@ export default function FormPartReview({input, onButtonClicked, handleChange, ha
 				isEditable={false}
 				showButton={false}
 				input={input}
-				handleChange={handleChange}
+				handleChange={() => {}}
 				onButtonClicked={onButtonClicked}
 			/>
 

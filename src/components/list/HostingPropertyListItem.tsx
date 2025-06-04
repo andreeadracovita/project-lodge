@@ -7,7 +7,7 @@ type HostingPropertyListItemProps = {
 
 // Component used for rendering a compact property item
 export default function HostingPropertyListItem({ item }: HostingPropertyListItemProps) {
-	const imgUrl = item.images_url_array.length > 0 ? propertyPhotoPrefix + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array?.length > 0 ? propertyPhotoPrefix + item.images_url_array[0] : null;
 
 	return (
 		<div className="row">
@@ -25,11 +25,12 @@ export default function HostingPropertyListItem({ item }: HostingPropertyListIte
 					item.is_listed
 					? <div>
 						<span className="btn btn-dark rounded-pill">Edit</span>
-						<span className="btn btn-outline-dark rounded-pill">View property page</span>
+						<span className="btn btn-outline-dark rounded-pill">View</span>
+						<span className="btn btn-outline-dark rounded-pill">Unpublish (after date)</span>
 					</div>
 					: <div>
-						<span className="btn btn-dark rounded-pill">Edit to publish</span>
-						<span className="btn btn-outline-dark rounded-pill">Preview property page</span>
+						<span className="btn btn-dark rounded-pill">Continue editing</span>
+						<span className="btn btn-outline-dark rounded-pill">Preview</span>
 					</div>
 				}
 			</div>

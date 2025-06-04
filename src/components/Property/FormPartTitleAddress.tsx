@@ -3,6 +3,7 @@ import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
 import { getAllBuildingTypes, getAllRentalTypes } from "/src/api/LodgeDbApiService";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 export default function FormPartTitleAddress({isEditable, showButton, input, handleChange, onButtonClicked}) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
@@ -63,7 +64,7 @@ export default function FormPartTitleAddress({isEditable, showButton, input, han
 			>
 				{
 					buildingTypes.map(type => 
-						<option key={type.id} value={type.id}>{type.name}</option>
+						<option key={type.id} value={type.id}>{capitalizeFirstLetter(type.name)}</option>
 					)
 				}
 				
@@ -80,7 +81,7 @@ export default function FormPartTitleAddress({isEditable, showButton, input, han
 			>
 				{
 					rentalTypes.map(type => 
-						<option key={type.id} value={type.id}>{type.name}</option>
+						<option key={type.id} value={type.id}>{capitalizeFirstLetter(type.name)}</option>
 					)
 				}
 			</select>
