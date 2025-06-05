@@ -1,5 +1,7 @@
 import axios from "axios";
+import imageType, { minimumBytes } from "image-type";
 import { useState } from "react";
+import { readChunk } from "read-chunk";
 import * as Icon from "react-bootstrap-icons";
 
 import "./AddPropertyForm.css";
@@ -55,8 +57,6 @@ export default function AddPropertyForm() {
 
 		if (formState < finalState) {
 			setFormState(formState + 1);
-		} else {
-			console.log("Add property to db");
 		}
 	}
 
@@ -97,65 +97,89 @@ export default function AddPropertyForm() {
 			});
 	}
 
+	async function uploadFile(file) {
+		if (file) {
+			console.log("Uploading file...");
+
+			const formData = new FormData();
+			formData.append("file", file);
+
+			try {
+				const result = await fetch("http://localhost:3000/upload", {
+					method: "POST",
+					body: formData
+				});
+				const data = await result.json();
+
+				console.log(data);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	}
+
 	/**
 	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
 	 * 2. If back and edit, patch entry with new details.
 	 */
-	function onBaseSubmit() {
-		if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
-			setShowError(true);
-			return;
-		}
+	async function onBaseSubmit() {
+		// Test copying a file
+		
 
-		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + input.country;
-		axios.get(`https://geocode.maps.co/search?q=${address}&api_key=6829981227127748709913iypd29e39`)
-			.then(response => {
-				console.log(response.data);
-				if (response.data.length > 0) {
-					const data = response.data[0];
-					const geo = { x: data.lat, y: data.lon };
-					if (!propertyId) {
-						createProperty(geo);
-					} else {
-						let check = 0;
-						// Update property
-						updateProperty(propertyId, {
-							title: input.title,
-							city: input.city,
-							country: input.country
-						})
-							.then(() => {
-								check++;
-								if (check === 2) {
+		// if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
+		// 	setShowError(true);
+		// 	return;
+		// }
+
+		// const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + input.country;
+		// axios.get(`https://geocode.maps.co/search?q=${address}&api_key=6829981227127748709913iypd29e39`)
+		// 	.then(response => {
+		// 		console.log(response.data);
+		// 		if (response.data.length > 0) {
+		// 			const data = response.data[0];
+		// 			const geo = { x: data.lat, y: data.lon };
+		// 			if (!propertyId) {
+		// 				createProperty(geo);
+		// 			} else {
+		// 				let check = 0;
+		// 				// Update property
+		// 				updateProperty(propertyId, {
+		// 					title: input.title,
+		// 					city: input.city,
+		// 					country: input.country
+		// 				})
+		// 					.then(() => {
+		// 						check++;
+		// 						if (check === 2) {
 									advanceState();
-								}
-							})
-							.catch((error) => {
-								console.error(error);
-							});
-						updatePropertyDetails(propertyId, {
-							building_type_id: parseInt(input.buildingType),
-							rental_type_id: parseInt(input.rentalType),
-							street: input.street,
-							street_no: input.streetNo
-						})
-							.then(() => {
-								check++;
-								if (check === 2) {
-									advanceState();
-								}
-							})
-							.catch((error) => {
-								console.error(error);
-							});
-					}
-				} else {
-					setShowError(true);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
+		// 						}
+		// 					})
+		// 					.catch((error) => {
+		// 						console.error(error);
+		// 					});
+		// 				updatePropertyDetails(propertyId, {
+		// 					building_type_id: parseInt(input.buildingType),
+		// 					rental_type_id: parseInt(input.rentalType),
+		// 					street: input.street,
+		// 					street_no: input.streetNo
+		// 				})
+		// 					.then(() => {
+		// 						check++;
+		// 						if (check === 2) {
+		// 							advanceState();
+		// 						}
+		// 					})
+		// 					.catch((error) => {
+		// 						console.error(error);
+		// 					});
+		// 			}
+		// 		} else {
+		// 			setShowError(true);
+		// 		}
+		// 	})
+		// 	.catch(error => {
+		// 		console.error(error);
+		// 	});
 	}
 
 	function onDescriptionSubmit() {
@@ -176,6 +200,28 @@ export default function AddPropertyForm() {
 			});
 	}
 
+	// TODO: move to utils
+	async function isFileImage(file) {
+		const buffer = await readChunk("/property_img/00000001_1.jpg", {length: minimumBytes});
+		console.log(buffer);
+		const type = await imageType(buffer);
+		console.log(type);
+		if (type === "image/jpeg" || type === "image/png" || type === "image/jpg") {
+			return true;
+		}
+		return false;
+	}
+
+	function onPhotosSubmit() {
+		// Save photos
+		input.photos.forEach(photo => {
+			// Call GoogleAPI to upload file to Google Drive
+			uploadFile(photo);
+		})
+		
+		// updatePropertyDetails(propertyId, { images_url_array: [photos]})
+	}
+
 	function onBackClicked() {
 		setFormState(formState - 1);
 	}
@@ -192,8 +238,18 @@ export default function AddPropertyForm() {
 		});
 	}
 
-	function handleChangePhotoUpload(event) {
-		const urls = Array.from(event.target.files).map((photo) => URL.createObjectURL(photo));
+	async function handleChangePhotoUpload(event) {
+		const fileArray = Array.from(event.target.files);
+		// for (let file of fileArray) {
+		// 	console.log(file);
+		// 	if (!(await isFileImage(file))) {
+		// 		console.log("One file is not png/jpg/jpeg");
+		// 		return;
+		// 	}
+		// }
+		// console.log("All files are png/jpg/jpeg");
+
+		const urls = fileArray.map((photo) => URL.createObjectURL(photo));
 
 		setInput((prevValue) => {
 			return {
@@ -291,7 +347,7 @@ export default function AddPropertyForm() {
 							showButton={true}
 							input={input}
 							handleChange={handleChange}
-							onButtonClicked={advanceState}
+							onButtonClicked={onPhotosSubmit}
 							handleChangePhotoUpload={handleChangePhotoUpload}
 						/>
 					</div>
