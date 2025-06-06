@@ -3,7 +3,6 @@ import classNames from "classnames";
 import DestinationListItem from "./DestinationListItem";
 import HostingPropertyListItem from "./HostingPropertyListItem";
 import PropertyListItem from "./PropertyListItem";
-import { propertyPhotoPrefix } from "/src/utils/constants";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 export enum ListItemType {

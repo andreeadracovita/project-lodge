@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { destinationsPhotoPrefix } from "/src/utils/constants";
+import { fileStorage } from "/src/utils/constants";
 
 type DestinationItem = {
 	city: string;
@@ -25,7 +25,7 @@ export default function DestinationListItem({ item, checkIn, checkOut }: Destina
 		<Link to={linkPath}>
 			<div className="mb-3">
 					<div>
-						<img src={destinationsPhotoPrefix + item.url} className="list-item-photo mb-2" />
+						<img src={fileStorage + item.url} className="list-item-photo mb-2" />
 						<div>
 							<p className="lato-bold">{item.city}, {item.country}</p>
 						</div>

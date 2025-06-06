@@ -14,7 +14,7 @@ export default function FormPartPricing({isEditable, showButton, input, handleCh
 	);
 
 	return (
-		<div>
+		<form>
 			<label htmlFor="price">How much will guests pay for a night at your property?</label>
 			<div className="d-flex align-items-center">
 				<input
@@ -41,6 +41,6 @@ export default function FormPartPricing({isEditable, showButton, input, handleCh
 					Review property <Icon.ChevronRight />
 				</button>
 			}
-		</div>
+		</form>
 	);
 }

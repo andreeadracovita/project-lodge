@@ -1,4 +1,4 @@
-import { propertyPhotoPrefix } from "/src/utils/constants";
+import { fileStorage } from "/src/utils/constants";
 import type { PropertyItem } from "./PropertyListItem";
 
 type HostingPropertyListItemProps = {
@@ -7,7 +7,7 @@ type HostingPropertyListItemProps = {
 
 // Component used for rendering a compact property item
 export default function HostingPropertyListItem({ item }: HostingPropertyListItemProps) {
-	const imgUrl = item.images_url_array?.length > 0 ? propertyPhotoPrefix + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
 
 	return (
 		<div className="row">

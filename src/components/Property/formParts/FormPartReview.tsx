@@ -7,7 +7,7 @@ import FormPartPricing from "./FormPartPricing";
 
 export default function FormPartReview({input, onButtonClicked}) {
 	return (
-		<div>
+		<form>
 			<FormPartTitleAddress
 				isEditable={false}
 				showButton={false}
@@ -44,6 +44,6 @@ export default function FormPartReview({input, onButtonClicked}) {
 			>
 				Publish property <Icon.ChevronRight />
 			</button>
-		</div>
+		</form>
 	)
 }

@@ -5,7 +5,7 @@ import "./PropertyListItem.css";
 import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
-import { propertyPhotoPrefix } from "/src/utils/constants";
+import { fileStorage } from "/src/utils/constants";
 
 type Geo = {
 	x: number,
@@ -52,7 +52,7 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 		}
 		: {};
 
-	const imgUrl = item.images_url_array.length > 0 ? propertyPhotoPrefix + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
 
 	function handleHeartClick() {
 		console.log("Heart ", item.id);

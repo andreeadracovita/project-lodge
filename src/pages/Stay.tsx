@@ -7,7 +7,7 @@ import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
 import PropertyDescription from "/src/components/stay/PropertyDescription";
 import BookingCard from "/src/components/stay/BookingCard";
 import Rating from "/src/components/common/Rating";
-import { propertyPhotoPrefix } from "/src/utils/constants";
+import { fileStorage } from "/src/utils/constants";
 
 export default function Stay() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +38,7 @@ export default function Stay() {
 						<Rating score={property.rating} />
 					</div>
 					<div className="mt-3">
-						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => propertyPhotoPrefix + url)} />
+						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => fileStorage + url)} />
 					</div>
 					<div className="mt-5 row">
 						<div className="col-8">

@@ -1,16 +1,14 @@
 import axios from "axios";
-import imageType, { minimumBytes } from "image-type";
 import { useState } from "react";
-import { readChunk } from "read-chunk";
 import * as Icon from "react-bootstrap-icons";
 
 import "./AddPropertyForm.css";
 import FormBackButton from "./FormBackButton";
-import FormPartTitleAddress from "./FormPartTitleAddress";
-import FormPartDescription from "./FormPartDescription";
-import FormPartPhotos from "./FormPartPhotos";
-import FormPartPricing from "./FormPartPricing";
-import FormPartReview from "./FormPartReview";
+import FormPartTitleAddress from "./formParts/FormPartTitleAddress";
+import FormPartDescription from "./formParts/FormPartDescription";
+import FormPartPhotos from "./formParts/FormPartPhotos";
+import FormPartPricing from "./formParts/FormPartPricing";
+import FormPartReview from "./formParts/FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
 import {
 	createNewProperty,
@@ -97,35 +95,11 @@ export default function AddPropertyForm() {
 			});
 	}
 
-	async function uploadFile(file) {
-		if (file) {
-			console.log("Uploading file...");
-
-			const formData = new FormData();
-			formData.append("file", file);
-
-			try {
-				const result = await fetch("http://localhost:3000/upload", {
-					method: "POST",
-					body: formData
-				});
-				const data = await result.json();
-
-				console.log(data);
-			} catch (error) {
-				console.error(error);
-			}
-		}
-	}
-
 	/**
 	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
 	 * 2. If back and edit, patch entry with new details.
 	 */
 	async function onBaseSubmit() {
-		// Test copying a file
-		
-
 		// if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
 		// 	setShowError(true);
 		// 	return;
@@ -200,28 +174,6 @@ export default function AddPropertyForm() {
 			});
 	}
 
-	// TODO: move to utils
-	async function isFileImage(file) {
-		const buffer = await readChunk("/property_img/00000001_1.jpg", {length: minimumBytes});
-		console.log(buffer);
-		const type = await imageType(buffer);
-		console.log(type);
-		if (type === "image/jpeg" || type === "image/png" || type === "image/jpg") {
-			return true;
-		}
-		return false;
-	}
-
-	function onPhotosSubmit() {
-		// Save photos
-		input.photos.forEach(photo => {
-			// Call GoogleAPI to upload file to Google Drive
-			uploadFile(photo);
-		})
-		
-		// updatePropertyDetails(propertyId, { images_url_array: [photos]})
-	}
-
 	function onBackClicked() {
 		setFormState(formState - 1);
 	}
@@ -238,7 +190,7 @@ export default function AddPropertyForm() {
 		});
 	}
 
-	async function handleChangePhotoUpload(event) {
+	async function handleChangePhotos(event) {
 		const fileArray = Array.from(event.target.files);
 		// for (let file of fileArray) {
 		// 	console.log(file);
@@ -295,114 +247,110 @@ export default function AddPropertyForm() {
 
 	return (
 		<div className="section-container">
-			<form>
-				{
-					formState === 0 &&
-					<div id="state-title-address" className="row">
-						<div className="col-6">
-							<h1 className="page-heading">List your property</h1>
-							{ showError && <span className="error-text">ERROR!</span>}
-							<FormPartTitleAddress
-								isEditable={true}
-								showButton={true}
-								input={input}
-								handleChange={handleChange}
-								onButtonClicked={onBaseSubmit}
-							/>
-						</div>
-						<div className="col-6">
-							<img src="/graphics/add-property-house.jpg" className="add-property-img" />
-						</div>
-					</div>
-				}
-				{
-					formState === 1 &&
-					<div id="state-describe" className="row">
-						<div className="col-6">
-							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1 className="page-heading">Describe your property</h1>
-							<FormPartDescription
-								isEditable={true}
-								showButton={true}
-								showUnselectedFeatures={true}
-								input={input}
-								handleChange={handleChange}
-								onButtonClicked={onDescriptionSubmit}
-								handleChangeFeatureMultiselect={handleChangeFeatureMultiselect}
-								handleChangeExperienceMultiselect={handleChangeExperienceMultiselect}
-							/>
-						</div>
-						<div className="col-6">
-							<img src="/graphics/add-property-room.jpg" className="add-property-img" />
-						</div>
-					</div>
-				}
-				{
-					formState === 2 &&
-					<div id="state-photos">
-						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">Showcase your property</h1>
-						<FormPartPhotos
+			{
+				formState === 0 &&
+				<div id="state-title-address" className="row">
+					<div className="col-6">
+						<h1 className="page-heading">List your property</h1>
+						{ showError && <span className="error-text">ERROR!</span>}
+						<FormPartTitleAddress
 							isEditable={true}
 							showButton={true}
 							input={input}
 							handleChange={handleChange}
-							onButtonClicked={onPhotosSubmit}
-							handleChangePhotoUpload={handleChangePhotoUpload}
+							onButtonClicked={onBaseSubmit}
 						/>
 					</div>
-				}
-				{
-					formState === 3 &&
-					<div id="state-pricing" className="row">
+					<div className="col-6">
+						<img src="/graphics/add-property-house.jpg" className="add-property-img" />
+					</div>
+				</div>
+			}
+			{
+				formState === 1 &&
+				<div id="state-describe" className="row">
+					<div className="col-6">
+						<FormBackButton onButtonClicked={onBackClicked} />
+						<h1 className="page-heading">Describe your property</h1>
+						<FormPartDescription
+							isEditable={true}
+							showButton={true}
+							showUnselectedFeatures={true}
+							input={input}
+							handleChange={handleChange}
+							onButtonClicked={onDescriptionSubmit}
+							handleChangeFeatureMultiselect={handleChangeFeatureMultiselect}
+							handleChangeExperienceMultiselect={handleChangeExperienceMultiselect}
+						/>
+					</div>
+					<div className="col-6">
+						<img src="/graphics/add-property-room.jpg" className="add-property-img" />
+					</div>
+				</div>
+			}
+			{
+				formState === 2 &&
+				<div id="state-photos">
+					<FormBackButton onButtonClicked={onBackClicked} />
+					<h1 className="page-heading">Showcase your property</h1>
+					<FormPartPhotos
+						isEditable={true}
+						showButton={true}
+						input={input}
+						handleChangePhotos={handleChangePhotos}
+					/>
+				</div>
+			}
+			{
+				formState === 3 &&
+				<div id="state-pricing" className="row">
+					<div className="col-6">
+						<FormBackButton onButtonClicked={onBackClicked} />
+						<h1 className="page-heading">Pricing</h1>
+						<FormPartPricing
+							isEditable={true}
+							showButton={true}
+							input={input}
+							handleChange={handleChange}
+							onButtonClicked={advanceState}
+						/>
+					</div>
+					<div className="col-6">
+						<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
+					</div>
+				</div>
+			}
+			{
+				formState === 4 &&
+				<div>
+					<div id="state-review" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1 className="page-heading">Pricing</h1>
-							<FormPartPricing
-								isEditable={true}
-								showButton={true}
+							<h1 className="page-heading">Review your property</h1>
+							<FormPartReview
 								input={input}
-								handleChange={handleChange}
 								onButtonClicked={advanceState}
 							/>
 						</div>
 						<div className="col-6">
-							<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
-						</div>
-					</div>
-				}
-				{
-					formState === 4 &&
-					<div>
-						<div id="state-review" className="row">
-							<div className="col-6">
-								<FormBackButton onButtonClicked={onBackClicked} />
-								<h1 className="page-heading">Review your property</h1>
-								<FormPartReview
-									input={input}
-									onButtonClicked={advanceState}
-								/>
-							</div>
-							<div className="col-6">
-								<div className="col-8 pt-5 ms-5 sticky">
-									<div id="preview">
-										<PropertyListItem
-											isLink={false}
-											id={-1}
-											img_url={input.photos && input.photos.length > 0 ? input.photos[0] : null}
-											title={input.title}
-											city={input.city}
-											country={input.country}
-											price={input.pricePerNight}
-											currency={"CHF"}
-										/>
-									</div>
+							<div className="col-8 pt-5 ms-5 sticky">
+								<div id="preview">
+									<PropertyListItem
+										isLink={false}
+										id={-1}
+										img_url={input.photos && input.photos.length > 0 ? input.photos[0] : null}
+										title={input.title}
+										city={input.city}
+										country={input.country}
+										price={input.pricePerNight}
+										currency={"CHF"}
+									/>
 								</div>
 							</div>
 						</div>
 					</div>
-				}
-			</form>
+				</div>
+			}
 		</div>
 	);
 }

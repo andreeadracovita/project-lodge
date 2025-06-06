@@ -67,7 +67,7 @@ export default function FormPartDescription({
 	);
 
 	return (
-		<div>
+		<form>
 			<label htmlFor="description">Let guests know about your property</label>
 			<textarea
 				id="description"
@@ -261,6 +261,6 @@ export default function FormPartDescription({
 					Add photos next <Icon.ChevronRight />
 				</button>
 			}
-		</div>
+		</form>
 	);
 }

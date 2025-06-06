@@ -1,5 +1,5 @@
 import { useAuth } from "/src/components/security/AuthContext";
-import { userPhotoPrefix } from "/src/utils/constants";
+import { fileStorage } from "/src/utils/constants";
 import "./Avatar.css";
 
 export default function Avatar({ size }) {
@@ -10,7 +10,7 @@ export default function Avatar({ size }) {
 			{
 				authContext.avatar !== undefined && authContext.avatar !== null
 					? <img
-						src={userPhotoPrefix + authContext.avatar}
+						src={fileStorage + authContext.avatar}
 						alt="avatar"
 						width={size}
 						height={size}

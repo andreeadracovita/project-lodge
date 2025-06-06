@@ -41,7 +41,7 @@ export default function FormPartTitleAddress({isEditable, showButton, input, han
 	);
 	
 	return (
-		<div id="partial-title-address">
+		<form>
 			<label htmlFor="title">Title</label>
 			<input
 				id="title"
@@ -141,6 +141,6 @@ export default function FormPartTitleAddress({isEditable, showButton, input, han
 					Describe place next <Icon.ChevronRight />
 				</button>
 			}
-		</div>
+		</form>
 	);
 }
