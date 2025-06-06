@@ -1,6 +1,6 @@
 import { fileStorage } from "/src/utils/constants";
 import type { PropertyItem } from "./PropertyListItem";
-import { deletePropertyById } from "/src/api/LodgeDbApiService";
+import { deletePropertyById, updateProperty } from "/src/api/LodgeDbApiService";
 
 type HostingPropertyListItemProps = {
 	item: PropertyItem,
@@ -24,7 +24,13 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 	}
 
 	function handleUnpublishClick() {
-		// TODO
+		updateProperty(item.id, { is_listed: false })
+			.then(() => {
+				setNeedsRefresh(true);
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 
 	return (
