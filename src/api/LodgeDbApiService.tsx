@@ -10,6 +10,13 @@ export const updateUser
 export const deleteAccount
 	= () => apiClient.delete("/user");
 
+// Photo upload
+export const uploadAvatar
+	= (payload) => apiClient.post("/upload/avatar", payload);
+
+export const uploadPhotos
+	= (payload) => apiClient.post("/upload/photos", payload);
+
 // Property
 // Testing purposes: there will never be a case when we need to fetch all properties without a filter
 export const getAllProperties
@@ -38,6 +45,9 @@ export const createNewPropertyDetailBase
 
 export const updatePropertyDetails
 	= (id, payload) => apiClient.patch(`/host/property-details/${id}`, payload);
+
+export const deletePropertyById
+	= (id) => apiClient.delete(`/host/property/${id}`);
 
 // Types
 export const getAllFeatures

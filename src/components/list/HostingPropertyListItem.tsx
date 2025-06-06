@@ -1,13 +1,31 @@
 import { fileStorage } from "/src/utils/constants";
 import type { PropertyItem } from "./PropertyListItem";
+import { deletePropertyById } from "/src/api/LodgeDbApiService";
 
 type HostingPropertyListItemProps = {
-	item: PropertyItem
+	item: PropertyItem,
+	setNeedsRefresh: () => void
 };
 
 // Component used for rendering a compact property item
-export default function HostingPropertyListItem({ item }: HostingPropertyListItemProps) {
+export default function HostingPropertyListItem({ item, setNeedsRefresh }: HostingPropertyListItemProps) {
 	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
+
+	function handleDeleteClick() {
+		deletePropertyById(item.id)
+			.then(response => {
+				if (response.status === 200) {
+					setNeedsRefresh(true);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}
+
+	function handleUnpublishClick() {
+		// TODO
+	}
 
 	return (
 		<div className="row">
@@ -24,13 +42,14 @@ export default function HostingPropertyListItem({ item }: HostingPropertyListIte
 				{
 					item.is_listed
 					? <div>
-						<span className="btn btn-dark rounded-pill">Edit</span>
+						<span className="btn btn-outline-dark rounded-pill">Edit</span>
 						<span className="btn btn-outline-dark rounded-pill">View</span>
-						<span className="btn btn-outline-dark rounded-pill">Unpublish (after date)</span>
+						<span className="btn btn-outline-dark rounded-pill" onClick={handleUnpublishClick}>Unpublish</span>
 					</div>
 					: <div>
-						<span className="btn btn-dark rounded-pill">Continue editing</span>
+						<span className="btn btn-outline-dark rounded-pill">Continue editing</span>
 						<span className="btn btn-outline-dark rounded-pill">Preview</span>
+						<span className="btn btn-outline-dark rounded-pill" onClick={handleDeleteClick}>Delete</span>
 					</div>
 				}
 			</div>

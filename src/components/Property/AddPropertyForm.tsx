@@ -10,12 +10,6 @@ import FormPartPhotos from "./formParts/FormPartPhotos";
 import FormPartPricing from "./formParts/FormPartPricing";
 import FormPartReview from "./formParts/FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
-import {
-	createNewProperty,
-	createNewPropertyDetailBase,
-	updateProperty,
-	updatePropertyDetails
-} from "/src/api/LodgeDbApiService";
 
 export default function AddPropertyForm() {
 	const [propertyId, setPropertyId] = useState();
@@ -41,10 +35,10 @@ export default function AddPropertyForm() {
 		pricePerNight: ""
 	});
 
+	const [imagesUrlArray, setImagesUrlArray] = useState([]); 
+
 	const [formState, setFormState] = useState(0);
 	const finalState = 4;
-
-	const [showError, setShowError] = useState(false);
 
 	function advanceState() {
 		// Validates input
@@ -58,122 +52,6 @@ export default function AddPropertyForm() {
 		}
 	}
 
-	async function createPropertyDetail(propertyId: int) {
-		// Create details
-		const payloadPropDetail = {
-			property_id: propertyId,
-			street: input.street,
-			street_no: input.streetNo
-		}
-		createNewPropertyDetailBase(payloadPropDetail)
-			.then(responsePropDetail => {
-				console.log(responsePropDetail);
-				advanceState();
-			})
-			.catch(error => {
-				console.error(error);
-			})
-	}
-
-	async function createProperty(geo) {
-		const payloadProp = {
-			title: input.title,
-			geo,
-			city: input.city,
-			country: input.country,
-			is_listed: false
-		};
-		// Create a new entry
-		createNewProperty(payloadProp)
-			.then(responseProp => {
-				const propertyId = responseProp.data.id;
-				setPropertyId(propertyId);
-				createPropertyDetail(propertyId);
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}
-
-	/**
-	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
-	 * 2. If back and edit, patch entry with new details.
-	 */
-	async function onBaseSubmit() {
-		// if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
-		// 	setShowError(true);
-		// 	return;
-		// }
-
-		// const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + input.country;
-		// axios.get(`https://geocode.maps.co/search?q=${address}&api_key=6829981227127748709913iypd29e39`)
-		// 	.then(response => {
-		// 		console.log(response.data);
-		// 		if (response.data.length > 0) {
-		// 			const data = response.data[0];
-		// 			const geo = { x: data.lat, y: data.lon };
-		// 			if (!propertyId) {
-		// 				createProperty(geo);
-		// 			} else {
-		// 				let check = 0;
-		// 				// Update property
-		// 				updateProperty(propertyId, {
-		// 					title: input.title,
-		// 					city: input.city,
-		// 					country: input.country
-		// 				})
-		// 					.then(() => {
-		// 						check++;
-		// 						if (check === 2) {
-									advanceState();
-		// 						}
-		// 					})
-		// 					.catch((error) => {
-		// 						console.error(error);
-		// 					});
-		// 				updatePropertyDetails(propertyId, {
-		// 					building_type_id: parseInt(input.buildingType),
-		// 					rental_type_id: parseInt(input.rentalType),
-		// 					street: input.street,
-		// 					street_no: input.streetNo
-		// 				})
-		// 					.then(() => {
-		// 						check++;
-		// 						if (check === 2) {
-		// 							advanceState();
-		// 						}
-		// 					})
-		// 					.catch((error) => {
-		// 						console.error(error);
-		// 					});
-		// 			}
-		// 		} else {
-		// 			setShowError(true);
-		// 		}
-		// 	})
-		// 	.catch(error => {
-		// 		console.error(error);
-		// 	});
-	}
-
-	function onDescriptionSubmit() {
-		updatePropertyDetails(propertyId, {
-			description: input.description,
-			guests: input.guests,
-			beds: input.beds,
-			bedrooms: input.bedrooms,
-			bathrooms: input.bathrooms,
-			features_ids: input.features_ids,
-			experiences_ids: input.experiences_ids
-		})
-			.then(() => {
-				advanceState();
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}
-
 	function onBackClicked() {
 		setFormState(formState - 1);
 	}
@@ -181,7 +59,6 @@ export default function AddPropertyForm() {
 	function handleChange(event) {
 		const { value, name } = event.target;
 
-		setShowError(false);
 		setInput((prevValue) => {
 			return {
 				...prevValue,
@@ -192,15 +69,6 @@ export default function AddPropertyForm() {
 
 	async function handleChangePhotos(event) {
 		const fileArray = Array.from(event.target.files);
-		// for (let file of fileArray) {
-		// 	console.log(file);
-		// 	if (!(await isFileImage(file))) {
-		// 		console.log("One file is not png/jpg/jpeg");
-		// 		return;
-		// 	}
-		// }
-		// console.log("All files are png/jpg/jpeg");
-
 		const urls = fileArray.map((photo) => URL.createObjectURL(photo));
 
 		setInput((prevValue) => {
@@ -208,7 +76,7 @@ export default function AddPropertyForm() {
 				...prevValue,
 				photos: urls
 			}
-		})
+		});
 	}
 
 	function handleChangeFeatureMultiselect(event) {
@@ -252,13 +120,14 @@ export default function AddPropertyForm() {
 				<div id="state-title-address" className="row">
 					<div className="col-6">
 						<h1 className="page-heading">List your property</h1>
-						{ showError && <span className="error-text">ERROR!</span>}
 						<FormPartTitleAddress
 							isEditable={true}
 							showButton={true}
 							input={input}
+							propertyId={propertyId}
+							setPropertyId={setPropertyId}
 							handleChange={handleChange}
-							onButtonClicked={onBaseSubmit}
+							advanceState={advanceState}
 						/>
 					</div>
 					<div className="col-6">
@@ -277,10 +146,11 @@ export default function AddPropertyForm() {
 							showButton={true}
 							showUnselectedFeatures={true}
 							input={input}
+							propertyId={propertyId}
 							handleChange={handleChange}
-							onButtonClicked={onDescriptionSubmit}
 							handleChangeFeatureMultiselect={handleChangeFeatureMultiselect}
 							handleChangeExperienceMultiselect={handleChangeExperienceMultiselect}
+							advanceState={advanceState}
 						/>
 					</div>
 					<div className="col-6">
@@ -297,7 +167,10 @@ export default function AddPropertyForm() {
 						isEditable={true}
 						showButton={true}
 						input={input}
+						propertyId={propertyId}
 						handleChangePhotos={handleChangePhotos}
+						setImagesUrlArray={setImagesUrlArray}
+						advanceState={advanceState}
 					/>
 				</div>
 			}
@@ -311,8 +184,9 @@ export default function AddPropertyForm() {
 							isEditable={true}
 							showButton={true}
 							input={input}
+							propertyId={propertyId}
 							handleChange={handleChange}
-							onButtonClicked={advanceState}
+							advanceState={advanceState}
 						/>
 					</div>
 					<div className="col-6">
@@ -329,7 +203,7 @@ export default function AddPropertyForm() {
 							<h1 className="page-heading">Review your property</h1>
 							<FormPartReview
 								input={input}
-								onButtonClicked={advanceState}
+								propertyId={propertyId}
 							/>
 						</div>
 						<div className="col-6">
@@ -337,13 +211,14 @@ export default function AddPropertyForm() {
 								<div id="preview">
 									<PropertyListItem
 										isLink={false}
-										id={-1}
-										img_url={input.photos && input.photos.length > 0 ? input.photos[0] : null}
-										title={input.title}
-										city={input.city}
-										country={input.country}
-										price={input.pricePerNight}
-										currency={"CHF"}
+										item={{
+											id: 0,
+											title: input.title,
+											city: input.city,
+											country: input.country,
+											price: input.price,
+											images_url_array: imagesUrlArray
+										}}
 									/>
 								</div>
 							</div>

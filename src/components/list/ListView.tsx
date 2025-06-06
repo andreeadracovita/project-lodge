@@ -11,7 +11,7 @@ export enum ListItemType {
 	HostingProperty
 }
 
-export default function ListView({ listItemType, items, cols }) {
+export default function ListView({ listItemType, items, cols, setNeedsRefresh }) {
 	// Today
 	// TODO: replace with first weekend
 	const checkIn = new Date();
@@ -68,7 +68,7 @@ export default function ListView({ listItemType, items, cols }) {
 					{
 						items.map((item, i) =>
 							<div key={i} className="col">
-								<HostingPropertyListItem item={item} />
+								<HostingPropertyListItem item={item} setNeedsRefresh={setNeedsRefresh} />
 							</div>
 						)
 					}

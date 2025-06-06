@@ -6,16 +6,17 @@ import "./FormPartDescription.css";
 import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { experienceIconMap } from "/src/utils/mappings";
+import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
 
 export default function FormPartDescription({
 	isEditable,
 	showButton,
-	showUnselectedFeatures,
 	input,
+	propertyId,
 	handleChange,
-	onButtonClicked,
 	handleChangeFeatureMultiselect,
-	handleChangeExperienceMultiselect
+	handleChangeExperienceMultiselect,
+	advanceState
 }) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
@@ -66,8 +67,28 @@ export default function FormPartDescription({
 		}
 	);
 
+	function onDescriptionSubmit(event) {
+		event.preventDefault();
+		
+		updatePropertyDetails(propertyId, {
+			description: input.description,
+			guests: input.guests,
+			beds: input.beds,
+			bedrooms: input.bedrooms,
+			bathrooms: input.bathrooms,
+			features_ids: input.features_ids,
+			experiences_ids: input.experiences_ids
+		})
+			.then(() => {
+				advanceState();
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+
 	return (
-		<form>
+		<form onSubmit={onDescriptionSubmit}>
 			<label htmlFor="description">Let guests know about your property</label>
 			<textarea
 				id="description"
@@ -176,7 +197,7 @@ export default function FormPartDescription({
 					}
 				</div>
 				{
-					showUnselectedFeatures &&
+					isEditable &&
 					<div id="unselected-features" className="d-flex flex-wrap">
 						{
 							features.map(feature => 
@@ -226,7 +247,7 @@ export default function FormPartDescription({
 					}
 				</div>
 				{
-					showUnselectedFeatures &&
+					isEditable &&
 					<div id="unselected-experiences" className="d-flex flex-wrap">
 						{
 							experiences.map(exp => 
@@ -254,9 +275,8 @@ export default function FormPartDescription({
 				showButton &&
 				<button
 					id="go-to-add-photos-button"
-					type="button"
+					type="submit"
 					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
-					onClick={onButtonClicked}
 				>
 					Add photos next <Icon.ChevronRight />
 				</button>

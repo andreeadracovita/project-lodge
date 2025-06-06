@@ -1,7 +1,9 @@
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-export default function FormPartPricing({isEditable, showButton, input, handleChange, onButtonClicked}) {
+import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
+
+export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
 	const currency = "CHF";
 
 	const stylingFormControl = classNames(
@@ -13,8 +15,22 @@ export default function FormPartPricing({isEditable, showButton, input, handleCh
 		}
 	);
 
+	function onSubmit(event) {
+		event.preventDefault();
+
+		updatePropertyDetails(propertyId, {
+			price: input.pricePerNight
+		})
+			.then(() => {
+				advanceState();
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+
 	return (
-		<form>
+		<form onSubmit={onSubmit}>
 			<label htmlFor="price">How much will guests pay for a night at your property?</label>
 			<div className="d-flex align-items-center">
 				<input
@@ -34,9 +50,8 @@ export default function FormPartPricing({isEditable, showButton, input, handleCh
 				showButton &&
 				<button
 					id="go-to-pricing-button"
-					type="button"
+					type="submit"
 					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
-					onClick={onButtonClicked}
 				>
 					Review property <Icon.ChevronRight />
 				</button>

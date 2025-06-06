@@ -1,55 +1,39 @@
 import { useEffect, useState } from "react";
-import imageType, { minimumBytes } from "image-type";
-import { readChunk } from "read-chunk";
 import * as Icon from "react-bootstrap-icons";
 
 import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
+import { uploadPhotos } from "/src/api/LodgeDbApiService";
+import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
 
-export default function FormPartPhotos({input, handleChangePhotos}) {
-
-	// TODO: move to utils
-	async function isFileImage(file) {
-		const buffer = await readChunk("/property_img/00000001_1.jpg", {length: minimumBytes});
-		console.log(buffer);
-		const type = await imageType(buffer);
-		console.log(type);
-		if (type === "image/jpeg" || type === "image/png" || type === "image/jpg") {
-			return true;
-		}
-		return false;
-	}
-
-	async function uploadFile(file) {
-		if (file) {
-			console.log("Uploading file...");
-
-			const formData = new FormData();
-			formData.append("file", file);
-
-			try {
-				const result = await fetch("http://localhost:3000/upload", {
-					method: "POST",
-					body: formData
-				});
-				const data = await result.json();
-
-				console.log(data);
-			} catch (error) {
-				console.error(error);
-			}
-		}
-	}
-
-	function onPhotosSubmit(event) {
+export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
+	
+	async function onPhotosSubmit(event) {
 		event.preventDefault();
-		// Check type
 
 		// Upload photos
-		const formData = new FormData(event.target);
-		const inputFile = formData.get("photos");
-		uploadFile(inputFile);
-		
-		// updatePropertyDetails(propertyId, { images_url_array: [photos]})
+		const files = event.target.photos.files;
+		const data = new FormData();
+		// Append files
+		if (files.length !== 0) {
+			for (const file of files) {
+				data.append("photos", file);
+			}
+		}
+
+		uploadPhotos(data)
+			.then(response => {
+				updatePropertyDetails(propertyId, { images_url_array: response.data.filenames })
+					.then(() => {
+						setImagesUrlArray(response.data.filenames);
+						advanceState();
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 
 	return (
@@ -62,8 +46,9 @@ export default function FormPartPhotos({input, handleChangePhotos}) {
 				type="file"
 				className="form-control rounded-pill w-50"
 				name="photos"
-				// multiple
+				multiple="multiple"
 				onChange={handleChangePhotos}
+				accept="image/png, image/jpeg"
 			/>
 
 			<button
