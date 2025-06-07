@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Icon from "react-bootstrap-icons";
+import { useSearchParams } from "react-router";
 
-import "./AddPropertyForm.css";
+import "./EditPropertyForm.css";
 import FormBackButton from "./FormBackButton";
 import FormPartTitleAddress from "./formParts/FormPartTitleAddress";
 import FormPartDescription from "./formParts/FormPartDescription";
@@ -10,8 +11,12 @@ import FormPartPhotos from "./formParts/FormPartPhotos";
 import FormPartPricing from "./formParts/FormPartPricing";
 import FormPartReview from "./formParts/FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
+import { getPropertyById } from "/src/api/LodgeDbApiService";
+import localisedString from "/src/localisation/en-GB";
+import { fileStorage } from "/src/utils/constants";
 
-export default function AddPropertyForm() {
+export default function EditPropertyForm() {
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [propertyId, setPropertyId] = useState();
 	const [input, setInput] = useState({
 		title: "",
@@ -21,8 +26,8 @@ export default function AddPropertyForm() {
 		streetNo: "",
 
 		description: "",
-		buildingType: "0",
-		rentalType: "0",
+		buildingType: 1,
+		rentalType: 1,
 		guests: 1,
 		beds: 1,
 		bedrooms: 1,
@@ -32,21 +37,57 @@ export default function AddPropertyForm() {
 
 		photos: [],
 
-		pricePerNight: ""
+		pricePerNight: 0,
+		is_listed: false
 	});
+	const [imagesUrlArray, setImagesUrlArray] = useState([]);
+	const [pageTitle, setPageTitle] = useState(localisedString["hosting:list-property"]);
+	const [endButtonText, setEndButtonText] = useState(localisedString["hosting:publish-property"]);
 
-	const [imagesUrlArray, setImagesUrlArray] = useState([]); 
+	useEffect(() => {
+		if (searchParams.get("id")) {
+			setPropertyId(searchParams.get("id"));
+
+			// Init propertyId, input, imagesUrlArray with data from db
+			getPropertyById(searchParams.get("id"))
+				.then(response => {
+					if (response.data?.length > 0) {
+						const data = response.data[0];
+						const photos = data.images_url_array;
+						setInput({
+							title: data.title,
+							city: data.city,
+							country: data.country,
+							street: data.street,
+							streetNo: data.street_no,
+							buildingType: data.building_type_id,
+							rentalType: data.rental_type_id,
+
+							description: data.description ?? "",
+							guests: data.guests ?? 1,
+							beds: data.beds ?? 1,
+							bedrooms: data.bedrooms ?? 1,
+							bathrooms: data.bathrooms ?? 1,
+							features_ids: data.features_ids ?? [],
+							experiences_ids: data.experiences_ids ?? [],
+							photos: photos ? photos.map(url => fileStorage + url) : [],
+							pricePerNight: data.price_per_night_eur ?? 0,
+							is_listed: data.is_listed ?? false
+						});
+						setImagesUrlArray(photos ? photos : []);
+						setPageTitle(localisedString["hosting:edit-property"]);
+					}
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
+	}, []);
 
 	const [formState, setFormState] = useState(0);
 	const finalState = 4;
 
 	function advanceState() {
-		// Validates input
-		// Remain on page if invalid input
-		// Call DB API to Create property entry
-		// Navigate to Manage Properties page to see the newly added entry
-		// navigate("//hosting/properties");
-
 		if (formState < finalState) {
 			setFormState(formState + 1);
 		}
@@ -119,7 +160,7 @@ export default function AddPropertyForm() {
 				formState === 0 &&
 				<div id="state-title-address" className="row">
 					<div className="col-6">
-						<h1 className="page-heading">List your property</h1>
+						<h1 className="page-heading">{ pageTitle }</h1>
 						<FormPartTitleAddress
 							isEditable={true}
 							showButton={true}
@@ -140,7 +181,7 @@ export default function AddPropertyForm() {
 				<div id="state-describe" className="row">
 					<div className="col-6">
 						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">Describe your property</h1>
+						<h1 className="page-heading">{ localisedString["hosting:describe-property"] }</h1>
 						<FormPartDescription
 							isEditable={true}
 							showButton={true}
@@ -162,7 +203,7 @@ export default function AddPropertyForm() {
 				formState === 2 &&
 				<div id="state-photos">
 					<FormBackButton onButtonClicked={onBackClicked} />
-					<h1 className="page-heading">Showcase your property</h1>
+					<h1 className="page-heading">{ localisedString["hosting:showcase-property"] }</h1>
 					<FormPartPhotos
 						isEditable={true}
 						showButton={true}
@@ -179,7 +220,7 @@ export default function AddPropertyForm() {
 				<div id="state-pricing" className="row">
 					<div className="col-6">
 						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">Pricing</h1>
+						<h1 className="page-heading">{ localisedString["hosting:pricing"] }</h1>
 						<FormPartPricing
 							isEditable={true}
 							showButton={true}
@@ -200,10 +241,11 @@ export default function AddPropertyForm() {
 					<div id="state-review" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1 className="page-heading">Review your property</h1>
+							<h1 className="page-heading">{ localisedString["hosting:review-property"] }</h1>
 							<FormPartReview
 								input={input}
 								propertyId={propertyId}
+								submitButtonText={endButtonText}
 							/>
 						</div>
 						<div className="col-6">

@@ -11,6 +11,7 @@ import {
 	updateProperty,
 	updatePropertyDetails
 } from "/src/api/LodgeDbApiService";
+import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, advanceState }) {
 	const [showError, setShowError] = useState(false);
@@ -51,14 +52,16 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 
 	async function addPropertyDetail(propertyId: int) {
 		// Create details
+		// Parse select values as int
 		const payloadPropDetail = {
 			property_id: propertyId,
 			street: input.street,
-			street_no: input.streetNo
+			street_no: input.streetNo,
+			building_type_id: parseInt(input.buildingType),
+			rental_type_id: parseInt(input.rentalType)
 		}
 		createNewPropertyDetailBase(payloadPropDetail)
 			.then(responsePropDetail => {
-				console.log(responsePropDetail);
 				advanceState();
 			})
 			.catch(error => {
@@ -124,6 +127,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 							.catch((error) => {
 								console.error(error);
 							});
+
+						// Parse select values as int
 						updatePropertyDetails(propertyId, {
 							building_type_id: parseInt(input.buildingType),
 							rental_type_id: parseInt(input.rentalType),
@@ -152,7 +157,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 	return (
 		<form onSubmit={onSubmit}>
 			{ showError && <span className="error-text d-block">Errors present!</span> }
-			<label htmlFor="title">Title</label>
+			<label htmlFor="title">{ localisedString["hosting:title"] }</label>
 			<input
 				id="title"
 				type="text"
@@ -163,14 +168,14 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				onChange={handleChange}
 			/>
 
-			<label htmlFor="buildingType" className="mt-2">Type of building</label>
+			<label htmlFor="buildingType" className="mt-2">{ localisedString["hosting:type-of-building"] }</label>
 			<select
 				id="buildingType"
 				className={stylingFormControl100}
 				name="buildingType"
-				value={input.buildingType}
+				value={input.buildingType ?? 1}
 				readOnly={!isEditable}
-				onChange={isEditable ? handleChange : undefined}
+				onChange={handleChange}
 			>
 				{
 					buildingTypes.map(type => 
@@ -180,14 +185,14 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				
 			</select>
 
-			<label htmlFor="rentalType" className="mt-2">Type of rental</label>
+			<label htmlFor="rentalType" className="mt-2">{ localisedString["hosting:type-of-rental"] }</label>
 			<select
 				id="rentalType"
 				className={stylingFormControl100}
 				name="rentalType"
-				value={input.rentalType}
+				value={input.rentalType ?? 1}
 				readOnly={!isEditable}
-				onChange={isEditable ? handleChange : undefined}
+				onChange={handleChange}
 			>
 				{
 					rentalTypes.map(type => 
@@ -197,8 +202,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			</select>
 
 			<div id="address">
-				<h2 className="mt-3">Address</h2>
-				<label htmlFor="street" className="mt-2">Street</label>
+				<h2 className="mt-3">{ localisedString["hosting:address"] }</h2>
+				<label htmlFor="street" className="mt-2">{ localisedString["hosting:street"] }</label>
 				<input
 					id="street"
 					type="text"
@@ -206,9 +211,9 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					name="street"
 					value={input.street}
 					readOnly={!isEditable}
-					onChange={isEditable ? handleChange : undefined}
+					onChange={handleChange}
 				/>
-				<label htmlFor="streetNo" className="mt-2">Street number</label>
+				<label htmlFor="streetNo" className="mt-2">{ localisedString["hosting:street-number"] }</label>
 				<input
 					id="streetNo"
 					type="text"
@@ -216,9 +221,9 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					name="streetNo"
 					value={input.streetNo}
 					readOnly={!isEditable}
-					onChange={isEditable ? handleChange : undefined}
+					onChange={handleChange}
 				/>
-				<label htmlFor="city" className="mt-2">City</label>
+				<label htmlFor="city" className="mt-2">{ localisedString["hosting:city"] }</label>
 				<input
 					id="city"
 					type="text"
@@ -226,9 +231,9 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					name="city"
 					value={input.city}
 					readOnly={!isEditable}
-					onChange={isEditable ? handleChange : undefined}
+					onChange={handleChange}
 				/>
-				<label htmlFor="country" className="mt-2">Country</label>
+				<label htmlFor="country" className="mt-2">{ localisedString["hosting:country"] }</label>
 				<input
 					id="country"
 					type="text"
@@ -236,7 +241,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					name="country"
 					value={input.country}
 					readOnly={!isEditable}
-					onChange={isEditable ? handleChange : undefined}
+					onChange={handleChange}
 				/>
 			</div>
 
@@ -247,7 +252,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					type="submit"
 					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
 				>
-					Describe place next <Icon.ChevronRight />
+					{ localisedString["hosting:describe-place-next"] } <Icon.ChevronRight />
 				</button>
 			}
 		</form>

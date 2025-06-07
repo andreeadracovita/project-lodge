@@ -6,6 +6,7 @@ import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import { updateProperty } from "/src/api/LodgeDbApiService";
+import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartReview({ input, propertyId }) {
 	const navigate = useNavigate();
@@ -13,15 +14,25 @@ export default function FormPartReview({ input, propertyId }) {
 	function onSubmit(event) {
 		event.preventDefault();
 
-		updateProperty(propertyId, {
-			is_listed: true
-		})
-			.then(() => {
+		const submitter = event.nativeEvent.submitter.name;
+		console.log(submitter);
+		switch (submitter) {
+			case "save":
 				navigate(`/stay?id=${propertyId}&guests=2`);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+				return;
+			case "publish":
+				updateProperty(propertyId, {
+					is_listed: true
+				})
+					.then(() => {
+						navigate(`/stay?id=${propertyId}&guests=2`);
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+				return;
+			default: {}
+		}
 	}
 
 	return (
@@ -34,7 +45,7 @@ export default function FormPartReview({ input, propertyId }) {
 				onButtonClicked={() => {}}
 			/>
 
-			<h2 className="mt-3">Description</h2>
+			<h2 className="mt-3">{ localisedString["hosting:description"] }</h2>
 			<FormPartDescription
 				isEditable={false}
 				showButton={false}
@@ -45,7 +56,7 @@ export default function FormPartReview({ input, propertyId }) {
 				handleChangeMultiselect={() => {}}
 			/>
 
-			<h2 className="mt-3">Pricing</h2>
+			<h2 className="mt-3">{ localisedString["hosting:pricing"] }</h2>
 			<FormPartPricing
 				isEditable={false}
 				showButton={false}
@@ -55,13 +66,27 @@ export default function FormPartReview({ input, propertyId }) {
 			/>
 
 			<form onSubmit={onSubmit}>
-				<button
-					id="publish-property-button"
-					type="submit"
-					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
-				>
-					Publish property <Icon.ChevronRight />
-				</button>
+				<div className="d-flex my-5">
+					<button
+						id="publish-property-button"
+						type="submit"
+						name="save"
+						className="btn btn-light rounded-pill brand-color-background d-flex align-items-center"
+					>
+						{ localisedString["hosting:save-edit"] } <Icon.ChevronRight />
+					</button>
+					{
+						input.is_listed === false &&
+						<button
+							id="publish-property-button"
+							type="submit"
+							name="publish"
+							className="btn btn-light rounded-pill brand-color-background ms-2 d-flex align-items-center"
+						>
+							{ localisedString["hosting:publish-property"] } <Icon.ChevronRight />
+						</button>
+					}
+				</div>
 			</form>
 		</div>
 	)

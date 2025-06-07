@@ -1,10 +1,11 @@
-import AddPropertyForm from "/src/components/property/AddPropertyForm";
+import { useState, useEffect } from "react";
 
-export default function PropertyEdit({editMode}) {
+import EditPropertyForm from "/src/components/property/EditPropertyForm";
 
+export default function PropertyEdit() {
 	return (
 		<div className="container">
-			{editMode ? <EditPropertyForm /> : <AddPropertyForm />}
+			<EditPropertyForm />
 		</div>
 	);
 }

@@ -7,6 +7,7 @@ import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { experienceIconMap } from "/src/utils/mappings";
 import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
+import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartDescription({
 	isEditable,
@@ -89,7 +90,7 @@ export default function FormPartDescription({
 
 	return (
 		<form onSubmit={onDescriptionSubmit}>
-			<label htmlFor="description">Let guests know about your property</label>
+			<label htmlFor="description">{ localisedString["hosting:description-detail"] }</label>
 			<textarea
 				id="description"
 				className={stylingFormTextArea}
@@ -99,13 +100,13 @@ export default function FormPartDescription({
 				onChange={isEditable ? handleChange : undefined}
 				rows="3"
 			>
-				Describe your property here
+				{ localisedString["hosting:description-placeholder"] }
 			</textarea>
 
-			<p className="mt-3 mb-1">How many people can stay?</p>
+			<p className="mt-3 mb-1">{ localisedString["hosting:capacity-detail"] }</p>
 			<div className="row">
 				<div className="col-2">
-					<label htmlFor="guests">Guests</label>
+					<label htmlFor="guests">{ localisedString["hosting:guests"] }</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -122,7 +123,7 @@ export default function FormPartDescription({
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="beds">Beds</label>
+					<label htmlFor="beds">{ localisedString["hosting:beds"] }</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -139,7 +140,7 @@ export default function FormPartDescription({
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="bedrooms">Bedrooms</label>
+					<label htmlFor="bedrooms">{ localisedString["hosting:bedrooms"] }</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -156,7 +157,7 @@ export default function FormPartDescription({
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="bathrooms">Bathrooms</label>
+					<label htmlFor="bathrooms">{ localisedString["hosting:bathrooms"] }</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -172,7 +173,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div id="features">
-				<h2 className="mt-3">Features</h2>
+				<h2 className="mt-3">{ localisedString["hosting:features"] }</h2>
 				<div id="selected-features" className="d-flex flex-wrap">
 					{
 						input.features_ids.map((id) => {
@@ -183,14 +184,14 @@ export default function FormPartDescription({
 									id={foundFeature.id}
 									className={classNames(
 										"features-list-item",
-										"selectable-item",
 										{
-											"selected-feature": isFeatureIdSelected(foundFeature.id)
+											"selectable-item": isEditable,
+											"selected-feature": isEditable && isFeatureIdSelected(foundFeature.id)
 										}
 									)}
 									onClick={isEditable ? handleChangeFeatureMultiselect : undefined}
 								>
-									{foundFeature.name}
+									{ capitalizeFirstLetter(foundFeature.name) }
 								</span>
 							}
 						})	
@@ -213,7 +214,7 @@ export default function FormPartDescription({
 									)}
 									onClick={handleChangeFeatureMultiselect}
 								>
-									{feature.name}
+									{ capitalizeFirstLetter(feature.name) }
 								</span>
 							)	
 						}
@@ -222,7 +223,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div id="experiences">
-				<label htmlFor="experiences" className="mt-3">What experiences can guests have in the area?</label>
+				<label htmlFor="experiences" className="mt-3">{ localisedString["hosting:experiences-detail"] }</label>
 				<div id="selected-features" className="d-flex flex-wrap">
 					{
 						input.experiences_ids.map((id) => {
@@ -233,14 +234,14 @@ export default function FormPartDescription({
 									id={foundExp.id}
 									className={classNames(
 										"features-list-item",
-										"selectable-item",
 										{
-											"selected-feature": isExperienceIdSelected(foundExp.id)
+											"selectable-item": isEditable,
+											"selected-feature": isEditable && isExperienceIdSelected(foundExp.id)
 										}
 									)}
 									onClick={isEditable ? handleChangeExperienceMultiselect : undefined}
 								>
-									{foundExp.name}
+									{ experienceIconMap.get(foundExp.name) } { capitalizeFirstLetter(foundExp.name) }
 								</span>
 							}
 						})	
@@ -278,7 +279,7 @@ export default function FormPartDescription({
 					type="submit"
 					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
 				>
-					Add photos next <Icon.ChevronRight />
+					{ localisedString["hosting:add-photos-next"] } <Icon.ChevronRight />
 				</button>
 			}
 		</form>

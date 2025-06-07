@@ -47,8 +47,8 @@ export default function App() {
 
             <Route path="/hosting" element={<RequireAuth><Hosting /></RequireAuth>} />
             <Route path="/hosting/properties" element={<RequireAuth><Properties /></RequireAuth>} />
-            <Route path="/hosting/property/add" element={<RequireAuth><PropertyEdit editMode={false} /></RequireAuth>} />
-            <Route path="/hosting/property/edit/:id" element={<RequireAuth><PropertyEdit editMode={true} /></RequireAuth>} />
+            <Route path="/hosting/property/add" element={<RequireAuth><PropertyEdit /></RequireAuth>} />
+            <Route path="/hosting/property/edit" element={<RequireAuth><PropertyEdit /></RequireAuth>} />
             <Route path="/hosting/calendar" element={<RequireAuth><HostingCalendar /></RequireAuth>} />
             <Route path="/hosting/messages" element={<RequireAuth><HostingMessages /></RequireAuth>} />
 

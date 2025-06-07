@@ -2,6 +2,7 @@ import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
 import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
+import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
 	const currency = "CHF";
@@ -31,7 +32,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 
 	return (
 		<form onSubmit={onSubmit}>
-			<label htmlFor="price">How much will guests pay for a night at your property?</label>
+			<label htmlFor="price">{ localisedString["hosting:pricing-description"] }</label>
 			<div className="d-flex align-items-center">
 				<input
 					id="price"
@@ -44,7 +45,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 				/>
 				<span className="ms-3 lato-bold">{currency} per night</span>
 			</div>
-			<p className="mt-3">Price can be adjusted from the <a href="/hosting/properties" className="lato-bold">Property Management</a> page.</p>
+			<p className="mt-3">{ localisedString["hosting:pricing-property-management-info"] }</p>
 
 			{
 				showButton &&
@@ -53,7 +54,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					type="submit"
 					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
 				>
-					Review property <Icon.ChevronRight />
+					{ localisedString["hosting:review-property"] } <Icon.ChevronRight />
 				</button>
 			}
 		</form>

@@ -1,6 +1,6 @@
 import "./PropertyPhotoGrid.css";
 
-export default function PropertyPhotoGrid({urlArray}) {
+export default function PropertyPhotoGrid({ urlArray }) {
 	return (
 		<div id="property-photo-grid" className="row g-2">
 			<div className="col-6">

@@ -4,20 +4,22 @@ import * as Icon from "react-bootstrap-icons";
 import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
 import { uploadPhotos } from "/src/api/LodgeDbApiService";
 import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
+import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
 	
 	async function onPhotosSubmit(event) {
 		event.preventDefault();
 
-		// Upload photos
 		const files = event.target.photos.files;
+		if (files.length === 0) {
+			advanceState();
+			return;
+		}
+
 		const data = new FormData();
-		// Append files
-		if (files.length !== 0) {
-			for (const file of files) {
-				data.append("photos", file);
-			}
+		for (const file of files) {
+			data.append("photos", file);
 		}
 
 		uploadPhotos(data)
@@ -40,8 +42,8 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 		<form onSubmit={onPhotosSubmit} encType="multipart/form-data">
 			<PropertyPhotoGrid urlArray={input.photos}/>
 
-			<label htmlFor="main-photo" className="lato-bold mt-3">Add photos</label>
-			<p className="mb-3">The first photo will be displayed in search results</p>
+			<label htmlFor="main-photo" className="lato-bold mt-3">{ localisedString["hosting:add-photos"] }</label>
+			<p className="mb-3">{ localisedString["hosting:add-photos-description"] }</p>
 			<input
 				type="file"
 				className="form-control rounded-pill w-50"
@@ -56,7 +58,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 				type="submit"
 				className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
 			>
-				Pricing next <Icon.ChevronRight />
+				{ localisedString["hosting:pricing-next"] } <Icon.ChevronRight />
 			</button>
 		</form>
 	);

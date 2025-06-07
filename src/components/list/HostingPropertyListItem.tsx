@@ -26,11 +26,10 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 	}
 
 	function handleEditClick() {
-		// TODO
+		navigate(`/hosting/property/edit?id=${item.id}`);
 	}
 
 	function handleViewClick() {
-		// TODO
 		navigate(`/stay?id=${item.id}&guests=2`);
 	}
 
