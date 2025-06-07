@@ -1,6 +1,6 @@
 // Strings
-export const siteName = "Nookleus";
-export const greetingMessage = "Find your nook";
+export const siteName = "Lodge";
+export const greetingMessage = "The best time to travel";
 
 // Paths
 export const fileStorage = "http://localhost:3000/";

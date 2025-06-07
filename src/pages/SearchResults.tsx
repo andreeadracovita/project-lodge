@@ -42,7 +42,8 @@ export default function SearchResults() {
 	}, [properties]);
 
 	useEffect(() => {
-		axios.get(`https://geocode.maps.co/search?q=${location}&api_key=6829981227127748709913iypd29e39`)
+		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
+		axios.get(`https://geocode.maps.co/search?q=${location}&api_key=${apiKey}`)
 			.then(response => {
 				if (response.data.length > 0) {
 					const data = response.data[0];

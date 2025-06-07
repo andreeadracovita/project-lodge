@@ -1,5 +1,7 @@
 import * as Icon from "react-bootstrap-icons";
 
+import { siteName } from "/src/utils/constants";
+
 export default function Footer() {
 
 	const now = new Date();
@@ -10,7 +12,7 @@ export default function Footer() {
 			<div className="container my-3">
 				<div className="row">
 					<div className="col-6">
-						<small>© {currentYear} Lodge</small>
+						<small>© {currentYear} {siteName}</small>
 					</div>
 				</div>
 			</div>
