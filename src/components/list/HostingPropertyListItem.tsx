@@ -1,6 +1,7 @@
 import { fileStorage } from "/src/utils/constants";
 import type { PropertyItem } from "./PropertyListItem";
 import { deletePropertyById, updateProperty } from "/src/api/LodgeDbApiService";
+import { useNavigate } from "react-router-dom";
 
 type HostingPropertyListItemProps = {
 	item: PropertyItem,
@@ -9,6 +10,7 @@ type HostingPropertyListItemProps = {
 
 // Component used for rendering a compact property item
 export default function HostingPropertyListItem({ item, setNeedsRefresh }: HostingPropertyListItemProps) {
+	const navigate = useNavigate();
 	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
 
 	function handleDeleteClick() {
@@ -21,6 +23,15 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 			.catch(error => {
 				console.error(error);
 			})
+	}
+
+	function handleEditClick() {
+		// TODO
+	}
+
+	function handleViewClick() {
+		// TODO
+		navigate(`/stay?id=${item.id}&guests=2`);
 	}
 
 	function handleUnpublishClick() {
@@ -48,14 +59,14 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 				{
 					item.is_listed
 					? <div>
-						<span className="btn btn-outline-dark rounded-pill">Edit</span>
-						<span className="btn btn-outline-dark rounded-pill">View</span>
-						<span className="btn btn-outline-dark rounded-pill" onClick={handleUnpublishClick}>Unpublish</span>
+						<span className="btn-text-underline" onClick={handleEditClick}>Edit</span>
+						<span className="btn-text-underline" onClick={handleViewClick}>View</span>
+						<span className="btn-text-underline" onClick={handleUnpublishClick}>Unpublish</span>
 					</div>
 					: <div>
-						<span className="btn btn-outline-dark rounded-pill">Continue editing</span>
-						<span className="btn btn-outline-dark rounded-pill">Preview</span>
-						<span className="btn btn-outline-dark rounded-pill" onClick={handleDeleteClick}>Delete</span>
+						<span className="btn-text-underline" onClick={handleEditClick}>Edit to publish</span>
+						<span className="btn-text-underline" onClick={handleViewClick}>Preview</span>
+						<span className="btn-text-underline" onClick={handleDeleteClick}>Delete</span>
 					</div>
 				}
 			</div>

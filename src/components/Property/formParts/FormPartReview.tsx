@@ -1,5 +1,5 @@
 import * as Icon from "react-bootstrap-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import FormPartTitleAddress from "./FormPartTitleAddress";
 import FormPartDescription from "./FormPartDescription";
