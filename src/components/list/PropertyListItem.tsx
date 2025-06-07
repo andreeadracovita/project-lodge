@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import * as Icon from "react-bootstrap-icons";
 
 import "./PropertyListItem.css";
+import WishlistIcon from "./WishlistIcon";
 import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
@@ -54,20 +54,11 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 
 	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
 
-	function handleHeartClick() {
-		console.log("Heart ", item.id);
-	}
-
 	return (
 		<div className="mb-3">
 			<div className="position-relative">
 				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
-				<Icon.HeartFill
-					size={24}
-					color={isFavorite ? "#ff3131" : "#9d9794"}
-					className="bi bi-heart-fill heart-icon position-absolute"
-					onClick={handleHeartClick}
-				/>
+				<WishlistIcon itemId={item.id} />
 				<Link to={linkPath}>
 					<div>
 						<p className="mb-0">{item.title}</p>

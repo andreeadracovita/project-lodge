@@ -4,6 +4,15 @@ import { apiClient } from "./ApiClient";
 export const getUserConfig
 	= () => apiClient.get("/user/config");
 
+export const getIsPropertyWishlisted
+	= (propertyId) => apiClient.get(`/user/wishlist/property-id/${propertyId}`);
+
+export const toggleWishlistProperty
+	= (propertyId) => apiClient.post(`/user/wishlist/toggle/property-id/${propertyId}`);
+
+export const getAllWishlisted
+	= () => apiClient.get("/user/wishlist/all");
+
 export const updateUser
 	= (payload) => apiClient.patch("/user", payload);
 
