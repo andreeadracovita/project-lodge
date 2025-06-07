@@ -76,7 +76,7 @@ export default function FormPartReview({ input, propertyId }) {
 						{ localisedString["hosting:save-edit"] } <Icon.ChevronRight />
 					</button>
 					{
-						input.is_listed === false &&
+						input.isListed === false &&
 						<button
 							id="publish-property-button"
 							type="submit"

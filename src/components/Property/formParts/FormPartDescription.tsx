@@ -45,11 +45,11 @@ export default function FormPartDescription({
 	}, []);
 
 	function isFeatureIdSelected(featureId) {
-		return input.features_ids.includes(featureId);
+		return input.featuresIds.includes(featureId);
 	}
 
 	function isExperienceIdSelected(experienceId) {
-		return input.experiences_ids.includes(experienceId);
+		return input.experiencesIds.includes(experienceId);
 	}
 
 	const stylingFormTextArea = classNames(
@@ -77,8 +77,8 @@ export default function FormPartDescription({
 			beds: input.beds,
 			bedrooms: input.bedrooms,
 			bathrooms: input.bathrooms,
-			features_ids: input.features_ids,
-			experiences_ids: input.experiences_ids
+			features_ids: input.featuresIds,
+			experiences_ids: input.experiencesIds
 		})
 			.then(() => {
 				advanceState();
@@ -176,7 +176,7 @@ export default function FormPartDescription({
 				<h2 className="mt-3">{ localisedString["hosting:features"] }</h2>
 				<div id="selected-features" className="d-flex flex-wrap">
 					{
-						input.features_ids.map((id) => {
+						input.featuresIds.map((id) => {
 							const foundFeature = features.find(feature => feature.id == id);
 							if (foundFeature) {
 								return <span
@@ -226,7 +226,7 @@ export default function FormPartDescription({
 				<label htmlFor="experiences" className="mt-3">{ localisedString["hosting:experiences-detail"] }</label>
 				<div id="selected-features" className="d-flex flex-wrap">
 					{
-						input.experiences_ids.map((id) => {
+						input.experiencesIds.map((id) => {
 							const foundExp = experiences.find(exp => exp.id == id);
 							if (foundExp) {
 								return <span

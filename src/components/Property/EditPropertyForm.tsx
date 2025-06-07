@@ -32,13 +32,13 @@ export default function EditPropertyForm() {
 		beds: 1,
 		bedrooms: 1,
 		bathrooms: 1,
-		features_ids: [],
-		experiences_ids: [],
+		featuresIds: [],
+		experiencesIds: [],
 
 		photos: [],
 
 		pricePerNight: 0,
-		is_listed: false
+		isListed: false
 	});
 	const [imagesUrlArray, setImagesUrlArray] = useState([]);
 	const [pageTitle, setPageTitle] = useState(localisedString["hosting:list-property"]);
@@ -68,11 +68,11 @@ export default function EditPropertyForm() {
 							beds: data.beds ?? 1,
 							bedrooms: data.bedrooms ?? 1,
 							bathrooms: data.bathrooms ?? 1,
-							features_ids: data.features_ids ?? [],
-							experiences_ids: data.experiences_ids ?? [],
+							featuresIds: data.features_ids ?? [],
+							experiencesIds: data.experiences_ids ?? [],
 							photos: photos ? photos.map(url => fileStorage + url) : [],
 							pricePerNight: data.price_per_night_eur ?? 0,
-							is_listed: data.is_listed ?? false
+							isListed: data.is_listed ?? false
 						});
 						setImagesUrlArray(photos ? photos : []);
 						setPageTitle(localisedString["hosting:edit-property"]);
@@ -123,7 +123,7 @@ export default function EditPropertyForm() {
 	function handleChangeFeatureMultiselect(event) {
 		const selected = parseInt(event.target.id);
 
-		let newFeaturesValue = input.features_ids;
+		let newFeaturesValue = input.featuresIds;
 		if (newFeaturesValue.includes(selected)) {
 			newFeaturesValue = newFeaturesValue.filter(f => f !== selected);
 		} else {
@@ -140,7 +140,7 @@ export default function EditPropertyForm() {
 	function handleChangeExperienceMultiselect(event) {
 		const selected = parseInt(event.target.id);
 
-		let newExperiencesValue = input.experiences_ids;
+		let newExperiencesValue = input.experiencesIds;
 		if (newExperiencesValue.includes(selected)) {
 			newExperiencesValue = newExperiencesValue.filter(e => e !== selected);
 		} else {
@@ -149,7 +149,7 @@ export default function EditPropertyForm() {
 		setInput((prevValue) => {
 			return {
 				...prevValue,
-				experiences_ids: newExperiencesValue
+				experiencesIds: newExperiencesValue
 			}
 		});
 	}
