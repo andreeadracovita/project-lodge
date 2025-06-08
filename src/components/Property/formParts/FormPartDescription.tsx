@@ -3,10 +3,9 @@ import classNames from "classnames";
 import * as Icon from "react-bootstrap-icons";
 
 import "./FormPartDescription.css";
-import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
+import { getAllFeatures, getAllExperiences, updatePropertyDetails } from "/src/api/BackendApiService";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { experienceIconMap } from "/src/utils/mappings";
-import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
 import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartDescription({

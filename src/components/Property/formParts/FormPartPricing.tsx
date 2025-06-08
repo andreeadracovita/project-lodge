@@ -1,7 +1,7 @@
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
+import { updatePropertyDetails } from "/src/api/BackendApiService";
 import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {

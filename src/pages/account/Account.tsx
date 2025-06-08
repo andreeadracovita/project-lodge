@@ -22,7 +22,7 @@ export default function Account() {
 			</div>
 
 			<div className="section-container">
-				<h2>Seeked travel experiences</h2>
+				<h2>Seeked travel experiences [TODO put user exp from db]</h2>
 				{
 					experiences.map((exp, i) => {
 						return <span key={i} className="features-list-item">

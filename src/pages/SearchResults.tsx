@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 
-import { getAllProperties } from "/src/api/LodgeDbApiService";
+import { getAllProperties } from "/src/api/BackendApiService";
 import Search from "/src/components/search/Search";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 import MapView from "/src/components/map/MapView";

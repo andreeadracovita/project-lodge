@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 
-import { getPropertyById } from "/src/api/LodgeDbApiService";
+import { getPropertyById } from "/src/api/BackendApiService";
 import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
 import PropertyDescription from "/src/components/stay/PropertyDescription";
 import BookingCard from "/src/components/stay/BookingCard";

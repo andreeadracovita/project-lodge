@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { apiClient } from "/src/api/ApiClient";
 import { executeJwtAuthenticationService } from "/src/api/AuthenticationApiService";
-import { getUserConfig } from "/src/api/LodgeDbApiService";
+import { getUserConfig } from "/src/api/BackendApiService";
 
 export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);

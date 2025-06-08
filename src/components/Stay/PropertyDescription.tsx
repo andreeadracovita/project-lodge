@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 import AvailabilitySection from "./AvailabilitySection";
 import MapView from "/src/components/map/MapView";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
-import { getAllFeatures, getAllExperiences } from "/src/api/LodgeDbApiService";
+import { getAllFeatures, getAllExperiences } from "/src/api/BackendApiService";
 import { experienceIconMap } from "/src/utils/mappings";
 
 export default function PropertyDescription({property}) {

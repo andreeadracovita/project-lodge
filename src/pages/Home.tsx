@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAllProperties, getAllExperiences } from "/src/api/LodgeDbApiService";
+import { getAllProperties, getAllExperiences } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 import Search from "/src/components/search/Search";
 import { greetingMessage, trendingDestinations } from "/src/utils/constants";

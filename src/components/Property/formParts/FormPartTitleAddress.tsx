@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import { getAllBuildingTypes, getAllRentalTypes } from "/src/api/LodgeDbApiService";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import {
 	createNewProperty,
 	createNewPropertyDetailBase,
 	updateProperty,
-	updatePropertyDetails
-} from "/src/api/LodgeDbApiService";
+	updatePropertyDetails,
+	getAllBuildingTypes,
+	getAllRentalTypes
+} from "/src/api/BackendApiService";
 import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, advanceState }) {

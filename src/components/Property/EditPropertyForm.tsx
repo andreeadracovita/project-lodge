@@ -11,7 +11,7 @@ import FormPartPhotos from "./formParts/FormPartPhotos";
 import FormPartPricing from "./formParts/FormPartPricing";
 import FormPartReview from "./formParts/FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
-import { getPropertyById } from "/src/api/LodgeDbApiService";
+import { getPropertyById } from "/src/api/BackendApiService";
 import localisedString from "/src/localisation/en-GB";
 import { fileStorage } from "/src/utils/constants";
 

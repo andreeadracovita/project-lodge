@@ -5,7 +5,7 @@ import FormPartTitleAddress from "./FormPartTitleAddress";
 import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
-import { updateProperty } from "/src/api/LodgeDbApiService";
+import { updateProperty } from "/src/api/BackendApiService";
 import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartReview({ input, propertyId }) {

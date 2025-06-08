@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAllWishlisted } from "/src/api/LodgeDbApiService";
+import { getAllWishlisted } from "/src/api/BackendApiService";
 
 export default function Wishlist() {
 	const [propertyIds, setPropertyIds] = useState([]);

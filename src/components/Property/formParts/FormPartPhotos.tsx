@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
-import { uploadPhotos } from "/src/api/LodgeDbApiService";
-import { updatePropertyDetails } from "/src/api/LodgeDbApiService";
+import { uploadPhotos, updatePropertyDetails } from "/src/api/BackendApiService";
 import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {

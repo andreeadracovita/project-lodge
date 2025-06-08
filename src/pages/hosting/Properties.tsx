@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useAuth } from "/src/components/security/AuthContext";
 import HostingHeader from "/src/components/common/header/HostingHeader";
-import { getPropertiesByUserId } from "/src/api/LodgeDbApiService";
+import { getPropertiesByUserId } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 
 // Page path: /hosting/properties

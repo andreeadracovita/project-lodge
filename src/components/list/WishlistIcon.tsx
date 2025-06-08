@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
-import { getIsPropertyWishlisted, toggleWishlistProperty } from "/src/api/LodgeDbApiService";
+import { getIsPropertyWishlisted, toggleWishlistProperty } from "/src/api/BackendApiService";
 
 export default function WishlistIcon({ itemId }) {
 	const [isFavorite, setIsFavorite] = useState(false);
