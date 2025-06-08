@@ -46,6 +46,11 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
+.container {
+  max-width: 1110px; /* padding-x 5, content 1100 */
+  padding: 0px 5px;
+}
+
 /* Used across multiple components */
 .lato-bold {
   font-family: "Lato", sans-serif;
