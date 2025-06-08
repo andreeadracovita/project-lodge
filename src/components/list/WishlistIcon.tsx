@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
+import "./WishlistIcon.css";
 import { getIsPropertyWishlisted, toggleWishlistProperty } from "/src/api/BackendApiService";
 
 export default function WishlistIcon({ itemId }) {
@@ -31,11 +32,13 @@ export default function WishlistIcon({ itemId }) {
 	}
 	
 	return (
-		<Icon.HeartFill
-			size={24}
-			color={isFavorite ? "#ff3131" : "#9d9794"}
-			className="bi bi-heart-fill heart-icon position-absolute cursor-pointer"
-			onClick={handleHeartClick}
-		/>
+		<div className="white-circle position-absolute cursor-pointer">
+			<Icon.HeartFill
+				size={24}
+				color={isFavorite ? "#ff3131" : "#9d9794"}
+				className="bi bi-heart-fill heart-icon"
+				onClick={handleHeartClick}
+			/>
+		</div>
 	);
 }

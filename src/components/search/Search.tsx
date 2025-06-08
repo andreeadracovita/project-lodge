@@ -103,7 +103,8 @@ export default function Search() {
 					<button
 						id="search-button"
 						type="button"
-						className="btn btn-light rounded-pill brand-color-background"
+						// className="btn rounded-pill brand-color-background"
+						className="btn-pill"
 						onClick={onSearchClicked}
 					>
 						Search

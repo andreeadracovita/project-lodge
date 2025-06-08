@@ -18,7 +18,6 @@ export type PropertyItem = {
 	city: string,
 	country: string,
 	geo: Geo,
-	is_listed: boolean,
 	price: string,
 	rating?: number,
 	images_url_array: Array[]

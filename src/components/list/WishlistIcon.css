@@ -1,0 +1,17 @@
+.white-circle {
+	background-color: white;
+	padding: 6px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	top: 20px;
+	right: 20px;
+}
+
+.heart-icon {
+	stroke: white;
+	transition: 0.3s;
+}
+
+.heart-icon:hover {
+	fill: pink;
+}
