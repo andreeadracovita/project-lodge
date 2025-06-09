@@ -1,26 +1,52 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import "./BookingCard.css";
 import { getConvertedPrice } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 import { getNightsCount } from "/src/utils/DateFormatUtils";
+import Calendar from "/src/components/calendar/Calendar";
+import { dayMonYear } from "/src/utils/DateFormatUtils";
 
 export default function BookingCard({price}) {
 	const authContext = useAuth();
+	const navigate = useNavigate();
 	const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
+	const [nightsCount, setNightsCount] = useState(0);
+	const [siteTotalPrice, setSiteTotalPrice] = useState(0);
 
 	const [searchParams, setSearchParams] = useSearchParams();
-	const checkIn = searchParams.get("check_in");
-	const checkOut = searchParams.get("check_out");
-	const guests = searchParams.get("guests");
-	const checkInDate = new Date(checkIn);
-	const checkOutDate = new Date(checkOut);
-	const nightsCount = getNightsCount(checkInDate, checkOutDate);
+	const [input, setInput] = useState({
+		checkIn: undefined,
+		checkOut: undefined,
+		guests: searchParams.get("guests") ?? 2
+	});
 
-	const siteTotalPrice = price * nightsCount;
 	useEffect(() => {
-		getConvertedPrice(authContext.currency, siteTotalPrice)
+		const checkInParam = searchParams.get("check_in");
+		const checkOutParam = searchParams.get("check_out");
+		if (checkInParam) {
+			setInput(prevValue => {
+				return {
+					...prevValue,
+					checkIn: new Date(checkInParam),
+					checkOut: checkOutParam ? new Date(checkOutParam) : null
+				};
+			});
+		}
+
+		if (!checkInParam || !checkOutParam) {
+			return;
+		}
+
+		const tempNightCount = getNightsCount(new Date(checkInParam), new Date(checkOutParam));
+		setNightsCount(tempNightCount);
+
+		const tempSiteTotalPrice = price * tempNightCount;
+		setSiteTotalPrice(tempSiteTotalPrice);
+
+		getConvertedPrice(authContext.currency, tempSiteTotalPrice)
 			.then(response => {
 				if (response.data) {
 					setConvertedTotalPrice(response.data.converted);
@@ -28,33 +54,68 @@ export default function BookingCard({price}) {
 			})
 			.catch(error => {
 				console.error(error);
-			})
-	}, []);
+			});
+	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
+
+	function handleChange(event) {
+		const { name, value } = event.target;
+		
+		setInput(prevValue => {
+			return {
+				...prevValue,
+				[name]: value
+			};
+		});
+	}
+
+	function onCalendarClick(event) {
+		event.stopPropagation();
+	}
+
+	function handleBookClick() {
+		navigate(`/book?id=${searchParams.get("id")}&guests=${searchParams.get("guests")}&check_in=${searchParams.get("check_in")}&check_out=${searchParams.get("check_out")}`);
+	}
 
 	return (
 		<div id="booking-card" className="border-section sticky">
 			<h2>{convertedTotalPrice} {authContext.currency}</h2>
 			<p>
-				{guests} {guests > 1 ? <span>guests</span> : <span>guest</span>}, {nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}
+				{input.guests} {input.guests > 1 ? <span>guests</span> : <span>guest</span>}, {nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}
 			</p>
 			<form>
 				<div className="form-field rounded-pill d-flex p-1 w-100">
-					<div className="w-50 ps-3">
-						<label htmlFor="check-in" className="ms-2">Check-in</label>
-						<input id="check-in" type="date" className="form-control search-field rounded-pill" placeholder="Check-in" aria-label="check-in" value={checkIn}/>
-					</div>
-					<div className="vr"></div>
-					<div className="w-50 ps-3">
-						<label htmlFor="check-out" className="ms-2">Check-out</label>
-						<input id="check-out" type="date" className="form-control search-field rounded-pill" placeholder="Check-out" aria-label="check-out" value={checkOut} />
+					<div className="dropdown-center w-100 cursor-pointer px-3">
+						<div id="dropdown-toggle" className="d-flex px-2 py-1 align-items-center justify-content-between" data-bs-toggle="dropdown">
+							<span className="me-2">
+								<span className="d-block">{input.checkIn && "Check-in"}</span>
+								<span className="d-block">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>
+							</span>
+							<span>—</span>
+							<span className="ms-2">
+								<span className="d-block">{input.checkOut && "Check-out"}</span>
+								<span className="d-block">{input.checkOut ? dayMonYear(new Date(input.checkOut)) : "Check-out"}</span>
+							</span>
+						</div>
+						
+						<div className="dropdown-menu p-3" onClick={onCalendarClick}>
+							<Calendar />
+						</div>
 					</div>
 				</div>
 				<div className="form-field rounded-pill p-1 w-100 mt-3 ps-3">
 					<label htmlFor="guests" className="ms-2">Guests</label>
 					<br />
-					<input id="guests" type="number" className="form-control search-field rounded-pill" placeholder="Guests" aria-label="number of guests" value={guests} />
+					<input
+						id="guests"
+						type="number"
+						className="form-control search-field rounded-pill"
+						placeholder="Guests"
+						aria-label="number of guests"
+						value={input.guests}
+						onChange={handleChange}
+					/>
 				</div>
-				<button type="button" className="btn-pill w-100 mt-3">
+				<button type="button" className="btn-pill w-100 mt-3" onClick={handleBookClick}>
 					Book
 				</button>
 			</form>
