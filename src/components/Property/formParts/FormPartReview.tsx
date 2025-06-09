@@ -15,7 +15,6 @@ export default function FormPartReview({ input, propertyId }) {
 		event.preventDefault();
 
 		const submitter = event.nativeEvent.submitter.name;
-		console.log(submitter);
 		switch (submitter) {
 			case "save":
 				navigate(`/stay?id=${propertyId}&guests=2`);
