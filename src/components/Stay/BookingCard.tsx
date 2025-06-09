@@ -1,33 +1,41 @@
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import "./BookingCard.css";
+import { getConvertedPrice } from "/src/api/BackendApiService";
+import { useAuth } from "/src/components/security/AuthContext";
+import { getNightsCount } from "/src/utils/DateFormatUtils";
 
 export default function BookingCard({price}) {
+	const authContext = useAuth();
+	const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
+
 	const [searchParams, setSearchParams] = useSearchParams();
 	const checkIn = searchParams.get("check_in");
 	const checkOut = searchParams.get("check_out");
 	const guests = searchParams.get("guests");
-	const currency = "CHF";
+	const checkInDate = new Date(checkIn);
+	const checkOutDate = new Date(checkOut);
+	const nightsCount = getNightsCount(checkInDate, checkOutDate);
 
-	function getNightsNo() {
-		const diffTime = new Date(checkOut) - new Date(checkIn);
-		const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-		return diffDays;
-	}
-
-	const nights = getNightsNo();
-
-	// TODO: Extract to PricingUtils
-	const taxPercentage = 0.15;
-	const priceBeforeTax = price * nights;
-	const addedTax = Math.ceil(priceBeforeTax * taxPercentage);
-	const total = priceBeforeTax + addedTax;
+	const siteTotalPrice = price * nightsCount;
+	useEffect(() => {
+		getConvertedPrice(authContext.currency, siteTotalPrice)
+			.then(response => {
+				if (response.data) {
+					setConvertedTotalPrice(response.data.converted);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}, []);
 
 	return (
 		<div id="booking-card" className="border-section sticky">
-			<h2>{total} {currency}</h2>
+			<h2>{convertedTotalPrice} {authContext.currency}</h2>
 			<p>
-				{guests} {guests > 1 ? <span>guests</span> : <span>guest</span>}, {nights} {nights > 1 ? <span>nights</span> : <span>night</span>}
+				{guests} {guests > 1 ? <span>guests</span> : <span>guest</span>}, {nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}
 			</p>
 			<form>
 				<div className="form-field rounded-pill d-flex p-1 w-100">
@@ -46,7 +54,7 @@ export default function BookingCard({price}) {
 					<br />
 					<input id="guests" type="number" className="form-control search-field rounded-pill" placeholder="Guests" aria-label="number of guests" value={guests} />
 				</div>
-				<button type="button" className="btn btn-light rounded-pill brand-color-background w-100 mt-3">
+				<button type="button" className="btn-pill w-100 mt-3">
 					Book
 				</button>
 			</form>

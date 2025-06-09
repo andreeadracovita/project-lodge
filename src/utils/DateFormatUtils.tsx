@@ -3,14 +3,14 @@
  */
 
 // 2025-05-14
-function yearDashMonthDashDay(date) {
+export function yearDashMonthDashDay(date) {
 	return date.getFullYear().toString() + "-" +
 			(date.getMonth() + 1).toString().padStart(2, '0') + "-" +
 			date.getDate().toString().padStart(2, '0');
 }
 
 // 14 May 2025
-function dayMonYear(date) {
+export function dayMonYear(date) {
 	const option = {
 		month: "short",
 		day: "numeric",
@@ -19,4 +19,8 @@ function dayMonYear(date) {
 	return date.toLocaleString("en-GB", option);
 }
 
-export { yearDashMonthDashDay, dayMonYear };
+export function getNightsCount(checkIn: Date, checkOut: Date) {
+	const diffTime = checkOut - checkIn;
+	const diffNights = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+	return diffNights;
+}

@@ -2,10 +2,12 @@ import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
 import { updatePropertyDetails } from "/src/api/BackendApiService";
+import { useAuth } from "/src/components/security/AuthContext";
 import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
-	const currency = "CHF";
+	const authContext = useAuth();
+	const currency = authContext.currency;
 
 	const stylingFormControl = classNames(
 		"form-control",
