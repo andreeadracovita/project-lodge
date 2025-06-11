@@ -79,8 +79,8 @@ export const getAllExperiences
 export const getBookingById
 	= (id) => apiClient.get(`/booking/id/${id}`);
 
-export const getBookingsByUserId
-	= (userId) => apiClient.get(`/booking/user-id/${userId}`);
+export const getBookingsByEmail
+	= (email) => apiClient.get(`/booking/user-id/${email}`);
 
 export const getBookingsByPropertyId
 	= (propertyId) => apiClient.get(`/booking/property-id/${propertyId}`);

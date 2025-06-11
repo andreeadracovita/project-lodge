@@ -61,14 +61,14 @@ export default function Home() {
 						}
 					</div>
 					<div className="mt-4">
-						<ListView listItemType={ListItemType.Property} items={properties} cols={5} />
+						<ListView listItemType={ListItemType.Property} items={properties} cols={4} />
 					</div>
 				</div>
 
 				<div id="trending" className="section-container">
 					<p className="section-heading">Trending destinations</p>
 					<div className="mt-4">
-						<ListView listItemType={ListItemType.Destination} items={trendingDestinations} cols={5} />
+						<ListView listItemType={ListItemType.Destination} items={trendingDestinations} cols={6} />
 					</div>
 				</div>
 			</div>

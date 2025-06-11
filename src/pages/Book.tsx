@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 
+import { createBooking } from "/src/api/BackendApiService";
+
 export default function Book() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	// TODO: pre-fill if user is logged-in
@@ -16,6 +18,9 @@ export default function Book() {
 		cardHolder: "John Doe"
 	});
 
+	// useEffect to retrieve booking info related to property, price
+
+
 	function onChange(event) {
 		const { name, value } = event.target;
 		setInput(prevValue => {
@@ -28,6 +33,38 @@ export default function Book() {
 
 	function onSubmit(event) {
 		event.preventDefault();
+
+		// TODO: Validate input
+		const checkIn = searchParams.get("check_in");
+		const checkOut = searchParams.get("check_out");
+		const guests = searchParams.get("guests");
+		const propertyId = searchParams.get("id");
+		if (!checkIn || !checkOut || !guests || !propertyId) {
+			return;
+		}
+
+		createBooking({
+			property_id: propertyId,
+			check_in: checkIn,
+			check_out: checkOut,
+			guests: guests,
+			first_name: input.firstName,
+			last_name: input.lastName,
+			email: input.email,
+			address: input.address,
+			city: input.city,
+			country: input.country,
+			phone_number: input.phoneNo,
+			card_number: input.cardNo,
+			card_holder: input.cardHolder,
+			price: 200 // ! TODO
+		})
+			.then(response => {
+				console.log(response);
+			})
+			.catch(error => {
+				console.error(error);
+			})
 	}
 	
 	return (
@@ -42,7 +79,9 @@ export default function Book() {
 			<div className="row section-container">
 				<div className="col-4">
 					<div className="border-section">
-						Prop & price details here
+						<p>[TODO] Prop & price details here</p>
+						<p>{ searchParams.get("check_in") } - { searchParams.get("check_out") }</p>
+						<p>{ searchParams.get("guests") } guests</p>
 					</div>
 				</div>
 				<div className="col-8">

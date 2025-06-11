@@ -74,19 +74,26 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 
 	return (
 		<div className="mb-3">
-			<div className="position-relative">
+			<div className="position-relative border-section property-card">
 				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
 				<WishlistIcon itemId={item.id} />
 				<Link to={linkPath}>
-					<div>
-						<p className="mb-0">{item.title}</p>
-						<p className="lato-bold">{item.city}, {item.country}</p>
-						<p className="text-muted">{displayDate}</p>
-						<p>
-							<span>{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}:</span>
-							<span className="lato-bold ms-1">{convertedTotalPrice}</span> {authContext.currency}
-						</p>
-						<Rating score={item.rating ? item.rating.toFixed(2) : ""} />
+					<div className="property-card-details">
+						<p className="mb-0 property-card-heading">{item.title}</p>
+						<div className="d-flex">
+							<Rating score={item.rating ? item.rating.toFixed(2) : ""} /><span className="ms-2"> · 130 reviews</span>
+						</div>
+						<p>{item.city}, {item.country}</p>
+						<hr />
+						<p>Cottage</p>
+						<p>Entire holiday home · 2 bedrooms · 1 bathroom</p>
+						<p>2 beds</p>
+
+						<div className="text-end mt-3">
+							<span className="text-muted d-block">{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}</span>
+							<span className="lato-bold property-card-price d-block">{convertedTotalPrice} {authContext.currency}</span>
+						</div>
+						
 					</div>
 				</Link>
 			</div>
