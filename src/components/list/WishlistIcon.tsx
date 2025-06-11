@@ -34,7 +34,7 @@ export default function WishlistIcon({ itemId }) {
 	return (
 		<div className="white-circle position-absolute cursor-pointer">
 			<Icon.HeartFill
-				size={24}
+				size={20}
 				color={isFavorite ? "#ff3131" : "#9d9794"}
 				className="bi bi-heart-fill heart-icon"
 				onClick={handleHeartClick}

@@ -1,7 +1,6 @@
 .white-circle {
 	background-color: white;
-	padding: 6px;
-	aspect-ratio: 1/1;
+	padding: 5px;
 	border-radius: 50%;
 	top: 16px;
 	right: 16px;
