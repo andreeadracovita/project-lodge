@@ -17,6 +17,9 @@ export const toggleWishlistProperty
 export const getAllWishlisted
 	= () => apiClient.get("/user/wishlist/all");
 
+export const getAllBookings
+	= () => apiClient.get("/user/booking/all");
+
 export const updateUser
 	= (payload) => apiClient.patch("/user", payload);
 
