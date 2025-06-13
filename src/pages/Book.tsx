@@ -85,7 +85,7 @@ export default function Book() {
 					</div>
 				</div>
 				<div className="col-8">
-					<div className="border-section p-3">
+					<div className="border-section">
 						<h1 className="page-heading">Enter your details</h1>
 						<form onSubmit={onSubmit}>
 							<label htmlFor="first-name">First name</label>

@@ -5,31 +5,16 @@ import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
 import AccountCard from "/src/components/user/AccountCard";
 import { SettingsSection } from "/src/components/user/SettingsNav";
-import { experienceIconMap } from "/src/utils/mappings";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 export default function Account() {
 	const authContext = useAuth();
 	const iconSize = 30;
-
-	const experiences = ["adventure", "culture", "nature", "entertainment", "food"];
 
 	return (
 		<div className="container section-container">
 			<div className="d-flex align-items-center">
 				<Avatar size={60} />
 				<h1 className="p-0 m-0 ms-3 page-heading">Hi, {authContext.firstName}</h1>
-			</div>
-
-			<div className="section-container">
-				<h2>Seeked travel experiences [TODO put user exp from db]</h2>
-				{
-					experiences.map((exp, i) => {
-						return <span key={i} className="features-list-item">
-							{ experienceIconMap.get(exp) } { capitalizeFirstLetter(exp) }
-						</span>
-					})
-				}
 			</div>
 
 			<div className="section-container">

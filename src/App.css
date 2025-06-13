@@ -142,6 +142,7 @@ h2 {
 .border-section {
   border: 1px solid #e7e7e7;
   border-radius: 12px;
+  padding: 10px;
 }
 
 .sticky {
@@ -224,8 +225,4 @@ h2 {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 12px;
-}
-
-.property-card {
-  padding: 10px;
 }

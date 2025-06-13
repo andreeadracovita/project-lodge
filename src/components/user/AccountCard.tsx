@@ -6,7 +6,7 @@ export default function AccountCard({ iconName, iconSize, title, desc, url }) {
 
 	return (
 		<Link to={url}>
-			<div className="border-section p-3">
+			<div className="border-section">
 				<div className="row">
 					<div className="col-10">
 						<Icon iconName={iconName} size={iconSize} />
