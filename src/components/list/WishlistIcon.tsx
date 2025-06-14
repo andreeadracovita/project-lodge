@@ -4,11 +4,16 @@ import * as Icon from "react-bootstrap-icons";
 
 import "./WishlistIcon.css";
 import { getIsPropertyWishlisted, toggleWishlistProperty } from "/src/api/BackendApiService";
+import { useAuth } from "/src/components/security/AuthContext";
 
 export default function WishlistIcon({ itemId }) {
+	const authContext = useAuth();
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
+		if (!authContext.isAuthenticated) {
+			return;
+		}
 		getIsPropertyWishlisted(itemId)
 			.then(response => {
 				if (response.data) {
@@ -21,6 +26,10 @@ export default function WishlistIcon({ itemId }) {
 	}, []);
 
 	function handleHeartClick() {
+		if (!authContext.isAuthenticated) {
+			console.log("Login or sign up to add to wishlist");
+			return;
+		}
 		toggleWishlistProperty(itemId)
 			.then(response => {
 				if (response.data) {
