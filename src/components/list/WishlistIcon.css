@@ -6,11 +6,15 @@
 	right: 16px;
 }
 
+.outline-heart-icon {
+	stroke: #0D0D0D;
+}
+
 .heart-icon {
-	stroke: white;
 	transition: 0.3s;
 }
 
 .heart-icon:hover {
+	stroke: none;
 	fill: pink;
 }

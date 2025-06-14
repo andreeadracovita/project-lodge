@@ -1,11 +1,13 @@
 /* Grass green: #7ed957 */
 :root {
-  --brand-color: #7ed957;
-  --light-green: #d6f2ca;
+  --brand-color: #DDF23D;
+  --medium-green: #95A612;
+  --light-green: #E4F2AE;
   --bright-red: #ff3131;
-  --light-grey: #d9d9d9;
+  --light-grey: #e7e7e7;
   --medium-grey: #bebbbb;
-  --dark: #000000;
+  --dark: #0D0D0D;
+  
   
   --body-font-size: 14px;
   --nav-font-size: 16px; /* Navbar links */
@@ -24,7 +26,14 @@
   flex-direction: column;
 }
 
+header {
+  background-color: var(--dark);
+  color: white;
+}
+
 footer {
+  background-color: var(--dark);
+  color: white;
   margin-top: auto;
 }
 
@@ -32,6 +41,7 @@ body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
+  color: var(--dark);
 }
 
 main {
@@ -206,18 +216,33 @@ h2 {
 }
 
 .btn-pill:hover {
-  background: #41B564;
+  background: var(--medium-green);
 }
 
 .btn-pill-outline {
   background: transparent;
-  border: 2px solid var(--brand-color);
+  border: 1px solid var(--dark);
   border-radius: 50rem;
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   display: inline-block;
   font-size: 1rem;
   transition: background 0.15s ease-in-out;
+}
+
+.btn-round {
+  background: var(--brand-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  font-size: 1rem;
+  transition: background 0.15s ease-in-out;
+}
+
+.btn-round:hover {
+  background: var(--medium-green);
 }
 
 /* Photos */
@@ -233,4 +258,9 @@ h2 {
   height: 300px;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.form-control:focus {
+  border-color: var(--medium-green);
+  box-shadow: 0 0 0 0.25rem var(--light-green);
 }

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
@@ -30,13 +31,20 @@ export default function WishlistIcon({ itemId }) {
 				console.error(error);
 			})
 	}
+
+	const heartClass = classNames(
+		"heart-icon",
+		{
+			"outline-heart-icon": !isFavorite
+		}
+	);
 	
 	return (
 		<div className="white-circle position-absolute cursor-pointer">
 			<Icon.HeartFill
 				size={20}
-				color={isFavorite ? "#ff3131" : "#9d9794"}
-				className="bi bi-heart-fill heart-icon"
+				color={isFavorite ? "#ff3131" : "white"}
+				className={heartClass}
 				onClick={handleHeartClick}
 			/>
 		</div>

@@ -141,7 +141,7 @@ export default function SignupLogin() {
 						/>
 						<button
 							type="button"
-							className="btn btn-light rounded-pill brand-color-background w-100 mt-3"
+							className="btn-pill w-100 mt-3"
 							onClick={onContinueClicked}
 						>
 							Continue
@@ -169,7 +169,7 @@ export default function SignupLogin() {
 						}
 						<button
 							type="submit"
-							className="btn btn-light rounded-pill brand-color-background w-100 mt-3"
+							className="btn-pill w-100 mt-3"
 						>
 							Continue
 						</button>
@@ -229,7 +229,7 @@ export default function SignupLogin() {
 						</div>
 						<button
 							type="submit"
-							className="btn btn-light rounded-pill brand-color-background w-100 mt-3"
+							className="btn-pill w-100 mt-3"
 						>
 							Continue
 						</button>
@@ -239,7 +239,7 @@ export default function SignupLogin() {
 				
 				</form>
 				<hr />
-				<button type="button" className="btn btn-outline-dark rounded-pill w-100 mt-3">
+				<button type="button" className="btn-pill-outline w-100 mt-3">
 					<span className="d-flex align-items-center justify-content-center">
 						<img src="/icons/Google__G__logo.png" width="18px" height="18px" className="me-1" />
 						Continue with Google

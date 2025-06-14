@@ -8,7 +8,7 @@ export default function Footer() {
 	const currentYear = now.getFullYear();
 	
 	return (
-		<footer className="border-top">
+		<footer>
 			<div className="container my-3">
 				<div className="row">
 					<div className="col-6">

@@ -1,5 +1,6 @@
 .user-account-button {
-  border: 1px solid #adb5bd;
+  /*border: 1px solid #adb5bd;*/
+  background-color: white;
 }
 
 .dropdown-menu {

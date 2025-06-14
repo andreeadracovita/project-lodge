@@ -17,7 +17,7 @@ export default function Header() {
 	}
 	
 	return (
-		<header className="py-3 border-bottom">
+		<header className="py-2">
 			<div className="container">
 				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 					<Link to="/" className="col-lg-6 d-flex mb-3 mb-md-0 link-body-emphasis text-decoration-none">
@@ -26,11 +26,11 @@ export default function Header() {
 					</Link>
 					<div className="col-lg-6 d-flex justify-content-end align-items-center">
 						<span className="me-4">{authContext.currency}</span>
-						<span className="me-4 d-flex align-items-center"><Icon.Globe color="black" size={16} className="me-1"/>{authContext.language}</span>
-						<Link to="/hosting/property/add" className="me-4">List a property</Link>
+						<span className="me-4 d-flex align-items-center"><Icon.Globe2 color="white" size={16} className="me-1"/>{authContext.language}</span>
+						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
 						{
 							!authContext.isAuthenticated &&
-							<Link to="/signup-login" className="me-4" >Sign up or log in</Link>
+							<Link to="/signup-login" className="me-4 btn-pill">Sign up or log in</Link>
 						}
 						{
 							authContext.isAuthenticated &&

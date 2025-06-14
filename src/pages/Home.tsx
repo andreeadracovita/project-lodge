@@ -14,7 +14,7 @@ export default function Home() {
 	const [properties, setProperties] = useState([]);
 
 	useEffect(() => {
-		setBackgroundImage(fileStorage + "val-d-orcia.jpg");
+		setBackgroundImage(fileStorage + "polar.jpg");
 
 		getAllProperties()
 			.then(response => {
@@ -42,7 +42,7 @@ export default function Home() {
 			<div id="landing-greeting-section" style={{ backgroundImage: `url(${backgroundImage})`}}>
 				<div id="landing-greeting-section-container" className="container">
 					<div className="greeting-message">{ greetingMessage }</div>
-					<div id="home-search-bar" className="pb-4">
+					<div id="home-search-bar" className="mb-4">
 						<Search />
 					</div>
 				</div>
