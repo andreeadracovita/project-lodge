@@ -55,7 +55,8 @@ export default function Home() {
 						{
 							experiences.map((exp, i) => 
 								<span key={i} className="features-list-item">
-									{ experienceIconMap.get(exp.name) } { capitalizeFirstLetter(exp.name) }
+									{/*{ experienceIconMap.get(exp.name) }*/}
+									{ capitalizeFirstLetter(exp.name) }
 								</span>
 							)
 						}

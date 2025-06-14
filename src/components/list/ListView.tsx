@@ -3,13 +3,15 @@ import classNames from "classnames";
 import DestinationListItem from "./DestinationListItem";
 import HostingPropertyListItem from "./HostingPropertyListItem";
 import PropertyListItem from "./PropertyListItem";
+import BookingListItem from "./BookingListItem";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 export enum ListItemType {
 	Property,
 	Destination,
-	HostingProperty
-}
+	HostingProperty,
+	Booking
+};
 
 export default function ListView({ listItemType, items, cols, setNeedsRefresh }) {
 	// Today
@@ -24,7 +26,6 @@ export default function ListView({ listItemType, items, cols, setNeedsRefresh })
 		"row-cols-1",
 		"row-cols-sm-2",
 		"row-cols-md-3",
-		// "row-cols-lg-4",
 		`row-cols-lg-${cols}`
 	);
 	
@@ -69,6 +70,18 @@ export default function ListView({ listItemType, items, cols, setNeedsRefresh })
 						items.map((item, i) =>
 							<div key={i} className="col">
 								<HostingPropertyListItem item={item} setNeedsRefresh={setNeedsRefresh} />
+							</div>
+						)
+					}
+				</>
+			}
+			{
+				listItemType === ListItemType.Booking &&
+				<>
+					{
+						items.map((item, i) =>
+							<div key={i} className="col">
+								<BookingListItem item={item} />
 							</div>
 						)
 					}
