@@ -26,6 +26,9 @@ export const updateUser
 export const deleteAccount
 	= () => apiClient.delete("/user");
 
+export const checkViewBookingAuthorization
+	= (bookingId) => apiClient.get(`/user/authorize/booking?id=${bookingId}`);
+
 // Photo upload
 export const uploadAvatar
 	= (payload) => apiClient.post("/upload/avatar", payload);
@@ -80,7 +83,7 @@ export const getAllExperiences
 
 // Bookings
 export const getBookingById
-	= (id) => apiClient.get(`/booking/id/${id}`);
+	= (id, pin) => apiClient.get(`/booking?id=${id}&pin=${pin}`);
 
 export const getBookingsByEmail
 	= (email) => apiClient.get(`/booking/user-id/${email}`);
@@ -90,6 +93,9 @@ export const getBookingsByPropertyId
 
 export const createBooking
 	= (payload) => apiClient.post("/booking/new", payload);
+
+export const authorizeBookingAccess
+	= (payload) => apiClient.post("/booking/authorize", payload);
 
 // Availability
 export const getPropertyBookedRanges

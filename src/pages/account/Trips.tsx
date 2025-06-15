@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getAllBookings } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 import { fileStorage } from "/src/utils/constants";
-import CallToTravel from "/src/components/booking/CallToTravel";
+import CallToTravel from "/src/components/trips/CallToTravel";
 
 /**
  * Trips are displayed in 3 sections:

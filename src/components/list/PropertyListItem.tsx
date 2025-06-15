@@ -53,7 +53,7 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 	const linkPath = isLink
 		? {
 			pathname: `/stay`,
-			search: `?id=${item.id}&guests=2&check_in=${checkInParam}&check_out=${checkOutParam}`
+			search: `?id=${item.id}&guests=1&check_in=${checkInParam}&check_out=${checkOutParam}`
 		}
 		: {};
 

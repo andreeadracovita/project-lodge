@@ -20,7 +20,7 @@ export default function BookingCard({price}) {
 	const [input, setInput] = useState({
 		checkIn: undefined,
 		checkOut: undefined,
-		guests: searchParams.get("guests") ?? 2
+		guests: searchParams.get("guests") ?? 1
 	});
 
 	useEffect(() => {
@@ -108,9 +108,10 @@ export default function BookingCard({price}) {
 					<input
 						id="guests"
 						type="number"
-						className="form-control search-field rounded-pill"
+						className="form-control search-field rounded-pill w-25"
 						placeholder="Guests"
 						aria-label="number of guests"
+						name="guests"
 						value={input.guests}
 						onChange={handleChange}
 					/>
