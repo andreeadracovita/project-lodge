@@ -27,16 +27,14 @@ export type PropertyItem = {
 };
 
 type PropertyListItemProps = {
-	isLink: boolean;
+	isPreview: boolean;
 	item: PropertyItem;
 	checkIn: Date;
 	checkOut: Date;
 };
 
-export default function PropertyListItem({ isLink, item, checkIn, checkOut }: PropertyListItemProps) {
+export default function PropertyListItem({ isPreview, item, checkIn, checkOut }: PropertyListItemProps) {
 	const authContext = useAuth();
-	// const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
-
 	let displayDate = "";
 	let checkInParam = "";
 	let checkOutParam = "";
@@ -50,7 +48,7 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 		nightsCount = getNightsCount(checkIn, checkOut);
 	}
 
-	const linkPath = isLink
+	const linkPath = !isPreview
 		? {
 			pathname: `/stay`,
 			search: `?id=${item.id}&guests=1&check_in=${checkInParam}&check_out=${checkOutParam}`
@@ -66,7 +64,7 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 		<div className="mb-3">
 			<div className="position-relative border-section">
 				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
-				<WishlistIcon itemId={item.id} />
+				<WishlistIcon isPreview={isPreview} itemId={item.id} />
 				<Link to={linkPath}>
 					<div className="property-card-details">
 						<p className="mb-0 property-card-heading">{item.title}</p>
@@ -81,7 +79,7 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 
 						<div className="text-end mt-3">
 							<span className="text-muted d-block">{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}</span>
-							<span className="lato-bold property-card-price d-block">{convertedTotalPrice} {authContext.currency}</span>
+							<span className="lato-bold property-card-price d-block">{isPreview ? Math.round(siteTotalPrice * 100) / 100 : convertedTotalPrice} {authContext.currency}</span>
 						</div>
 						
 					</div>

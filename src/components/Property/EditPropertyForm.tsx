@@ -44,6 +44,10 @@ export default function EditPropertyForm() {
 	const [pageTitle, setPageTitle] = useState(localisedString["hosting:list-property"]);
 	const [endButtonText, setEndButtonText] = useState(localisedString["hosting:publish-property"]);
 
+	const previewCheckIn = new Date();
+	let previewCheckOut = new Date()
+	previewCheckOut.setDate(previewCheckOut.getDate() + 3);
+
 	useEffect(() => {
 		if (searchParams.get("id")) {
 			setPropertyId(searchParams.get("id"));
@@ -252,15 +256,17 @@ export default function EditPropertyForm() {
 							<div className="col-8 pt-5 ms-5 sticky">
 								<div id="preview">
 									<PropertyListItem
-										isLink={false}
+										isPreview={true}
 										item={{
 											id: 0,
 											title: input.title,
 											city: input.city,
 											country: input.country,
-											price: input.price,
+											price: input.pricePerNight,
 											images_url_array: imagesUrlArray
 										}}
+										checkIn={previewCheckIn}
+										checkOut={previewCheckOut}
 									/>
 								</div>
 							</div>

@@ -22,7 +22,8 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 		event.preventDefault();
 
 		updatePropertyDetails(propertyId, {
-			price: input.pricePerNight
+			price: input.pricePerNight,
+			currency: authContext.currency
 		})
 			.then(() => {
 				advanceState();

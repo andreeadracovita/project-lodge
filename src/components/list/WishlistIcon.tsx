@@ -6,12 +6,12 @@ import "./WishlistIcon.css";
 import { getIsPropertyWishlisted, toggleWishlistProperty } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 
-export default function WishlistIcon({ itemId }) {
+export default function WishlistIcon({ itemId, isPreview }) {
 	const authContext = useAuth();
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
-		if (!authContext.isAuthenticated) {
+		if (!authContext.isAuthenticated || isPreview) {
 			return;
 		}
 		getIsPropertyWishlisted(itemId)
@@ -26,8 +26,7 @@ export default function WishlistIcon({ itemId }) {
 	}, []);
 
 	function handleHeartClick() {
-		if (!authContext.isAuthenticated) {
-			console.log("Login or sign up to add to wishlist");
+		if (!authContext.isAuthenticated || isPreview) {
 			return;
 		}
 		toggleWishlistProperty(itemId)
@@ -44,7 +43,7 @@ export default function WishlistIcon({ itemId }) {
 	const heartClass = classNames(
 		"heart-icon",
 		{
-			"outline-heart-icon": !isFavorite
+			"outline-heart-icon": !isFavorite && !isPreview
 		}
 	);
 	
@@ -52,7 +51,7 @@ export default function WishlistIcon({ itemId }) {
 		<div className="white-circle position-absolute cursor-pointer">
 			<Icon.HeartFill
 				size={20}
-				color={isFavorite ? "#ff3131" : "white"}
+				color={isFavorite || isPreview ? "#ff3131" : "white"}
 				className={heartClass}
 				onClick={handleHeartClick}
 			/>

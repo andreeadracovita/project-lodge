@@ -38,7 +38,7 @@ export default function ListView({ listItemType, items, cols, setNeedsRefresh })
 						items.map((item, i) =>
 							<div key={i} className="col">
 								<PropertyListItem
-									isLink={true}
+									isPreview={false}
 									item={item}
 									checkIn={checkIn}
 									checkOut={checkOut}
