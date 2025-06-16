@@ -44,8 +44,13 @@ export const getAllProperties
 export const getPropertyById
 	= (id) => apiClient.get(`/property/id/${id}`);
 
+// Date format: 2025-08-01
 export const getBookedByPropertyIdForDate
-	= (id, date) => apiClient.get(`/property/booked?id=${id}&date=${date}`); // 2025-08-01
+	= (id, date) => apiClient.get(`/property/booked?id=${id}&date=${date}`);
+
+// Date format: 2025-08-01
+export const getPropertyAvailability
+	= (id, checkIn, checkOut) => apiClient.get(`/property/availability?id=${id}&check_in=${checkIn}&check_out=${checkOut}`);
 
 // Filters: country, city, proximity, price, rental type, experiences, property type
 export const getPropertiesFilteredBy

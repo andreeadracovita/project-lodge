@@ -1,19 +1,21 @@
 import { useSearchParams } from "react-router";
 import { useState } from "react";
 
+import { getPropertyAvailability } from "/src/api/BackendApiService";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import CalendarMonth from "./CalendarMonth";
 import "./Calendar.css";
 
-export default function Calendar({propertyId}) {
+export default function Calendar() {
 	const [searchParams, setSearchParams] = useSearchParams();
+	const propertyId = searchParams.get("id");
 	
 	// Left calendar sheet
 	const [firstDate, setFirstDate] = useState(() => getFirstDate());
 	// Right calendar sheet
 	const [secondDate, setSecondDate] = useState(() => getNextMonth(firstDate));
 	// Use to switch between check-in and out selections
-	const [isDatePicked, setIsDatePicked] = useState(true);
+	const [isRangePicked, setIsRangePicked] = useState(true);
 
 	function getFirstDate() {
 		const checkIn = searchParams.get("check_in");
@@ -47,28 +49,33 @@ export default function Calendar({propertyId}) {
 		setSecondDate(() => getNextMonth(secondDate));
 	}
 
-	function pickDate(date) {
-		// TODO: Check for overlap
-
-		if (isDatePicked) {
-			// Pick check-in date
+	async function pickDate(date) {
+		const checkIn = searchParams.get("check_in");
+		if (isRangePicked || (checkIn && date <= new Date(checkIn))) {
+			// Start a new range
 			searchParams.set("check_in", yearDashMonthDashDay(date));
 			searchParams.delete("check_out");
 			setSearchParams(searchParams);
-			setIsDatePicked(false);
+			setIsRangePicked(false);
 		} else {
+			const checkOut = yearDashMonthDashDay(date);
+			if (propertyId) {
+				const response = await getPropertyAvailability(propertyId, checkIn, checkOut);
+				if (response?.data?.available === false) {
+					return;
+				}
+			}
 			// Pick check-out date
-			searchParams.set("check_out", yearDashMonthDashDay(date));
+			searchParams.set("check_out", checkOut);
 			setSearchParams(searchParams);
-			setIsDatePicked(true);
+			setIsRangePicked(true);
 		}
 	}
-		
+
 	return (
 		<div id="calendar" className="row g-5">
 			<div className="col-6">
 				<CalendarMonth
-					propertyId={propertyId}
 					month={firstDate.getMonth()}
 					year={firstDate.getFullYear()}
 					chevronLeft={true}
@@ -79,7 +86,6 @@ export default function Calendar({propertyId}) {
 			</div>
 			<div className="col-6">
 				<CalendarMonth
-					propertyId={propertyId}
 					month={secondDate.getMonth()}
 					year={secondDate.getFullYear()}
 					chevronLeft={false}
