@@ -3,8 +3,9 @@ import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import { isDateAvailable } from "/src/utils/BookingUtils";
 import "./CalendarMonth.css";
+import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
+import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 /*
 	Month: 0 - 11
@@ -29,6 +30,28 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 	const [checkIn, setCheckIn] = useState();
 	const [checkOut, setCheckOut] = useState();
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [bookedDates, setBookedDates] = useState([]);
+	const propertyId = searchParams.get("id");
+
+	useEffect(() => {
+		console.log("Recompute bookedDates");
+		if (!propertyId) {
+			return;
+		}
+		getBookedByPropertyIdForDate(propertyId, yearDashMonthDashDay(new Date(year, month, 1)))
+			.then(response => {
+				const newBookedRanges = response.data.map(entry => {
+					return {
+						check_in: new Date(entry.check_in),
+						check_out: new Date(entry.check_out)
+					}
+				});
+				setBookedDates(newBookedRanges);
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, []);
 
 	useEffect(() => {
 		const checkInString = searchParams.get("check_in");
@@ -76,6 +99,25 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 		return false;
 	}
 
+	function isDateAvailable(date) {
+		if (date < new Date()) {
+			return false;
+		}
+		for (const booked of bookedDates) {
+			if (date >= booked.check_in && date < booked.check_out) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	function sanitizeDateClick(isAvailable, date) {
+		if (!isAvailable) {
+			return;
+		}
+		onDateClicked(date)
+	}
+
 	function renderCalendarDay(index) {
 		const date = new Date(year, month, index);
 		const isAvailable = isDateAvailable(date);
@@ -99,7 +141,15 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 				"day-selection-highlight": isAvailable && !isCheckIn && !isCheckOut
 			}
 		);
-		return <div key={index} className={containerClass} onClick={() => onDateClicked(date)}><span className={dayClass}>{index}</span></div>;
+		return (
+			<div
+				key={index}
+				className={containerClass}
+				onClick={() => sanitizeDateClick(isAvailable, date)}
+			>
+				<span className={dayClass}>{index}</span>
+			</div>
+		);
 	}
 
 	return (

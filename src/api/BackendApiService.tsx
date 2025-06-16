@@ -44,6 +44,9 @@ export const getAllProperties
 export const getPropertyById
 	= (id) => apiClient.get(`/property/id/${id}`);
 
+export const getBookedByPropertyIdForDate
+	= (id, date) => apiClient.get(`/property/booked?id=${id}&date=${date}`); // 2025-08-01
+
 // Filters: country, city, proximity, price, rental type, experiences, property type
 export const getPropertiesFilteredBy
 	= (payload) => apiClient.post(`/property/filter`, payload);

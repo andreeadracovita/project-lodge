@@ -42,7 +42,7 @@ export default function AuthProvider({ children }) {
 				if (response.data) {
 					setExchangeRate(response.data.rate);
 					setExchangeDay((new Date()).toDateString());
-					console.log(response.data.rate);
+					console.log("Day exchange rate:", response.data.rate);
 				}
 			})
 			.catch(error => {

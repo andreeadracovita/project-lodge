@@ -5,7 +5,7 @@ import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import CalendarMonth from "./CalendarMonth";
 import "./Calendar.css";
 
-export default function Calendar() {
+export default function Calendar({propertyId}) {
 	const [searchParams, setSearchParams] = useSearchParams();
 	
 	// Left calendar sheet
@@ -33,6 +33,11 @@ export default function Calendar() {
 	}
 
 	function decrementMonth() {
+		// Do not decrement past current month
+		const today = new Date();
+		if (firstDate.getFullYear() === today.getFullYear() && firstDate.getMonth() === today.getMonth()) {
+			return;
+		}
 		setSecondDate(firstDate);
 		setFirstDate(() => getPrevMonth(firstDate));
 	}
@@ -43,6 +48,8 @@ export default function Calendar() {
 	}
 
 	function pickDate(date) {
+		// TODO: Check for overlap
+
 		if (isDatePicked) {
 			// Pick check-in date
 			searchParams.set("check_in", yearDashMonthDashDay(date));
@@ -61,6 +68,7 @@ export default function Calendar() {
 		<div id="calendar" className="row g-5">
 			<div className="col-6">
 				<CalendarMonth
+					propertyId={propertyId}
 					month={firstDate.getMonth()}
 					year={firstDate.getFullYear()}
 					chevronLeft={true}
@@ -71,6 +79,7 @@ export default function Calendar() {
 			</div>
 			<div className="col-6">
 				<CalendarMonth
+					propertyId={propertyId}
 					month={secondDate.getMonth()}
 					year={secondDate.getFullYear()}
 					chevronLeft={false}

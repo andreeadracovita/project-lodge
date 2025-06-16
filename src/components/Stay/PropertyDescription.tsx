@@ -71,7 +71,7 @@ export default function PropertyDescription({property}) {
 				}
 			</div>
 			<hr />
-			<AvailabilitySection />
+			<AvailabilitySection propertyId={property.id}/>
 			<hr />
 			<h2>Review section</h2>
 			<h2>[Stars here]</h2>
