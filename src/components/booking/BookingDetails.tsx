@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { getBookingById } from "/src/api/BackendApiService";
+import { getBookingById, cancelBooking } from "/src/api/BackendApiService";
 
 export default function BookingDetails() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const bookingId = searchParams.get("id");
 	const pinCode = searchParams.get("pin");
+	const [showCancel, setShowCancel] = useState(true);
 
 	useEffect(() => {
 		if (bookingId && pinCode) {
@@ -14,12 +15,31 @@ export default function BookingDetails() {
 				.then(response => {
 					// Populate component
 					console.log(response.data);
+					setShowCancel(response.data.booking_status_id !== 3);
 				})
 				.catch(error => {
 					console.error(error);
 				});
 		}
 	}, []);
+
+	function handleCancelBookingClick() {
+		const payload = {
+			confirmation_number: bookingId,
+			pin_code: pinCode
+		}
+		cancelBooking(payload)
+			.then(response => {
+				console.log(response);
+				if (response.status === 200) {
+					console.log(response.message);
+					setShowCancel(false);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}
 	
 	return (
 		<>
@@ -27,6 +47,8 @@ export default function BookingDetails() {
 			<h2 className="section-heading">Booking confirmation</h2>
 			<p>Confirmation number: <span className="lato-bold">{bookingId}</span></p>
 			<p>PIN code: <span className="lato-bold">{pinCode}</span></p>
+
+			<p>BOOKING STATUS</p>
 
 			<p>Property title</p>
 			<p>Check-in, check-out, time</p>
@@ -40,6 +62,11 @@ export default function BookingDetails() {
 			<p>Type of building</p>
 			<p>Guest name</p>
 			<p>Features</p>
+
+			{
+				showCancel &&
+				<button className="btn-pill" onClick={handleCancelBookingClick}>Cancel booking</button>
+			}
 		</>
 	);
 }

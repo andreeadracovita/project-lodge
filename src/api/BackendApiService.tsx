@@ -97,6 +97,9 @@ export const createBooking
 export const authorizeBookingAccess
 	= (payload) => apiClient.post("/booking/authorize", payload);
 
+export const cancelBooking
+	= (payload) => apiClient.post("/booking/cancel", payload);
+
 // Availability
 export const getPropertyBookedRanges
 	= (payload) => apiClient.post("/property/booked-ranges", payload);
