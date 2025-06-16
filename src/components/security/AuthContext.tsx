@@ -11,53 +11,25 @@ export default function AuthProvider({ children }) {
 	const defaultCurrency = "EUR";
 	const defaultLanguage = "en-GB";
 
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [token, setToken] = useState();
+	const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem("lodgeIsAuthenticated"));
+	const [token, setToken] = useState(sessionStorage.getItem("lodgeToken"));
 
 	// User details
-	const [firstName, setFirstName] = useState();
-	const [avatar, setAvatar] = useState();
+	const [firstName, setFirstName] = useState(sessionStorage.getItem("lodgeFirstName"));
+	const [avatar, setAvatar] = useState(sessionStorage.getItem("lodgeAvatar"));
 
 	// User configs
-	const [currency, setCurrency] = useState(defaultCurrency);
-	const [language, setLanguage] = useState(defaultLanguage);
+	const [currency, setCurrency] = useState(sessionStorage.getItem("lodgeCurrency") ?? defaultCurrency);
+	const [language, setLanguage] = useState(sessionStorage.getItem("lodgeLanguage") ?? defaultLanguage);
 
-	useEffect(() => {
-		const tempIsAuthenticated = sessionStorage.getItem("lodgeIsAuthenticated");
-		if (tempIsAuthenticated !== null) {
-
-			setIsAuthenticated(tempIsAuthenticated);
-
-			// Optional field
-			const storedCurrency = sessionStorage.getItem("lodgeCurrency");
-			if (storedCurrency !== null) {
-				setCurrency(storedCurrency);
+	if (isAuthenticated !== null) {
+		apiClient.interceptors.request.use(
+			(config) => {
+				config.headers.Authorization = token;
+				return config;
 			}
-			
-			// Optional field
-			const storedLanguage = sessionStorage.getItem("lodgeLanguage");
-			if (storedLanguage !== null) {
-				setLanguage(storedLanguage);
-			}
-
-			// Optional field
-			const storedAvatar = sessionStorage.getItem("lodgeAvatar");
-			if (storedAvatar !== null) {
-				setAvatar(storedAvatar);
-			}
-			
-			setFirstName(sessionStorage.getItem("lodgeFirstName"));
-
-			const jwtToken = sessionStorage.getItem("lodgeToken");
-			setToken(jwtToken);
-			apiClient.interceptors.request.use(
-				(config) => {
-					config.headers.Authorization = jwtToken;
-					return config;
-				}
-			)
-		}
-	}, []);
+		)
+	}
 
 	async function setUserConfig() {
 		try {
@@ -131,8 +103,8 @@ export default function AuthProvider({ children }) {
 		setAvatar(null);
 		sessionStorage.removeItem("lodgeAvatar");
 
-		// User config?
-
+		navigate("/");
+		window.location.reload(true);
 	}
 
 	return (

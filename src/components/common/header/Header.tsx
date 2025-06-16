@@ -12,7 +12,6 @@ export default function Header() {
 	const navigate = useNavigate();
 
 	function logoutClicked() {
-		navigate("/"); // TODO: wire properly
 		authContext.logout();
 	}
 	
