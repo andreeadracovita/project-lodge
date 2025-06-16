@@ -1,8 +1,8 @@
 import { apiClient } from "./ApiClient";
 
 // Misc
-export const getConvertedPrice
-	= (currency, value) => apiClient(`/misc/convert?currency=${currency}&value=${value}`);
+export const getExchangeRateForTarget
+	= (target) => apiClient(`/misc/exchange-rate?target=${target}`);
 
 // User
 export const getUserConfig

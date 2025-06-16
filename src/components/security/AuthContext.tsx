@@ -2,13 +2,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { apiClient } from "/src/api/ApiClient";
 import { executeJwtAuthenticationService } from "/src/api/AuthenticationApiService";
-import { getUserConfig } from "/src/api/BackendApiService";
+import { getUserConfig, getExchangeRateForTarget } from "/src/api/BackendApiService";
 
 export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
-	const defaultCurrency = "EUR";
+	const defaultCurrency = "CHF";
 	const defaultLanguage = "en-GB";
 
 	const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem("lodgeIsAuthenticated"));
@@ -22,6 +22,10 @@ export default function AuthProvider({ children }) {
 	const [currency, setCurrency] = useState(sessionStorage.getItem("lodgeCurrency") ?? defaultCurrency);
 	const [language, setLanguage] = useState(sessionStorage.getItem("lodgeLanguage") ?? defaultLanguage);
 
+	// Exchange rate
+	const [exchangeRate, setExchangeRate] = useState(0.5);
+	const [exchangeDay, setExchangeDay] = useState((new Date()).toDateString());
+
 	if (isAuthenticated !== null) {
 		apiClient.interceptors.request.use(
 			(config) => {
@@ -30,6 +34,21 @@ export default function AuthProvider({ children }) {
 			}
 		)
 	}
+
+	useEffect(() => {
+		console.log("Refresh exchange rate because the day has changed...");
+		getExchangeRateForTarget(currency)
+			.then(response => {
+				if (response.data) {
+					setExchangeRate(response.data.rate);
+					setExchangeDay((new Date()).toDateString());
+					console.log(response.data.rate);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, [(new Date().toDateString() !== exchangeDay)]);
 
 	async function setUserConfig() {
 		try {
@@ -104,11 +123,11 @@ export default function AuthProvider({ children }) {
 		sessionStorage.removeItem("lodgeAvatar");
 
 		navigate("/");
-		window.location.reload(true);
+		// window.location.reload(true);
 	}
 
 	return (
-		<AuthContext.Provider value={ { isAuthenticated, login, logout, firstName, token, currency, language, avatar } }>
+		<AuthContext.Provider value={ { isAuthenticated, login, logout, firstName, token, currency, language, avatar, exchangeRate } }>
 			{ children }
 		</AuthContext.Provider>
 	);

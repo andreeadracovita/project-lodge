@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import "./PropertyListItem.css";
 import WishlistIcon from "./WishlistIcon";
-import { getConvertedPrice } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
 import { fileStorage } from "/src/utils/constants";
 import { getNightsCount } from "/src/utils/DateFormatUtils";
+import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 type Geo = {
 	x: number,
@@ -35,7 +35,7 @@ type PropertyListItemProps = {
 
 export default function PropertyListItem({ isLink, item, checkIn, checkOut }: PropertyListItemProps) {
 	const authContext = useAuth();
-	const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
+	// const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
 
 	let displayDate = "";
 	let checkInParam = "";
@@ -60,17 +60,7 @@ export default function PropertyListItem({ isLink, item, checkIn, checkOut }: Pr
 	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
 	
 	const siteTotalPrice = item.price * nightsCount;
-	useEffect(() => {
-		getConvertedPrice(authContext.currency, siteTotalPrice)
-			.then(response => {
-				if (response.data) {
-					setConvertedTotalPrice(response.data.converted);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			})
-	}, []);
+	const convertedTotalPrice = convertToPreferredCurrency(siteTotalPrice, authContext.exchangeRate);
 
 	return (
 		<div className="mb-3">

@@ -3,11 +3,10 @@ import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 import "./BookingCard.css";
-import { getConvertedPrice } from "/src/api/BackendApiService";
-import { useAuth } from "/src/components/security/AuthContext";
-import { getNightsCount } from "/src/utils/DateFormatUtils";
 import Calendar from "/src/components/calendar/Calendar";
-import { dayMonYear } from "/src/utils/DateFormatUtils";
+import { useAuth } from "/src/components/security/AuthContext";
+import { getNightsCount, dayMonYear } from "/src/utils/DateFormatUtils";
+import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 export default function BookingCard({price}) {
 	const authContext = useAuth();
@@ -46,15 +45,16 @@ export default function BookingCard({price}) {
 		const tempSiteTotalPrice = price * tempNightCount;
 		setSiteTotalPrice(tempSiteTotalPrice);
 
-		getConvertedPrice(authContext.currency, tempSiteTotalPrice)
-			.then(response => {
-				if (response.data) {
-					setConvertedTotalPrice(response.data.converted);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
+		// getConvertedPrice(authContext.currency, tempSiteTotalPrice)
+		// 	.then(response => {
+		// 		if (response.data) {
+		// 			setConvertedTotalPrice(response.data.converted);
+		// 		}
+		// 	})
+		// 	.catch(error => {
+		// 		console.error(error);
+		// 	});
+		setConvertedTotalPrice(convertToPreferredCurrency(tempSiteTotalPrice, authContext.exchangeRate));
 	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
 
 	function handleChange(event) {
