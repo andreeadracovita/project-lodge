@@ -62,7 +62,7 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 
 	return (
 		<div className="mb-3">
-			<div className="position-relative border-section">
+			<div className="position-relative card-item">
 				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
 				<WishlistIcon isPreview={isPreview} itemId={item.id} />
 				<Link to={linkPath}>

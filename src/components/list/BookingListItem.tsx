@@ -19,7 +19,7 @@ export default function BookingListItem({item}: BookingListItemProp) {
 	return (
 		<div>
 			<Link to={`/booking?id=${item.booking_id}&pin=${item.pin_code}`}>
-				<div className="border-section w-100 row">
+				<div className="card-item w-100 row">
 					<div className="col-4">
 						<img src={fileStorage + item.images_url_array[0]} className="list-item-photo" />
 					</div>

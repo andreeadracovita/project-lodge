@@ -150,10 +150,15 @@ h2 {
 }
 
 .border-section {
-  /*border: 1px solid #e7e7e7;*/
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  border: 1px solid #e7e7e7;
   border-radius: 12px;
-  padding: 8px;
+  padding: 16px;
+}
+
+.card-item {
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  padding: 10px;
 }
 
 .sticky {

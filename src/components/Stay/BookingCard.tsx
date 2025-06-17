@@ -77,7 +77,7 @@ export default function BookingCard({price}) {
 	}
 
 	return (
-		<div id="booking-card" className="border-section sticky">
+		<div id="booking-card" className="card-item sticky">
 			<h2>{convertedTotalPrice} {authContext.currency}</h2>
 			<p>
 				{input.guests} {input.guests > 1 ? <span>guests</span> : <span>guest</span>}, {nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}
