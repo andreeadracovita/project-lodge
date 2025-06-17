@@ -1,10 +1,14 @@
 import * as Icon from "react-bootstrap-icons";
 
-export default function Rating({score}) {
+import "./Rating.css";
+
+export default function Rating({score, reviewsNo}) {
 	return (
 		<span className="d-flex align-items-center">
-			<Icon.StarFill color="black" size={16} />
-			<span className="ms-1 lato-bold">{score ? score : "-"}</span>
+			<div className="rating-container d-flex justify-content-center align-items-center">
+				<span className="lato-bold">{score ? score.toFixed(2) : "4.5"}</span>
+			</div>
+			<span className="ms-2 text-muted"> · {reviewsNo} reviews</span>
 		</span>
 	);
 }

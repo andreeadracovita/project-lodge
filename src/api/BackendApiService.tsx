@@ -83,6 +83,7 @@ export const getAllFeatures
 export const getAllRentalTypes
 	= () => apiClient.get("/types/rental");
 
+// Rename: getAllPropertyTypes
 export const getAllBuildingTypes
 	= () => apiClient.get("/types/building");
 

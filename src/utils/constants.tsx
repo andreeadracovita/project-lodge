@@ -5,6 +5,9 @@ export const greetingMessage = "The best time to travel";
 // Paths
 export const fileStorage = "http://localhost:3000/";
 
+// Currency
+export const siteCurrency = "EUR";
+
 // Trending destinations
 export const trendingDestinations = [
 	{

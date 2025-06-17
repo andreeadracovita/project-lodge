@@ -1,4 +1,3 @@
-/* Grass green: #7ed957 */
 :root {
   --brand-color: #DDF23D;
   --medium-green: #95A612;
@@ -26,6 +25,19 @@
   flex-direction: column;
 }
 
+/* Start: HTML tag overrides -------------------------------------------------- */
+h1 {
+  margin: 0px;
+}
+
+h2 {
+  margin: 0px;
+}
+
+h3 {
+  margin: 0px;
+}
+
 header {
   background-color: var(--dark);
   color: white;
@@ -42,31 +54,51 @@ body {
   font-weight: 400;
   font-style: normal;
   color: var(--dark);
+  font-size: var(--body-font-size);
 }
 
 main {
   margin-bottom: 2rem;
 }
 
-h2 {
-  font-size: 1.25rem;
-  font-family: "Lato", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  margin-bottom: 1.5rem;
+label {
+  margin-top: 0.75rem;
 }
 
+hr {
+  border-top: 1px solid var(--light-grey);
+  opacity: 1;
+}
+/* End: Tag overrides --------------------------------------------------------- */
+
+/* BS overrides */
 .container {
   max-width: 1110px; /* padding-x 5, content 1100 */
+  min-width: 1110px;
   padding: 0px 5px;
 }
 
-/* Used across multiple components */
+
+/* Start: Font ---------------------------------------------------------------- */
 .lato-bold {
   font-family: "Lato", sans-serif;
   font-weight: 700;
   font-style: normal;
 }
+
+.text-strong {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.brand-font {
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+/* End: Font ------------------------------------------------------------------ */
 
 .brand-icon {
   fill: var(--brand-color);
@@ -85,17 +117,19 @@ h2 {
   background-color: var(--brand-color);
 }
 
-.brand-font {
-  font-family: "League Spartan", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
-/* Spacing */
+/* Start: Spacing ------------------------------------------------------------- */
 .section-container {
   margin-top: 2rem;
 }
+
+.mt-6 {
+  margin-top: 6px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+/* End: Spacing --------------------------------------------------------------- */
 
 /* Headings, headlines, font types */
 .greeting-message {
@@ -150,7 +184,7 @@ h2 {
 }
 
 .border-section {
-  border: 1px solid #e7e7e7;
+  border: 1px solid var(--light-grey);
   border-radius: 12px;
   padding: 16px;
 }
@@ -170,6 +204,7 @@ h2 {
   cursor: pointer;
 }
 
+/* Rename: modal-container */
 .sign-in-container {
   width: 450px;
 }

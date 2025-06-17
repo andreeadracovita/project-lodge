@@ -15,7 +15,18 @@ export function dayMonYear(date) {
 		month: "short",
 		day: "numeric",
 		year: "numeric"
-	}
+	};
+	return date.toLocaleString("en-GB", option);
+}
+
+// Wed 14 May 2025
+export function weekdayMonYear(date) {
+	const option = {
+		weekday: "short",
+		month: "short",
+		day: "numeric",
+		year: "numeric"
+	};
 	return date.toLocaleString("en-GB", option);
 }
 

@@ -68,9 +68,7 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 				<Link to={linkPath}>
 					<div className="property-card-details">
 						<p className="mb-0 property-card-heading">{item.title}</p>
-						<div className="d-flex">
-							<Rating score={item.rating ? item.rating.toFixed(2) : ""} /><span className="ms-2"> · 130 reviews</span>
-						</div>
+						<Rating score={item.rating} reviewsNo={130} />
 						<p>{item.city}, {item.country}</p>
 						<hr />
 						<p>Cottage</p>

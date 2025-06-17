@@ -35,7 +35,7 @@ export default function Stay() {
 					<div>
 						<h1 className="page-heading">{property.title}</h1>
 						<p><Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {property.country}</p>
-						<Rating score={property.rating} />
+						<Rating score={property.rating} reviewsNo={130} />
 					</div>
 					<div className="mt-3">
 						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => fileStorage + url)} />

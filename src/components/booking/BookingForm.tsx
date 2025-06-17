@@ -1,4 +1,5 @@
 import { useState } from "react";
+import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
@@ -76,6 +77,10 @@ export default function BookingForm() {
 	return (
 		<>
 			<h1 className="page-heading">Enter your details</h1>
+			<div className="d-flex align-items-center" style={{color: "green"}}>
+				<Icon.CheckCircle size={16} />
+				<span className="ms-2">Almost done! Just fill in the <span style={{color: "red"}}>*</span> required info</span>
+			</div>
 			<form onSubmit={onSubmit}>
 				<label htmlFor="first-name">First name</label>
 				<input id="first-name" type="text" className="form-control rounded-pill" name="firstName" value={ input.firstName } onChange={onChange} />

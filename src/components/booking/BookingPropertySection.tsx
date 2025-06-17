@@ -1,0 +1,45 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
+
+import { getAllFeatures } from "/src/api/BackendApiService";
+import Rating from "/src/components/common/Rating";
+import Feature from "/src/components/common/Feature";
+
+export default function BookingPropertySection({ item }) {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [features, setFeatures] = useState([]);
+
+	useEffect(() => {
+		getAllFeatures()
+			.then(response => {
+				if (response.data) {
+					setFeatures(response.data);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, []);
+	
+	return (
+		<div className="border-section">
+			<h2 className="property-card-heading">{item.title}</h2>
+			<div className="mt-10">{item.city}, {item.street} {item.street_no}, {item.country}</div>
+			<div className="mt-6">
+				<Rating score={item.rating} reviewsNo={130} />
+			</div>
+			<div id="features-section" className="mt-6 d-flex">
+				{
+					item.features_ids.map((id, i) => {
+						const foundFeature = features.find(feat => feat.id == id);
+						if (foundFeature) {
+							return <div key={i} className="me-2">
+								<Feature name={foundFeature.name} isLarge={false} />
+							</div>
+						}
+					})
+				}
+			</div>
+		</div>
+	);
+}
