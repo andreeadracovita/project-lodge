@@ -1,17 +1,8 @@
-:root {
-  --brand-color: #DDF23D;
-  --medium-green: #95A612;
-  --light-green: #E4F2AE;
-  --bright-red: #ff3131;
-  --light-grey: #e7e7e7;
-  --medium-grey: #bebbbb;
-  --dark: #0D0D0D;
-}
-
 .rating-container {
 	width: 30px;
 	height: 30px;
 	border-radius: 10px;
 	border-bottom-left-radius: 0px;
 	background-color: var(--brand-color);
+	color: white;
 }

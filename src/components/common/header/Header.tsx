@@ -16,16 +16,18 @@ export default function Header() {
 	}
 	
 	return (
-		<header className="py-2">
+		<header className="py-3">
 			<div className="container">
 				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<Link to="/" className="col-lg-6 d-flex mb-3 mb-md-0 link-body-emphasis text-decoration-none">
-						<object data="/icons/icon.svg" type="image/svg+xml" width="40" height="32" role="img" aria-label="brand icon"></object>
-						<span className="fs-3 brand-font brand-color-text">{ siteName }</span>
-					</Link>
-					<div className="col-lg-6 d-flex justify-content-end align-items-center">
-						<span className="me-4">{authContext.currency}</span>
-						<span className="me-4 d-flex align-items-center"><Icon.Globe2 color="white" size={16} className="me-1"/>{authContext.language}</span>
+					<div className="col-lg-6 d-flex">
+						<Link to="/" className="mb-3 mb-md-0 link-body-emphasis text-decoration-none">
+							<object data="/icons/icon.svg" type="image/svg+xml" width="40" height="32" role="img" aria-label="brand icon"></object>
+							<span className="fs-3 brand-font brand-color-text">{ siteName }</span>
+						</Link>
+					</div>
+					<div className="col-lg-6 d-flex justify-content-end align-items-center nav-item-font">
+						<span className="me-4 btn-pill">{authContext.currency}</span>
+						<span className="me-4 d-flex align-items-center btn-pill"><Icon.Globe2 color="white" size={16} className="me-1"/>{authContext.language}</span>
 						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
 						{
 							!authContext.isAuthenticated &&

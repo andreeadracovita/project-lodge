@@ -1,12 +1,13 @@
 :root {
-  --brand-color: #DDF23D;
+  --brand-color: #146A8C; /* Try: Indigo #414AF2, Light turquoise #5BC7C6, Dark turquoise #037F8C */
   --medium-green: #95A612;
   --light-green: #E4F2AE;
   --bright-red: #ff3131;
   --light-grey: #e7e7e7;
   --medium-grey: #bebbbb;
   --dark: #0D0D0D;
-  
+  --contrast: #FF5733; /* #F26849; */
+  --darker-brand-color: #095978;
   
   --body-font-size: 14px;
   --nav-font-size: 16px; /* Navbar links */
@@ -17,6 +18,8 @@
   --strong-font-size: 16px; /* Property card heading */
   --small-font-size: 12px; /* Property card details */
   --optical-mult: 0.0625rem;
+
+  --border-radius: 18px;
 }
 
 #root {
@@ -39,7 +42,7 @@ h3 {
 }
 
 header {
-  background-color: var(--dark);
+  background-color: var(--brand-color);
   color: white;
 }
 
@@ -98,6 +101,10 @@ hr {
   font-weight: 700;
   font-style: normal;
 }
+
+.nav-item-font {
+  font-size: var(--nav-font-size);
+}
 /* End: Font ------------------------------------------------------------------ */
 
 .brand-icon {
@@ -110,7 +117,7 @@ hr {
 }
 
 .brand-color-text {
-  color: var(--brand-color);
+  color: white;
 }
 
 .brand-color-background {
@@ -253,10 +260,11 @@ hr {
   display: inline-block;
   font-size: 1rem;
   transition: background 0.15s ease-in-out;
+  color: white;
 }
 
 .btn-pill:hover {
-  background: var(--medium-green);
+  background: var(--darker-brand-color);
 }
 
 .btn-pill-outline {
@@ -282,7 +290,7 @@ hr {
 }
 
 .btn-round:hover {
-  background: var(--medium-green);
+  background: var(--darker-brand-color);
 }
 
 /* Photos */

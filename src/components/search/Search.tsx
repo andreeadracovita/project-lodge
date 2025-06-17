@@ -57,23 +57,27 @@ export default function Search() {
 
 	return (
 		<form role="search">
-			<div id="search-bar" className="rounded-pill p-1 w-100 d-flex align-items-center justify-content-between">
-				<input
-					id="destination"
-					type="search"
-					className="form-control search-field rounded-pill w-25"
-					placeholder="Where?"
-					aria-label="destination"
-					name="destination"
-					value={input.destination}
-					onChange={handleChange}
-					autoComplete="off"
-				/>
+			<div id="search-bar" className="rounded-pill p-1 px-2 w-100 d-flex align-items-center justify-content-between">
+				<div className="d-flex w-25 align-items-center">
+					<Icon.House size={24} />
+					<input
+						id="destination"
+						type="search"
+						className="form-control search-field rounded-pill"
+						placeholder="Where?"
+						aria-label="destination"
+						name="destination"
+						value={input.destination}
+						onChange={handleChange}
+						autoComplete="off"
+					/>
+				</div>
 
 				<div className="vr"></div>
 
-				<div className="d-flex w-50 justify-content-center">
-					<div className="mx-5 dropdown-center d-flex align-items-center cursor-pointer">
+				<div className="d-flex w-50 justify-content-center align-items-center">
+					<Icon.CalendarWeek size={24} />
+					<div className="dropdown-center d-flex align-items-center cursor-pointer">
 						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown">
 							<span className="me-2">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>
 							—
@@ -88,8 +92,9 @@ export default function Search() {
 
 				<div className="vr"></div>
 
-				<div className="d-flex align-items-center w-25">
-					<label htmlFor="guests" className="ms-2">Guests:</label>
+				<div className="d-flex align-items-center w-25 ms-2">
+					<Icon.People size={24} />
+					<label htmlFor="guests" className="ms-2 mt-0">Guests:</label>
 					<input
 						id="guests"
 						type="number"
@@ -108,7 +113,7 @@ export default function Search() {
 					className="btn-round"
 					onClick={onSearchClicked}
 				>
-					<Icon.Search color="#0D0D0D" size={20} />
+					<Icon.Search color="white" size={20} />
 				</button>
 			</div>
 		</form>
