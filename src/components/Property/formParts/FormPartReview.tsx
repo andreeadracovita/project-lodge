@@ -44,7 +44,7 @@ export default function FormPartReview({ input, propertyId }) {
 				onButtonClicked={() => {}}
 			/>
 
-			<h2 className="mt-3">{ localisedString["hosting:description"] }</h2>
+			<h2 className="section-heading">{ localisedString["hosting:description"] }</h2>
 			<FormPartDescription
 				isEditable={false}
 				showButton={false}
@@ -55,7 +55,7 @@ export default function FormPartReview({ input, propertyId }) {
 				handleChangeMultiselect={() => {}}
 			/>
 
-			<h2 className="mt-3">{ localisedString["hosting:pricing"] }</h2>
+			<h2 className="section-heading">{ localisedString["hosting:pricing"] }</h2>
 			<FormPartPricing
 				isEditable={false}
 				showButton={false}

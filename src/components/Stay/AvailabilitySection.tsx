@@ -22,7 +22,7 @@ export default function AvailabilitySection() {
 
 	return (
 		<>
-			<h2>Availability</h2>
+			<h2 className="section-heading">Availability</h2>
 			<p className="text-muted">{dayMonYear(checkIn)} — {dayMonYear(checkOut)}</p>
 			<Calendar />
 		</>

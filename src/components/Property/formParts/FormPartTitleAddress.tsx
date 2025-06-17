@@ -203,7 +203,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			</select>
 
 			<div id="address">
-				<h2 className="mt-3">{ localisedString["hosting:address"] }</h2>
+				<h2 className="section-heading">{ localisedString["hosting:address"] }</h2>
 				<label htmlFor="street" className="mt-2">{ localisedString["hosting:street"] }</label>
 				<input
 					id="street"

@@ -172,7 +172,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div id="features">
-				<h2 className="mt-3">{ localisedString["hosting:features"] }</h2>
+				<h2 className="section-heading">{ localisedString["hosting:features"] }</h2>
 				<div id="selected-features" className="d-flex flex-wrap">
 					{
 						input.featuresIds.map((id) => {

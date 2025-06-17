@@ -18,7 +18,7 @@ export default function Account() {
 			</div>
 
 			<div className="section-container">
-				<h2>Account and preferences</h2>
+				<h2 className="section-heading">Account and preferences</h2>
 				<div className="row g-4">
 					<div className="col-4">
 						<AccountCard
@@ -69,7 +69,7 @@ export default function Account() {
 			</div>
 
 			<div className="section-container">
-				<h2>Travel activity</h2>
+				<h2 className="section-heading">Travel activity</h2>
 				<div className="row">
 					<div className="col-4">
 						<AccountCard
@@ -102,7 +102,7 @@ export default function Account() {
 			</div>
 
 			<div className="section-container">
-				<h2>Hosting</h2>
+				<h2 className="section-heading">Hosting</h2>
 				<div className="row">
 					<div className="col-4">
 						<AccountCard

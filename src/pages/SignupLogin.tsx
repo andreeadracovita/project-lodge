@@ -130,7 +130,7 @@ export default function SignupLogin() {
 				{
 					showEmailInput &&
 					<div>
-						<h2>Welcome to Lodge</h2>
+						<h2 className="section-heading">Welcome to Lodge</h2>
 						<input
 							type="text"
 							className="form-control rounded-pill"
@@ -151,7 +151,7 @@ export default function SignupLogin() {
 				{
 					showPasswordInput &&
 					<div>
-						<h2>Welcome back</h2>
+						<h2 className="section-heading">Welcome back</h2>
 						<input
 							type="password"
 							className="form-control rounded-pill"
@@ -178,7 +178,7 @@ export default function SignupLogin() {
 				{
 					showSignupForm &&
 					<div>
-						<h2>Legal name</h2>
+						<h2 className="section-heading">Legal name</h2>
 						<input
 							type="text"
 							className="form-control rounded-pill"
@@ -196,7 +196,7 @@ export default function SignupLogin() {
 							placeholder="Last name"
 						/>
 
-						<h2 className="mt-3">Contact info</h2>
+						<h2 className="section-heading mt-3">Contact info</h2>
 						<input
 							type="text"
 							className="form-control rounded-pill"
@@ -206,7 +206,7 @@ export default function SignupLogin() {
 							placeholder="Email"
 						/>
 
-						<h2 className="mt-3">Password</h2>
+						<h2 className="section-heading mt-3">Password</h2>
 						<input
 							type="password"
 							className="form-control rounded-pill"

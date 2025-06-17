@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import AvailabilitySection from "./AvailabilitySection";
+import Feature from "/src/components/common/Feature";
 import MapView from "/src/components/map/MapView";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { getAllFeatures, getAllExperiences } from "/src/api/BackendApiService";
@@ -38,27 +39,34 @@ export default function PropertyDescription({property}) {
 
 	return (
 		<>
-			<h2>About this property</h2>
-			<p>
+			<h2 className="section-heading">About this property</h2>
+			<div className="mt-10">
 				{property.description.replace('\n', <br />)}
-			</p>
-			<p className="btn btn-outline-dark rounded-pill">Show more</p>
+			</div>
+			<div className="btn-pill-outline mt-6">Show more</div>
 			{/*<p className="btn btn-outline-dark rounded-pill">Show less</p>*/}
 			<hr />
-			<h2>Features</h2>
-			<div>
+			<h2 className="section-heading">Features</h2>
+			<div className="mt-10">
 				{
 					property.features_ids.map((id, i) => {
 						const foundFeature = features.find(feat => feat.id == id);
 						if (foundFeature) {
-							return <span key={i} className="features-list-item">{capitalizeFirstLetter(foundFeature.name)}</span>
+							return <span className="mt-10"><Feature key={i} name={foundFeature.name} isLarge={true} /></span>
 						}
 					})
 				}
 			</div>
+			<div className="btn-pill-outline mt-6">Show more</div>
 			<hr />
-			<h2>Experiences in the area</h2>
-			<div>
+			<AvailabilitySection propertyId={property.id}/>
+			<hr />
+			<h2 className="section-heading">Review section</h2>
+			<div className="mt-10 section-heading">[Stars here]</div>
+			<div className="section-heading">[Reviews here]</div>
+			<hr />
+			<h2 className="section-heading">Experiences around</h2>
+			<div className="mt-10">
 				{
 					property.experiences_ids.map((id, i) => {
 						const foundExperience = experiences.find(exp => exp.id == id);
@@ -71,14 +79,15 @@ export default function PropertyDescription({property}) {
 				}
 			</div>
 			<hr />
-			<AvailabilitySection propertyId={property.id}/>
-			<hr />
-			<h2>Review section</h2>
-			<h2>[Stars here]</h2>
-			<h2>[Reviews here]</h2>
-			<hr />
-			<h2>Area</h2>
-			<MapView height={"350px"} center={[property.geo.x, property.geo.y]} zoom={14} points={[[property.geo.x, property.geo.y]]} />
+			<h2 className="section-heading">Area</h2>
+			<div className="mt-10">
+				<MapView
+					height={"350px"}
+					center={[property.geo.x, property.geo.y]}
+					zoom={14}
+					points={[[property.geo.x, property.geo.y]]}
+				/>
+			</div>
 		</>
 	);
 }
