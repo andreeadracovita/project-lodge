@@ -5,6 +5,6 @@
 }
 
 .avatar-container:hover {
-	background-color: var(--light-green);
+	background-color: var(--light-brand-color);
 	cursor: pointer;
 }

@@ -113,7 +113,7 @@ export default function Search() {
 					className="btn-round"
 					onClick={onSearchClicked}
 				>
-					<Icon.Search color="white" size={20} />
+					<Icon.Search id="search-icon" color="white" size={20} />
 				</button>
 			</div>
 		</form>
