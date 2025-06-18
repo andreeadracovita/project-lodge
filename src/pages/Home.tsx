@@ -14,7 +14,7 @@ export default function Home() {
 	const [properties, setProperties] = useState([]);
 
 	useEffect(() => {
-		setBackgroundImage(fileStorage + "polar.jpg");
+		setBackgroundImage(fileStorage + "sunset-villa-family.jpg");
 
 		getAllProperties()
 			.then(response => {

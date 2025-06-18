@@ -4,6 +4,7 @@ import { getAllBookings } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 import { fileStorage } from "/src/utils/constants";
 import CallToTravel from "/src/components/trips/CallToTravel";
+import CurrentTrip from "/src/components/trips/CurrentTrip";
 
 /**
  * Trips are displayed in 3 sections:
@@ -37,27 +38,24 @@ export default function Trips() {
 			
 			{
 				(currentBookings.length === 0 && upcomingBookings.length === 0) &&
-				<CallToTravel />
+				<div className="mt-10">
+					<CallToTravel />
+				</div>
 			}
 
 			{
 				currentBookings.length > 0 && 
-				<div className="border-section w-100">
-					<div className="row">
-						<div className="col-6">
-							<h2 className="section-heading">Current trip</h2>
-							<span className="d-block">Title</span>
-							<span className="d-block">Address</span>
-							<span className="d-block">Check-in, check-out</span>
-						</div>
-						<div  className="col-6">
-							<img src={fileStorage + "val-d-orcia.jpg"} className="trip-card-photo"/>
-						</div>
-					</div>
+				<div className="mt-10">
+					<CurrentTrip item={currentBookings[0]} />
 				</div>
 			}
 			
-			<ListView listItemType={ListItemType.Booking} items={currentBookings.slice(1)} cols={3} />
+			{
+				currentBookings.length > 1 && 
+				<div className="mt-10">
+					<ListView listItemType={ListItemType.Booking} items={currentBookings.slice(1)} cols={3} />
+				</div>
+			}
 
 			{
 				upcomingBookings.length > 0 &&

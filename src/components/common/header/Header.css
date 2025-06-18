@@ -4,5 +4,5 @@
 }
 
 .dropdown-menu {
-	border-radius: 12px;
+	border-radius: var(--border-radius);
 }
