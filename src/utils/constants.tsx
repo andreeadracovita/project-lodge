@@ -8,6 +8,10 @@ export const fileStorage = "http://localhost:3000/";
 // Currency
 export const siteCurrency = "EUR";
 
+// Check-in, check-out times
+export const checkInTimes = "15:00 — 20:00";
+export const checkOutTimes = "06:00 — 10:00";
+
 // Trending destinations
 export const trendingDestinations = [
 	{

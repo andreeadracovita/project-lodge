@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import { checkViewBookingAuthorization } from "/src/api/BackendApiService";
-import BookingDetails from "/src/components/booking/BookingDetails";
+import BookingConfirmation from "/src/components/booking/BookingConfirmation";
 import BookingUnauthGate from "/src/components/booking/BookingUnauthGate";
 import { useAuth } from "/src/components/security/AuthContext";
 
@@ -37,7 +37,7 @@ export default function Booking() {
 			{
 				showGate
 				? <BookingUnauthGate setShowGate={setShowGate} />
-				: <BookingDetails />
+				: <BookingConfirmation />
 			}
 			
 		</div>

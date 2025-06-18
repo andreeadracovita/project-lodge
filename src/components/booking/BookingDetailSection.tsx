@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { getAllBuildingTypes, getAllRentalTypes } from "/src/api/BackendApiService";
+import BookedPropertyType from "/src/components/booking/BookedPropertyType";
+import { checkInTimes, checkOutTimes } from "/src/utils/constants";
 import { weekdayMonYear, getNightsCount } from "/src/utils/DateFormatUtils";
 
 export default function BookingDetailSection({ item }) {
@@ -10,43 +10,6 @@ export default function BookingDetailSection({ item }) {
 	const checkOutDate = new Date(searchParams.get("check_out"));
 	const nightsCount = getNightsCount(checkInDate, checkOutDate);
 	const guestsNo = searchParams.get("guests");
-
-	const [rentalTypes, setRentalTypes] = useState([]);
-	const [propertyTypes, setPropertyTypes] = useState([]);
-
-	useEffect(() => {
-		getAllBuildingTypes()
-			.then(response => {
-				if (response.data.length > 0) {
-					setPropertyTypes(response.data);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-
-		getAllRentalTypes()
-			.then(response => {
-				if (response.data.length > 0) {
-					setRentalTypes(response.data);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}, []);
-
-	function getBookedProperty(): string {
-		const currentRentalType = rentalTypes.find(type => type.id === item.rental_type_id);
-		if (currentRentalType?.name === "room") {
-			return "room";
-		}
-		const currentPropertyType = propertyTypes.find(type => type.id === item.building_type_id);
-		if (currentPropertyType) {
-			return currentPropertyType.name;
-		}
-		return "???";
-	}
 	
 	return (
 		<div className="border-section">
@@ -54,21 +17,21 @@ export default function BookingDetailSection({ item }) {
 			<div className="mt-10 d-flex justify-content-between">
 				<div>
 					<div>Check-in</div>
-					<div className="text-strong property-card-heading">{ weekdayMonYear(checkInDate) }</div>
-					<div className="text-muted">15:00 — 20:00</div>
+					<div className="text-strong property-card-heading">{weekdayMonYear(checkInDate)}</div>
+					<div className="text-muted">{checkInTimes}</div>
 				</div>
 				<div className="vr"></div>
 				<div>
 					<div>Check-out</div>
-					<div className="text-strong property-card-heading">{ weekdayMonYear(checkOutDate) }</div>
-					<div className="text-muted">06:00 — 10:00</div>
+					<div className="text-strong property-card-heading">{weekdayMonYear(checkOutDate)}</div>
+					<div className="text-muted">{checkOutTimes}</div>
 				</div>
 			</div>
 			<div className="mt-6">Total length of stay:</div>
 			<div className="text-strong property-card-heading">{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}</div>
 			<hr />
 			<div>You selected</div>
-			<div className="text-strong">1 { getBookedProperty() } for { guestsNo } { guestsNo > 1 ? <span>guests</span> : <span>guest</span> }</div>
+			<div className="text-strong"><BookedPropertyType rentalTypeId={item.rental_type_id} buildingTypeId={item.building_type_id} /> for {guestsNo} {guestsNo > 1 ? <span>guests</span> : <span>guest</span>}</div>
 		</div>
 	);
 }

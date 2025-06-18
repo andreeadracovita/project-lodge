@@ -2,7 +2,7 @@ import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 import "./CurrentTrip.css";
-import { fileStorage } from "/src/utils/constants";
+import { checkInTimes, checkOutTimes, fileStorage } from "/src/utils/constants";
 import { weekdayMonYear } from "/src/utils/DateFormatUtils";
 
 export default function CurrentTrip({ item }) {
@@ -27,13 +27,13 @@ export default function CurrentTrip({ item }) {
 							<div>
 								<div>Check-in</div>
 								<div className="mt-6 property-card-heading">{checkIn}</div>
-								<div className="mt-6 text-muted">15:00 — 20:00</div>
+								<div className="mt-6 text-muted">{checkInTimes}</div>
 							</div>
 							<div className="mx-5 vr"></div>
 							<div>
 								<div>Check-out</div>
 								<div className="mt-6 property-card-heading">{checkOut}</div>
-								<div className="mt-6 text-muted">06:00 — 10:00</div>
+								<div className="mt-6 text-muted">{checkOutTimes}</div>
 							</div>
 						</div>
 					</div>

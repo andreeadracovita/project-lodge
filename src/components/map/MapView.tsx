@@ -17,8 +17,10 @@ import "./MapView.css";
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
 export default function MapView({width, height, center, zoom, points}) {
 	const pinStyle = {
-        'circle-radius': 5,
-		'circle-fill-color': 'blue'
+        "circle-radius": 10,
+		"circle-fill-color": "#371590",
+		"circle-stroke-width": 2,
+		"circle-stroke-color": "white"
 	}
 
 	useEffect(() => {
