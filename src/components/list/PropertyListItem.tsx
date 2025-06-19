@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import "./PropertyListItem.css";
 import WishlistIcon from "./WishlistIcon";
@@ -49,11 +48,8 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 	}
 
 	const linkPath = !isPreview
-		? {
-			pathname: `/stay`,
-			search: `?id=${item.id}&guests=1&check_in=${checkInParam}&check_out=${checkOutParam}`
-		}
-		: {};
+		? `/stay?id=${item.id}&guests=1&check_in=${checkInParam}&check_out=${checkOutParam}`
+		: "#";
 
 	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
 	
@@ -63,9 +59,9 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 	return (
 		<div className="mb-3">
 			<div className="position-relative card-item">
-				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
+				<a href={linkPath} target={isPreview ? "_self" : "_blank"}><img src={imgUrl} className="list-item-photo mb-2" /></a>
 				<WishlistIcon isPreview={isPreview} itemId={item.id} />
-				<Link to={linkPath}>
+				<a href={linkPath} target={isPreview ? "_self" : "_blank"}>
 					<div className="property-card-details">
 						<p className="mb-0 property-card-heading">{item.title}</p>
 						<Rating score={item.rating} reviewsNo={130} />
@@ -81,7 +77,7 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 						</div>
 						
 					</div>
-				</Link>
+				</a>
 			</div>
 		</div>
 	);

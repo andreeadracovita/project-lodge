@@ -59,7 +59,7 @@ export default function Search() {
 		<form role="search">
 			<div id="search-bar" className="rounded-pill p-1 px-2 w-100 d-flex align-items-center justify-content-between">
 				<div className="d-flex w-25 align-items-center">
-					<Icon.House size={24} />
+					<Icon.GeoAlt size={24} />
 					<input
 						id="destination"
 						type="search"
@@ -76,7 +76,7 @@ export default function Search() {
 				<div className="vr"></div>
 
 				<div className="d-flex w-50 justify-content-center align-items-center">
-					<Icon.CalendarWeek size={24} />
+					<Icon.CalendarRange size={24} />
 					<div className="dropdown-center d-flex align-items-center cursor-pointer">
 						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown">
 							<span className="me-2">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>

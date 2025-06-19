@@ -76,6 +76,9 @@ export const updatePropertyDetails
 export const deletePropertyById
 	= (id) => apiClient.delete(`/host/property/${id}`);
 
+export const getPartitionedReservations
+	= () => apiClient.get("/host/reservations/partitioned");
+
 // Types
 export const getAllFeatures
 	= () => apiClient.get("/types/feature");
