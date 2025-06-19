@@ -271,6 +271,20 @@ hr {
 .btn-round:hover {
   background: var(--darker-brand-color);
 }
+
+.btn-pill-hover-only {
+  background: transparent;
+  border-radius: 50rem;
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  display: inline-block;
+  font-size: 1rem;
+  transition: background 0.15s ease-in-out;
+}
+
+.btn-pill-hover-only:hover {
+  background: var(--light-brand-color);
+}
 /* End: Buttons --------------------------------------------------------------- */
 
 /* Start: Photos -------------------------------------------------------------- */
@@ -316,4 +330,8 @@ hr {
 
 .brand-color-fill {
   fill: var(--brand-color);
+}
+
+.selected-tab {
+  border: 1px solid var(--dark);
 }

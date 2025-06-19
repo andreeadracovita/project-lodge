@@ -1,9 +1,9 @@
-import HostingHeader from "/src/components/common/header/HostingHeader";
+import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
 
 export default function HostingMessages() {
 	return (
 		<div className="container section-container">
-			<HostingHeader />
+			<HostingHeader current={HostingTab.Messages} />
 			
 			<h1 className="page-heading">Hosting messages</h1>
 		</div>

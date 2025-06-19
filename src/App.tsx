@@ -18,7 +18,7 @@ import Trips from "./pages/account/Trips";
 import Wishlist from "./pages/account/Wishlist";
 import Messages from "./pages/account/Messages";
 
-import Hosting from "./pages/hosting/Hosting";
+import HostingDashboard from "./pages/hosting/HostingDashboard";
 import Properties from "./pages/hosting/Properties";
 import PropertyEdit from "./pages/hosting/PropertyEdit";
 import HostingCalendar from "./pages/hosting/HostingCalendar";
@@ -49,7 +49,7 @@ export default function App() {
             <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
             <Route path="/messages" element={<RequireAuth><Messages /></RequireAuth>} />
 
-            <Route path="/hosting" element={<RequireAuth><Hosting /></RequireAuth>} />
+            <Route path="/hosting" element={<RequireAuth><HostingDashboard /></RequireAuth>} />
             <Route path="/hosting/properties" element={<RequireAuth><Properties /></RequireAuth>} />
             <Route path="/hosting/property/add" element={<RequireAuth><PropertyEdit /></RequireAuth>} />
             <Route path="/hosting/property/edit" element={<RequireAuth><PropertyEdit /></RequireAuth>} />

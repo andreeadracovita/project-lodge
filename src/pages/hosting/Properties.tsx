@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useAuth } from "/src/components/security/AuthContext";
-import HostingHeader from "/src/components/common/header/HostingHeader";
+import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
 import { getPropertiesByUserId } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 
@@ -26,7 +26,7 @@ export default function Properties() {
 
 	return (
 		<div className="container section-container">
-			<HostingHeader />
+			<HostingHeader current={HostingTab.Properties} />
 			<h1 className="page-heading">Properties</h1>
 			<ListView listItemType={ListItemType.HostingProperty} items={hostedProperties} cols={3} setNeedsRefresh={setNeedsRefresh} />
 		</div>

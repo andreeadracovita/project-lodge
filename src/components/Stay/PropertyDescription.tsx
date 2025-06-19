@@ -52,7 +52,7 @@ export default function PropertyDescription({property}) {
 					property.features_ids.map((id, i) => {
 						const foundFeature = features.find(feat => feat.id == id);
 						if (foundFeature) {
-							return <span className="mt-10"><Feature key={i} name={foundFeature.name} isLarge={true} /></span>
+							return <span key={i} className="mt-10"><Feature name={foundFeature.name} isLarge={true} /></span>
 						}
 					})
 				}
