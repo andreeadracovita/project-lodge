@@ -3,14 +3,12 @@ import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import "./CalendarMonth.css";
+import "./HostingCalendarMonth.css";
 import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
-/*
-	Month: 0 - 11
-*/
-export default function CalendarMonth({month, year, chevronLeft, chevronRight, onLeftChevronClicked, onRightChevronClicked, onDateClicked}) {
+// TODO: Customize booking calendar to show host calendar
+export default function HostingCalendarMonth({ id, month, year }) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 	const monthNames = [
 		"January",
@@ -27,8 +25,6 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 		"December"
 	];
 
-	const [checkIn, setCheckIn] = useState();
-	const [checkOut, setCheckOut] = useState();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [bookedDates, setBookedDates] = useState([]);
 	const propertyId = searchParams.get("id");
@@ -52,20 +48,6 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 			});
 	}, []);
 
-	useEffect(() => {
-		const checkInString = searchParams.get("check_in");
-		const checkOutString = searchParams.get("check_out");
-		if (checkInString) {
-			setCheckIn(new Date(checkInString));
-			setCheckOut(undefined);
-		}
-		if (checkOutString) {
-			setCheckOut(new Date(checkOutString));
-		} else {
-			setCheckOut(undefined);
-		}
-	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
-
 	// Calendar sheet setup
 	const firstDayOfMonth = new Date(year, month, 1);
 	let firstDayOfMonthCount = firstDayOfMonth.getDay(); // Sunday - Saturday : 0 - 6
@@ -73,95 +55,71 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 	const dayPadding = firstDayOfMonthCount - 1 >= 0 ? firstDayOfMonthCount - 1 : 6; // Sunday -> 6
 	const lastDay = (new Date(year, month + 1, 0)).getDate();
 
-	// Selection styling
-	function isCheckInDay(dayIndex) {
-		if (checkIn) {
-			return checkIn.getFullYear() === year && checkIn.getMonth() === month && checkIn.getDate() === dayIndex;
+	// Styling
+	function isPastDate(dayIndex) {
+		// TODO: current day should not be past
+		const date = new Date(year, month, dayIndex);
+		if (date < new Date()) {
+			return true;
 		}
+		return false;
+	}
+
+	function isCheckInDay(dayIndex) {
+		// Search ranges
 		return false;
 	}
 
 	function isCheckOutDay(dayIndex) {
-		if (checkOut) {
-			return checkOut.getFullYear() === year && checkOut.getMonth() === month && checkOut.getDate() === dayIndex;
-		}
+		// Search ranges
 		return false;
 	}
 
 	function isIntermediaryDay(dayIndex) {
-		let queryDate = new Date(year, month, dayIndex);
-		if (checkIn && checkOut) {
-			if (queryDate > checkIn && queryDate < checkOut) {
-				return true;
-			}
-		}
+		// Search ranges
 		return false;
 	}
 
 	function isDateAvailable(date) {
-		if (date < new Date()) {
-			return false;
-		}
-		for (const booked of bookedDates) {
-			if (date >= booked.check_in && date < booked.check_out) {
-				return false;
-			}
-		}
 		return true;
-	}
-
-	function sanitizeDateClick(isAvailable, date) {
-		if (!isAvailable) {
-			return;
-		}
-		onDateClicked(date)
 	}
 
 	function renderCalendarDay(index) {
 		const date = new Date(year, month, index);
-		const isAvailable = isDateAvailable(date);
 		const isCheckIn = isCheckInDay(index);
 		const isCheckOut = isCheckOutDay(index);
 
 		const containerClass = classNames(
 			"calendar-day",
+			"d-flex",
+			"flex-wrap",
+			"justify-content-start",
+			"p-2",
 			{
-				"highlight": isIntermediaryDay(index),
-				"start-highlight": isCheckIn,
-				"end-highlight": isCheckOut,
-				"unavailable": !isAvailable,
-				"cursor-pointer": isAvailable
-			}
-		);
-		const dayClass = classNames(
-			"text-center",
-			{
-				"start-end-checked": isCheckIn || isCheckOut,
-				"day-selection-highlight": isAvailable && !isCheckIn && !isCheckOut
+				"past": isPastDate(index),
+				"booked": isIntermediaryDay(index),
+				"start-booked": isCheckIn,
+				"end-booked": isCheckOut
 			}
 		);
 		return (
 			<div
+				id={id*100+index}
 				key={index}
 				className={containerClass}
-				onClick={() => sanitizeDateClick(isAvailable, date)}
+				onClick={() => {}}
 			>
-				<span className={dayClass}>{index}</span>
+				<div className="w-100">{index}</div>
+				<div>80 CHF</div>
 			</div>
 		);
 	}
 
 	return (
-		<div>
+		<div id={id} className="mt-10">
 			<div id="calendar-header">
-				<div className="d-flex">
-					<div className="col-2">
-						{chevronLeft && <span className="cursor-pointer"><Icon.ChevronLeft onClick={onLeftChevronClicked} /></span>}
-					</div>
-					<div className="col-8 text-center">{monthNames[month]} {year}</div>
-					<div className="col-2 d-flex justify-content-end">
-						{chevronRight && <span className="cursor-pointer"><Icon.ChevronRight onClick={onRightChevronClicked} /></span>}
-					</div>
+				<div className="page-heading">
+					{monthNames[month]} {year !== new Date().getFullYear() ? year : "" }
 				</div>
 				<div className="days-grid mt-2">
 					{weekDays.map((day, i) => 

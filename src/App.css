@@ -2,11 +2,12 @@
 :root {
   /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
   --brand-color: #371590; /* Options: Gentian Blue #371590 */
-  --light-brand-color: #d0d1eb; /* Highlights; Options: #BABBE1, #d0d1eb */
+  --light-brand-color: #d0d1eb; /* Highlights; Options: #BABBE1, #d0d1eb, !! #ccceff */
   --darker-brand-color: #260C6A; /* Button hover; Options: #1E0857 */
 
   --bright-red: #FF3131; /* Heart */
   --light-grey: #E7E7E7; /* Form/sections border, hr, vr */
+  --lighter-grey: #f2f2f2; /* Host calendar past */
   --medium-grey: #BEBBBB;
   --dark: #0D0D0D;
   --contrast: #FFA600; /* Options: #ffa600, #ffca3a, #8eba1b, #F26849, #FF5733 */
@@ -239,6 +240,7 @@ hr {
   display: inline-block;
   font-size: 1rem;
   transition: background 0.15s ease-in-out;
+  cursor: pointer;
   color: white;
 }
 
@@ -254,6 +256,7 @@ hr {
   line-height: 1.5;
   display: inline-block;
   font-size: 1rem;
+  cursor: pointer;
   transition: background 0.15s ease-in-out;
 }
 
@@ -265,6 +268,7 @@ hr {
   height: 50px;
   display: inline-block;
   font-size: 1rem;
+  cursor: pointer;
   transition: background 0.15s ease-in-out;
 }
 
@@ -273,12 +277,13 @@ hr {
 }
 
 .btn-pill-hover-only {
-  background: transparent;
+  background: var(--light-grey); /* transparent; */
   border-radius: 50rem;
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   display: inline-block;
   font-size: 1rem;
+  cursor: pointer;
   transition: background 0.15s ease-in-out;
 }
 
@@ -334,4 +339,9 @@ hr {
 
 .selected-tab {
   border: 1px solid var(--dark);
+}
+
+#calendar-sheet {
+  height: 750px;
+  overflow: scroll;
 }

@@ -21,7 +21,6 @@ export default function HostingDashboard() {
 		getPartitionedReservations()
 			.then(response => {
 				const data = response.data;
-				console.log(data);
 				setArriving(data.arriving);
 				setCheckingOut(data.checkingOut);
 				setCurrent(data.current);
@@ -56,22 +55,24 @@ export default function HostingDashboard() {
 		<div className="container section-container">
 			<HostingHeader current={HostingTab.Dashboard} />
 
-			<h1 className="section-container page-heading">Welcome, {authContext.firstName}!</h1>
-			<h2 className="section-container section-heading">Your reservations</h2>
-			<div id="reservations-tabs" className="mt-10">
-				{
-					tabs.map((tab, i) =>
-						<ReservationTabItem
-							key={i}
-							tab={tab}
-							activeTab={activeTab}
-							setActiveTab={setActiveTab}
-							itemsCount={getItemsCount(tab)} />
-					)
-				}
-			</div>
-			<div id="reservations-section" className="border-section section-container">
-				<ReservationsSection tab={activeTab} items={getActiveTabItems()} />
+			<div className="section-container">
+				<h1 className="page-heading">Welcome, {authContext.firstName}!</h1>
+				<h2 className="section-container section-heading">Your reservations</h2>
+				<div id="reservations-tabs" className="mt-10">
+					{
+						tabs.map((tab, i) =>
+							<ReservationTabItem
+								key={i}
+								tab={tab}
+								activeTab={activeTab}
+								setActiveTab={setActiveTab}
+								itemsCount={getItemsCount(tab)} />
+						)
+					}
+				</div>
+				<div id="reservations-section" className="border-section section-container">
+					<ReservationsSection tab={activeTab} items={getActiveTabItems()} />
+				</div>
 			</div>
 		</div>
 	);

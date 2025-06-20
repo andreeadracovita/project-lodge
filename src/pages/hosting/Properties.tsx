@@ -27,8 +27,18 @@ export default function Properties() {
 	return (
 		<div className="container section-container">
 			<HostingHeader current={HostingTab.Properties} />
-			<h1 className="page-heading">Properties</h1>
-			<ListView listItemType={ListItemType.HostingProperty} items={hostedProperties} cols={3} setNeedsRefresh={setNeedsRefresh} />
+
+			<div className="section-container">
+				<h1 className="page-heading">Properties</h1>
+				<div className="mt-10">
+					<ListView
+						listItemType={ListItemType.HostingProperty}
+						items={hostedProperties}
+						cols={3}
+						setNeedsRefresh={setNeedsRefresh}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }

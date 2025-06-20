@@ -5,7 +5,9 @@ export default function HostingMessages() {
 		<div className="container section-container">
 			<HostingHeader current={HostingTab.Messages} />
 			
-			<h1 className="page-heading">Hosting messages</h1>
+			<div className="section-container">
+				<h1 className="page-heading">Hosting messages</h1>
+			</div>
 		</div>
 	);
 }
