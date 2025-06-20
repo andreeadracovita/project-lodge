@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import HostingCalendarMonth from "/src/components/hosting/HostingCalendarMonth";
 import HostingCalendarSettings from "/src/components/hosting/HostingCalendarSettings";
 import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
@@ -6,6 +8,7 @@ export default function HostingCalendar() {
 	const currentYear = new Date().getFullYear();
 	const currentMonth = new Date().getMonth();
 	const years = [currentYear - 1, currentYear, currentYear + 1];
+	const [isFocused, setIsFocused] = useState(false);
 
 	const months = [];
 	for (let year = currentYear - 1; year < currentYear + 2; year++) {
@@ -14,14 +17,11 @@ export default function HostingCalendar() {
 		}
 	}
 
-	function focusMonth() {
-		console.log("Focusing");
+	useEffect(() => {
+		setIsFocused(true);
 		const currentMonthElement = document.getElementById(`${currentYear*100+currentMonth}`);
-		if (currentMonthElement) {
-			currentMonthElement.scrollIntoView();
-			console.log("Focused.");
-		}
-	}
+		currentMonthElement.scrollIntoView();
+	}, [!isFocused && document.getElementById(`${currentYear*100+currentMonth}`)])
 
 	return (
 		<div className="container section-container">
@@ -40,7 +40,6 @@ export default function HostingCalendar() {
 
 						<div id="calendar-sheet" className="mt-10">
 							{months}
-							{focusMonth()}
 						</div>
 					</div>
 				</div>
