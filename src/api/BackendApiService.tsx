@@ -4,7 +4,7 @@ import { apiClient } from "./ApiClient";
 export const getExchangeRateForTarget
 	= (target) => apiClient(`/misc/exchange-rate?target=${target}`);
 
-// User
+// User -----------------------------------------------------------------------
 export const getUserConfig
 	= () => apiClient.get("/user/config");
 
@@ -36,7 +36,7 @@ export const uploadAvatar
 export const uploadPhotos
 	= (payload) => apiClient.post("/upload/photos", payload);
 
-// Property
+// Property -------------------------------------------------------------------
 // Testing purposes: there will never be a case when we need to fetch all properties without a filter
 export const getAllProperties
 	= () => apiClient.get("/property/all");
@@ -56,7 +56,7 @@ export const getPropertyAvailability
 export const getPropertiesFilteredBy
 	= (payload) => apiClient.post(`/property/filter`, payload);
 
-// Host
+// Host -----------------------------------------------------------------------
 // Protected routes
 export const getPropertiesByUserId
 	= () => apiClient.get("/host/properties");
@@ -76,10 +76,13 @@ export const updatePropertyDetails
 export const deletePropertyById
 	= (id) => apiClient.delete(`/host/property/${id}`);
 
-export const getPartitionedReservations
-	= () => apiClient.get("/host/reservations/partitioned");
+export const getPartitionedBookings
+	= () => apiClient.get("/host/bookings/partitioned");
 
-// Types
+export const getCalendarBookingsForPropertyId
+	= (id) => apiClient.get(`/host/bookings/calendar/property/${id}`);
+
+// Types ----------------------------------------------------------------------
 export const getAllFeatures
 	= () => apiClient.get("/types/feature");
 
@@ -93,7 +96,7 @@ export const getAllBuildingTypes
 export const getAllExperiences
 	= () => apiClient.get("/types/experience");
 
-// Bookings
+// Bookings -------------------------------------------------------------------
 export const getBookingById
 	= (id, pin) => apiClient.get(`/booking?id=${id}&pin=${pin}`);
 
@@ -112,22 +115,19 @@ export const authorizeBookingAccess
 export const cancelBooking
 	= (payload) => apiClient.post("/booking/cancel", payload);
 
-// Availability
+// Availability ---------------------------------------------------------------
 export const getPropertyBookedRanges
 	= (payload) => apiClient.post("/property/booked-ranges", payload);
 
-// Wishlist
+// Wishlist -------------------------------------------------------------------
 export const getWishlistByUserId
 	= (userId) => apiClient.get(`/wishlist/user-id/${userId}`);
 
-// Messages
-export const getMessagesSentByUserIdToPropertyId
-	= (userId, propertyId) => apiClient.get(`/message/user/${userId}/${propertyId}`);
+// Messages -------------------------------------------------------------------
+export const getMessagesForUser1User2PropertyId
+	= (userId1, userId2, propertyId) => apiClient.get(`/message/${userId1}/${userId2}/${propertyId}`);
 
-export const getMessagesSentByPropertyIdToUserId
-	= (userId, propertyId) => apiClient.get(`/message/property/${propertyId}/${userId}`);
-
-// Reviews
+// Reviews --------------------------------------------------------------------
 export const getAllReviewsByPropertyId
 	= (propertyId) => apiClient.get(`/review/property-id/${propertyId}`);
 

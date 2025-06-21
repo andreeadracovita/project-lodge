@@ -1,43 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
-enum State {
-	Selection,
-	Settings
-};
+import { getPropertiesByUserId } from "/src/api/BackendApiService";
 
+/**
+ * HostingCalendarSettings retrieves all managed properties by hostId for dropdown select and sets searchParams
+ * to first id in results. This approach maintains selection at page refresh.
+ */
 export default function HostingCalendarSettings() {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [state, setState] = useState(State.Selection);
+	const [hostedProperties, setHostedProperties] = useState([]);
+	const [selectedPropId, setSelectedPropId] = useState();
 
-	function handlePropertyClick() {
-		searchParams.set("id", 1); // Prop ID
-		setSearchParams(searchParams);
-		setState(State.Settings);
-	}
+	useEffect(() => {
+		getPropertiesByUserId()
+			.then(response => {
+				const data = response.data;
+				if (data.length > 0) {
+					setHostedProperties(data);
+					if (!searchParams.get("id")) {
+						searchParams.set("id", data[1].id); // 0
+						setSearchParams(searchParams);
+					}
+					setSelectedPropId(data[1].id); // 0
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, [])
 
-	function handleBackClick() {
-		searchParams.delete("id");
-		setSearchParams(searchParams);
-		setState(State.Selection);
+	function handlePropertyClick(event) {
+
 	}
 	
 	return (
 		<div className="border-section">
+			<div className="text-strong">Selected property</div>
 			{
-				state === State.Selection &&
-				<>
-					<div className="section-heading">Manage property</div>
-					<div>[Managed properties list here]</div>
-				</>
-			}
-			{
-				state === State.Settings &&
-				<>
-					<div><Icon.ChevronLeft /> Choose another property</div>
-					<div className="section-heading">Prop title</div>
-				</>
+				hostedProperties.length > 0 && selectedPropId &&
+				<div>
+					<div className="btn-pill-outline mt-10">{hostedProperties.find(p => p.id === selectedPropId)?.title}</div>
+					<div>[Dropdown with properties, first selected by default]</div>
+				</div>
 			}
 		</div>
 	);

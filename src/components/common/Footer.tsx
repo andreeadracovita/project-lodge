@@ -9,7 +9,6 @@ const noFooterPaths = [
 
 export default function Footer() {
 	const location = useLocation();
-	console.log(location.pathname);
 
 	const now = new Date();
 	const currentYear = now.getFullYear();

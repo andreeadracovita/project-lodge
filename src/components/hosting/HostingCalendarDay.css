@@ -1,0 +1,28 @@
+.calendar-day {
+	height: 90px;
+	border: 1px solid var(--light-grey);
+}
+
+.past {
+	background-color: var(--lighter-grey);
+}
+
+.booked-tag {
+	background: var(--light-brand-color);
+	border: none;
+	border-radius: 50rem;
+	padding: 0px;
+	line-height: 0.5;
+	display: inline-block;
+	transition: background 0.15s ease-in-out;
+	cursor: pointer;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+}
+
+.check-in {
+	
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
 import ReservationsSection from "/src/components/hosting/ReservationsSection";
-import { getPartitionedReservations } from "/src/api/BackendApiService";
+import { getPartitionedBookings } from "/src/api/BackendApiService";
 import ReservationTabItem, { ReservationsTab } from "/src/components/hosting/ReservationTab";
 import { useAuth } from "/src/components/security/AuthContext";
 
@@ -18,7 +18,7 @@ export default function HostingDashboard() {
 	const [upcoming, setUpcoming] = useState([]);
 
 	useEffect(() => {
-		getPartitionedReservations()
+		getPartitionedBookings()
 			.then(response => {
 				const data = response.data;
 				setArriving(data.arriving);

@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
-import "./HostingCalendarMonth.css";
+import HostingCalendarDay from "./HostingCalendarDay";
 import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
@@ -55,67 +55,6 @@ export default function HostingCalendarMonth({ id, month, year }) {
 	const dayPadding = firstDayOfMonthCount - 1 >= 0 ? firstDayOfMonthCount - 1 : 6; // Sunday -> 6
 	const lastDay = (new Date(year, month + 1, 0)).getDate();
 
-	// Styling
-	function isPastDate(dayIndex) {
-		// TODO: current day should not be past
-		const date = new Date(year, month, dayIndex);
-		if (date < new Date()) {
-			return true;
-		}
-		return false;
-	}
-
-	function isCheckInDay(dayIndex) {
-		// Search ranges
-		return false;
-	}
-
-	function isCheckOutDay(dayIndex) {
-		// Search ranges
-		return false;
-	}
-
-	function isIntermediaryDay(dayIndex) {
-		// Search ranges
-		return false;
-	}
-
-	function isDateAvailable(date) {
-		return true;
-	}
-
-	function renderCalendarDay(index) {
-		const date = new Date(year, month, index);
-		const isCheckIn = isCheckInDay(index);
-		const isCheckOut = isCheckOutDay(index);
-
-		const containerClass = classNames(
-			"calendar-day",
-			"d-flex",
-			"flex-wrap",
-			"justify-content-start",
-			"p-2",
-			{
-				"past": isPastDate(index),
-				"booked": isIntermediaryDay(index),
-				"start-booked": isCheckIn,
-				"end-booked": isCheckOut
-			}
-		);
-		return (
-			<div
-				id={id*100+index}
-				key={index}
-				className={containerClass}
-				onClick={() => {}}
-			>
-				<div className="w-100">{index}</div>
-				
-				<div>80 CHF</div>
-			</div>
-		);
-	}
-
 	return (
 		<div id={id} className="mt-10">
 			<div id="calendar-header">
@@ -134,7 +73,13 @@ export default function HostingCalendarMonth({ id, month, year }) {
 				        <span key={index}></span>
 				    ))}
 					{[...Array(lastDay)].map((_, index) => (
-				        renderCalendarDay(index + 1)
+				        <HostingCalendarDay
+				        	key={year * 10000 + month * 100 + index + 1}
+				        	id={year * 10000 + month * 100 + index + 1}
+				        	year={year}
+				        	month={month}
+				        	day={index + 1}
+				        />
 			    	))}
 				</div>
 			</div>
