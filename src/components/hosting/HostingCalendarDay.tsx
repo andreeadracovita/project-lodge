@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import { useEffect } from "react";
 
 import "./HostingCalendarDay.css";
 
 export default function HostingCalendarDay({ id, year, month, day }) {
-	const date = new Date(year, month, day);
 
 	function isPastDate(dayIndex) {
 		// TODO: current day should not be past
@@ -29,7 +29,6 @@ export default function HostingCalendarDay({ id, year, month, day }) {
 		<div
 			id={id}
 			className={containerClass}
-			onClick={() => {}}
 		>
 			<div className="w-100 d-flex justify-content-between">
 				<span>{day}</span>

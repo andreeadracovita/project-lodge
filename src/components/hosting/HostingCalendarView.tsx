@@ -4,6 +4,42 @@ import { useSearchParams } from "react-router";
 import { getCalendarBookingsForPropertyId } from "/src/api/BackendApiService";
 import HostingCalendarMonth from "/src/components/hosting/HostingCalendarMonth";
 
+function createBookedTag(dayElementId, tagText) {
+	const dayElement = document.getElementById(`${dayElementId}`);
+	if (dayElement) {
+		const tag = document.createElement("div");
+		// Differentiate between check-in, out, booked
+		tag.id = `tag-${tagText}-${dayElementId}`;
+		tag.className = "mt-6 booked-tag";
+
+		const tagSpan = document.createElement("span");
+		tagSpan.textContent = tagText;
+		tag.appendChild(tagSpan);
+
+		dayElement.appendChild(tag);
+	}
+}
+
+function attachBookingTagsToDays(bookings) {
+	for (let booking of bookings) {
+		const checkIn = new Date(booking.check_in);
+		const checkInId = checkIn.getFullYear() * 10000 + checkIn.getMonth() * 100 + checkIn.getDate();
+		createBookedTag(checkInId, "Check-in");
+
+		const checkOut = new Date(booking.check_out);
+		const checkOutId = checkOut.getFullYear() * 10000 + checkOut.getMonth() * 100 + checkOut.getDate();
+		createBookedTag(checkOutId, "Check-out");
+
+		// For intermediary days create Booked
+		const loopStart = checkIn;
+		loopStart.setDate(loopStart.getDate() + 1);
+		for (let d = loopStart; d < checkOut; d.setDate(d.getDate() + 1)) {
+			const dayId = d.getFullYear() * 10000 + d.getMonth() * 100 + d.getDate();
+			createBookedTag(dayId, "Booked");
+		}
+	}
+}
+
 /**
  * Retrieve all bookings for selectedPropId. --For each booking, attach new div to calendar day corresponding to state:--
  * - Check-in
@@ -27,60 +63,29 @@ export default function HostingCalendarView() {
 		}
 	}
 
-	function focusToday() {
-		const currentMonthElement = document.getElementById(`${currentYear*100+currentMonth}`);
-		currentMonthElement?.scrollIntoView();
-	}
-
 	useEffect(() => {
 		setIsFocused(true);
-		focusToday();
+		focusToday(currentYear, currentMonth);
 	}, [!isFocused && document.getElementById(`${currentYear*100+currentMonth}`)])
 
 	useEffect(() => {
 		setSelectedPropId(searchParams.get("id"));
-	}, [searchParams.get("id")])
-
-	function createBookedTag(dayElementId, tagText) {
-		const dayElement = document.getElementById(`${dayElementId}`);
-		if (dayElement) {
-			const tag = document.createElement("div");
-			tag.id = `tag-${dayElementId}`;
-			tag.className = "mt-6 booked-tag";
-
-			const tagSpan = document.createElement("span");
-			tagSpan.textContent = tagText;
-			tag.appendChild(tagSpan);
-
-			dayElement.appendChild(tag);
-		}
-	}
-
-	function attachBookingTagsToDays(bookings) {
-		for (let booking of bookings) {
-			const checkIn = new Date(booking.check_in);
-			const checkInId = checkIn.getFullYear() * 10000 + checkIn.getMonth() * 100 + checkIn.getDate();
-			createBookedTag(checkInId, "Check-in");
-
-			const checkOut = new Date(booking.check_out);
-			const checkOutId = checkOut.getFullYear() * 10000 + checkOut.getMonth() * 100 + checkOut.getDate();
-			createBookedTag(checkOutId, "Check-out");
-
-			// For intermediary days create Booked
-			const loopStart = checkIn;
-			loopStart.setDate(loopStart.getDate() + 1);
-			for (let d = loopStart; d < checkOut; d.setDate(d.getDate() + 1)) {
-				const dayId = d.getFullYear() * 10000 + d.getMonth() * 100 + d.getDate();
-				createBookedTag(dayId, "Booked");
-			}
-		}
-	}
+	}, [searchParams.get("id") && searchParams.get("id") !== selectedPropId])
 
 	useEffect(() => {
 		if (selectedPropId) {
 			getCalendarBookingsForPropertyId(selectedPropId)
 				.then(response => {
 					setBookings(response.data);
+
+					// Clear previously attached divs by className
+					const bookedElements = Array.from(document.getElementsByClassName("booked-tag"));
+					if (bookedElements.length > 0) {
+						bookedElements.forEach(element => {
+							element.remove();
+						});
+					}
+
 					attachBookingTagsToDays(response.data);
 				})
 				.catch(error => {
@@ -88,6 +93,11 @@ export default function HostingCalendarView() {
 				});
 		}
 	}, [selectedPropId])
+
+	function focusToday() {
+		const currentMonthElement = document.getElementById(`${currentYear * 100 + currentMonth}`);
+		currentMonthElement?.scrollIntoView();
+	}
 	
 	return (
 		<>

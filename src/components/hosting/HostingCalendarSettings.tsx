@@ -23,7 +23,7 @@ export default function HostingCalendarSettings() {
 						searchParams.set("id", data[0].id);
 						setSearchParams(searchParams);
 					}
-					setSelectedPropId(data[0].id);
+					setSelectedPropId(searchParams.get("id") ?? data[0].id);
 				}
 			})
 			.catch(error => {
@@ -44,7 +44,7 @@ export default function HostingCalendarSettings() {
 				hostedProperties.length > 0 && selectedPropId &&
 				<div className="dropdown">
 					<div id="dropdown-properties" role="button" className="btn-pill-outline mt-10" data-bs-toggle="dropdown">
-						{hostedProperties.find(p => p.id === selectedPropId)?.title}
+						{hostedProperties.find(p => p.id == selectedPropId)?.title}
 					</div>
 					
 					<ul className="dropdown-menu dropdown-menu-start text-small">
