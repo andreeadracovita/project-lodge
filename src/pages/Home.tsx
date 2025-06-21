@@ -41,7 +41,7 @@ export default function Home() {
 		<>
 			<div id="landing-greeting-section" style={{ backgroundImage: `url(${backgroundImage})`}}>
 				<div id="landing-greeting-section-container" className="container">
-					<div className="greeting-message">{ greetingMessage }</div>
+					{/*<div className="greeting-message">{ greetingMessage }</div>*/}
 					<div id="home-search-bar" className="mb-4">
 						<Search />
 					</div>

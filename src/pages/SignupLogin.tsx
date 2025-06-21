@@ -7,22 +7,25 @@ import { useAuth } from "/src/components/security/AuthContext";
 import { checkUserExists } from "/src/api/AuthenticationApiService";
 import { createAccount } from "/src/api/AuthenticationApiService";
 
+enum FormState {
+	Email,
+	Password,
+	Signup
+};
+
 export default function SignupLogin() {
 	const navigate = useNavigate();
 	const authContext = useAuth();
-	const { state } = useLocation();
+	const { location } = useLocation();
 
+	const [formState, setFormState] = useState(FormState.Email);
 	const [input, setInput] = useState({
 		email: "",
 		firstName: "",
 		lastName: "",
 		password: ""
 	});
-	const [doesUserExist, setDoesUserExist] = useState(false);
 
-	const [showEmailInput, setShowEmailInput] = useState(true);
-	const [showPasswordInput, setShowPasswordInput] = useState(false);
-	const [showSignupForm, setShowSignupForm] = useState(false);
 	const [passwordStrength, setPasswordStrength] = useState("weak");
 	const [showLoginError, setShowLoginError] = useState(false);
 
@@ -34,9 +37,7 @@ export default function SignupLogin() {
 	];
 
 	function onBackClicked() {
-		setShowPasswordInput(false);
-		setShowSignupForm(false);
-		setShowEmailInput(true);
+		setFormState(FormState.Email);
 	}
 
 	async function onContinueClicked() {
@@ -44,11 +45,9 @@ export default function SignupLogin() {
 			const response = await checkUserExists(input.email);
 
 			if (response.data?.userExists) {
-				setShowEmailInput(false);
-				setShowPasswordInput(true);
+				setFormState(FormState.Password);
 			} else {
-				setShowEmailInput(false);
-				setShowSignupForm(true);
+				setFormState(FormState.Signup);
 			}
 		} catch (error) {
 			console.error(error);
@@ -70,7 +69,7 @@ export default function SignupLogin() {
 	async function handleLogin() {
 		if (await authContext.login(input.email, input.password)) {
 			setShowLoginError(false);
-			navigate(state?.path || "/");
+			navigate(location?.path || "/");
 		} else {
 			setShowLoginError(true);
 		}
@@ -79,10 +78,10 @@ export default function SignupLogin() {
 	async function onFormSubmit(event) {
 		event.preventDefault();
 
-		if (showPasswordInput) {
+		if (formState === FormState.Password) {
 			// Log in
 			handleLogin();
-		} else if (showSignupForm) {
+		} else if (formState === FormState.Signup) {
 			// Sign up
 			const payload = {
 				email: input.email,
@@ -106,21 +105,21 @@ export default function SignupLogin() {
 				<div className="row mb-3 border-bottom">
 					<div className="col-2">
 						{
-							(showSignupForm || showPasswordInput) &&
+							(formState === FormState.Signup || formState === FormState.Password) &&
 							<div className="cursor-pointer" onClick={onBackClicked}><Icon.ChevronLeft /></div>
 						}
 					</div>
 					<div className="col-8">
 						{
-							showEmailInput &&
+							formState === FormState.Email &&
 							<h1 className="page-heading text-center">Sign up or log in</h1>
 						}
 						{
-							showSignupForm &&
+							formState === FormState.Signup &&
 							<h1 className="page-heading text-center">Create an account</h1>
 						}
 						{
-							showPasswordInput &&
+							formState === FormState.Password &&
 							<h1 className="page-heading text-center">Log in</h1>
 						}
 					</div>
@@ -128,12 +127,12 @@ export default function SignupLogin() {
 
 				<form onSubmit={onFormSubmit}>
 				{
-					showEmailInput &&
+					formState === FormState.Email &&
 					<div>
 						<h2 className="section-heading">Welcome to Lodge</h2>
 						<input
 							type="text"
-							className="form-control rounded-pill"
+							className="form-control rounded-pill mt-10"
 							name="email"
 							value={input.email} 
 							onChange={handleChange}
@@ -141,20 +140,27 @@ export default function SignupLogin() {
 						/>
 						<button
 							type="button"
-							className="btn-pill w-100 mt-3"
+							className="btn-pill w-100 section-container"
 							onClick={onContinueClicked}
 						>
 							Continue
 						</button>
+						<hr />
+						<button type="button" className="btn-pill-outline w-100">
+							<span className="d-flex align-items-center justify-content-center">
+								<img src="/icons/Google__G__logo.png" width="18px" height="18px" className="me-1" />
+								Continue with Google
+							</span>
+						</button>
 					</div>
 				}
 				{
-					showPasswordInput &&
+					formState === FormState.Password &&
 					<div>
 						<h2 className="section-heading">Welcome back</h2>
 						<input
 							type="password"
-							className="form-control rounded-pill"
+							className="form-control rounded-pill mt-10"
 							name="password"
 							value={input.password}
 							onChange={handleChange}
@@ -169,19 +175,19 @@ export default function SignupLogin() {
 						}
 						<button
 							type="submit"
-							className="btn-pill w-100 mt-3"
+							className="btn-pill w-100 section-container"
 						>
 							Continue
 						</button>
 					</div>
 				}
 				{
-					showSignupForm &&
+					formState === FormState.Signup &&
 					<div>
 						<h2 className="section-heading">Legal name</h2>
 						<input
 							type="text"
-							className="form-control rounded-pill"
+							className="form-control rounded-pill mt-10"
 							name="firstName"
 							value={input.firstName} 
 							onChange={handleChange}
@@ -196,27 +202,27 @@ export default function SignupLogin() {
 							placeholder="Last name"
 						/>
 
-						<h2 className="section-heading mt-3">Contact info</h2>
+						<h2 className="section-heading section-container">Contact info</h2>
 						<input
 							type="text"
-							className="form-control rounded-pill"
+							className="form-control rounded-pill mt-10"
 							name="email"
 							value={input.email} 
 							onChange={handleChange}
 							placeholder="Email"
 						/>
 
-						<h2 className="section-heading mt-3">Password</h2>
+						<h2 className="section-heading section-container">Password</h2>
 						<input
 							type="password"
-							className="form-control rounded-pill"
+							className="form-control rounded-pill mt-10"
 							name="password"
 							value={input.password}
 							onChange={handleChange}
 							placeholder="Password"
 							autoComplete="off"
 						/>
-						<div className="mt-3">
+						<div className="mt-10">
 							{
 								errorsText.map((error, i) => 
 									<p key={i} className="error-font">
@@ -229,22 +235,20 @@ export default function SignupLogin() {
 						</div>
 						<button
 							type="submit"
-							className="btn-pill w-100 mt-3"
+							className="btn-pill w-100 section-container"
 						>
 							Continue
 						</button>
+						<hr />
+						<button type="button" className="btn-pill-outline w-100">
+							<span className="d-flex align-items-center justify-content-center">
+								<img src="/icons/Google__G__logo.png" width="18px" height="18px" className="me-1" />
+								Continue with Google
+							</span>
+						</button>
 					</div>
 				}
-				
-				
 				</form>
-				<hr />
-				<button type="button" className="btn-pill-outline w-100 mt-3">
-					<span className="d-flex align-items-center justify-content-center">
-						<img src="/icons/Google__G__logo.png" width="18px" height="18px" className="me-1" />
-						Continue with Google
-					</span>
-				</button>
 			</div>
 		</div>
 	);

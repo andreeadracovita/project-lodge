@@ -110,6 +110,7 @@ export default function HostingCalendarMonth({ id, month, year }) {
 				onClick={() => {}}
 			>
 				<div className="w-100">{index}</div>
+				
 				<div>80 CHF</div>
 			</div>
 		);
