@@ -20,10 +20,10 @@ export default function HostingCalendarSettings() {
 				if (data.length > 0) {
 					setHostedProperties(data);
 					if (!searchParams.get("id")) {
-						searchParams.set("id", data[1].id); // 0
+						searchParams.set("id", data[0].id);
 						setSearchParams(searchParams);
 					}
-					setSelectedPropId(data[1].id); // 0
+					setSelectedPropId(data[0].id);
 				}
 			})
 			.catch(error => {
@@ -31,8 +31,10 @@ export default function HostingCalendarSettings() {
 			});
 	}, [])
 
-	function handlePropertyClick(event) {
-
+	function handlePropertyClick(id) {
+		searchParams.set("id", id);
+		setSearchParams(searchParams);
+		setSelectedPropId(id);
 	}
 	
 	return (
@@ -40,9 +42,22 @@ export default function HostingCalendarSettings() {
 			<div className="text-strong">Selected property</div>
 			{
 				hostedProperties.length > 0 && selectedPropId &&
-				<div>
-					<div className="btn-pill-outline mt-10">{hostedProperties.find(p => p.id === selectedPropId)?.title}</div>
-					<div>[Dropdown with properties, first selected by default]</div>
+				<div className="dropdown">
+					<div id="dropdown-properties" role="button" className="btn-pill-outline mt-10" data-bs-toggle="dropdown">
+						{hostedProperties.find(p => p.id === selectedPropId)?.title}
+					</div>
+					
+					<ul className="dropdown-menu dropdown-menu-start text-small">
+						{hostedProperties.map((p, i) => {
+							return <li
+								key={i}
+								className="dropdown-item cursor-pointer"
+								onClick={() => handlePropertyClick(p.id)}
+							>
+								{p.title}
+							</li>
+						})}
+					</ul>
 				</div>
 			}
 		</div>

@@ -44,18 +44,15 @@ export default function HostingCalendarView() {
 	function createBookedTag(dayElementId, tagText) {
 		const dayElement = document.getElementById(`${dayElementId}`);
 		if (dayElement) {
-			const dayElementTag = document.getElementById(`tag-${dayElementId}`);
-			if (!dayElementTag) {
-				const tag = document.createElement("div");
-				tag.id = `tag-${dayElementId}`;
-				tag.className = "mt-6 booked-tag";
+			const tag = document.createElement("div");
+			tag.id = `tag-${dayElementId}`;
+			tag.className = "mt-6 booked-tag";
 
-				const tagSpan = document.createElement("span");
-				tagSpan.textContent = tagText;
-				tag.appendChild(tagSpan);
+			const tagSpan = document.createElement("span");
+			tagSpan.textContent = tagText;
+			tag.appendChild(tagSpan);
 
-				dayElement.appendChild(tag);
-			}
+			dayElement.appendChild(tag);
 		}
 	}
 
