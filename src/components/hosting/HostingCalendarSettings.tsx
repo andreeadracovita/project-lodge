@@ -19,6 +19,7 @@ export default function HostingCalendarSettings() {
 				const data = response.data;
 				if (data.length > 0) {
 					setHostedProperties(data);
+					console.log(data);
 					if (!searchParams.get("id")) {
 						searchParams.set("id", data[0].id);
 						setSearchParams(searchParams);
@@ -42,22 +43,33 @@ export default function HostingCalendarSettings() {
 			<div className="text-strong">Selected property</div>
 			{
 				hostedProperties.length > 0 && selectedPropId &&
-				<div className="dropdown">
-					<div id="dropdown-properties" role="button" className="btn-pill-outline mt-10" data-bs-toggle="dropdown">
-						{hostedProperties.find(p => p.id == selectedPropId)?.title}
+				<div>
+					<div className="dropdown">
+						<div id="dropdown-properties" role="button" className="btn-pill-outline mt-10" data-bs-toggle="dropdown">
+							{hostedProperties.find(p => p.id == selectedPropId)?.title}
+						</div>
+						
+						<ul className="dropdown-menu dropdown-menu-start text-small">
+							{hostedProperties.map((p, i) => {
+								return <li
+									key={i}
+									className="dropdown-item cursor-pointer"
+									onClick={() => handlePropertyClick(p.id)}
+								>
+									{p.title}
+								</li>
+							})}
+						</ul>
 					</div>
-					
-					<ul className="dropdown-menu dropdown-menu-start text-small">
-						{hostedProperties.map((p, i) => {
-							return <li
-								key={i}
-								className="dropdown-item cursor-pointer"
-								onClick={() => handlePropertyClick(p.id)}
-							>
-								{p.title}
-							</li>
-						})}
-					</ul>
+
+					<div className="section-heading section-container">Price settings</div>
+					<div className="mt-10">Per night: [EXTRACT BOOKING DETAILS AS WELL] {hostedProperties.find(p => p.id == selectedPropId)?.price_per_night_eur}</div>
+					<div className="btn-text-underline">Edit price</div>
+					<hr />
+					<div className="btn-text-underline">Edit Availability</div>
+					<hr />
+					<div className="section-heading">Selected booking</div>
+					<div className="btn-text-underline">View booking</div>
 				</div>
 			}
 		</div>

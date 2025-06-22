@@ -153,7 +153,7 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 
 	return (
 		<div>
-			<div id="calendar-header">
+			<div>
 				<div className="d-flex">
 					<div className="col-2">
 						{chevronLeft && <span className="cursor-pointer"><Icon.ChevronLeft onClick={onLeftChevronClicked} /></span>}
@@ -169,7 +169,7 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 					)}
 				</div>
 			</div>
-			<div id="calendar-days">
+			<div>
 				<div className="days-grid mt-2">
 					{[...Array(dayPadding)].map((_, index) => (
 				        <span key={index}></span>

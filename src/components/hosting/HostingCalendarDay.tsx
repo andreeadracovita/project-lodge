@@ -15,7 +15,7 @@ export default function HostingCalendarDay({ id, year, month, day }) {
 	}
 
 	const containerClass = classNames(
-		"calendar-day",
+		"hosting-calendar-day",
 		"d-flex",
 		"flex-wrap",
 		"justify-content-start",

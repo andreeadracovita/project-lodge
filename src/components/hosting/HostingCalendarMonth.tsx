@@ -57,7 +57,7 @@ export default function HostingCalendarMonth({ id, month, year }) {
 
 	return (
 		<div id={id} className="mt-10">
-			<div id="calendar-header">
+			<div>
 				<div className="page-heading">
 					{monthNames[month]} {year !== new Date().getFullYear() ? year : "" }
 				</div>
@@ -67,7 +67,7 @@ export default function HostingCalendarMonth({ id, month, year }) {
 					)}
 				</div>
 			</div>
-			<div id="calendar-days">
+			<div>
 				<div className="days-grid mt-2">
 					{[...Array(dayPadding)].map((_, index) => (
 				        <span key={index}></span>
