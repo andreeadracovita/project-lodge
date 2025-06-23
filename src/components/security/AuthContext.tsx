@@ -123,7 +123,6 @@ export default function AuthProvider({ children }) {
 		sessionStorage.removeItem("lodgeAvatar");
 
 		navigate("/");
-		// window.location.reload(true);
 	}
 
 	return (

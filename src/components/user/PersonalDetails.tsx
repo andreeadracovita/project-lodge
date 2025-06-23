@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import Avatar from "./Avatar";
 import "./PersonalDetails.css";
-import { updateUser, uploadAvatar } from "/src/api/BackendApiService";
+import { getUserConfig, updateUser, uploadAvatar } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 
 enum Section {
@@ -17,38 +17,61 @@ enum Section {
 export default function PersonalDetails() {
 	const authContext = useAuth();
 	const [avatarUrl, setAvatarUrl] = useState();
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [nationality, setNationality] = useState("");
+	const [input, setInput] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		nationality: ""
+	});
 
 	const [visibleSection, setVisibleSection] = useState(Section.None);
 
 	// Fetch info from db
 	useEffect(() => {
-
+		// get user details, setInput
+		getUserConfig()
+			.then(response => {
+				setInput(prevVal => {
+					return {
+						firstName: response.data.first_name,
+						lastName: response.data.last_name,
+						nationality: response.data.country_code
+					}
+				})
+			})
+			.catch(error => {
+				console.error(error);
+			})
 	}, []);
 
 	function handleChange(event): void {
 		const { name, value } = event.target;
-		setInput((prevVal) => {
+		setInput(prevVal => {
 			return {
 				...prevVal,
 				[name]: value
 			}
-		})
+		});
 	}
 
-	function handleNameSubmit(): void {
-		
+	function handleNameSubmit(event: Event): void {
+		event.preventDefault();
+		updateUser({ first_name: input.firstName, last_name: input.lastName })
+			.then(() => {
+				clearSection();
+				authContext.setUserConfig();
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	}
 
-	function handleEmailSubmit(): void {
-		
+	function handleEmailSubmit(event: Event): void {
+		event.preventDefault();
 	}
 
-	function handleNationalitySubmit(): void {
-		
+	function handleNationalitySubmit(event: Event): void {
+		event.preventDefault();
 	}
 
 	function showSection(section: Section): void {
@@ -64,7 +87,7 @@ export default function PersonalDetails() {
 		document.getElementById("avatar-input").click();
 	}
 
-	function handleAvatarUploaded(event): void {
+	function handleAvatarUploaded(event: Event): void {
 		const files = Array.from(event.target.files);
 		if (files.length > 0) {
 			const tempUrl = URL.createObjectURL(files[0]);
@@ -156,21 +179,21 @@ export default function PersonalDetails() {
 							visibleSection === Section.Name
 							? <>
 								<label htmlFor="first-name">First name</label>
-								<input id="first-name" name="firstName" value={firstName} onChange={handleChange} className={formClassNames} />
+								<input id="first-name" name="firstName" value={input.firstName} onChange={handleChange} className={formClassNames} />
 
 								<label htmlFor="last-name">Last name</label>
-								<input id="last-name" name="lastName" value={lastName} onChange={handleChange} className={formClassNames} />
+								<input id="last-name" name="lastName" value={input.lastName} onChange={handleChange} className={formClassNames} />
 							</>
 							: <>
-								<span>First Last</span>
+								<span>{input.firstName} {input.lastName}</span>
 							</>
 						}
 						
 					</div>
-					<div className="col-2 text-end">
+					<div className="col-2 d-flex justify-content-end align-items-start">
 						{
 							visibleSection === Section.Name
-							? <span className="btn-text-underline" onClick={clearSection}>Save</span>
+							? <button className="btn-text-underline" type="submit">Save</button>
 							: <span className="btn-text-underline" onClick={() => showSection(Section.Name)}>Edit</span>
 						}
 					</div>
@@ -189,10 +212,10 @@ export default function PersonalDetails() {
 							: <span>Email@</span>
 						}
 					</div>
-					<div className="col-2 text-end">
+					<div className="col-2 d-flex justify-content-end align-items-start">
 						{
 							visibleSection === Section.Email
-							? <span className="btn-text-underline" onClick={clearSection}>Save</span>
+							? <button className="btn-text-underline" type="submit">Save</button>
 							: <span className="btn-text-underline" onClick={() => showSection(Section.Email)}>Edit</span>
 						}
 					</div>
@@ -212,10 +235,10 @@ export default function PersonalDetails() {
 						}
 						
 					</div>
-					<div className="col-2 text-end">
+					<div className="col-2 d-flex justify-content-end align-items-start">
 						{
 							visibleSection === Section.Nationality
-							? <span className="btn-text-underline" onClick={clearSection}>Save</span>
+							? <button className="btn-text-underline" type="submit">Save</button>
 							: <span className="btn-text-underline" onClick={() => showSection(Section.Nationality)}>Edit</span>
 						}
 					</div>
