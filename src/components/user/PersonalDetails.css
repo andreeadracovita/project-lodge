@@ -8,3 +8,7 @@
 	background-color: var(--light-brand-color);
 	cursor: pointer;
 }
+
+#avatar-input {
+	display: none;
+}

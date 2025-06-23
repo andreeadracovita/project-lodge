@@ -3,16 +3,20 @@ import classNames from "classnames";
 
 import Avatar from "./Avatar";
 import "./PersonalDetails.css";
+import { updateUser, uploadAvatar } from "/src/api/BackendApiService";
+import { useAuth } from "/src/components/security/AuthContext";
 
 enum Section {
 	None,
+	Avatar,
 	Name,
 	Email,
 	Nationality
 }
 
 export default function PersonalDetails() {
-	const [avatarUrl, setAvatarUrl] = useState("");
+	const authContext = useAuth();
+	const [avatarUrl, setAvatarUrl] = useState();
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -23,7 +27,7 @@ export default function PersonalDetails() {
 	// Fetch info from db
 	useEffect(() => {
 
-	});
+	}, []);
 
 	function handleChange(event): void {
 		const { name, value } = event.target;
@@ -35,8 +39,16 @@ export default function PersonalDetails() {
 		})
 	}
 
-	function handleSubmit(): void {
-		console.log("Update info");
+	function handleNameSubmit(): void {
+		
+	}
+
+	function handleEmailSubmit(): void {
+		
+	}
+
+	function handleNationalitySubmit(): void {
+		
 	}
 
 	function showSection(section: Section): void {
@@ -45,6 +57,52 @@ export default function PersonalDetails() {
 
 	function clearSection(): void {
 		setVisibleSection(Section.None);
+	}
+
+	function handleAvatarClick(): void {
+		showSection(Section.Avatar);
+		document.getElementById("avatar-input").click();
+	}
+
+	function handleAvatarUploaded(event): void {
+		const files = Array.from(event.target.files);
+		if (files.length > 0) {
+			const tempUrl = URL.createObjectURL(files[0]);
+			setAvatarUrl(tempUrl);
+		}
+	}
+
+	async function handleAvatarSubmit(event): void {
+		event.preventDefault();
+
+		const files = event.target.avatar.files;
+		if (files.length === 0) {
+			clearSection();
+			return;
+		}
+
+		const data = new FormData();
+		data.append("avatar", files[0]);
+
+		uploadAvatar(data)
+			.then(response => {
+				updateUser({ img_url: response.data.filename })
+					.then(() => {
+						clearSection();
+						authContext.setUserConfig();
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
+	function handleAvatarDismissClick(): void {
+		clearSection();
+		setAvatarUrl(null);
 	}
 
 	const formClassNames = classNames(
@@ -60,15 +118,35 @@ export default function PersonalDetails() {
 					<h1 className="page-heading">Personal details</h1>
 					<p>Update your contact information and find out how it's used.</p>
 				</div>
-				<div className="col-2 d-flex justify-content-end">
-					<div className="avatar-container d-flex justify-content-center align-items-center">
-						<Avatar size={52} />
-					</div>
+				<div className="col-2 justify-content-end">
+					<form onSubmit={handleAvatarSubmit}>
+						<div className="d-flex flex-wrap justify-content-center">
+							<div className="avatar-container d-flex justify-content-center align-items-center w-100">
+								<div onClick={handleAvatarClick}>
+									<Avatar size={52} previewAvatar={avatarUrl} />
+									<input
+										id="avatar-input"
+										type="file"
+										name="avatar"
+										onChange={handleAvatarUploaded}
+										accept="image/png, image/jpeg"
+									/>
+								</div>
+							</div>
+							{
+								visibleSection === Section.Avatar &&
+								<div className="d-flex">
+									<button className="btn-text-underline" type="submit">Save</button>
+									<button className="btn-text-underline" onClick={handleAvatarDismissClick}>Dismiss</button>
+								</div>
+							}
+						</div>
+					</form>
 				</div>
 			</div>
 			
 			<hr />
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleNameSubmit}>
 				<div className="row px-3">
 					<div className="col-2">
 						<label htmlFor="first-name">Name</label>
@@ -92,14 +170,14 @@ export default function PersonalDetails() {
 					<div className="col-2 text-end">
 						{
 							visibleSection === Section.Name
-							? <span className="btn-text-underline" onClick={() => clearSection()}>Save</span>
+							? <span className="btn-text-underline" onClick={clearSection}>Save</span>
 							: <span className="btn-text-underline" onClick={() => showSection(Section.Name)}>Edit</span>
 						}
 					</div>
 				</div>
 			</form>
 			<hr />
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleEmailSubmit}>
 				<div className="row px-3">
 					<div className="col-2">
 						<label htmlFor="email">Email</label>
@@ -114,14 +192,14 @@ export default function PersonalDetails() {
 					<div className="col-2 text-end">
 						{
 							visibleSection === Section.Email
-							? <span className="btn-text-underline" onClick={() => clearSection()}>Save</span>
+							? <span className="btn-text-underline" onClick={clearSection}>Save</span>
 							: <span className="btn-text-underline" onClick={() => showSection(Section.Email)}>Edit</span>
 						}
 					</div>
 				</div>
 			</form>
 			<hr />
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleNationalitySubmit}>
 				<div className="row px-3">
 					<div className="col-2">
 						<label htmlFor="nationality">Nationality</label>
@@ -137,7 +215,7 @@ export default function PersonalDetails() {
 					<div className="col-2 text-end">
 						{
 							visibleSection === Section.Nationality
-							? <span className="btn-text-underline" onClick={() => clearSection()}>Save</span>
+							? <span className="btn-text-underline" onClick={clearSection}>Save</span>
 							: <span className="btn-text-underline" onClick={() => showSection(Section.Nationality)}>Edit</span>
 						}
 					</div>

@@ -67,9 +67,9 @@ main {
   margin-bottom: 2rem;
 }
 
-label {
+/*label {
   margin-top: 0.75rem;
-}
+}*/
 
 hr {
   border-top: 1px solid var(--light-grey);
@@ -230,6 +230,8 @@ hr {
   cursor: pointer;
   text-decoration: underline;
   display: block;
+  border: none;
+  background: transparent;
 }
 
 .btn-pill {

@@ -75,7 +75,7 @@ export default function AuthProvider({ children }) {
 				}
 			}
 		} catch (error) { 
-			console.log(error)
+			console.log(error);
 		}
 	}
 
@@ -127,7 +127,7 @@ export default function AuthProvider({ children }) {
 	}
 
 	return (
-		<AuthContext.Provider value={ { isAuthenticated, login, logout, firstName, token, currency, language, avatar, exchangeRate } }>
+		<AuthContext.Provider value={ { isAuthenticated, login, setUserConfig, logout, firstName, token, currency, language, avatar, exchangeRate } }>
 			{ children }
 		</AuthContext.Provider>
 	);
