@@ -20,6 +20,8 @@
     "react-bootstrap-icons": "^1.11.5",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",
+    "react-select": "^5.10.1",
+    "react-select-country-list": "^2.2.3",
     "read-chunk": "^5.0.0"
   },
   "devDependencies": {

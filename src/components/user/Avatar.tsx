@@ -8,7 +8,7 @@ export default function Avatar({ size, previewAvatar }) {
 	return (
 		<>
 			{
-				authContext.avatar !== undefined && authContext.avatar !== null
+				previewAvatar || authContext.avatar !== undefined && authContext.avatar !== null
 					? <img
 						src={previewAvatar ? previewAvatar : fileStorage + authContext.avatar}
 						alt="avatar"

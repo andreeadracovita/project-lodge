@@ -232,6 +232,7 @@ hr {
   display: block;
   border: none;
   background: transparent;
+  padding: 0;
 }
 
 .btn-pill {
