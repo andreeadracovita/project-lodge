@@ -3,14 +3,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { apiClient } from "/src/api/ApiClient";
 import { executeJwtAuthenticationService } from "/src/api/AuthenticationApiService";
 import { getUserConfig, getExchangeRateForTarget } from "/src/api/BackendApiService";
+import { defaultLanguage, siteCurrency } from "/src/utils/constants";
 
 export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
-	const defaultCurrency = "CHF";
-	const defaultLanguage = "en-GB";
-
 	const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem("lodgeIsAuthenticated"));
 	const [token, setToken] = useState(sessionStorage.getItem("lodgeToken"));
 
@@ -19,7 +17,7 @@ export default function AuthProvider({ children }) {
 	const [avatar, setAvatar] = useState(sessionStorage.getItem("lodgeAvatar"));
 
 	// User configs
-	const [currency, setCurrency] = useState(sessionStorage.getItem("lodgeCurrency") ?? defaultCurrency);
+	const [currency, setCurrency] = useState(sessionStorage.getItem("lodgeCurrency") ?? siteCurrency);
 	const [language, setLanguage] = useState(sessionStorage.getItem("lodgeLanguage") ?? defaultLanguage);
 
 	// Exchange rate

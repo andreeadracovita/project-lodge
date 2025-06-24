@@ -6,36 +6,10 @@ import AvatarForm from "./settings/avatar/AvatarForm";
 import EmailForm from "./settings/email/EmailForm";
 import NameForm from "./settings/name/NameForm";
 import NationalityForm from "./settings/nationality/NationalityForm";
-import { getUserConfig, updateUser, uploadAvatar } from "/src/api/BackendApiService";
+import { getUserConfig } from "/src/api/BackendApiService";
 
-export default function PersonalDetails() {
-	const [data, setData] = useState({
-		firstName: "",
-		lastName: "",
-		email: "",
-		nationality: ""
-	});
+export default function PersonalDetails({ data }) {
 	const [visibleSection, setVisibleSection] = useState(SettingsSectionEnum.None);
-
-	// Fetch info from db
-	useEffect(() => {
-		// get user details, setData
-		getUserConfig()
-			.then(response => {
-				console.log(response.data);
-				setData(prevVal => {
-					return {
-						firstName: response.data.first_name,
-						lastName: response.data.last_name,
-						email: response.data.email,
-						nationality: response.data.country_code
-					}
-				})
-			})
-			.catch(error => {
-				console.error(error);
-			})
-	}, []);
 
 	function showSection(section: SettingsSectionEnum): void {
 		setVisibleSection(section);
@@ -45,7 +19,8 @@ export default function PersonalDetails() {
 		setVisibleSection(SettingsSectionEnum.None);
 	}
 
-	return <>
+	return (
+		<>
 			<div className="row">
 				<div className="col-10">
 					<h1 className="page-heading">Personal details</h1>
@@ -83,4 +58,5 @@ export default function PersonalDetails() {
 			/>
 			<hr />
 		</>
+	);
 }

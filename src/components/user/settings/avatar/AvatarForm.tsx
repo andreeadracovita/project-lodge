@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import Avatar from "/src/components/user/Avatar";
-import { getUserConfig, updateUser, uploadAvatar } from "/src/api/BackendApiService";
+import { updateUser, uploadAvatar } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 
 export default function AvatarForm({ isFocused, showSection, clearSection }) {

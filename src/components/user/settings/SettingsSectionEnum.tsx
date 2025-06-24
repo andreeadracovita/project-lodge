@@ -3,5 +3,7 @@ export enum SettingsSectionEnum {
 	Avatar,
 	Name,
 	Email,
-	Nationality
+	Nationality,
+	Currency,
+	Language
 }

@@ -5,7 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 import "./Header.css";
 import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
-import { siteName } from "/src/utils/constants";
+import { availableLanguages, siteName } from "/src/utils/constants";
 
 export default function Header() {
 	const authContext = useAuth();
@@ -26,7 +26,10 @@ export default function Header() {
 					</div>
 					<div className="col-lg-6 d-flex justify-content-end align-items-center nav-item-font">
 						<span className="me-4 btn-pill">{authContext.currency}</span>
-						<span className="me-4 d-flex align-items-center btn-pill"><Icon.Globe2 color="white" size={16} className="me-1"/>{authContext.language}</span>
+						<span className="me-4 d-flex align-items-center btn-pill">
+							<Icon.Globe2 color="white" size={16} className="me-1"/>
+							{availableLanguages.find(l => l.value === authContext.language)?.label}
+						</span>
 						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
 						{
 							!authContext.isAuthenticated &&

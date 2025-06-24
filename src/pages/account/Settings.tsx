@@ -2,6 +2,7 @@ import { PersonGear, ShieldLock, Sliders } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
+import { getUserConfig } from "/src/api/BackendApiService";
 import PersonalDetails from "/src/components/user/PersonalDetails";
 import LoginSecurity from "/src/components/user/LoginSecurity";
 import Preferences from "/src/components/user/Preferences";
@@ -10,10 +11,41 @@ import Privacy from "/src/components/user/Privacy";
 import SettingsNav, { SettingsSection } from "/src/components/user/SettingsNav";
 
 export default function Settings() {
+	const [data, setData] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		nationality: "",
+		currency: "",
+		language: "",
+		experiencesIds: []
+	});
 	const iconSize = 30;
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [activeSection, setActiveSection] = useState();
+
+	useEffect(() => {
+		getUserConfig()
+			.then(response => {
+				const data = response.data;
+				console.log(data);
+				setData(prevVal => {
+					return {
+						firstName: data.first_name,
+						lastName: data.last_name,
+						email: data.email,
+						nationality: data.country_code,
+						currency: data.currency,
+						language: data.language,
+						experiencesIds: data.experiences_ids
+					}
+				})
+			})
+			.catch(error => {
+				console.error(error);
+			})
+	}, []);
 
 	useEffect(() => {
 		setActiveSection(searchParams.get("section"));
@@ -68,7 +100,7 @@ export default function Settings() {
 				<div id="settings-main" className="col-8">
 					{
 						activeSection === SettingsSection.Details &&
-						<PersonalDetails />
+						<PersonalDetails data={data} />
 					}
 					{
 						activeSection === SettingsSection.Security &&
@@ -76,7 +108,7 @@ export default function Settings() {
 					}
 					{
 						activeSection === SettingsSection.Preferences &&
-						<Preferences />
+						<Preferences data={data} />
 					}
 					{
 						activeSection === SettingsSection.Payment &&
