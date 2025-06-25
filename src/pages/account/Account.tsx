@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
 import AccountCard from "/src/components/user/AccountCard";
-import { SettingsSection } from "/src/components/user/SettingsNav";
+import { SettingsTab } from "/src/components/user/SettingsNav";
 
 export default function Account() {
 	const authContext = useAuth();
@@ -26,7 +26,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Personal details"
 							desc="Update your contact information"
-							url={`/myaccount/settings?section=${SettingsSection.Details}`}
+							url={`/myaccount/settings?tab=${SettingsTab.Details}`}
 						/>
 					</div>
 					<div className="col-4">
@@ -35,7 +35,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Login and security"
 							desc="Update your contact information"
-							url={`/myaccount/settings?section=${SettingsSection.Security}`}
+							url={`/myaccount/settings?tab=${SettingsTab.Security}`}
 						/>
 					</div>
 					<div className="col-4">
@@ -44,7 +44,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Preferences"
 							desc="Change language, currency and experiences"
-							url={`/myaccount/settings?section=${SettingsSection.Preferences}`}
+							url={`/myaccount/settings?tab=${SettingsTab.Preferences}`}
 						/>
 					</div>
 					<div className="col-4">
@@ -53,7 +53,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Payment"
 							desc="Add or remove payment methods"
-							url={`/myaccount/settings?section=${SettingsSection.Payment}`}
+							url={`/myaccount/settings?tab=${SettingsTab.Payment}`}
 						/>
 					</div>
 					<div className="col-4">
@@ -62,7 +62,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Privacy"
 							desc="Updatte privacy settings"
-							url={`/myaccount/settings?section=${SettingsSection.Privacy}`}
+							url={`/myaccount/settings?tab=${SettingsTab.Privacy}`}
 						/>
 					</div>
 				</div>

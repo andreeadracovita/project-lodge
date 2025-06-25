@@ -8,7 +8,8 @@ import LoginSecurity from "/src/components/user/LoginSecurity";
 import Preferences from "/src/components/user/Preferences";
 import Payment from "/src/components/user/Payment";
 import Privacy from "/src/components/user/Privacy";
-import SettingsNav, { SettingsSection } from "/src/components/user/SettingsNav";
+import SettingsNav, { SettingsTab } from "/src/components/user/SettingsNav";
+import { SettingsSectionEnum } from "/src/components/user/settings/SettingsSectionEnum";
 
 export default function Settings() {
 	const [data, setData] = useState({
@@ -23,7 +24,8 @@ export default function Settings() {
 	const iconSize = 30;
 
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [activeSection, setActiveSection] = useState();
+	const [activeTab, setActiveTab] = useState();
+	const [activeSection, setActiveSection] = useState(SettingsSectionEnum.None);
 
 	useEffect(() => {
 		getUserConfig()
@@ -48,8 +50,16 @@ export default function Settings() {
 	}, []);
 
 	useEffect(() => {
-		setActiveSection(searchParams.get("section"));
-	}, [searchParams.get("section")]);
+		setActiveTab(searchParams.get("tab"));
+	}, [searchParams.get("tab")]);
+
+	function showSection(section: SettingsSectionEnum): void {
+		setActiveSection(section);
+	}
+
+	function clearSection(): void {
+		setActiveSection(SettingsSectionEnum.None);
+	}
 
 	return (
 		<div className="container section-container">
@@ -60,62 +70,62 @@ export default function Settings() {
 							iconName="PersonGear"
 							iconSize={iconSize}
 							tabName="Personal details"
-							settingsSection={SettingsSection.Details}
-							activeSection={activeSection}
+							settingsTab={SettingsTab.Details}
+							activeSection={activeTab}
 						/>
 						<hr />
 						<SettingsNav
 							iconName="ShieldLock"
 							iconSize={iconSize}
 							tabName="Login and security"
-							settingsSection={SettingsSection.Security}
-							activeSection={activeSection}
+							settingsTab={SettingsTab.Security}
+							activeSection={activeTab}
 						/>
 						<hr />
 						<SettingsNav
 							iconName="Sliders"
 							iconSize={iconSize}
 							tabName="Preferences"
-							settingsSection={SettingsSection.Preferences}
-							activeSection={activeSection}
+							settingsTab={SettingsTab.Preferences}
+							activeSection={activeTab}
 						/>
 						<hr />
 						<SettingsNav
 							iconName="CreditCard"
 							iconSize={iconSize}
 							tabName="Payment"
-							settingsSection={SettingsSection.Payment}
-							activeSection={activeSection}
+							settingsTab={SettingsTab.Payment}
+							activeSection={activeTab}
 						/>
 						<hr />
 						<SettingsNav
 							iconName="ShieldCheck"
 							iconSize={iconSize}
 							tabName="Privacy"
-							settingsSection={SettingsSection.Privacy}
-							activeSection={activeSection}
+							settingsTab={SettingsTab.Privacy}
+							activeSection={activeTab}
 						/>
 					</div>
 				</div>
 				<div id="settings-main" className="col-8">
 					{
-						activeSection === SettingsSection.Details &&
-						<PersonalDetails data={data} />
+						activeTab === SettingsTab.Details &&
+						<PersonalDetails data={data} showSection={showSection} clearSection={clearSection} activeSection={activeSection} />
 					}
 					{
-						activeSection === SettingsSection.Security &&
+						activeTab === SettingsTab.Security &&
 						<LoginSecurity />
 					}
 					{
-						activeSection === SettingsSection.Preferences &&
-						<Preferences data={data} />
+						activeTab === SettingsTab.Preferences &&
+						<Preferences data={data} showSection={showSection} clearSection={clearSection} activeSection={activeSection} />
 					}
 					{
-						activeSection === SettingsSection.Payment &&
+						activeTab === SettingsTab.Payment &&
 						<Payment />
 					}
 					{
-						activeSection === SettingsSection.Privacy &&
+						activeTab === SettingsTab.Privacy &&
 						<Privacy />
 					}
 				</div>

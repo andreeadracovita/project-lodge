@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import "./FormPartDescription.css";
 import { getAllFeatures, getAllExperiences, updatePropertyDetails } from "/src/api/BackendApiService";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
-import { experienceIconMap } from "/src/utils/mappings";
+import Multiselect from "/src/components/common/Multiselect";
 import localisedString from "/src/localisation/en-GB";
+import { experienceIconMap, featuresIconMap } from "/src/utils/mappings";
 
 export default function FormPartDescription({
 	isEditable,
@@ -42,14 +42,6 @@ export default function FormPartDescription({
 				console.error(error);
 			})
 	}, []);
-
-	function isFeatureIdSelected(featureId) {
-		return input.featuresIds.includes(featureId);
-	}
-
-	function isExperienceIdSelected(experienceId) {
-		return input.experiencesIds.includes(experienceId);
-	}
 
 	const stylingFormTextArea = classNames(
 		"form-control",
@@ -173,102 +165,24 @@ export default function FormPartDescription({
 
 			<div id="features">
 				<h2 className="section-heading">{ localisedString["hosting:features"] }</h2>
-				<div id="selected-features" className="d-flex flex-wrap">
-					{
-						input.featuresIds.map((id) => {
-							const foundFeature = features.find(feature => feature.id == id);
-							if (foundFeature) {
-								return <span
-									key={foundFeature.id}
-									id={foundFeature.id}
-									className={classNames(
-										"features-list-item",
-										{
-											"selectable-item": isEditable,
-											"selected-feature": isEditable && isFeatureIdSelected(foundFeature.id)
-										}
-									)}
-									onClick={isEditable ? handleChangeFeatureMultiselect : undefined}
-								>
-									{ capitalizeFirstLetter(foundFeature.name) }
-								</span>
-							}
-						})	
-					}
-				</div>
-				{
-					isEditable &&
-					<div id="unselected-features" className="d-flex flex-wrap">
-						{
-							features.map(feature => 
-								<span
-									key={feature.id}
-									id={feature.id}
-									className={classNames(
-										"features-list-item",
-										"selectable-item",
-										{
-											"d-none": isFeatureIdSelected(feature.id)
-										}
-									)}
-									onClick={handleChangeFeatureMultiselect}
-								>
-									{ capitalizeFirstLetter(feature.name) }
-								</span>
-							)	
-						}
-					</div>
-				}
+				<Multiselect
+					options={features}
+					selectedIds={input.featuresIds}
+					handleChange={handleChangeFeatureMultiselect}
+					isEditable={isEditable}
+					iconMap={featuresIconMap}
+				/>
 			</div>
 
 			<div id="experiences">
 				<label htmlFor="experiences" className="mt-3">{ localisedString["hosting:experiences-detail"] }</label>
-				<div id="selected-features" className="d-flex flex-wrap">
-					{
-						input.experiencesIds.map((id) => {
-							const foundExp = experiences.find(exp => exp.id == id);
-							if (foundExp) {
-								return <span
-									key={foundExp.id}
-									id={foundExp.id}
-									className={classNames(
-										"features-list-item",
-										{
-											"selectable-item": isEditable,
-											"selected-feature": isEditable && isExperienceIdSelected(foundExp.id)
-										}
-									)}
-									onClick={isEditable ? handleChangeExperienceMultiselect : undefined}
-								>
-									{ experienceIconMap.get(foundExp.name) } { capitalizeFirstLetter(foundExp.name) }
-								</span>
-							}
-						})	
-					}
-				</div>
-				{
-					isEditable &&
-					<div id="unselected-experiences" className="d-flex flex-wrap">
-						{
-							experiences.map(exp => 
-								<span
-									key={exp.id}
-									id={exp.id}
-									className={classNames(
-										"features-list-item",
-										"selectable-item",
-										{
-											"d-none": isExperienceIdSelected(exp.id)
-										}
-									)}
-									onClick={handleChangeExperienceMultiselect}
-								>
-									{ experienceIconMap.get(exp.name) } { capitalizeFirstLetter(exp.name) }
-								</span>
-							)	
-						}
-					</div>
-				}
+				<Multiselect
+					options={experiences}
+					selectedIds={input.experiencesIds}
+					handleChange={handleChangeExperienceMultiselect}
+					isEditable={isEditable}
+					// iconMap={experienceIconMap}
+				/>
 			</div>
 
 			{

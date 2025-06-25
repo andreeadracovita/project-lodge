@@ -124,36 +124,19 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	function handleChangeFeatureMultiselect(event) {
-		const selected = parseInt(event.target.id);
+	function handleChangeMultiselect(event, name) {
+		const item = parseInt(event.target.id);
 
-		let newFeaturesValue = input.featuresIds;
-		if (newFeaturesValue.includes(selected)) {
-			newFeaturesValue = newFeaturesValue.filter(f => f !== selected);
+		let newValues = input[name];
+		if (newValues.includes(item)) {
+			newValues = newValues.filter(val => val !== item);
 		} else {
-			newFeaturesValue.push(selected);
+			newValues.push(item);
 		}
 		setInput((prevValue) => {
 			return {
 				...prevValue,
-				features_ids: newFeaturesValue
-			}
-		});
-	}
-
-	function handleChangeExperienceMultiselect(event) {
-		const selected = parseInt(event.target.id);
-
-		let newExperiencesValue = input.experiencesIds;
-		if (newExperiencesValue.includes(selected)) {
-			newExperiencesValue = newExperiencesValue.filter(e => e !== selected);
-		} else {
-			newExperiencesValue.push(selected);
-		}
-		setInput((prevValue) => {
-			return {
-				...prevValue,
-				experiencesIds: newExperiencesValue
+				[name]: newValues
 			}
 		});
 	}
@@ -193,8 +176,8 @@ export default function EditPropertyForm() {
 							input={input}
 							propertyId={propertyId}
 							handleChange={handleChange}
-							handleChangeFeatureMultiselect={handleChangeFeatureMultiselect}
-							handleChangeExperienceMultiselect={handleChangeExperienceMultiselect}
+							handleChangeFeatureMultiselect={(event) => handleChangeMultiselect(event, "featuresIds")}
+							handleChangeExperienceMultiselect={(event) => handleChangeMultiselect(event, "experiencesIds")}
 							advanceState={advanceState}
 						/>
 					</div>

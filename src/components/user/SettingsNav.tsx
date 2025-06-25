@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router";
 
 import { Icon } from "/src/components/common/Icon";
 
-export enum SettingsSection {
+export enum SettingsTab {
 	Details = "details",
 	Security = "security",
 	Preferences = "preferences",
@@ -10,32 +10,32 @@ export enum SettingsSection {
 	Privacy = "privacy"
 };
 
-export default function SettingsNav({ iconName, iconSize, tabName, settingsSection, activeSection }) {
+export default function SettingsNav({ iconName, iconSize, tabName, settingsTab, activeSection }) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	function isActive(settingsSection: SettingsSection) {
-		if (activeSection === settingsSection) {
+	function isActive(settingsTab: SettingsTab) {
+		if (activeSection === settingsTab) {
 			return true;
 		}
 		return false;
 	}
 
-	function getStyle(settingsSection: SettingsSection) {
-		if (isActive(settingsSection)) {
+	function getStyle(settingsTab: SettingsTab) {
+		if (isActive(settingsTab)) {
 			return { textDecoration: "underline" };
 		}
 		return {};
 	}
 
-	function updateSearchParams(settingsSection: SettingsSection) {
-		searchParams.set("section", settingsSection);
+	function updateSearchParams(settingsTab: SettingsTab) {
+		searchParams.set("tab", settingsTab);
 		setSearchParams(searchParams);
 	}
 	
 	return (
-		<div className="m-3 cursor-pointer" onClick={() => updateSearchParams(settingsSection)}>
+		<div className="m-3 cursor-pointer" onClick={() => updateSearchParams(settingsTab)}>
 			<Icon iconName={iconName} size={iconSize} />
-			<span className="ms-4 lato-bold" style={getStyle(settingsSection)}>{tabName}</span>
+			<span className="ms-4 lato-bold" style={getStyle(settingsTab)}>{tabName}</span>
 		</div>
 	);
 }

@@ -2,18 +2,10 @@ import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "./settings/SettingsSectionEnum";
 import CurrencyForm from "./settings/currency/CurrencyForm";
+import ExperiencesForm from "./settings/experiences/ExperiencesForm";
 import LanguageForm from "./settings/language/LanguageForm";
 
-export default function Preferences({ data }) {
-	const [visibleSection, setVisibleSection] = useState(SettingsSectionEnum.None);
-
-	function showSection(section: SettingsSectionEnum): void {
-		setVisibleSection(section);
-	}
-
-	function clearSection(): void {
-		setVisibleSection(SettingsSectionEnum.None);
-	}
+export default function Preferences({ data, showSection, clearSection, activeSection }) {
 
 	return (
 		<>
@@ -22,19 +14,24 @@ export default function Preferences({ data }) {
 			<hr />
 			<CurrencyForm
 				value={data.currency}
-				isFocused={visibleSection === SettingsSectionEnum.Currency}
+				isFocused={activeSection === SettingsSectionEnum.Currency}
 				showSection={showSection}
 				clearSection={clearSection}
 			/>
 			<hr />
 			<LanguageForm
 				value={data.language}
-				isFocused={visibleSection === SettingsSectionEnum.Language}
+				isFocused={activeSection === SettingsSectionEnum.Language}
 				showSection={showSection}
 				clearSection={clearSection}
 			/>
 			<hr />
-			<span>Experiences</span>
+			<ExperiencesForm
+				value={data.experiencesIds}
+				isFocused={activeSection === SettingsSectionEnum.Experiences}
+				showSection={showSection}
+				clearSection={clearSection}
+			/>
 		</>
 	);
 }

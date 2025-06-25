@@ -8,16 +8,8 @@ import NameForm from "./settings/name/NameForm";
 import NationalityForm from "./settings/nationality/NationalityForm";
 import { getUserConfig } from "/src/api/BackendApiService";
 
-export default function PersonalDetails({ data }) {
+export default function PersonalDetails({ data, showSection, clearSection }) {
 	const [visibleSection, setVisibleSection] = useState(SettingsSectionEnum.None);
-
-	function showSection(section: SettingsSectionEnum): void {
-		setVisibleSection(section);
-	}
-
-	function clearSection(): void {
-		setVisibleSection(SettingsSectionEnum.None);
-	}
 
 	return (
 		<>
