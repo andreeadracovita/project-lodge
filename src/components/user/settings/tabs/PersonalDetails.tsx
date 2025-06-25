@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
-import "./PersonalDetails.css";
-import { SettingsSectionEnum } from "./settings/SettingsSectionEnum";
-import AvatarForm from "./settings/avatar/AvatarForm";
-import EmailForm from "./settings/email/EmailForm";
-import NameForm from "./settings/name/NameForm";
-import NationalityForm from "./settings/nationality/NationalityForm";
+import { SettingsSectionEnum } from "../SettingsSectionEnum";
+import AvatarForm from "../sections/AvatarForm";
+import EmailForm from "../sections/EmailForm";
+import NameForm from "../sections/NameForm";
+import NationalityForm from "../sections/nationality/NationalityForm";
 import { getUserConfig } from "/src/api/BackendApiService";
 
 export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection }) {

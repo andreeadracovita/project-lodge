@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import countries from "react-select-country-list";
 
-import { SettingsSectionEnum } from "../SettingsSectionEnum";
+import { SettingsSectionEnum } from "../../SettingsSectionEnum";
 import NationalitySelect from "./NationalitySelect";
 import { updateUser } from "/src/api/BackendApiService";
 

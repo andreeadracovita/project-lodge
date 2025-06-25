@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import "./AvatarForm.css";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import Avatar from "/src/components/user/Avatar";

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import { getUserConfig } from "/src/api/BackendApiService";
-import PersonalDetails from "/src/components/user/PersonalDetails";
-import LoginSecurity from "/src/components/user/LoginSecurity";
-import Preferences from "/src/components/user/Preferences";
-import Payment from "/src/components/user/Payment";
-import Privacy from "/src/components/user/Privacy";
+import PersonalDetails from "/src/components/user/settings/tabs/PersonalDetails";
+import LoginSecurity from "/src/components/user/settings/tabs/LoginSecurity";
+import Preferences from "/src/components/user/settings/tabs/Preferences";
+import Payment from "/src/components/user/settings/tabs/Payment";
+import Privacy from "/src/components/user/settings/tabs/Privacy";
 import SettingsNav, { SettingsTab } from "/src/components/user/SettingsNav";
 import { SettingsSectionEnum } from "/src/components/user/settings/SettingsSectionEnum";
 

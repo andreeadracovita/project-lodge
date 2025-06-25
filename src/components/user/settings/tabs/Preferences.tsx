@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { SettingsSectionEnum } from "./settings/SettingsSectionEnum";
-import CurrencyForm from "./settings/currency/CurrencyForm";
-import ExperiencesForm from "./settings/experiences/ExperiencesForm";
-import LanguageForm from "./settings/language/LanguageForm";
+import { SettingsSectionEnum } from "../SettingsSectionEnum";
+import CurrencyForm from "../sections/CurrencyForm";
+import ExperiencesForm from "../sections/ExperiencesForm";
+import LanguageForm from "../sections/LanguageForm";
 
 export default function Preferences({ data, showSectionHandler, clearSectionHandler, activeSection }) {
 
