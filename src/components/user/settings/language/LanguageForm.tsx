@@ -6,7 +6,7 @@ import { updateUser } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 import { availableLanguages } from "/src/utils/constants";
 
-export default function LanguageForm({ value, isFocused, showSection, clearSection }) {
+export default function LanguageForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const authContext = useAuth();
 	const [language, setLanguage] = useState(authContext.language);
 
@@ -24,7 +24,7 @@ export default function LanguageForm({ value, isFocused, showSection, clearSecti
 		event.preventDefault();
 		updateUser({ language: language })
 			.then(() => {
-				clearSection();
+				clearSectionHandler();
 				authContext.setUserConfig();
 			})
 			.catch((error) => {
@@ -61,7 +61,7 @@ export default function LanguageForm({ value, isFocused, showSection, clearSecti
 					{
 						isFocused
 						? <button className="btn-text-underline" type="submit">Save</button>
-						: <span className="btn-text-underline" onClick={() => showSection(SettingsSectionEnum.Language)}>Edit</span>
+						: <span className="btn-text-underline" onClick={() => showSectionHandler(SettingsSectionEnum.Language)}>Edit</span>
 					}
 				</div>
 			</div>

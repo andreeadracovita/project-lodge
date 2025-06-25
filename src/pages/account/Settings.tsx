@@ -53,11 +53,11 @@ export default function Settings() {
 		setActiveTab(searchParams.get("tab"));
 	}, [searchParams.get("tab")]);
 
-	function showSection(section: SettingsSectionEnum): void {
+	function showSectionHandler(section: SettingsSectionEnum): void {
 		setActiveSection(section);
 	}
 
-	function clearSection(): void {
+	function clearSectionHandler(): void {
 		setActiveSection(SettingsSectionEnum.None);
 	}
 
@@ -110,15 +110,30 @@ export default function Settings() {
 				<div id="settings-main" className="col-8">
 					{
 						activeTab === SettingsTab.Details &&
-						<PersonalDetails data={data} showSection={showSection} clearSection={clearSection} activeSection={activeSection} />
+						<PersonalDetails
+							data={data}
+							showSectionHandler={showSectionHandler}
+							clearSectionHandler={clearSectionHandler}
+							activeSection={activeSection}
+						/>
 					}
 					{
 						activeTab === SettingsTab.Security &&
-						<LoginSecurity />
+						<LoginSecurity
+							data={data}
+							showSectionHandler={showSectionHandler}
+							clearSectionHandler={clearSectionHandler}
+							activeSection={activeSection}
+						/>
 					}
 					{
 						activeTab === SettingsTab.Preferences &&
-						<Preferences data={data} showSection={showSection} clearSection={clearSection} activeSection={activeSection} />
+						<Preferences
+							data={data}
+							showSectionHandler={showSectionHandler}
+							clearSectionHandler={clearSectionHandler}
+							activeSection={activeSection}
+						/>
 					}
 					{
 						activeTab === SettingsTab.Payment &&

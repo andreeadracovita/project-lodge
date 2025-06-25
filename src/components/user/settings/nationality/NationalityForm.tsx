@@ -5,7 +5,7 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import NationalitySelect from "./NationalitySelect";
 import { updateUser } from "/src/api/BackendApiService";
 
-export default function NationalityForm({ value, isFocused, showSection, clearSection }) {
+export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [countryCode, setCountryCode] = useState(value);
 
 	useEffect(() => {
@@ -20,7 +20,7 @@ export default function NationalityForm({ value, isFocused, showSection, clearSe
 		event.preventDefault();
 		updateUser({ country_code: countryCode })
 			.then(() => {
-				clearSection();
+				clearSectionHandler();
 			})
 			.catch((error) => {
 				console.error(error);
@@ -45,7 +45,7 @@ export default function NationalityForm({ value, isFocused, showSection, clearSe
 					{
 						isFocused
 						? <button className="btn-text-underline" type="submit">Save</button>
-						: <span className="btn-text-underline" onClick={() => showSection(SettingsSectionEnum.Nationality)}>Edit</span>
+						: <span className="btn-text-underline" onClick={() => showSectionHandler(SettingsSectionEnum.Nationality)}>Edit</span>
 					}
 				</div>
 			</div>

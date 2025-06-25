@@ -1,4 +1,4 @@
-export default function LoginSecurity() {
+export default function LoginSecurity({ data, showSectionHandler, clearSectionHandler }) {
 	return (
 		<>
 			<h1 className="page-heading">Login and security</h1>

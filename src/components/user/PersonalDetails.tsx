@@ -8,8 +8,7 @@ import NameForm from "./settings/name/NameForm";
 import NationalityForm from "./settings/nationality/NationalityForm";
 import { getUserConfig } from "/src/api/BackendApiService";
 
-export default function PersonalDetails({ data, showSection, clearSection }) {
-	const [visibleSection, setVisibleSection] = useState(SettingsSectionEnum.None);
+export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection }) {
 
 	return (
 		<>
@@ -20,9 +19,9 @@ export default function PersonalDetails({ data, showSection, clearSection }) {
 				</div>
 				<div className="col-2 justify-content-end">
 					<AvatarForm
-						isFocused={visibleSection === SettingsSectionEnum.Avatar}
-						showSection={showSection}
-						clearSection={clearSection}
+						isFocused={activeSection === SettingsSectionEnum.Avatar}
+						showSectionHandler={showSectionHandler}
+						clearSectionHandler={clearSectionHandler}
 					/>
 				</div>
 			</div>
@@ -30,23 +29,23 @@ export default function PersonalDetails({ data, showSection, clearSection }) {
 			<NameForm
 				firstNameValue={data.firstName}
 				lastNameValue={data.lastName}
-				isFocused={visibleSection === SettingsSectionEnum.Name}
-				showSection={showSection}
-				clearSection={clearSection}
+				isFocused={activeSection === SettingsSectionEnum.Name}
+				showSectionHandler={showSectionHandler}
+				clearSectionHandler={clearSectionHandler}
 			/>
 			<hr />
 			<EmailForm
 				value={data.email}
-				isFocused={visibleSection === SettingsSectionEnum.Email}
-				showSection={showSection}
-				clearSection={clearSection}
+				isFocused={activeSection === SettingsSectionEnum.Email}
+				showSectionHandler={showSectionHandler}
+				clearSectionHandler={clearSectionHandler}
 			/>
 			<hr />
 			<NationalityForm
 				value={data.nationality}
-				isFocused={visibleSection === SettingsSectionEnum.Nationality}
-				showSection={showSection}
-				clearSection={clearSection}
+				isFocused={activeSection === SettingsSectionEnum.Nationality}
+				showSectionHandler={showSectionHandler}
+				clearSectionHandler={clearSectionHandler}
 			/>
 			<hr />
 		</>

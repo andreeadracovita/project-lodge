@@ -4,7 +4,7 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { getAllExperiences, updateUser } from "/src/api/BackendApiService";
 import Multiselect from "/src/components/common/Multiselect";
 
-export default function ExperiencesForm({ value, isFocused, showSection, clearSection }) {
+export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [experiencesIds, setExperiencesIds] = useState([]);
 	const [experiences, setExperiences] = useState();
 
@@ -42,7 +42,7 @@ export default function ExperiencesForm({ value, isFocused, showSection, clearSe
 		event.preventDefault();
 		updateUser({ experiences_ids: experiencesIds })
 			.then(() => {
-				clearSection();
+				clearSectionHandler();
 			})
 			.catch((error) => {
 				console.error(error);
@@ -67,7 +67,7 @@ export default function ExperiencesForm({ value, isFocused, showSection, clearSe
 					{
 						isFocused
 						? <button className="btn-text-underline" type="submit">Save</button>
-						: <span className="btn-text-underline" onClick={() => showSection(SettingsSectionEnum.Experiences)}>Edit</span>
+						: <span className="btn-text-underline" onClick={() => showSectionHandler(SettingsSectionEnum.Experiences)}>Edit</span>
 					}
 				</div>
 			</div>

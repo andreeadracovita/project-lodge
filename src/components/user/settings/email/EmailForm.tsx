@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 
-export default function EmailForm({ value, isFocused, showSection, clearSection }) {
+export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [email, setEmail] = useState(value);
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ export default function EmailForm({ value, isFocused, showSection, clearSection 
 		event.preventDefault();
 		// updateUser({ email: input.email })
 		// 	.then(() => {
-		// 		clearSection();
+		// 		clearSectionHandler();
 		// 	})
 		// 	.catch((error) => {
 		// 		console.error(error);
@@ -42,7 +42,7 @@ export default function EmailForm({ value, isFocused, showSection, clearSection 
 					{
 						isFocused
 						? <button className="btn-text-underline" type="submit">Save</button>
-						: <span className="btn-text-underline" onClick={() => showSection(SettingsSectionEnum.Email)}>Edit</span>
+						: <span className="btn-text-underline" onClick={() => showSectionHandler(SettingsSectionEnum.Email)}>Edit</span>
 					}
 				</div>
 			</div>

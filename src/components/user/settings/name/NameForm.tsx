@@ -4,7 +4,7 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import { updateUser } from "/src/api/BackendApiService";
 
-export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSection, clearSection }) {
+export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [input, setInput] = useState({
 		firstName: firstNameValue,
 		lastName: lastNameValue
@@ -31,7 +31,7 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 		event.preventDefault();
 		updateUser({ first_name: input.firstName, last_name: input.lastName })
 			.then(() => {
-				clearSection();
+				clearSectionHandler();
 				authContext.setUserConfig();
 			})
 			.catch((error) => {
@@ -65,7 +65,7 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 					{
 						isFocused
 						? <button className="btn-text-underline" type="submit">Save</button>
-						: <span className="btn-text-underline" onClick={() => showSection(SettingsSectionEnum.Name)}>Edit</span>
+						: <span className="btn-text-underline" onClick={() => showSectionHandler(SettingsSectionEnum.Name)}>Edit</span>
 					}
 				</div>
 			</div>

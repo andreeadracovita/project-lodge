@@ -6,7 +6,7 @@ import { updateUser } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 import { availableCurrencies } from "/src/utils/constants";
 
-export default function CurrencyForm({ value, isFocused, showSection, clearSection }) {
+export default function CurrencyForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const authContext = useAuth();
 	const [currency, setCurrency] = useState(authContext.currency);
 
@@ -24,7 +24,7 @@ export default function CurrencyForm({ value, isFocused, showSection, clearSecti
 		event.preventDefault();
 		updateUser({ currency: currency })
 			.then(() => {
-				clearSection();
+				clearSectionHandler();
 				authContext.setUserConfig();
 			})
 			.catch((error) => {
@@ -61,7 +61,7 @@ export default function CurrencyForm({ value, isFocused, showSection, clearSecti
 					{
 						isFocused
 						? <button className="btn-text-underline" type="submit">Save</button>
-						: <span className="btn-text-underline" onClick={() => showSection(SettingsSectionEnum.Currency)}>Edit</span>
+						: <span className="btn-text-underline" onClick={() => showSectionHandler(SettingsSectionEnum.Currency)}>Edit</span>
 					}
 				</div>
 			</div>

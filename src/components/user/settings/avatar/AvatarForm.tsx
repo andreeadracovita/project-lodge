@@ -6,12 +6,12 @@ import Avatar from "/src/components/user/Avatar";
 import { updateUser, uploadAvatar } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 
-export default function AvatarForm({ isFocused, showSection, clearSection }) {
+export default function AvatarForm({ isFocused, showSectionHandler, clearSectionHandler }) {
 	const authContext = useAuth();
 	const [avatarUrl, setAvatarUrl] = useState();
 
 	function handleAvatarClick(): void {
-		showSection(SettingsSectionEnum.Avatar);
+		showSectionHandler(SettingsSectionEnum.Avatar);
 		document.getElementById("avatar-input").click();
 	}
 
@@ -28,7 +28,7 @@ export default function AvatarForm({ isFocused, showSection, clearSection }) {
 
 		const files = event.target.avatar.files;
 		if (files.length === 0) {
-			clearSection();
+			clearSectionHandler();
 			return;
 		}
 
@@ -39,7 +39,7 @@ export default function AvatarForm({ isFocused, showSection, clearSection }) {
 			.then(response => {
 				updateUser({ img_url: response.data.filename })
 					.then(() => {
-						clearSection();
+						clearSectionHandler();
 						authContext.setUserConfig();
 					})
 					.catch((error) => {
@@ -52,7 +52,7 @@ export default function AvatarForm({ isFocused, showSection, clearSection }) {
 	}
 
 	function handleDismissClick(): void {
-		clearSection();
+		clearSectionHandler();
 		setAvatarUrl(null);
 	}
 	
