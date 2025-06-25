@@ -10,7 +10,7 @@ export default function Preferences({ data, showSectionHandler, clearSectionHand
 	return (
 		<>
 			<h1 className="page-heading">Preferences</h1>
-			<p>Update your preferences</p>
+			<p>Update your currency, language and results preferences for a more customized experience.</p>
 			<hr />
 			<CurrencyForm
 				value={data.currency}
@@ -32,6 +32,7 @@ export default function Preferences({ data, showSectionHandler, clearSectionHand
 				showSectionHandler={showSectionHandler}
 				clearSectionHandler={clearSectionHandler}
 			/>
+			<hr />
 		</>
 	);
 }

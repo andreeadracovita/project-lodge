@@ -23,6 +23,9 @@ export const getAllBookings
 export const updateUser
 	= (payload) => apiClient.patch("/user", payload);
 
+export const updateUserPassword
+	= (payload) => apiClient.patch("/user/password", payload);
+
 export const deleteAccount
 	= () => apiClient.delete("/user");
 

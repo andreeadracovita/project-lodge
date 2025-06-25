@@ -4,6 +4,7 @@ export enum SettingsSectionEnum {
 	Name,
 	Email,
 	Nationality,
+	Password,
 	Currency,
 	Language,
 	Experiences
