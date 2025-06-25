@@ -31,7 +31,6 @@ export default function Settings() {
 		getUserConfig()
 			.then(response => {
 				const data = response.data;
-				console.log(data);
 				setData(prevVal => {
 					return {
 						firstName: data.first_name,
