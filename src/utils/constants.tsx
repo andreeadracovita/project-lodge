@@ -23,6 +23,15 @@ export const availableLanguages = [
 export const checkInTimes = "15:00 — 20:00";
 export const checkOutTimes = "06:00 — 10:00";
 
+// Landing images
+export const landingImages = [
+	"landing_0.jpg",
+	"landing_1.jpg",
+	"landing_2.jpg",
+	"landing_3.jpg",
+	"landing_4.jpg"
+];
+
 // Trending destinations
 export const trendingDestinations = [
 	{

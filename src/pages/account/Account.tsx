@@ -95,7 +95,7 @@ export default function Account() {
 							iconSize={iconSize}
 							title="Reviews [TODO]"
 							desc="View and update posted reviews"
-							url="#"
+							url="/myaccount/reviews"
 						/>
 					</div>
 				</div>

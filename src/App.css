@@ -191,10 +191,11 @@ hr {
 }
 
 #landing-greeting-section {
-  background-size: cover;
+  background-color: black;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  height: 550px;
+  height: 400px;
 }
 
 #landing-greeting-section-container {
@@ -220,6 +221,10 @@ hr {
   margin-inline-end: 0.25rem;
   text-align: center;
   padding: 6px 10px;
+}
+
+.account-card {
+  height: 172px;
 }
 
 /* End: Containers ------------------------------------------------------------ */

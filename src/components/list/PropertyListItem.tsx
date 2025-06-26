@@ -32,7 +32,7 @@ type PropertyListItemProps = {
 	checkOut: Date;
 };
 
-export default function PropertyListItem({ isPreview, item, checkIn, checkOut }: PropertyListItemProps) {
+export default function PropertyListItem({ isPreview, item, checkIn, checkOut, hidePrice, hideWishlist }: PropertyListItemProps) {
 	const authContext = useAuth();
 	let displayDate = "";
 	let checkInParam = "";
@@ -60,7 +60,7 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 		<div className="mb-3">
 			<div className="position-relative card-item">
 				<a href={linkPath} target={isPreview ? "_self" : "_blank"}><img src={imgUrl} className="list-item-photo mb-2" /></a>
-				<WishlistIcon isPreview={isPreview} itemId={item.id} />
+				{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} /> }
 				<a href={linkPath} target={isPreview ? "_self" : "_blank"}>
 					<div className="property-card-details">
 						<p className="mb-0 property-card-heading">{item.title}</p>
@@ -71,11 +71,13 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut }:
 						<p>Entire holiday home · 2 bedrooms · 1 bathroom</p>
 						<p>2 beds</p>
 
-						<div className="text-end mt-3">
-							<span className="text-muted d-block">{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}</span>
-							<span className="lato-bold property-card-price d-block">{isPreview ? Math.round(siteTotalPrice * 100) / 100 : convertedTotalPrice} {authContext.currency}</span>
-						</div>
-						
+						{
+							!hidePrice &&
+							<div className="text-end mt-3">
+								<span className="text-muted d-block">{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}</span>
+								<span className="lato-bold property-card-price d-block">{isPreview ? Math.round(siteTotalPrice * 100) / 100 : convertedTotalPrice} {authContext.currency}</span>
+							</div>
+						}
 					</div>
 				</a>
 			</div>

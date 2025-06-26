@@ -6,7 +6,11 @@ import Search from "/src/components/search/Search";
 import { greetingMessage, trendingDestinations } from "/src/utils/constants";
 import { experienceIconMap } from "/src/utils/mappings";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
-import { fileStorage } from "/src/utils/constants";
+import { fileStorage, landingImages } from "/src/utils/constants";
+
+function getRandomLandingImage() {
+	return landingImages[Math.floor(Math.random() * landingImages.length)];
+}
 
 export default function Home() {
 	const [backgroundImage, setBackgroundImage] = useState();
@@ -14,7 +18,7 @@ export default function Home() {
 	const [properties, setProperties] = useState([]);
 
 	useEffect(() => {
-		setBackgroundImage(fileStorage + "sunset-villa-family.jpg");
+		setBackgroundImage(fileStorage + getRandomLandingImage());
 
 		getAllProperties()
 			.then(response => {

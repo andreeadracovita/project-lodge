@@ -17,6 +17,8 @@ import Settings from "./pages/account/Settings";
 import Trips from "./pages/account/Trips";
 import Wishlist from "./pages/account/Wishlist";
 import Messages from "./pages/account/Messages";
+import Review from "./pages/account/Review";
+import UserReviews from "./pages/account/UserReviews";
 
 import HostingDashboard from "./pages/hosting/HostingDashboard";
 import Properties from "./pages/hosting/Properties";
@@ -48,6 +50,8 @@ export default function App() {
             <Route path="/trips" element={<RequireAuth><Trips /></RequireAuth>} />
             <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
             <Route path="/messages" element={<RequireAuth><Messages /></RequireAuth>} />
+            <Route path="/myaccount/reviews" element={<RequireAuth><UserReviews /></RequireAuth>} />
+            <Route path="/review" element={<RequireAuth><Review /></RequireAuth>} />
 
             <Route path="/hosting" element={<RequireAuth><HostingDashboard /></RequireAuth>} />
             <Route path="/hosting/properties" element={<RequireAuth><Properties /></RequireAuth>} />

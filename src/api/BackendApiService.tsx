@@ -131,8 +131,12 @@ export const getMessagesForUser1User2PropertyId
 	= (userId1, userId2, propertyId) => apiClient.get(`/message/${userId1}/${userId2}/${propertyId}`);
 
 // Reviews --------------------------------------------------------------------
-export const getAllReviewsByPropertyId
-	= (propertyId) => apiClient.get(`/review/property-id/${propertyId}`);
+export const addReviewForPropertyId
+	= (propertyId, payload) => apiClient.post(`/review/property/${propertyId}`, payload); 
 
-export const getAllReviewsByUserId
-	= (userId) => apiClient.get(`/reviews/user-id/${userId}`);
+// Unguarded
+export const getAllReviewsByPropertyId
+	= (propertyId) => apiClient.get(`/property/reviews/${propertyId}`);
+
+export const getAllReviewsByLoggedUser
+	= () => apiClient.get("/review/all");
