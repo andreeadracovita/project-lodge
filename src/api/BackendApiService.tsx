@@ -4,6 +4,9 @@ import { apiClient } from "./ApiClient";
 export const getExchangeRateForTarget
 	= (target) => apiClient(`/misc/exchange-rate?target=${target}`);
 
+export const getUserNameAndAvatar
+	= (id) => apiClient(`/misc/user/${id}`);
+
 // User -----------------------------------------------------------------------
 export const getUserConfig
 	= () => apiClient.get("/user/config");

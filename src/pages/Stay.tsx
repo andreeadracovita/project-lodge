@@ -5,6 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 import { getPropertyById } from "/src/api/BackendApiService";
 import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
 import PropertyDescription from "/src/components/stay/PropertyDescription";
+import PropertyReviews from "/src/components/stay/PropertyReviews";
 import BookingCard from "/src/components/stay/BookingCard";
 import Rating from "/src/components/common/Rating";
 import { fileStorage } from "/src/utils/constants";
@@ -35,7 +36,7 @@ export default function Stay() {
 					<div>
 						<h1 className="page-heading">{property.title}</h1>
 						<p><Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {property.country}</p>
-						<Rating score={property.rating} reviewsNo={130} />
+						<Rating score={property.rating} reviewsNo={property.reviews_no} />
 					</div>
 					<div className="mt-3">
 						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => fileStorage + url)} />
@@ -48,6 +49,8 @@ export default function Stay() {
 							<BookingCard price={property.price_per_night_eur} />
 						</div>
 					</div>
+					<hr />
+					<PropertyReviews property={property} />
 				</div>
 			}
 		</>

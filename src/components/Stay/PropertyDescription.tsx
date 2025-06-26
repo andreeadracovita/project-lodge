@@ -3,18 +3,15 @@ import { useSearchParams } from "react-router";
 
 import AvailabilitySection from "./AvailabilitySection";
 import Feature from "/src/components/common/Feature";
-import Rating from "/src/components/common/Rating";
 import MapView from "/src/components/map/MapView";
-import ReviewItem from "/src/components/review/ReviewItem";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
-import { getAllFeatures, getAllExperiences, getAllReviewsByPropertyId } from "/src/api/BackendApiService";
+import { getAllFeatures, getAllExperiences } from "/src/api/BackendApiService";
 import { experienceIconMap } from "/src/utils/mappings";
 
 export default function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [reviews, setReviews] = useState([]);
 
 	const checkIn = searchParams.get("check_in");
 	const checkOut = searchParams.get("check_out");
@@ -34,13 +31,6 @@ export default function PropertyDescription({property}) {
 				if (response.data) {
 					setExperiences(response.data);
 				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-		getAllReviewsByPropertyId(property.id)
-			.then(response => {
-				setReviews(response.data);
 			})
 			.catch(error => {
 				console.error(error);
@@ -70,15 +60,6 @@ export default function PropertyDescription({property}) {
 			<div className="btn-pill-outline mt-6">Show more</div>
 			<hr />
 			<AvailabilitySection propertyId={property.id}/>
-			<hr />
-			<h2 className="section-heading">Guest reviews</h2>
-			<Rating score={property.rating} reviewsNo={property.reviews_no} />
-			<div className="mt-10 text-strong">Guests who stayed here loved</div>
-			<div className="row row-cols-3">
-			{
-				reviews.map((review, i) => <ReviewItem item={review} />)
-			}
-			</div>
 			<hr />
 			<h2 className="section-heading">Experiences around</h2>
 			<div className="mt-10">

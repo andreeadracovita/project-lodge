@@ -40,7 +40,7 @@ export default function Header() {
 							<div className="dropdown">
 								<div id="dropdown-button" role="button" className="d-flex rounded-pill user-account-button px-2 py-1" data-bs-toggle="dropdown">
 									<object data="/icons/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
-									<Avatar size={32} />
+									<Avatar size={32} url={authContext.avatar} firstName={authContext.firstName} />
 								</div>
 								
 								<ul className="dropdown-menu dropdown-menu-end text-small">

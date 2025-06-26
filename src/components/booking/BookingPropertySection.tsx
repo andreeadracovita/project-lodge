@@ -26,7 +26,7 @@ export default function BookingPropertySection({ item }) {
 			<h2 className="property-card-heading">{item.title}</h2>
 			<div className="mt-10">{item.city}, {item.street} {item.street_no}, {item.country}</div>
 			<div className="mt-6">
-				<Rating score={item.rating} reviewsNo={130} />
+				<Rating score={item.rating} reviewsNo={item.reviews_no} />
 			</div>
 			<div id="features-section" className="mt-6 d-flex">
 				{

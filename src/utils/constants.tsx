@@ -40,14 +40,14 @@ export const trendingDestinations = [
 		url: "zurich.jpg"
 	},
 	{
-		city: "Olbia",
-		country: "Italy",
-		url: "olbia.jpg"
-	},
-	{
 		city: "Reykjavik",
 		country: "Iceland",
 		url: "reykjavik.jpg"
+	},
+	{
+		city: "Olbia",
+		country: "Italy",
+		url: "olbia.jpg"
 	},
 	{
 		city: "Nikko",
@@ -60,28 +60,8 @@ export const trendingDestinations = [
 		url: "cinque-terre.jpg"
 	},
 	{
-		city: "Kuala Lumpur",
-		country: "Malaysia",
-		url: "kuala-lumpur.jpg"
-	},
-	{
 		city: "Lavaux",
 		country: "Switzerland",
 		url: "lavaux.jpg"
-	},
-	{
-		city: "Buenos Aires",
-		country: "Argentina",
-		url: "buenos-aires.jpg"
-	},
-	{
-		city: "Brisbane",
-		country: "Australia",
-		url: "brisbane.jpg"
-	},
-	{
-		city: "Franschhoek",
-		country: "South Africa",
-		url: "franschhoek.jpg"
 	},
 ]

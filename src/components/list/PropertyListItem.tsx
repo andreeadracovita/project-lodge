@@ -64,7 +64,7 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut, h
 				<a href={linkPath} target={isPreview ? "_self" : "_blank"}>
 					<div className="property-card-details">
 						<p className="mb-0 property-card-heading">{item.title}</p>
-						<Rating score={item.rating} reviewsNo={130} />
+						<Rating score={item.rating} reviewsNo={item.reviews_no} />
 						<p>{item.city}, {item.country}</p>
 						<hr />
 						<p>Cottage</p>

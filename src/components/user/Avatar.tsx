@@ -1,16 +1,14 @@
-import { useAuth } from "/src/components/security/AuthContext";
 import { fileStorage } from "/src/utils/constants";
 import "./Avatar.css";
 
-export default function Avatar({ size, previewAvatar }) {
-	const authContext = useAuth();
+export default function Avatar({ url, size, previewAvatar, firstName }) {
 
 	return (
 		<>
 			{
-				previewAvatar || authContext.avatar !== undefined && authContext.avatar !== null
+				previewAvatar || url
 					? <img
-						src={previewAvatar ? previewAvatar : fileStorage + authContext.avatar}
+						src={previewAvatar ? previewAvatar : fileStorage + url}
 						alt="avatar"
 						width={size}
 						height={size}
@@ -20,7 +18,7 @@ export default function Avatar({ size, previewAvatar }) {
 							className="avatar-letter"
 							style={{fontSize: size * 0.75, top: size / 6 }}
 						>
-							{authContext.firstName ? authContext.firstName[0] : ""}
+							{firstName ? firstName[0] : ""}
 						</span>
 					</div>
 			}

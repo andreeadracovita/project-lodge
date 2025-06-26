@@ -13,7 +13,7 @@ export default function Account() {
 	return (
 		<div className="container section-container">
 			<div className="d-flex align-items-center">
-				<Avatar size={60} />
+				<Avatar size={60} url={authContext.avatar} firstName={authContext.firstName} />
 				<h1 className="p-0 m-0 ms-3 page-heading">Hi, {authContext.firstName}</h1>
 			</div>
 

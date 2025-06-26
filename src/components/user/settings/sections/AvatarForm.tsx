@@ -62,7 +62,12 @@ export default function AvatarForm({ isFocused, showSectionHandler, clearSection
 			<div className="d-flex flex-wrap justify-content-center">
 				<div className="avatar-container d-flex justify-content-center align-items-center w-100">
 					<div onClick={handleAvatarClick}>
-						<Avatar size={52} previewAvatar={avatarUrl} />
+						<Avatar
+							size={52}
+							previewAvatar={avatarUrl}
+							url={authContext.avatar}
+							firstName={authContext.firstName}
+						/>
 						<input
 							id="avatar-input"
 							type="file"
