@@ -2,16 +2,17 @@ import { useState } from "react";
 import { useSearchParams } from "react-router";
 
 import StarRating from "./StarRating";
-import { addReviewForPropertyId } from "/src/api/BackendApiService";
+import { addReviewForBookingId } from "/src/api/BackendApiService";
 
-export default function ReviewForm() {
+export default function ReviewForm({ propertyId }) {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [input, setInput] = useState({
 		rating: 0,
 		title: "",
-		body: ""
+		body: "",
+		property_id: propertyId
 	});
-	const propertyId = searchParams.get("id");
+	const bookingId = searchParams.get("booking_id");
 
 	function handleChange(event) {
 		const { value, name } = event.target;
@@ -27,11 +28,11 @@ export default function ReviewForm() {
 	function handleSubmit(event) {
 		event.preventDefault();
 
-		if (!propertyId || input.rating === 0) {
+		if (!bookingId || input.rating === 0) {
 			return;
 		}
 
-		addReviewForPropertyId(propertyId, input)
+		addReviewForBookingId(bookingId, input)
 			.then(response => {
 				console.log(response.data);
 			})

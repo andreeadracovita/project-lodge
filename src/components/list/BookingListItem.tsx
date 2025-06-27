@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { existsReviewForBookingId } from "/src/api/BackendApiService";
 import { fileStorage } from "/src/utils/constants";
 import { dayMonYear } from "/src/utils/DateFormatUtils";
 
@@ -15,9 +17,10 @@ type BookingListItemProp = {
 };
 
 export default function BookingListItem({item}: BookingListItemProp) {
+	const [showReviewButton, setShowReviewButton] = useState(false);
 	const bookingPath = `/booking?id=${item.booking_id}&pin=${item.pin_code}`;
 
-	function renderReviewButton() {
+	useEffect(() => {
 		// Can review only non-cancelled bookings
 		if (item.booking_status_id !== 2) {
 			return;
@@ -28,8 +31,17 @@ export default function BookingListItem({item}: BookingListItemProp) {
 			return;
 		}
 
-		return <Link to={`/review?booking_id=${item.booking_id}`} className="btn-pill">Review</Link>;
-	}
+		console.log("Check if review exists for:", item.booking_id);
+		existsReviewForBookingId(item.booking_id)
+			.then(response => {
+				if (response.data?.exists === false) {
+					setShowReviewButton(true);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, []);
 	
 	return (
 		<div>
@@ -45,7 +57,12 @@ export default function BookingListItem({item}: BookingListItemProp) {
 						<span className="d-block">{item.city}, {item.country}</span>
 						<span className="d-block text-muted">{dayMonYear(new Date(item.check_in))} — {dayMonYear(new Date(item.check_out))}</span>
 					</Link>
-					<span className="d-block mt-6">{renderReviewButton()}</span>
+					<span className="d-block mt-6">
+					{
+						showReviewButton &&
+						<Link to={`/review?booking_id=${item.booking_id}`} className="btn-pill">Review</Link>
+					}
+					</span>
 				</div>
 			</div>
 		</div>

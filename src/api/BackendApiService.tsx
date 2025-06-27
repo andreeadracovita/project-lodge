@@ -134,15 +134,19 @@ export const getMessagesForUser1User2PropertyId
 	= (userId1, userId2, propertyId) => apiClient.get(`/message/${userId1}/${userId2}/${propertyId}`);
 
 // Reviews --------------------------------------------------------------------
-export const addReviewForPropertyId
-	= (propertyId, payload) => apiClient.post(`/review/property/${propertyId}`, payload); 
+// Auth
+export const existsReviewForBookingId
+	= (bookingId) => apiClient.get(`/review/exists/user/booking/${bookingId}`);
 
-// Unguarded
-export const getAllReviewsByPropertyId
-	= (propertyId) => apiClient.get(`/property/reviews/${propertyId}`);
+export const addReviewForBookingId
+	= (bookingId, payload) => apiClient.post(`/review/booking/${bookingId}`, payload); 
 
 export const getAllReviewsByLoggedUser
 	= () => apiClient.get("/review/all");
 
 export const getAuthorizationForReview
 	= (propertyId) => apiClient.get(`/review/authorize/booking/${propertyId}`);
+
+// Non-auth
+export const getAllReviewsByPropertyId
+	= (propertyId) => apiClient.get(`/property/reviews/${propertyId}`);

@@ -56,7 +56,7 @@ export default function Review() {
 				</div>
 				<div className="col-9">
 					<h1 className="page-heading">Review your stay</h1>
-					<ReviewForm />
+					<ReviewForm propertyId={property.id} />
 				</div>
 			</div>
 		}
