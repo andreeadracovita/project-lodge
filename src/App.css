@@ -299,6 +299,16 @@ hr {
 .btn-pill-hover-only:hover {
   background: var(--light-brand-color);
 }
+
+/* ... */
+.btn-more {
+  background: transparent;
+  border: 1px solid var(--light-grey);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
 /* End: Buttons --------------------------------------------------------------- */
 
 /* Start: Photos -------------------------------------------------------------- */

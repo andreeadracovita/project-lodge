@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import "./PropertyListItem.css";
 import WishlistIcon from "./WishlistIcon";
 import { useAuth } from "/src/components/security/AuthContext";

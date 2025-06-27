@@ -30,7 +30,7 @@ export default function HostingCalendarSettings() {
 			.catch(error => {
 				console.error(error);
 			});
-	}, [])
+	}, []);
 
 	function handlePropertyClick(id) {
 		searchParams.set("id", id);

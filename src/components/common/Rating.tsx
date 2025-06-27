@@ -8,7 +8,7 @@ export default function Rating({score, reviewsNo}) {
 			<div className="rating-container d-flex justify-content-center align-items-center">
 				<span>{score ? score.toFixed(1) : "-"}</span>
 			</div>
-			{ reviewsNo && <span className="ms-2 text-muted"> · {reviewsNo} reviews</span> }
+			{ reviewsNo && <span className="ms-2 text-muted"> · {reviewsNo} {reviewsNo > 1 ? "reviews" : "review"}</span> }
 		</span>
 	);
 }

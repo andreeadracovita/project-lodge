@@ -66,11 +66,11 @@ export default function HostingCalendarView() {
 	useEffect(() => {
 		setIsFocused(true);
 		focusToday(currentYear, currentMonth);
-	}, [!isFocused && document.getElementById(`${currentYear*100+currentMonth}`)])
+	}, [!isFocused && document.getElementById(`${currentYear*100+currentMonth}`)]);
 
 	useEffect(() => {
 		setSelectedPropId(searchParams.get("id"));
-	}, [searchParams.get("id") && searchParams.get("id") !== selectedPropId])
+	}, [searchParams.get("id") && searchParams.get("id") !== selectedPropId]);
 
 	useEffect(() => {
 		if (selectedPropId) {
@@ -92,7 +92,7 @@ export default function HostingCalendarView() {
 					console.error(error);
 				});
 		}
-	}, [selectedPropId])
+	}, [selectedPropId]);
 
 	function focusToday() {
 		const currentMonthElement = document.getElementById(`${currentYear * 100 + currentMonth}`);

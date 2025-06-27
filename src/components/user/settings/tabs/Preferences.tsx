@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import CurrencyForm from "../sections/CurrencyForm";
 import ExperiencesForm from "../sections/ExperiencesForm";

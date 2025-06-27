@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";

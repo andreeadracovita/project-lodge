@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import AvatarForm from "../sections/AvatarForm";
 import EmailForm from "../sections/EmailForm";
