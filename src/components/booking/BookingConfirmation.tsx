@@ -39,7 +39,6 @@ export default function BookingConfirmation() {
 						.then(response => {
 							if (response.data.length === 1) {
 								const propData = response.data[0];
-								console.log(propData);
 								setProperty(propData);
 								// Lat 46.628050423092084, Lon 8.03273395337422
 								setGoogleMapsLink(`https://www.google.com/maps/place/${propData.geo.x}N+${propData.geo.y}E`);
@@ -49,7 +48,6 @@ export default function BookingConfirmation() {
 							console.error(error);
 						});
 
-					console.log(data);
 					setBooking(data);
 					setShowCancel(data.booking_status_id !== 3);
 

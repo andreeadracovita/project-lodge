@@ -9,7 +9,6 @@ export default function UserReviews() {
 	useEffect(() => {
 		getAllReviewsByLoggedUser()
 			.then(response => {
-				console.log(response.data);
 				setReviews(response.data);
 			})
 			.catch(error => {

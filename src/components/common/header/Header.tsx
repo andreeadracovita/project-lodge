@@ -47,6 +47,7 @@ export default function Header() {
 									<li><Link to="/myaccount" className="dropdown-item">My account</Link></li>
 									<li><Link to="/wishlist" className="dropdown-item">Wishlist</Link></li>
 									<li><Link to="/trips" className="dropdown-item">Trips</Link></li>
+									<li><Link to="/myaccount/reviews" className="dropdown-item">Reviews</Link></li>
 									<li><Link to="/messages" className="dropdown-item">Messages</Link></li>
 									<li><hr className="dropdown-divider" /></li>
 									<li><Link to="/hosting" className="dropdown-item">Property manager</Link></li>

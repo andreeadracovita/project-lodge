@@ -1,27 +1,42 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-import { getPropertyById } from "/src/api/BackendApiService";
+import { getAuthorizationForReview, getPropertyById } from "/src/api/BackendApiService";
 import ReviewForm from "/src/components/review/ReviewForm";
 import PropertyListItem from "/src/components/list/PropertyListItem";
 
 export default function Review() {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const propertyId = searchParams.get("id");
+	const navigate = useNavigate();
+	const bookingId = searchParams.get("booking_id");
+	const [isAuthorizedToReview, setIsAuthorizedToReview] = useState(true);
 	const [property, setProperty] = useState();
 
 	useEffect(() => {
-		if (!propertyId) {
+		if (!bookingId) {
+			navigate("/");
 			return;
 		}
-
-		getPropertyById(propertyId)
-			.then(response => {
-				if (response.data?.length > 0) {
-					setProperty(response.data[0]);
+		getAuthorizationForReview(bookingId)
+			.then(responseAuth => {
+				const data = responseAuth.data;
+				if (data && data.isAuthorized) {
+					// Is authorized: load page content
+					const propertyId = data.property_id;
+					getPropertyById(propertyId)
+						.then(response => {
+							if (response.data?.length > 0) {
+								setProperty(response.data[0]);
+							}
+						})
+						.catch(error => {
+							console.error(error);
+						});
 				}
 			})
 			.catch(error => {
+				navigate("/");
 				console.error(error);
 			})
 	}, []);

@@ -93,7 +93,7 @@ export default function Account() {
 						<AccountCard
 							iconName="ChatLeftText"
 							iconSize={iconSize}
-							title="Reviews [TODO]"
+							title="Reviews"
 							desc="View and update posted reviews"
 							url="/myaccount/reviews"
 						/>

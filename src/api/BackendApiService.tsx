@@ -143,3 +143,6 @@ export const getAllReviewsByPropertyId
 
 export const getAllReviewsByLoggedUser
 	= () => apiClient.get("/review/all");
+
+export const getAuthorizationForReview
+	= (propertyId) => apiClient.get(`/review/authorize/booking/${propertyId}`);
