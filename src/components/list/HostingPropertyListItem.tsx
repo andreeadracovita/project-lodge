@@ -1,5 +1,4 @@
 import { fileStorage } from "/src/utils/constants";
-import type { PropertyItem } from "./PropertyListItem";
 import { deletePropertyById, updateProperty } from "/src/api/BackendApiService";
 import { useNavigate } from "react-router-dom";
 

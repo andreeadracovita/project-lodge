@@ -30,7 +30,7 @@ type PropertyListItemProps = {
 	checkOut: Date;
 };
 
-export default function PropertyListItem({ isPreview, item, checkIn, checkOut, hidePrice, hideWishlist }: PropertyListItemProps) {
+export default function PropertyListItem({ isPreview, item, guests, checkIn, checkOut, hidePrice, hideWishlist, isCompact }: PropertyListItemProps) {
 	const authContext = useAuth();
 	let displayDate = "";
 	let checkInParam = "";
@@ -46,7 +46,7 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut, h
 	}
 
 	const linkPath = !isPreview
-		? `/stay?id=${item.id}&guests=1&check_in=${checkInParam}&check_out=${checkOutParam}`
+		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkInParam}&check_out=${checkOutParam}`
 		: "#";
 
 	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
@@ -54,28 +54,46 @@ export default function PropertyListItem({ isPreview, item, checkIn, checkOut, h
 	const siteTotalPrice = item.price * nightsCount;
 	const convertedTotalPrice = convertToPreferredCurrency(siteTotalPrice, authContext.exchangeRate);
 
+	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
+	const guestsString = guests + (guests > 1 ? " guests" : " guest");
+	const priceString = (isPreview ? Math.round(siteTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
+
 	return (
 		<div className="mb-3">
-			<div className="position-relative card-item">
+			<div className="position-relative card-item" style={{ height: isCompact ? "410px" : "550px" }}>
 				<a href={linkPath} target={isPreview ? "_self" : "_blank"}><img src={imgUrl} className="list-item-photo mb-2" /></a>
+				
 				{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} /> }
+
 				<a href={linkPath} target={isPreview ? "_self" : "_blank"}>
 					<div className="property-card-details">
-						<p className="mb-0 property-card-heading">{item.title}</p>
-						<Rating score={item.rating} reviewsNo={item.reviews_no} />
-						<p>{item.city}, {item.country}</p>
-						<hr />
-						<p>Cottage</p>
-						<p>Entire holiday home · 2 bedrooms · 1 bathroom</p>
-						<p>2 beds</p>
-
+						<div className="property-card-heading">{item.title}</div>
+						<div className="mt-6">
+							<Rating score={item.rating} reviewsNo={item.reviews_no} />
+						</div>
+						<div className="mt-6">{item.city}, {item.country}</div>
 						{
-							!hidePrice &&
-							<div className="text-end mt-3">
-								<span className="text-muted d-block">{nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}</span>
-								<span className="lato-bold property-card-price d-block">{isPreview ? Math.round(siteTotalPrice * 100) / 100 : convertedTotalPrice} {authContext.currency}</span>
+							!isCompact &&
+							<div>
+								<hr />
+								<div>Cottage</div>
+								<div className="mt-6">Entire holiday home · 2 bedrooms · 1 bathroom</div>
+								<div className="mt-6">2 beds</div>
 							</div>
 						}
+						<div className="price-container">
+						{
+							isCompact
+							? <div className="d-flex align-items-center justify-content-end">
+								<div className="text-muted d-block me-2">{nightsString}</div>
+								<div className="lato-bold property-card-price d-block">{priceString}</div>
+							</div>
+							: <div className="text-end mt-3">
+								<div className="text-muted d-block">{nightsString}, {guestsString}</div>
+								<div className="mt-6 lato-bold property-card-price d-block">{priceString}</div>
+							</div>
+						}
+						</div>
 					</div>
 				</a>
 			</div>

@@ -50,8 +50,6 @@ export default function Review() {
 					<PropertyListItem
 						isPreview={true}
 						item={property}
-						hideWishlist={true}
-						hidePrice={true}
 					/>
 				</div>
 				<div className="col-9">

@@ -13,12 +13,14 @@ export enum ListItemType {
 	Booking
 };
 
-export default function ListView({ listItemType, items, cols, setNeedsRefresh }) {
+export default function ListView({ listItemType, items, cols, setNeedsRefresh, isCompact }) {
 	// Today
 	// TODO: replace with first weekend
+	// TODO: [checkIn, out, guests] need to be props for ListView. Parent component establishes values.
 	const checkIn = new Date();
 	let checkOut = new Date();
-	checkOut.setDate(checkOut.getDate() + 3);
+	checkOut.setDate(checkOut.getDate() + 2);
+	const guests = 1;
 
 	const gridClassNames = classNames(
 		"row",
@@ -40,8 +42,10 @@ export default function ListView({ listItemType, items, cols, setNeedsRefresh })
 								<PropertyListItem
 									isPreview={false}
 									item={item}
+									guests={guests}
 									checkIn={checkIn}
 									checkOut={checkOut}
+									isCompact={isCompact}
 								/>
 							</div>
 						)

@@ -66,7 +66,7 @@ export default function Home() {
 						}
 					</div>
 					<div className="mt-4">
-						<ListView listItemType={ListItemType.Property} items={properties} cols={4} />
+						<ListView listItemType={ListItemType.Property} items={properties} cols={4} isCompact={true} />
 					</div>
 				</div>
 

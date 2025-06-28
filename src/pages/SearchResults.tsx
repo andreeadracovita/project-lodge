@@ -72,7 +72,7 @@ export default function SearchResults() {
 				</div>
 				<div className="col-9">
 					<h1 className="page-heading">{location}: {properties.length} results found</h1>
-					<ListView listItemType={ListItemType.Property} items={properties} cols={3} />
+					<ListView listItemType={ListItemType.Property} items={properties} cols={3} isCompact={false} />
 				</div>
 	        </div>
 		</div>

@@ -39,7 +39,7 @@ export default function Wishlist() {
 			</div>
 			<div className="section-container">
 				<h1 className="page-heading">All wishlists [TODO collections]</h1>
-				<ListView listItemType={ListItemType.Property} items={properties} cols={3} />
+				<ListView listItemType={ListItemType.Property} items={properties} cols={4} />
 			</div>
 		</div>
 	);
