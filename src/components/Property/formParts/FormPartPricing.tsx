@@ -55,7 +55,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 				<button
 					id="go-to-pricing-button"
 					type="submit"
-					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
+					className="btn-pill my-5 d-flex align-items-center"
 				>
 					{ localisedString["hosting:review-property"] } <Icon.ChevronRight />
 				</button>

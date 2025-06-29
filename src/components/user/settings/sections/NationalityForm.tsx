@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import countries from "react-select-country-list";
 
-import { SettingsSectionEnum } from "../../SettingsSectionEnum";
-import NationalitySelect from "./NationalitySelect";
+import { SettingsSectionEnum } from "../SettingsSectionEnum";
+import CountrySelect from "/src/components/common/CountrySelect";
 import { updateUser } from "/src/api/BackendApiService";
 
 export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
@@ -36,7 +36,7 @@ export default function NationalityForm({ value, isFocused, showSectionHandler, 
 				<div className="col-8">
 					{
 						isFocused
-						? <NationalitySelect initialValue={countryCode} handleFormChange={handleChange} />
+						? <CountrySelect id="nationality" initialValue={countryCode} handleFormChange={handleChange} />
 						: <span>{countryCode ? countries().getLabel(countryCode) : ""}</span>
 					}
 					

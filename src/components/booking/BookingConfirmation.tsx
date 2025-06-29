@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
+import countries from "react-select-country-list";
 
 import { getAllFeatures, getBookingById, getPropertyById, cancelBooking } from "/src/api/BackendApiService";
 import BookedPropertyType from "/src/components/booking/BookedPropertyType";
@@ -132,7 +133,7 @@ export default function BookingConfirmation() {
 							</div>
 							<div className="ms-4">
 								<div className="text-strong">Property address</div>
-								<div>Street {property.street} {property.street_no}, {property.city}, {property.country}</div>
+								<div>Street {property.street} {property.street_no}, {property.city}, {countries().getLabel(property.country)}</div>
 								<div><a href={googleMapsLink} target="_blank" className="heading btn-text-underline">Google Map directions</a></div>
 							</div>
 						</div>

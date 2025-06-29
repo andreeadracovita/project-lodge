@@ -1,5 +1,6 @@
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
+import countries from "react-select-country-list";
 
 import "./CurrentTrip.css";
 import { checkInTimes, checkOutTimes, fileStorage } from "/src/utils/constants";
@@ -19,7 +20,8 @@ export default function CurrentTrip({ item }) {
 						<div className="mt-10 section-heading">{item.title}</div>
 						<div className="mt-6 d-flex align-items-center">
 							<Icon.GeoAltFill size={18} />
-							{item.city}, {item.street ?? "street"} {item.street_no ?? "number"}, {item.country}
+							{item.city}, {item.street ?? "street"} 
+							{item.street_no ?? "number"}, {countries().getLabel(item.country)}
 						</div>
 						<div className="mt-6">GPS: Lon, Lat</div>
 

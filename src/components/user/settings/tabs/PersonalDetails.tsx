@@ -2,7 +2,7 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import AvatarForm from "../sections/AvatarForm";
 import EmailForm from "../sections/EmailForm";
 import NameForm from "../sections/NameForm";
-import NationalityForm from "../sections/nationality/NationalityForm";
+import NationalityForm from "../sections/NationalityForm";
 import { getUserConfig } from "/src/api/BackendApiService";
 
 export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection }) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
+import countries from "react-select-country-list";
 
 import { getPropertyById } from "/src/api/BackendApiService";
 import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
@@ -35,7 +36,9 @@ export default function Stay() {
 				<div className="container section-container">
 					<div>
 						<h1 className="page-heading">{property.title}</h1>
-						<p><Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {property.country}</p>
+						<p>
+							<Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
+						</p>
 						<Rating score={property.rating} reviewsNo={property.reviews_no} />
 					</div>
 					<div className="mt-3">

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-export default function NationalitySelect({ initialValue, handleFormChange }) {
+export default function CountrySelect({ id, initialValue, handleFormChange }) {
 	const [value, setValue] = useState();
 	const options = useMemo(() => countryList().getData(), []);
 
@@ -21,6 +21,6 @@ export default function NationalitySelect({ initialValue, handleFormChange }) {
 	}
 	
 	return (
-		<Select options={options} value={value} onChange={changeHandler} />
+		<Select id={id} options={options} value={value} onChange={changeHandler} />
 	);
 }

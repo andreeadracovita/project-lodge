@@ -70,7 +70,7 @@ export default function FormPartReview({ input, propertyId }) {
 						id="publish-property-button"
 						type="submit"
 						name="save"
-						className="btn btn-light rounded-pill brand-color-background d-flex align-items-center"
+						className="btn-pill d-flex align-items-center"
 					>
 						{ localisedString["hosting:save-edit"] } <Icon.ChevronRight />
 					</button>
@@ -80,7 +80,7 @@ export default function FormPartReview({ input, propertyId }) {
 							id="publish-property-button"
 							type="submit"
 							name="publish"
-							className="btn btn-light rounded-pill brand-color-background ms-2 d-flex align-items-center"
+							className="btn-pill ms-2 d-flex align-items-center"
 						>
 							{ localisedString["hosting:publish-property"] } <Icon.ChevronRight />
 						</button>

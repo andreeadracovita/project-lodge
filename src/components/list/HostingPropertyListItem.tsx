@@ -1,6 +1,7 @@
 import { fileStorage } from "/src/utils/constants";
 import { deletePropertyById, updateProperty } from "/src/api/BackendApiService";
 import { useNavigate } from "react-router-dom";
+import countries from "react-select-country-list";
 
 type HostingPropertyListItemProps = {
 	item: PropertyItem,
@@ -49,7 +50,7 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 			</div>
 			<div className="col-6">
 				<p className="lato-bold">{item.title}</p>
-				<p>{item.city}, {item.country}</p>
+				<p>{item.city}, {countries().getLabel(item.country)}</p>
 				{
 					item.is_listed &&
 					<p className="lato-bold">Listed</p>

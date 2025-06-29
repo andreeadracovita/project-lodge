@@ -1,3 +1,5 @@
+import countries from "react-select-country-list";
+
 import "./PropertyListItem.css";
 import WishlistIcon from "./WishlistIcon";
 import { useAuth } from "/src/components/security/AuthContext";
@@ -71,7 +73,7 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 						<div className="mt-6">
 							<Rating score={item.rating} reviewsNo={item.reviews_no} />
 						</div>
-						<div className="mt-6">{item.city}, {item.country}</div>
+						<div className="mt-6">{item.city}, {countries().getLabel(item.country)}</div>
 						{
 							!isCompact &&
 							<div>

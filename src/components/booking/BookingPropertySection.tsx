@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import countries from "react-select-country-list";
 
 import { getAllFeatures } from "/src/api/BackendApiService";
 import Rating from "/src/components/common/Rating";
@@ -24,7 +25,7 @@ export default function BookingPropertySection({ item }) {
 	return (
 		<div className="border-section">
 			<h2 className="property-card-heading">{item.title}</h2>
-			<div className="mt-10">{item.city}, {item.street} {item.street_no}, {item.country}</div>
+			<div className="mt-10">{item.city}, {item.street} {item.street_no}, {countries().getLabel(item.country)}</div>
 			<div className="mt-6">
 				<Rating score={item.rating} reviewsNo={item.reviews_no} />
 			</div>

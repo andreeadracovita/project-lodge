@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
+import countries from "react-select-country-list";
 
 import "./EditPropertyForm.css";
 import FormBackButton from "./FormBackButton";
@@ -38,7 +39,8 @@ export default function EditPropertyForm() {
 		photos: [],
 
 		priceNight: 0,
-		isListed: false
+		isListed: false,
+		localCurrency: ""
 	});
 	const [imagesUrlArray, setImagesUrlArray] = useState([]);
 	const [pageTitle, setPageTitle] = useState(localisedString["hosting:list-property"]);
@@ -77,7 +79,8 @@ export default function EditPropertyForm() {
 							experiencesIds: data.experiences_ids ?? [],
 							photos: photos ? photos.map(url => fileStorage + url) : [],
 							priceNight: data.price_night ?? 0,
-							isListed: data.is_listed ?? false
+							isListed: data.is_listed ?? false,
+							localCurrency: data.local_currency ?? ""
 						});
 						setImagesUrlArray(photos ? photos : []);
 						setPageTitle(localisedString["hosting:edit-property"]);
@@ -111,6 +114,15 @@ export default function EditPropertyForm() {
 				[name]: value
 			}
 		});
+	}
+
+	function handleChangeCountry(value) {
+		setInput((prevValue) => {
+			return {
+				...prevValue,
+				country: value
+			}
+		})
 	}
 
 	async function handleChangePhotos(event) {
@@ -156,6 +168,7 @@ export default function EditPropertyForm() {
 							propertyId={propertyId}
 							setPropertyId={setPropertyId}
 							handleChange={handleChange}
+							handleChangeCountry={handleChangeCountry}
 							advanceState={advanceState}
 						/>
 					</div>
@@ -245,7 +258,7 @@ export default function EditPropertyForm() {
 											id: 0,
 											title: input.title,
 											city: input.city,
-											country: input.country,
+											country: countries().getLabel(input.country),
 											price: input.priceNight,
 											images_url_array: imagesUrlArray
 										}}

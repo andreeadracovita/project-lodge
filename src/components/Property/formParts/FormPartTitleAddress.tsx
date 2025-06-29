@@ -1,7 +1,8 @@
 import axios from "axios";
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
-import classNames from "classnames";
+import countries from "react-select-country-list";
 
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import {
@@ -12,9 +13,10 @@ import {
 	getAllBuildingTypes,
 	getAllRentalTypes
 } from "/src/api/BackendApiService";
+import CountrySelect from "/src/components/common/CountrySelect";
 import localisedString from "/src/localisation/en-GB";
 
-export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, advanceState }) {
+export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, handleChangeCountry, advanceState }) {
 	const [showError, setShowError] = useState(false);
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
@@ -102,7 +104,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			return;
 		}
 
-		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + input.country;
+		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + countries().getLabel(input.country);
 		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
 		axios.get(`https://geocode.maps.co/search?q=${address}&api_key=${apiKey}`)
 			.then(response => {
@@ -147,6 +149,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 							});
 					}
 				} else {
+					console.log(response.data);
 					setShowError(true);
 				}
 			})
@@ -235,15 +238,12 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					onChange={handleChange}
 				/>
 				<label htmlFor="country" className="mt-2">{ localisedString["hosting:country"] }</label>
-				<input
-					id="country"
-					type="text"
-					className={stylingFormControl100}
-					name="country"
-					value={input.country}
-					readOnly={!isEditable}
-					onChange={handleChange}
-				/>
+				{
+					isEditable
+					? <CountrySelect id="country" initialValue={input.country} handleFormChange={handleChangeCountry} />
+					: <div className={stylingFormControl100}>{countries().getLabel(input.country)}</div>
+				}
+				
 			</div>
 
 			{
@@ -251,7 +251,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				<button
 					id="go-to-describe-place-button"
 					type="submit"
-					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
+					className="btn-pill my-5 d-flex align-items-center"
 				>
 					{ localisedString["hosting:describe-place-next"] } <Icon.ChevronRight />
 				</button>

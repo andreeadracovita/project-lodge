@@ -190,7 +190,7 @@ export default function FormPartDescription({
 				<button
 					id="go-to-add-photos-button"
 					type="submit"
-					className="btn btn-light rounded-pill brand-color-background my-5 d-flex align-items-center"
+					className="btn-pill my-5 d-flex align-items-center"
 				>
 					{ localisedString["hosting:add-photos-next"] } <Icon.ChevronRight />
 				</button>
