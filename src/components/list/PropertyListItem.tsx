@@ -53,12 +53,12 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 
 	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
 	
-	const siteTotalPrice = item.price * nightsCount;
-	const convertedTotalPrice = convertToPreferredCurrency(siteTotalPrice, authContext.exchangeRate);
+	const siteCurrencyTotalPrice = item.price * nightsCount;
+	const convertedTotalPrice = convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate);
 
 	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
 	const guestsString = guests + (guests > 1 ? " guests" : " guest");
-	const priceString = (isPreview ? Math.round(siteTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
+	const priceString = (isPreview ? Math.round(siteCurrencyTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
 
 	return (
 		<div className="mb-3">

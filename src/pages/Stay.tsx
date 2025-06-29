@@ -20,8 +20,8 @@ export default function Stay() {
 	useEffect(() => {
 		getPropertyById(id)
 			.then(response => {
-				if (response.data?.length > 0) {
-					setProperty(response.data[0]);
+				if (response.data) {
+					setProperty(response.data);
 				}
 			})
 			.catch(error => {

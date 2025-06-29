@@ -28,7 +28,7 @@ export default function DestinationListItem({ item, checkIn, checkOut }: Destina
 					<div>
 						<img src={fileStorage + item.url} className="list-item-photo mb-2" />
 						<div>
-							<p className="lato-bold">{item.city}, {countries().getLabel(item.country)}</p>
+							<p className="lato-bold">{item.city}, {item.country}</p>
 						</div>
 					</div>
 				
