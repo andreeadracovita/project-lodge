@@ -14,8 +14,8 @@ export default function BookingSelection() {
 	useEffect(() => {
 		getPropertyById(propertyId)
 			.then(response => {
-				if (response.data?.length > 0) {
-					setProperty(response.data[0]);
+				if (response.data) {
+					setProperty(response.data);
 				}
 			})
 			.catch(error => {

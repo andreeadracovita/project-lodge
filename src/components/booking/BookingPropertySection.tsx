@@ -29,7 +29,7 @@ export default function BookingPropertySection({ item }) {
 			<div className="mt-6">
 				<Rating score={item.rating} reviewsNo={item.reviews_no} />
 			</div>
-			<div id="features-section" className="mt-6 d-flex">
+			<div id="features-section" className="mt-6 d-flex flex-wrap">
 				{
 					item.features_ids.map((id, i) => {
 						const foundFeature = features.find(feat => feat.id == id);

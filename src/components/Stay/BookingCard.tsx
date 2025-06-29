@@ -73,7 +73,7 @@ export default function BookingCard({price}) {
 	}
 
 	function handleBookClick() {
-		navigate(`/book?id=${searchParams.get("id")}&guests=${searchParams.get("guests")}&check_in=${searchParams.get("check_in")}&check_out=${searchParams.get("check_out")}`);
+		navigate(`/book?id=${searchParams.get("id")}&guests=${input.guests}&check_in=${searchParams.get("check_in")}&check_out=${searchParams.get("check_out")}`);
 	}
 
 	return (
