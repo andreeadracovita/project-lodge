@@ -22,7 +22,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 		event.preventDefault();
 
 		updatePropertyDetails(propertyId, {
-			price: input.pricePerNight,
+			price: input.priceNight,
 			currency: authContext.currency
 		})
 			.then(() => {
@@ -41,8 +41,8 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					id="price"
 					type="text"
 					className={stylingFormControl}
-					name="pricePerNight"
-					value={input.pricePerNight}
+					name="priceNight"
+					value={input.priceNight}
 					readOnly={!isEditable}
 					onChange={isEditable ? handleChange : undefined}
 				/>

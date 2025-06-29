@@ -46,7 +46,7 @@ export default function Stay() {
 							<PropertyDescription property={property} />
 						</div>
 						<div className="col-4">
-							<BookingCard price={property.price_per_night_eur} />
+							<BookingCard price={property.price_night} />
 						</div>
 					</div>
 					<hr />

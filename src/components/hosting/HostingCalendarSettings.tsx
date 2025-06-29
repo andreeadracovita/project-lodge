@@ -63,7 +63,7 @@ export default function HostingCalendarSettings() {
 					</div>
 
 					<div className="section-heading section-container">Price settings</div>
-					<div className="mt-10">Per night: [EXTRACT BOOKING DETAILS AS WELL] {hostedProperties.find(p => p.id == selectedPropId)?.price_per_night_eur}</div>
+					<div className="mt-10">Per night: [EXTRACT BOOKING DETAILS AS WELL] {hostedProperties.find(p => p.id == selectedPropId)?.price_night}</div>
 					<div className="btn-text-underline">Edit price</div>
 					<hr />
 					<div className="btn-text-underline">Edit Availability</div>

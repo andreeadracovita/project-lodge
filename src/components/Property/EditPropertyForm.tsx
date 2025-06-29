@@ -37,7 +37,7 @@ export default function EditPropertyForm() {
 
 		photos: [],
 
-		pricePerNight: 0,
+		priceNight: 0,
 		isListed: false
 	});
 	const [imagesUrlArray, setImagesUrlArray] = useState([]);
@@ -49,6 +49,7 @@ export default function EditPropertyForm() {
 	previewCheckOut.setDate(previewCheckOut.getDate() + 3);
 
 	useEffect(() => {
+		// Editing an existing property
 		if (searchParams.get("id")) {
 			setPropertyId(searchParams.get("id"));
 
@@ -75,7 +76,7 @@ export default function EditPropertyForm() {
 							featuresIds: data.features_ids ?? [],
 							experiencesIds: data.experiences_ids ?? [],
 							photos: photos ? photos.map(url => fileStorage + url) : [],
-							pricePerNight: data.price_per_night_eur ?? 0,
+							priceNight: data.price_night ?? 0,
 							isListed: data.is_listed ?? false
 						});
 						setImagesUrlArray(photos ? photos : []);
@@ -245,7 +246,7 @@ export default function EditPropertyForm() {
 											title: input.title,
 											city: input.city,
 											country: input.country,
-											price: input.pricePerNight,
+											price: input.priceNight,
 											images_url_array: imagesUrlArray
 										}}
 										checkIn={previewCheckIn}
