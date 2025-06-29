@@ -46,9 +46,10 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					readOnly={!isEditable}
 					onChange={isEditable ? handleChange : undefined}
 				/>
-				<span className="ms-3 lato-bold">{currency} per night</span>
+				<div className="ms-3 lato-bold">{input.localCurrency} per night</div>
 			</div>
-			<p className="mt-3">{ localisedString["hosting:pricing-property-management-info"] }</p>
+			<div className="mt-6 text-muted">{ localisedString["hosting:pricing-currency-info"] }</div>
+			<div className="mt-6 text-muted">{ localisedString["hosting:pricing-property-management-info"] }</div>
 
 			{
 				showButton &&

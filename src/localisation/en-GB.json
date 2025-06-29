@@ -32,6 +32,7 @@
 
 	"hosting:pricing": "Pricing",
 	"hosting:pricing-description": "How much will guests pay for a night at your property?",
+	"hosting:pricing-currency-info": "Prices are set in the local currency of the property.",
 	"hosting:pricing-property-management-info": "Price can be adjusted from the Property Management page.",
 
 	"hosting:review-property": "Review your property",

@@ -1,4 +1,5 @@
 import axios from "axios";
+import countryToCurrency from "country-to-currency";
 import { useState, useEffect } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
@@ -117,12 +118,14 @@ export default function EditPropertyForm() {
 	}
 
 	function handleChangeCountry(value) {
+		const countryLabel = countries().getLabel(value);
 		setInput((prevValue) => {
 			return {
 				...prevValue,
-				country: value
+				country: value,
+				localCurrency: countryToCurrency[value]
 			}
-		})
+		});
 	}
 
 	async function handleChangePhotos(event) {

@@ -61,7 +61,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			street: input.street,
 			street_no: input.streetNo,
 			building_type_id: parseInt(input.buildingType),
-			rental_type_id: parseInt(input.rentalType)
+			rental_type_id: parseInt(input.rentalType),
+			local_currency: input.localCurrency
 		}
 		createNewPropertyDetailBase(payloadPropDetail)
 			.then(responsePropDetail => {
@@ -104,7 +105,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			return;
 		}
 
-		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + countries().getLabel(input.country);
+		const countryLabel = countries().getLabel(input.country);
+		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + countryLabel;
 		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
 		axios.get(`https://geocode.maps.co/search?q=${address}&api_key=${apiKey}`)
 			.then(response => {
@@ -136,7 +138,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 							building_type_id: parseInt(input.buildingType),
 							rental_type_id: parseInt(input.rentalType),
 							street: input.street,
-							street_no: input.streetNo
+							street_no: input.streetNo,
+							local_currency: input.localCurrency
 						})
 							.then(() => {
 								check++;
@@ -243,7 +246,6 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					? <CountrySelect id="country" initialValue={input.country} handleFormChange={handleChangeCountry} />
 					: <div className={stylingFormControl100}>{countries().getLabel(input.country)}</div>
 				}
-				
 			</div>
 
 			{
