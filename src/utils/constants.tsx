@@ -6,7 +6,7 @@ export const greetingMessage = "The best time to travel";
 export const fileStorage = "http://localhost:3000/";
 
 // Currency
-export const siteCurrency = "EUR";
+export const siteCurrency = "CHF";
 
 // Available currencies
 export const availableCurrencies = ["EUR", "USD", "CHF", "GBP"];
