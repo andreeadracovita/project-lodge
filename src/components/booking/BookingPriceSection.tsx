@@ -11,8 +11,8 @@ export default function BookingPriceSection({ item }) {
 	const checkInDate = new Date(searchParams.get("check_in"));
 	const checkOutDate = new Date(searchParams.get("check_out"));
 	const nightsCount = getNightsCount(checkInDate, checkOutDate);
-	const localTotalPrice = item.price_night_original * nightsCount;
-	const siteTotalPrice = item.price_night * nightsCount;
+	const localTotalPrice = item.price_night_local * nightsCount;
+	const siteTotalPrice = item.price_night_site * nightsCount;
 	const convertedTotalPrice = convertToPreferredCurrency(siteTotalPrice, authContext.exchangeRate);
 	
 	return (

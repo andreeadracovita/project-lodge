@@ -79,7 +79,7 @@ export default function EditPropertyForm() {
 							featuresIds: data.features_ids ?? [],
 							experiencesIds: data.experiences_ids ?? [],
 							photos: photos ? photos.map(url => fileStorage + url) : [],
-							priceNight: data.price_night ?? 0,
+							priceNight: data.price_night_local ?? 0,
 							isListed: data.is_listed ?? false,
 							localCurrency: data.local_currency ?? ""
 						});

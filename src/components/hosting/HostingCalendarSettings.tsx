@@ -11,7 +11,7 @@ import { getPropertiesByUserId } from "/src/api/BackendApiService";
 export default function HostingCalendarSettings() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [hostedProperties, setHostedProperties] = useState([]);
-	const [selectedPropId, setSelectedPropId] = useState();
+	const [selectedProp, setSelectedProp] = useState();
 
 	useEffect(() => {
 		getPropertiesByUserId()
@@ -19,12 +19,11 @@ export default function HostingCalendarSettings() {
 				const data = response.data;
 				if (data.length > 0) {
 					setHostedProperties(data);
-					console.log(data);
-					if (!searchParams.get("id")) {
-						searchParams.set("id", data[0].id);
-						setSearchParams(searchParams);
-					}
-					setSelectedPropId(searchParams.get("id") ?? data[0].id);
+					const firstPropId = data[0].id;
+					searchParams.set("id", firstPropId);
+					setSearchParams(searchParams);
+					const foundPropWithId = data.find(p => p.id == firstPropId);
+					setSelectedProp(foundPropWithId);
 				}
 			})
 			.catch(error => {
@@ -35,18 +34,18 @@ export default function HostingCalendarSettings() {
 	function handlePropertyClick(id) {
 		searchParams.set("id", id);
 		setSearchParams(searchParams);
-		setSelectedPropId(id);
+		setSelectedProp(hostedProperties.find(p => p.id == id));
 	}
 	
 	return (
 		<div className="border-section">
 			<div className="text-strong">Selected property</div>
 			{
-				hostedProperties.length > 0 && selectedPropId &&
+				hostedProperties.length > 0 && selectedProp &&
 				<div>
 					<div className="dropdown">
 						<div id="dropdown-properties" role="button" className="btn-pill-outline mt-10" data-bs-toggle="dropdown">
-							{hostedProperties.find(p => p.id == selectedPropId)?.title}
+							{selectedProp?.title}
 						</div>
 						
 						<ul className="dropdown-menu dropdown-menu-start text-small">
@@ -63,7 +62,7 @@ export default function HostingCalendarSettings() {
 					</div>
 
 					<div className="section-heading section-container">Price settings</div>
-					<div className="mt-10">Per night: [EXTRACT BOOKING DETAILS AS WELL] {hostedProperties.find(p => p.id == selectedPropId)?.price_night}</div>
+					<div className="mt-10">Per night: {selectedProp?.price_night_local} {selectedProp?.local_currency}</div>
 					<div className="btn-text-underline">Edit price</div>
 					<hr />
 					<div className="btn-text-underline">Edit Availability</div>
