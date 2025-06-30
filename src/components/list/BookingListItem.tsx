@@ -32,7 +32,6 @@ export default function BookingListItem({item}: BookingListItemProp) {
 			return;
 		}
 
-		console.log("Check if review exists for:", item.booking_id);
 		existsReviewForBookingId(item.booking_id)
 			.then(response => {
 				if (response.data?.exists === false) {

@@ -35,11 +35,12 @@ export default function BookingConfirmation() {
 			getBookingById(bookingId, pinCode)
 				.then(response => {
 					const data = response.data;
+					console.log(data);
 
 					getPropertyById(data.property_id)
 						.then(response => {
-							if (response.data.length === 1) {
-								const propData = response.data[0];
+							if (response.data) {
+								const propData = response.data;
 								setProperty(propData);
 								// Lat 46.628050423092084, Lon 8.03273395337422
 								setGoogleMapsLink(`https://www.google.com/maps/place/${propData.geo.x}N+${propData.geo.y}E`);
@@ -146,8 +147,8 @@ export default function BookingConfirmation() {
 					</div>
 
 					<div className="section-container">
-						<div className="section-heading">Total</div>
-						<div className="mt-6 property-card-price">[...Locked price from payment...] {authContext.currency}</div>
+						<div className="section-heading">Total paid</div>
+						<div className="mt-6 property-card-price">{booking.amount} {booking.currency}</div>
 					</div>
 
 					<div className="section-container">
