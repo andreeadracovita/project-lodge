@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 import { siteName } from "/src/utils/constants";
 
 const noFooterPaths = [
-	"/hosting/calendar"
+	"/hosting/calendar",
+	"/messages"
 ];
 
 export default function Footer() {

@@ -1,0 +1,12 @@
+#messages-container {
+	height: calc(100% - 40px);
+}
+
+.layout-container {
+	height: calc(100vh - 200px);
+}
+
+#message-tools {
+	display: flex;
+	flex-direction: column;
+}
