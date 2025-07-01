@@ -9,7 +9,7 @@ export default function Avatar({ url, size, previewAvatar, firstName }) {
 				previewAvatar || url
 					? <img
 						src={previewAvatar ? previewAvatar : fileStorage + url}
-						alt="avatar"
+						alt="user avatar"
 						width={size}
 						height={size}
 						className="rounded-circle object-fit-cover" />

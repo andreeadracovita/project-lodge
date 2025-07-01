@@ -16,7 +16,7 @@ export default function ConversationTab({ data }: Prop) {
 	
 	return (
 		<div className="d-flex align-items-center mt-10">
-			<PropertyAvatar url={data.img_url} size={72}/>
+			<PropertyAvatar url={data.img_url} size={72} />
 			<div className="ms-1">
 				<div className="text-strong ellipsis">{data.property_title}</div>
 				<div>{dayMonYear(new Date(data.check_in))} — {dayMonYear(new Date(data.check_out))}</div>

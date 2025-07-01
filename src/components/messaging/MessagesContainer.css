@@ -1,8 +1,9 @@
 #messages-container {
-	height: calc(100% - 40px);
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
-.layout-container {
+#layout-container {
 	height: calc(100vh - 200px);
 }
 

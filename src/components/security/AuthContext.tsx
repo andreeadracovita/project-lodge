@@ -15,6 +15,7 @@ export default function AuthProvider({ children }) {
 	// User details
 	const [firstName, setFirstName] = useState(sessionStorage.getItem("lodgeFirstName"));
 	const [avatar, setAvatar] = useState(sessionStorage.getItem("lodgeAvatar"));
+	const [email, setEmail] = useState(sessionStorage.getItem("lodgeEmail"));
 
 	// User configs
 	const [currency, setCurrency] = useState(sessionStorage.getItem("lodgeCurrency") ?? siteCurrency);
@@ -40,7 +41,6 @@ export default function AuthProvider({ children }) {
 				if (response.data) {
 					setExchangeRate(response.data.rate);
 					setExchangeDay((new Date()).toDateString());
-					console.log("Day exchange rate:", response.data.rate);
 				}
 			})
 			.catch(error => {
@@ -87,6 +87,9 @@ export default function AuthProvider({ children }) {
 				setIsAuthenticated(true);
 				sessionStorage.setItem("lodgeIsAuthenticated", true);
 
+				setEmail(email);
+				sessionStorage.setItem("lodgeEmail", email);
+
 				setToken(jwtToken);
 				sessionStorage.setItem("lodgeToken", jwtToken);
 
@@ -111,6 +114,9 @@ export default function AuthProvider({ children }) {
 		setIsAuthenticated(false);
 		sessionStorage.removeItem("lodgeIsAuthenticated");
 
+		setEmail(null);
+		sessionStorage.removeItem("lodgeEmail");
+
 		setToken(null);
 		sessionStorage.removeItem("lodgeToken");
 
@@ -120,11 +126,29 @@ export default function AuthProvider({ children }) {
 		setAvatar(null);
 		sessionStorage.removeItem("lodgeAvatar");
 
+		setCurrency(siteCurrency);
+		sessionStorage.removeItem("lodgeCurrency");
+
+		setLanguage(defaultLanguage);
+		sessionStorage.removeItem("lodgeLanguage");
+
 		navigate("/");
 	}
 
 	return (
-		<AuthContext.Provider value={ { isAuthenticated, login, setUserConfig, logout, firstName, token, currency, language, avatar, exchangeRate } }>
+		<AuthContext.Provider value={{
+			isAuthenticated,
+			login,
+			setUserConfig,
+			logout,
+			email,
+			firstName,
+			token,
+			currency,
+			language,
+			avatar,
+			exchangeRate
+		}}>
 			{ children }
 		</AuthContext.Provider>
 	);
