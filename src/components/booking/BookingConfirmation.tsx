@@ -41,7 +41,6 @@ export default function BookingConfirmation() {
 							if (response.data) {
 								const propData = response.data;
 								setProperty(propData);
-								// Lat 46.628050423092084, Lon 8.03273395337422
 								setGoogleMapsLink(`https://www.google.com/maps/place/${propData.geo.x}N+${propData.geo.y}E`);
 							}
 						})
@@ -137,15 +136,42 @@ export default function BookingConfirmation() {
 						</div>
 					</div>
 
+					<div className="mt-10">
+						<div className="d-flex align-items-center">
+							<div className="">
+								<Icon.TelephoneFill size={24} />
+							</div>
+							<div className="ms-4">
+								<div className="text-strong">Host contact</div>
+								<div>Email: {booking.host_email}</div>
+							</div>
+						</div>
+					</div>
+
 					<div className="section-container">
-						<div className="section-heading">You've booked <BookedPropertyType rentalTypeId={property.rental_type_id} buildingTypeId={property.building_type_id} /></div>
-						<div className="mt-6">[...Same details as on large stay card...]</div>
-						<div className="heading btn-text-underline">View location details</div>
+						<div className="section-heading">
+							<span>You've booked </span>
+							<BookedPropertyType
+								rentalTypeId={property.rental_type_id}
+								buildingTypeId={property.building_type_id}
+							/>
+							<span> for {property.guests} {property.guests > 1 ? <span>guests</span> : <span>guest</span>}</span>
+						</div>
+						<div className="mt-6">
+							
+						</div>
+						<div className="heading btn-text-underline">View accommodation page</div>
 					</div>
 
 					<div className="section-container">
 						<div className="section-heading">Total paid</div>
-						<div className="mt-6 property-card-price">{booking.amount} {booking.currency}</div>
+						<div className="mt-6 property-card-price">
+							{
+								booking.amount
+								? <span>{booking.amount} {booking.currency}</span>
+								: <span>-</span>
+							}
+						</div>
 					</div>
 
 					<div className="section-container">

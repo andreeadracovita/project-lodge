@@ -16,9 +16,7 @@ export default function BookingForm() {
 		address: "",
 		city: "",
 		country: "",
-		phoneNo: "",
-		cardNo: "0000000000000000",
-		cardHolder: "John Doe"
+		phoneNo: ""
 	});
 
 	// useEffect to retrieve booking info related to property, price
@@ -56,9 +54,7 @@ export default function BookingForm() {
 			address: input.address,
 			city: input.city,
 			country: input.country,
-			phone_number: input.phoneNo,
-			card_number: input.cardNo,
-			card_holder: input.cardHolder
+			phone_number: input.phoneNo
 		})
 			.then(response => {
 				if (response.data) {
@@ -102,15 +98,7 @@ export default function BookingForm() {
 
 				<label htmlFor="phone-number">Phone number</label>
 				<input id="phone-number" type="text" className="form-control rounded-pill" name="phoneNo" value={ input.phoneNo } onChange={onChange} />
-
-				<hr />
-				<h2 className="section-heading">Payment</h2>
-				<label htmlFor="card-number">Card number</label>
-				<input id="card-number" type="text" className="form-control rounded-pill" name="cardNo" value={ input.cardNo } onChange={onChange} readOnly />
-
-				<label htmlFor="card-holder">Card holder</label>
-				<input id="card-holder" type="text" className="form-control rounded-pill" name="cardHolder" value={ input.cardHolder } onChange={onChange} readOnly />
-
+				
 				<div className="d-flex justify-content-end">
 					<button type="submit" className="mt-4 btn-pill">Finish booking</button>
 				</div>
