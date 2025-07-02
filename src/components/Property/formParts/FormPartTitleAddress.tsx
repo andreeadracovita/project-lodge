@@ -14,7 +14,6 @@ import {
 	getAllRentalTypes
 } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
-import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, handleChangeCountry, advanceState }) {
 	const [showError, setShowError] = useState(false);
@@ -164,7 +163,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 	return (
 		<form onSubmit={onSubmit}>
 			{ showError && <span className="error-text d-block">Errors present!</span> }
-			<label htmlFor="title">{ localisedString["hosting:title"] }</label>
+			<label htmlFor="title">Title</label>
 			<input
 				id="title"
 				type="text"
@@ -175,7 +174,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				onChange={handleChange}
 			/>
 
-			<label htmlFor="buildingType" className="mt-2">{ localisedString["hosting:type-of-building"] }</label>
+			<label htmlFor="buildingType" className="mt-2">Type of building</label>
 			<select
 				id="buildingType"
 				className={stylingFormControl100}
@@ -192,7 +191,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				
 			</select>
 
-			<label htmlFor="rentalType" className="mt-2">{ localisedString["hosting:type-of-rental"] }</label>
+			<label htmlFor="rentalType" className="mt-2">Type of rental</label>
 			<select
 				id="rentalType"
 				className={stylingFormControl100}
@@ -209,8 +208,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			</select>
 
 			<div id="address">
-				<h2 className="section-heading">{ localisedString["hosting:address"] }</h2>
-				<label htmlFor="street" className="mt-2">{ localisedString["hosting:street"] }</label>
+				<h2 className="section-heading">Address</h2>
+				<label htmlFor="street" className="mt-2">Street</label>
 				<input
 					id="street"
 					type="text"
@@ -220,7 +219,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					readOnly={!isEditable}
 					onChange={handleChange}
 				/>
-				<label htmlFor="streetNo" className="mt-2">{ localisedString["hosting:street-number"] }</label>
+				<label htmlFor="streetNo" className="mt-2">Street number</label>
 				<input
 					id="streetNo"
 					type="text"
@@ -230,7 +229,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					readOnly={!isEditable}
 					onChange={handleChange}
 				/>
-				<label htmlFor="city" className="mt-2">{ localisedString["hosting:city"] }</label>
+				<label htmlFor="city" className="mt-2">City</label>
 				<input
 					id="city"
 					type="text"
@@ -240,7 +239,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					readOnly={!isEditable}
 					onChange={handleChange}
 				/>
-				<label htmlFor="country" className="mt-2">{ localisedString["hosting:country"] }</label>
+				<label htmlFor="country" className="mt-2">Country</label>
 				{
 					isEditable
 					? <CountrySelect id="country" initialValue={input.country} handleFormChange={handleChangeCountry} />
@@ -255,7 +254,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					type="submit"
 					className="btn-pill my-5 d-flex align-items-center"
 				>
-					{ localisedString["hosting:describe-place-next"] } <Icon.ChevronRight />
+					Describe place next <Icon.ChevronRight />
 				</button>
 			}
 		</form>

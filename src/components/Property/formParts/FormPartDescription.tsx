@@ -5,7 +5,6 @@ import * as Icon from "react-bootstrap-icons";
 import "./FormPartDescription.css";
 import { getAllFeatures, getAllExperiences, updatePropertyDetails } from "/src/api/BackendApiService";
 import Multiselect from "/src/components/common/Multiselect";
-import localisedString from "/src/localisation/en-GB";
 import { experienceIconMap, featuresIconMap } from "/src/utils/mappings";
 
 export default function FormPartDescription({
@@ -81,7 +80,7 @@ export default function FormPartDescription({
 
 	return (
 		<form onSubmit={onDescriptionSubmit}>
-			<label htmlFor="description">{ localisedString["hosting:description-detail"] }</label>
+			<label htmlFor="description">Let guests know about your property</label>
 			<textarea
 				id="description"
 				className={stylingFormTextArea}
@@ -91,13 +90,13 @@ export default function FormPartDescription({
 				onChange={isEditable ? handleChange : undefined}
 				rows="3"
 			>
-				{ localisedString["hosting:description-placeholder"] }
+				Describe your property here
 			</textarea>
 
-			<p className="mt-3 mb-1">{ localisedString["hosting:capacity-detail"] }</p>
+			<p className="mt-3 mb-1">How many people can stay?</p>
 			<div className="row">
 				<div className="col-2">
-					<label htmlFor="guests">{ localisedString["hosting:guests"] }</label>
+					<label htmlFor="guests">Guests</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -114,7 +113,7 @@ export default function FormPartDescription({
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="beds">{ localisedString["hosting:beds"] }</label>
+					<label htmlFor="beds">Beds</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -131,7 +130,7 @@ export default function FormPartDescription({
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="bedrooms">{ localisedString["hosting:bedrooms"] }</label>
+					<label htmlFor="bedrooms">Bedrooms</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -148,7 +147,7 @@ export default function FormPartDescription({
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="bathrooms">{ localisedString["hosting:bathrooms"] }</label>
+					<label htmlFor="bathrooms">Bathrooms</label>
 				</div>
 				<div className="col-4">
 					<input
@@ -164,7 +163,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div id="features">
-				<h2 className="section-heading">{ localisedString["hosting:features"] }</h2>
+				<h2 className="section-heading">Features</h2>
 				<Multiselect
 					options={features}
 					selectedIds={input.featuresIds}
@@ -175,7 +174,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div id="experiences">
-				<label htmlFor="experiences" className="mt-3">{ localisedString["hosting:experiences-detail"] }</label>
+				<label htmlFor="experiences" className="mt-3">What experiences can guests have in the area?</label>
 				<Multiselect
 					options={experiences}
 					selectedIds={input.experiencesIds}
@@ -192,7 +191,7 @@ export default function FormPartDescription({
 					type="submit"
 					className="btn-pill my-5 d-flex align-items-center"
 				>
-					{ localisedString["hosting:add-photos-next"] } <Icon.ChevronRight />
+					Add photos next <Icon.ChevronRight />
 				</button>
 			}
 		</form>

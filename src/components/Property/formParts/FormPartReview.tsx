@@ -6,7 +6,6 @@ import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import { updateProperty } from "/src/api/BackendApiService";
-import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartReview({ input, propertyId }) {
 	const navigate = useNavigate();
@@ -44,7 +43,7 @@ export default function FormPartReview({ input, propertyId }) {
 				onButtonClicked={() => {}}
 			/>
 
-			<h2 className="section-heading">{ localisedString["hosting:description"] }</h2>
+			<h2 className="section-heading">Description</h2>
 			<FormPartDescription
 				isEditable={false}
 				showButton={false}
@@ -55,7 +54,7 @@ export default function FormPartReview({ input, propertyId }) {
 				handleChangeMultiselect={() => {}}
 			/>
 
-			<h2 className="section-heading">{ localisedString["hosting:pricing"] }</h2>
+			<h2 className="section-heading">Pricing</h2>
 			<FormPartPricing
 				isEditable={false}
 				showButton={false}
@@ -72,7 +71,7 @@ export default function FormPartReview({ input, propertyId }) {
 						name="save"
 						className="btn-pill d-flex align-items-center"
 					>
-						{ localisedString["hosting:save-edit"] } <Icon.ChevronRight />
+						Save edit <Icon.ChevronRight />
 					</button>
 					{
 						input.isListed === false &&
@@ -82,7 +81,7 @@ export default function FormPartReview({ input, propertyId }) {
 							name="publish"
 							className="btn-pill ms-2 d-flex align-items-center"
 						>
-							{ localisedString["hosting:publish-property"] } <Icon.ChevronRight />
+							Publish property <Icon.ChevronRight />
 						</button>
 					}
 				</div>

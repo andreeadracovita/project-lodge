@@ -14,7 +14,6 @@ import FormPartPricing from "./formParts/FormPartPricing";
 import FormPartReview from "./formParts/FormPartReview";
 import PropertyListItem from "/src/components/list/PropertyListItem";
 import { getPropertyById } from "/src/api/BackendApiService";
-import localisedString from "/src/localisation/en-GB";
 import { fileStorage } from "/src/utils/constants";
 
 export default function EditPropertyForm() {
@@ -44,8 +43,8 @@ export default function EditPropertyForm() {
 		localCurrency: ""
 	});
 	const [imagesUrlArray, setImagesUrlArray] = useState([]);
-	const [pageTitle, setPageTitle] = useState(localisedString["hosting:list-property"]);
-	const [endButtonText, setEndButtonText] = useState(localisedString["hosting:publish-property"]);
+	const [pageTitle, setPageTitle] = useState("List your property");
+	const [endButtonText, setEndButtonText] = useState("Publish property");
 
 	const previewCheckIn = new Date();
 	let previewCheckOut = new Date()
@@ -84,7 +83,7 @@ export default function EditPropertyForm() {
 							localCurrency: data.local_currency ?? ""
 						});
 						setImagesUrlArray(photos ? photos : []);
-						setPageTitle(localisedString["hosting:edit-property"]);
+						setPageTitle("Edit your property");
 					}
 				})
 				.catch(error => {
@@ -185,7 +184,7 @@ export default function EditPropertyForm() {
 				<div id="state-describe" className="row">
 					<div className="col-6">
 						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">{ localisedString["hosting:describe-property"] }</h1>
+						<h1 className="page-heading">Describe your property</h1>
 						<FormPartDescription
 							isEditable={true}
 							showButton={true}
@@ -207,7 +206,7 @@ export default function EditPropertyForm() {
 				formState === 2 &&
 				<div id="state-photos">
 					<FormBackButton onButtonClicked={onBackClicked} />
-					<h1 className="page-heading">{ localisedString["hosting:showcase-property"] }</h1>
+					<h1 className="page-heading">Showcase your property</h1>
 					<FormPartPhotos
 						isEditable={true}
 						showButton={true}
@@ -224,7 +223,7 @@ export default function EditPropertyForm() {
 				<div id="state-pricing" className="row">
 					<div className="col-6">
 						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">{ localisedString["hosting:pricing"] }</h1>
+						<h1 className="page-heading">Pricing</h1>
 						<FormPartPricing
 							isEditable={true}
 							showButton={true}
@@ -245,7 +244,7 @@ export default function EditPropertyForm() {
 					<div id="state-review" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1 className="page-heading">{ localisedString["hosting:review-property"] }</h1>
+							<h1 className="page-heading">Review your property</h1>
 							<FormPartReview
 								input={input}
 								propertyId={propertyId}

@@ -3,7 +3,6 @@ import classNames from "classnames";
 
 import { updatePropertyDetails } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
-import localisedString from "/src/localisation/en-GB";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
 	const authContext = useAuth();
@@ -35,7 +34,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 
 	return (
 		<form onSubmit={onSubmit}>
-			<label htmlFor="price">{ localisedString["hosting:pricing-description"] }</label>
+			<label htmlFor="price">How much will guests pay for a night at your property?</label>
 			<div className="d-flex align-items-center">
 				<input
 					id="price"
@@ -48,8 +47,8 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 				/>
 				<div className="ms-3 lato-bold">{input.localCurrency} per night</div>
 			</div>
-			<div className="mt-6 text-muted">{ localisedString["hosting:pricing-currency-info"] }</div>
-			<div className="mt-6 text-muted">{ localisedString["hosting:pricing-property-management-info"] }</div>
+			<div className="mt-6 text-muted">Prices are set in the local currency of the property.</div>
+			<div className="mt-6 text-muted">Price can be adjusted from the Property Management page.</div>
 
 			{
 				showButton &&
@@ -58,7 +57,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					type="submit"
 					className="btn-pill my-5 d-flex align-items-center"
 				>
-					{ localisedString["hosting:review-property"] } <Icon.ChevronRight />
+					Review your property <Icon.ChevronRight />
 				</button>
 			}
 		</form>

@@ -26,10 +26,6 @@ export default function Header() {
 					</div>
 					<div className="col-lg-6 d-flex justify-content-end align-items-center nav-item-font">
 						<span className="me-4 btn-pill">{authContext.currency}</span>
-						<span className="me-4 d-flex align-items-center btn-pill">
-							<Icon.Globe2 color="white" size={16} className="me-1"/>
-							{availableLanguages.find(l => l.value === authContext.language)?.label}
-						</span>
 						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
 						{
 							!authContext.isAuthenticated &&
