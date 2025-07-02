@@ -3,12 +3,12 @@ import { useState } from "react";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import { updateUserPassword } from "/src/api/BackendApiService";
+import PasswordInput from "/src/components/common/PasswordInput";
 
 export default function PasswordForm({ isFocused, showSectionHandler, clearSectionHandler }) {
 	const [input, setInput] = useState({
 		oldPassword: "",
-		newPassword: "",
-		newPasswordConfirm: ""
+		newPassword: ""
 	});
 
 	function handleChange(event): void {
@@ -23,8 +23,8 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
-		if (input.newPassword !== input.newPasswordConfirm) {
-			console.log("Confirmation does not match");
+		if (input.newPassword === "") {
+			// TODO: error
 			return;
 		}
 		updateUserPassword({ old_password: input.oldPassword, new_password: input.newPassword })
@@ -46,34 +46,20 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 					{
 						isFocused
 						? <>
-							<label htmlFor="old-pass">Old password</label>
-							<input
-								type="password"
-								id="old-pass"
+							<label htmlFor="old-password">Old password</label>
+							<PasswordInput
+								id="old-password"
 								name="oldPassword"
 								value={input.oldPassword}
-								onChange={handleChange}
-								className={formClassNames}
+								handleChange={handleChange}
 							/>
 	
-							<label htmlFor="new-pass">New password</label>
-							<input
-								type="password"
-								id="new-pass"
+							<label htmlFor="new-password">New password</label>
+							<PasswordInput
+								id="new-password"
 								name="newPassword"
 								value={input.newPassword}
-								onChange={handleChange}
-								className={formClassNames}
-							/>
-
-							<label htmlFor="new-pass">Confirm new password</label>
-							<input
-								type="password"
-								id="confirm-new-pass"
-								name="newPasswordConfirm"
-								value={input.newPasswordConfirm}
-								onChange={handleChange}
-								className={formClassNames}
+								handleChange={handleChange}
 							/>
 						</>
 						: <span>*****</span>

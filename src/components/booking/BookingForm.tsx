@@ -58,11 +58,9 @@ export default function BookingForm() {
 			country: input.country,
 			phone_number: input.phoneNo,
 			card_number: input.cardNo,
-			card_holder: input.cardHolder,
-			price: 200 // ! TODO
+			card_holder: input.cardHolder
 		})
 			.then(response => {
-				console.log(response.data);
 				if (response.data) {
 					const bookingId = response.data.id;
 					const pinCode = response.data.pin_code;

@@ -45,7 +45,6 @@ function attachBookingTagsToDays(bookings) {
  * - Check-in
  * - Booked
  * - Check-out
- * - TODO: Unavailable ranges set by host.
  */
 export default function HostingCalendarView() {
 	const [searchParams, setSearchParams] = useSearchParams();

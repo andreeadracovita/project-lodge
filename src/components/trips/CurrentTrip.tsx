@@ -7,7 +7,6 @@ import { checkInTimes, checkOutTimes, fileStorage } from "/src/utils/constants";
 import { weekdayMonYear } from "/src/utils/DateFormatUtils";
 
 export default function CurrentTrip({ item }) {
-	console.log(item);
 	const checkIn = weekdayMonYear(new Date(item.check_in));
 	const checkOut = weekdayMonYear(new Date(item.check_out));
 	

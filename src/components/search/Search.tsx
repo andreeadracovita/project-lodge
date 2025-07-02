@@ -57,7 +57,7 @@ export default function Search() {
 
 	return (
 		<form role="search">
-			<div id="search-bar" className="rounded-pill p-1 px-2 w-100 d-flex align-items-center justify-content-between">
+			<div id="search-bar" className="rounded-pill p-1 px-2 w-100 d-flex align-items-center justify-content-between pill-container">
 				<div className="d-flex w-25 align-items-center">
 					<Icon.GeoAlt size={24} />
 					<input

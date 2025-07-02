@@ -35,7 +35,6 @@ export default function AuthProvider({ children }) {
 	}
 
 	useEffect(() => {
-		console.log("Refresh exchange rate because the day has changed...");
 		getExchangeRateForTarget(currency)
 			.then(response => {
 				if (response.data) {
@@ -50,11 +49,9 @@ export default function AuthProvider({ children }) {
 
 	async function setUserConfig() {
 		try {
-			console.log("setUserConfig");
 			const response = await getUserConfig();
 			if (response.status === 200) {
 				const { first_name, img_url, currency, language } = response.data;
-				console.log(response.data);
 
 				setFirstName(first_name);
 				sessionStorage.setItem("lodgeFirstName", first_name);
@@ -75,7 +72,7 @@ export default function AuthProvider({ children }) {
 				}
 			}
 		} catch (error) { 
-			console.log(error);
+			console.error(error);
 		}
 	}
 

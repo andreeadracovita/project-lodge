@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
-import { useAuth } from "/src/components/security/AuthContext";
 import { checkUserExists } from "/src/api/AuthenticationApiService";
 import { createAccount } from "/src/api/AuthenticationApiService";
+import { useAuth } from "/src/components/security/AuthContext";
+import PasswordInput from "/src/components/common/PasswordInput";
 
 enum FormState {
 	Email,
@@ -94,7 +95,7 @@ export default function SignupLogin() {
 					handleLogin();
 				})
 				.catch(error => {
-					console.log(error);
+					console.error(error);
 				})
 		}
 	}
@@ -151,15 +152,7 @@ export default function SignupLogin() {
 					formState === FormState.Password &&
 					<div>
 						<h2 className="section-heading">Welcome back</h2>
-						<input
-							type="password"
-							className="form-control rounded-pill mt-10"
-							name="password"
-							value={input.password}
-							onChange={handleChange}
-							placeholder="Password"
-							autoComplete="off"
-						/>
+						<PasswordInput id="password" name="password" value={input.password} handleChange={handleChange} />
 						{
 							showLoginError &&
 							<div>
@@ -208,16 +201,8 @@ export default function SignupLogin() {
 						/>
 
 						<label htmlFor="password" className="section-heading section-container">Password</label>
-						<input
-							id="password"
-							type="password"
-							className="form-control rounded-pill mt-10"
-							name="password"
-							value={input.password}
-							onChange={handleChange}
-							placeholder="Password"
-							autoComplete="off"
-						/>
+						<PasswordInput id="password" name="password" value={input.password} handleChange={handleChange} />
+
 						<div className="mt-10">
 							{
 								errorsText.map((error, i) => 

@@ -7,7 +7,6 @@ import HostingCalendarDay from "./HostingCalendarDay";
 import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
-// TODO: Customize booking calendar to show host calendar
 export default function HostingCalendarMonth({ id, month, year }) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 	const monthNames = [

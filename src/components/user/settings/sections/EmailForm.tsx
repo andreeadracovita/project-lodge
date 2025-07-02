@@ -16,6 +16,7 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
+		// TODO
 		// updateUser({ email: input.email })
 		// 	.then(() => {
 		// 		clearSectionHandler();

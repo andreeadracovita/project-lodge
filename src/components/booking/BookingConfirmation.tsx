@@ -35,7 +35,6 @@ export default function BookingConfirmation() {
 			getBookingById(bookingId, pinCode)
 				.then(response => {
 					const data = response.data;
-					console.log(data);
 
 					getPropertyById(data.property_id)
 						.then(response => {
@@ -88,9 +87,7 @@ export default function BookingConfirmation() {
 		}
 		cancelBooking(payload)
 			.then(response => {
-				console.log(response);
 				if (response.status === 200) {
-					console.log(response.message);
 					setShowCancel(false);
 				}
 			})

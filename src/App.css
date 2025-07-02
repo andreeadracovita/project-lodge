@@ -232,14 +232,9 @@ a {
   height: 172px;
 }
 
-.tag-pill {
-  background: var(--light-brand-color);
-  border: none;
-  border-radius: 50rem;
-  padding: 0.375rem 0.75rem;
-  line-height: 1;
-  display: inline-block;
-  font-size: 1rem;
+.pill-container {
+  border: 1px solid var(--light-grey);
+  background-color: white;
 }
 
 /* End: Containers ------------------------------------------------------------ */
