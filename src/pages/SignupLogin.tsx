@@ -145,13 +145,6 @@ export default function SignupLogin() {
 						>
 							Continue
 						</button>
-						<hr />
-						<button type="button" className="btn-pill-outline w-100">
-							<span className="d-flex align-items-center justify-content-center">
-								<img src="/icons/Google__G__logo.png" width="18px" height="18px" className="me-1" />
-								Continue with Google
-							</span>
-						</button>
 					</div>
 				}
 				{
@@ -184,8 +177,9 @@ export default function SignupLogin() {
 				{
 					formState === FormState.Signup &&
 					<div>
-						<h2 className="section-heading">Legal name</h2>
+						<label htmlFor="first-name" className="section-heading">Legal name</label>
 						<input
+							id="first-name"
 							type="text"
 							className="form-control rounded-pill mt-10"
 							name="firstName"
@@ -202,18 +196,20 @@ export default function SignupLogin() {
 							placeholder="Last name"
 						/>
 
-						<h2 className="section-heading section-container">Contact info</h2>
+						<label htmlFor="email" className="section-heading section-container">Contact info</label>
 						<input
+							id="email"
 							type="text"
 							className="form-control rounded-pill mt-10"
 							name="email"
-							value={input.email} 
+							value={input.email}
 							onChange={handleChange}
 							placeholder="Email"
 						/>
 
-						<h2 className="section-heading section-container">Password</h2>
+						<label htmlFor="password" className="section-heading section-container">Password</label>
 						<input
+							id="password"
 							type="password"
 							className="form-control rounded-pill mt-10"
 							name="password"
@@ -238,13 +234,6 @@ export default function SignupLogin() {
 							className="btn-pill w-100 section-container"
 						>
 							Continue
-						</button>
-						<hr />
-						<button type="button" className="btn-pill-outline w-100">
-							<span className="d-flex align-items-center justify-content-center">
-								<img src="/icons/Google__G__logo.png" width="18px" height="18px" className="me-1" />
-								Continue with Google
-							</span>
 						</button>
 					</div>
 				}

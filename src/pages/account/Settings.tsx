@@ -6,8 +6,6 @@ import { getUserConfig } from "/src/api/BackendApiService";
 import PersonalDetails from "/src/components/user/settings/tabs/PersonalDetails";
 import LoginSecurity from "/src/components/user/settings/tabs/LoginSecurity";
 import Preferences from "/src/components/user/settings/tabs/Preferences";
-import Payment from "/src/components/user/settings/tabs/Payment";
-import Privacy from "/src/components/user/settings/tabs/Privacy";
 import SettingsNav, { SettingsTab } from "/src/components/user/SettingsNav";
 import { SettingsSectionEnum } from "/src/components/user/settings/SettingsSectionEnum";
 
@@ -88,22 +86,6 @@ export default function Settings() {
 							settingsTab={SettingsTab.Preferences}
 							activeSection={activeTab}
 						/>
-						<hr />
-						<SettingsNav
-							iconName="CreditCard"
-							iconSize={iconSize}
-							tabName="Payment"
-							settingsTab={SettingsTab.Payment}
-							activeSection={activeTab}
-						/>
-						<hr />
-						<SettingsNav
-							iconName="ShieldCheck"
-							iconSize={iconSize}
-							tabName="Privacy"
-							settingsTab={SettingsTab.Privacy}
-							activeSection={activeTab}
-						/>
 					</div>
 				</div>
 				<div id="settings-main" className="col-8">
@@ -133,14 +115,6 @@ export default function Settings() {
 							clearSectionHandler={clearSectionHandler}
 							activeSection={activeSection}
 						/>
-					}
-					{
-						activeTab === SettingsTab.Payment &&
-						<Payment />
-					}
-					{
-						activeTab === SettingsTab.Privacy &&
-						<Privacy />
 					}
 				</div>
 			</div>

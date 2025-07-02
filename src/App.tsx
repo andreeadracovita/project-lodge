@@ -16,7 +16,6 @@ import Account from "./pages/account/Account";
 import Settings from "./pages/account/Settings";
 import Trips from "./pages/account/Trips";
 import Wishlist from "./pages/account/Wishlist";
-import Messages from "./pages/account/Messages";
 import Review from "./pages/account/Review";
 import UserReviews from "./pages/account/UserReviews";
 
@@ -24,7 +23,6 @@ import HostingDashboard from "./pages/hosting/HostingDashboard";
 import Properties from "./pages/hosting/Properties";
 import PropertyEdit from "./pages/hosting/PropertyEdit";
 import HostingCalendar from "./pages/hosting/HostingCalendar";
-import HostingMessages from "./pages/hosting/HostingMessages";
 
 import NoMatch from "./pages/NoMatch";
 
@@ -49,7 +47,6 @@ export default function App() {
             <Route path="/myaccount/settings" element={<RequireAuth><Settings /></RequireAuth>} />
             <Route path="/trips" element={<RequireAuth><Trips /></RequireAuth>} />
             <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
-            <Route path="/messages" element={<RequireAuth><Messages /></RequireAuth>} />
             <Route path="/myaccount/reviews" element={<RequireAuth><UserReviews /></RequireAuth>} />
             <Route path="/review" element={<RequireAuth><Review /></RequireAuth>} />
 
@@ -58,7 +55,6 @@ export default function App() {
             <Route path="/hosting/property/add" element={<RequireAuth><PropertyEdit /></RequireAuth>} />
             <Route path="/hosting/property/edit" element={<RequireAuth><PropertyEdit /></RequireAuth>} />
             <Route path="/hosting/calendar" element={<RequireAuth><HostingCalendar /></RequireAuth>} />
-            <Route path="/hosting/messages" element={<RequireAuth><HostingMessages /></RequireAuth>} />
 
             <Route path="*" element={<NoMatch />} />
           </Routes>

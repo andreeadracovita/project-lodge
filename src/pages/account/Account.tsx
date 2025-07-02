@@ -47,24 +47,6 @@ export default function Account() {
 							url={`/myaccount/settings?tab=${SettingsTab.Preferences}`}
 						/>
 					</div>
-					<div className="col-4">
-						<AccountCard
-							iconName="CreditCard"
-							iconSize={iconSize}
-							title="Payment"
-							desc="Add or remove payment methods"
-							url={`/myaccount/settings?tab=${SettingsTab.Payment}`}
-						/>
-					</div>
-					<div className="col-4">
-						<AccountCard
-							iconName="ShieldCheck"
-							iconSize={iconSize}
-							title="Privacy"
-							desc="Updatte privacy settings"
-							url={`/myaccount/settings?tab=${SettingsTab.Privacy}`}
-						/>
-					</div>
 				</div>
 			</div>
 

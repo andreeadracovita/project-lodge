@@ -17,7 +17,6 @@ export default function AccountCard({ iconName, iconSize, title, desc, url }) {
 						<Icon iconName="ChevronRight" size={24} />
 					</div>
 				</div>
-				
 			</div>
 		</Link>
 	);

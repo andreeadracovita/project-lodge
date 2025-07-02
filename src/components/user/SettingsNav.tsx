@@ -5,9 +5,7 @@ import { Icon } from "/src/components/common/Icon";
 export enum SettingsTab {
 	Details = "details",
 	Security = "security",
-	Preferences = "preferences",
-	Payment = "payment",
-	Privacy = "privacy"
+	Preferences = "preferences"
 };
 
 export default function SettingsNav({ iconName, iconSize, tabName, settingsTab, activeSection }) {

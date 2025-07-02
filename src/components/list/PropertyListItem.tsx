@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import countries from "react-select-country-list";
 
 import "./PropertyListItem.css";
@@ -63,11 +64,11 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 	return (
 		<div className="mb-3">
 			<div className="position-relative card-item" style={{ height: isCompact ? "410px" : "550px" }}>
-				<a href={linkPath} target={isPreview ? "_self" : "_blank"}><img src={imgUrl} className="list-item-photo mb-2" /></a>
+				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
 				
 				{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} /> }
 
-				<a href={linkPath} target={isPreview ? "_self" : "_blank"}>
+				<Link to={linkPath}>
 					<div className="property-card-details">
 						<div className="property-card-heading">{item.title}</div>
 						<div className="mt-6">
@@ -97,7 +98,7 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 						}
 						</div>
 					</div>
-				</a>
+				</Link>
 			</div>
 		</div>
 	);
