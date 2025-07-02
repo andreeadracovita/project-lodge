@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
+import { updateUser } from "/src/api/BackendApiService";
 
 export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [email, setEmail] = useState(value);
@@ -17,13 +18,18 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
 		// TODO
-		// updateUser({ email: input.email })
-		// 	.then(() => {
-		// 		clearSectionHandler();
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error);
-		// 	});
+		updateUser({ email: email })
+			.then(response => {
+				if (response.data?.isAvailable === false) {
+					// TODO Show error with unavailable email
+					console.log("Email is already associated with an account!");
+					setEmail(value);
+				}
+				clearSectionHandler();
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 
 	return (
