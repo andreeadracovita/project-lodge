@@ -32,7 +32,6 @@ export default function HostingCalendarDay({ id, year, month, day }) {
 		>
 			<div className="w-100 d-flex justify-content-between">
 				<span>{day}</span>
-				<span>80 CHF</span>
 			</div>
 		</div>
 	);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
-import { getPropertiesByUserId } from "/src/api/BackendApiService";
+import { getPropertiesByUserId, updatePropertyDetails } from "/src/api/BackendApiService";
 
 /**
  * HostingCalendarSettings retrieves all managed properties by hostId for dropdown select and sets searchParams
@@ -12,6 +12,9 @@ export default function HostingCalendarSettings() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [hostedProperties, setHostedProperties] = useState([]);
 	const [selectedProp, setSelectedProp] = useState();
+
+	const [priceInput, setPriceInput] = useState();
+	const [showEdit, setShowEdit] = useState(false);
 
 	useEffect(() => {
 		getPropertiesByUserId()
@@ -24,6 +27,7 @@ export default function HostingCalendarSettings() {
 					setSearchParams(searchParams);
 					const foundPropWithId = data.find(p => p.id == firstPropId);
 					setSelectedProp(foundPropWithId);
+					setPriceInput(foundPropWithId.price_night_local);
 				}
 			})
 			.catch(error => {
@@ -35,6 +39,19 @@ export default function HostingCalendarSettings() {
 		searchParams.set("id", id);
 		setSearchParams(searchParams);
 		setSelectedProp(hostedProperties.find(p => p.id == id));
+	}
+
+	function savePrice() {
+		updatePropertyDetails(selectedProp.id, {
+			price: priceInput
+		})
+			.then(() => {
+				setShowEdit(false);
+				window.location.reload(false);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	}
 	
 	return (
@@ -61,14 +78,30 @@ export default function HostingCalendarSettings() {
 						</ul>
 					</div>
 
-					<div className="section-heading section-container">Price settings</div>
-					<div className="mt-10">Per night: {selectedProp?.price_night_local} {selectedProp?.local_currency}</div>
-					<div className="btn-text-underline">Edit price</div>
-					<hr />
-					<div className="btn-text-underline">Edit Availability</div>
-					<hr />
-					<div className="section-heading">Selected booking</div>
-					<div className="btn-text-underline">View booking</div>
+					<div className="section-heading mt-10">Price settings</div>
+					<div className="mt-10">Per night</div>
+					{
+						showEdit
+						? <div>
+							<input
+								type="text"
+								className="form-control rounded-pill"
+								name="price"
+								value={priceInput}
+								onChange={(e) => setPriceInput(e.target.value)}
+							/>
+							<div>{selectedProp?.local_currency}</div>
+							<div className="mt-6 btn-text-underline" onClick={() => setShowEdit(false)}>Dismiss</div>
+							<div className="btn-text-underline" onClick={savePrice}>Save</div>
+						</div>
+						: <div>
+							<div className="property-card-price text-strong">{selectedProp?.price_night_local} {selectedProp?.local_currency}</div>
+							<div className="btn-text-underline" onClick={() => {
+								setPriceInput(selectedProp?.price_night_local);
+								setShowEdit(true);
+							}}>Edit price</div>
+						</div>
+					}
 				</div>
 			}
 		</div>

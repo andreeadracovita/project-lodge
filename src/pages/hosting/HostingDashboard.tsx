@@ -70,7 +70,7 @@ export default function HostingDashboard() {
 						)
 					}
 				</div>
-				<div id="reservations-section" className="border-section section-container">
+				<div id="reservations-section" className="section-container">
 					<ReservationsSection tab={activeTab} items={getActiveTabItems()} />
 				</div>
 			</div>
