@@ -5,7 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 import "./Header.css";
 import { useAuth } from "/src/components/security/AuthContext";
 import Avatar from "/src/components/user/Avatar";
-import { availableLanguages, siteName } from "/src/utils/constants";
+import { availableCurrencies, siteName } from "/src/utils/constants";
 
 export default function Header() {
 	const authContext = useAuth();
@@ -25,7 +25,23 @@ export default function Header() {
 						</Link>
 					</div>
 					<div className="col-lg-6 d-flex justify-content-end align-items-center nav-item-font">
-						<span className="me-4 btn-pill">{authContext.currency}</span>
+						<div className="dropdown">
+							<div id="dropdown-button" role="button" className="me-4" data-bs-toggle="dropdown">
+								<span className="btn-pill">{authContext.currency}</span>
+							</div>
+							<ul className="dropdown-menu dropdown-menu-end text-small">
+							{
+								availableCurrencies.map((currency, i) => 
+									<li key={i}>
+										<span className="dropdown-item cursor-pointer" onClick={() => {authContext.setSessionCurrency(currency)}}>
+											{currency}
+										</span>
+									</li>
+								)
+							}
+								
+							</ul>
+						</div>
 						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
 						{
 							!authContext.isAuthenticated &&

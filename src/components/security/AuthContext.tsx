@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { apiClient } from "/src/api/ApiClient";
 import { executeJwtAuthenticationService } from "/src/api/AuthenticationApiService";
-import { getUserConfig, getExchangeRateForTarget } from "/src/api/BackendApiService";
+import { getUserConfig, getExchangeRateForTarget, updateUser } from "/src/api/BackendApiService";
 import { defaultLanguage, siteCurrency } from "/src/utils/constants";
 
 export const AuthContext = createContext();
@@ -50,9 +50,11 @@ export default function AuthProvider({ children }) {
 
 	async function setUserConfig() {
 		try {
+			console.log("setUserConfig");
 			const response = await getUserConfig();
 			if (response.status === 200) {
 				const { first_name, img_url, currency, language } = response.data;
+				console.log(response.data);
 
 				setFirstName(first_name);
 				sessionStorage.setItem("lodgeFirstName", first_name);
@@ -135,11 +137,27 @@ export default function AuthProvider({ children }) {
 		navigate("/");
 	}
 
+	function setSessionCurrency(value) {
+		if (isAuthenticated) {
+			updateUser({ currency: value })
+				.then(() => {
+					setUserConfig();
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		} else {
+			setCurrency(value);
+			sessionStorage.setItem("lodgeCurrency", value);
+		}
+	}
+
 	return (
 		<AuthContext.Provider value={{
 			isAuthenticated,
 			login,
 			setUserConfig,
+			setSessionCurrency,
 			logout,
 			email,
 			firstName,
