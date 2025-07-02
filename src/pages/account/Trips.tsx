@@ -13,7 +13,6 @@ import CurrentTrip from "/src/components/trips/CurrentTrip";
  * - Completed: desc order by check-in
  */
 export default function Trips() {
-	// Allow having more current trips
 	const [currentBookings, setCurrentBookings] = useState([]);
 	const [upcomingBookings, setUpcomingBookings] = useState([]);
 	const [completedBookings, setCompletedBookings] = useState([]);

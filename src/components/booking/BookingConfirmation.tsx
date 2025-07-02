@@ -49,7 +49,7 @@ export default function BookingConfirmation() {
 						});
 
 					setBooking(data);
-					setShowCancel(data.booking_status_id !== 3);
+					setShowCancel(data.booking_status !== "cancelled");
 
 					if (data.booking_status_id === 3) {
 						setStatus(BookingStatus.cancelled);
@@ -61,6 +61,7 @@ export default function BookingConfirmation() {
 							setStatus(BookingStatus.confirmed);
 						} else {
 							setStatus(BookingStatus.completed);
+							setShowCancel(false);
 						}
 					}
 				})

@@ -136,7 +136,7 @@ export const getMessagesForUser1User2PropertyId
 // Reviews --------------------------------------------------------------------
 // Auth
 export const existsReviewForBookingId
-	= (bookingId) => apiClient.get(`/review/exists/user/booking/${bookingId}`);
+	= (bookingId) => apiClient.get(`/review/exists/booking/${bookingId}`);
 
 export const addReviewForBookingId
 	= (bookingId, payload) => apiClient.post(`/review/booking/${bookingId}`, payload); 

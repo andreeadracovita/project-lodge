@@ -23,7 +23,7 @@ export default function BookingListItem({item}: BookingListItemProp) {
 
 	useEffect(() => {
 		// Can review only non-cancelled bookings
-		if (item.booking_status_id !== 2) {
+		if (item.booking_status !== "confirmed") {
 			return;
 		}
 
