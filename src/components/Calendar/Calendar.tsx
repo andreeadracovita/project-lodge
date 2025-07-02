@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
-import { useState } from "react";
 
+import "./Calendar.css";
+import CalendarMonth from "./CalendarMonth";
 import { getPropertyAvailability } from "/src/api/BackendApiService";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
-import CalendarMonth from "./CalendarMonth";
-import "./Calendar.css";
 
 export default function Calendar() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +17,26 @@ export default function Calendar() {
 	const [secondDate, setSecondDate] = useState(() => getNextMonth(firstDate));
 	// Use to switch between check-in and out selections
 	const [isRangePicked, setIsRangePicked] = useState(true);
+
+	useEffect(() => {
+		// Check check-in - check-out availability from search parameters. If unavailable, clear values.
+		const checkIn = searchParams.get("check_in");
+		const checkOut = searchParams.get("check_out");
+
+		if (!checkIn || !checkOut) {
+			return;
+		}
+
+		getPropertyAvailability(propertyId, checkIn, checkOut)
+			.then(response => {
+				if (response?.data?.available === false) {
+					clearSelection();
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, []);
 
 	function getFirstDate() {
 		const checkIn = searchParams.get("check_in");
@@ -72,6 +93,13 @@ export default function Calendar() {
 		}
 	}
 
+	function clearSelection() {
+		searchParams.delete("check_in");
+		searchParams.delete("check_out");
+		setSearchParams(searchParams);
+		setIsRangePicked(true);
+	}
+
 	return (
 		<div id="calendar" className="row g-5">
 			<div className="col-6">
@@ -93,6 +121,10 @@ export default function Calendar() {
 					onRightChevronClicked={incrementMonth}
 					onDateClicked={pickDate}
 				/>
+			</div>
+			<div className="mt-10 d-flex align-items-center cursor-pointer" onClick={clearSelection}>
+				<Icon.Eraser size={20} />
+				<span className="ms-1">Clear selection</span>
 			</div>
 		</div>
 	);

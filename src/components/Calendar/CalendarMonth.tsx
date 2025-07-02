@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
-import classNames from "classnames";
 
 import "./CalendarMonth.css";
+import CalendarDay from "./CalendarDay";
 import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
@@ -55,6 +55,11 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 	useEffect(() => {
 		const checkInString = searchParams.get("check_in");
 		const checkOutString = searchParams.get("check_out");
+		if (checkInString === null) {
+			setCheckIn(undefined);
+			setCheckOut(undefined);
+		}
+
 		if (checkInString) {
 			setCheckIn(new Date(checkInString));
 			setCheckOut(undefined);
@@ -72,84 +77,6 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 	// Monday - Sunday : 0 - 6, how much padding to use before starting rendering day numbers
 	const dayPadding = firstDayOfMonthCount - 1 >= 0 ? firstDayOfMonthCount - 1 : 6; // Sunday -> 6
 	const lastDay = (new Date(year, month + 1, 0)).getDate();
-
-	// Selection styling
-	function isCheckInDay(dayIndex) {
-		if (checkIn) {
-			return checkIn.getFullYear() === year && checkIn.getMonth() === month && checkIn.getDate() === dayIndex;
-		}
-		return false;
-	}
-
-	function isCheckOutDay(dayIndex) {
-		if (checkOut) {
-			return checkOut.getFullYear() === year && checkOut.getMonth() === month && checkOut.getDate() === dayIndex;
-		}
-		return false;
-	}
-
-	function isIntermediaryDay(dayIndex) {
-		let queryDate = new Date(year, month, dayIndex);
-		if (checkIn && checkOut) {
-			if (queryDate > checkIn && queryDate < checkOut) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	function isDateAvailable(date) {
-		if (date < new Date()) {
-			return false;
-		}
-		for (const booked of bookedDates) {
-			if (date >= booked.check_in && date < booked.check_out) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	function sanitizeDateClick(isAvailable, date) {
-		if (!isAvailable) {
-			return;
-		}
-		onDateClicked(date)
-	}
-
-	function renderCalendarDay(index) {
-		const date = new Date(year, month, index);
-		const isAvailable = isDateAvailable(date);
-		const isCheckIn = isCheckInDay(index);
-		const isCheckOut = isCheckOutDay(index);
-
-		const containerClass = classNames(
-			"calendar-day",
-			{
-				"highlight": isIntermediaryDay(index),
-				"start-highlight": isCheckIn,
-				"end-highlight": isCheckOut,
-				"unavailable": !isAvailable,
-				"cursor-pointer": isAvailable
-			}
-		);
-		const dayClass = classNames(
-			"text-center",
-			{
-				"start-end-checked": isCheckIn || isCheckOut,
-				"day-selection-highlight": isAvailable && !isCheckIn && !isCheckOut
-			}
-		);
-		return (
-			<div
-				key={index}
-				className={containerClass}
-				onClick={() => sanitizeDateClick(isAvailable, date)}
-			>
-				<span className={dayClass}>{index}</span>
-			</div>
-		);
-	}
 
 	return (
 		<div>
@@ -174,9 +101,18 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 					{[...Array(dayPadding)].map((_, index) => (
 				        <span key={index}></span>
 				    ))}
-					{[...Array(lastDay)].map((_, index) => (
-				        renderCalendarDay(index + 1)
-			    	))}
+					{[...Array(lastDay)].map((_, index) => 
+				        <CalendarDay
+				        	key={index}
+				        	year={year}
+				        	month={month}
+				        	day={index + 1}
+				        	checkIn={checkIn}
+				        	checkOut={checkOut}
+				        	bookedDates={bookedDates}
+				        	handleDateClicked={onDateClicked}
+				        />
+			    	)}
 				</div>
 			</div>
 		</div>

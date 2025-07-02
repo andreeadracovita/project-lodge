@@ -35,3 +35,10 @@ export function getNightsCount(checkIn: Date, checkOut: Date) {
 	const diffNights = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 	return diffNights;
 }
+
+// Compares date1 to date2. If date1 > date2 return 1, if date1 < date2 return -1, if === return 0.
+export function compareDates(date1: Date, date2: Date): number {
+	const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+	const utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+	return utc1 > utc2 ? 1 : (utc1 < utc2 ? -1 : 0);
+}

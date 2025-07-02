@@ -2,13 +2,13 @@ import classNames from "classnames";
 import { useEffect } from "react";
 
 import "./HostingCalendarDay.css";
+import { compareDates } from "/src/utils/DateFormatUtils";
 
 export default function HostingCalendarDay({ id, year, month, day }) {
 
 	function isPastDate(dayIndex) {
-		// TODO: current day should not be past
 		const date = new Date(year, month, dayIndex);
-		if (date < new Date()) {
+		if (compareDates(date, new Date()) < 0) {
 			return true;
 		}
 		return false;
