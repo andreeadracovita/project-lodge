@@ -155,7 +155,7 @@ export default function BookingConfirmation() {
 								rentalTypeId={property.rental_type_id}
 								buildingTypeId={property.building_type_id}
 							/>
-							<span> for {property.guests} {property.guests > 1 ? <span>guests</span> : <span>guest</span>}</span>
+							<span> for {booking.guests} {booking.guests > 1 ? <span>guests</span> : <span>guest</span>}</span>
 						</div>
 						<div className="mt-6">
 							
