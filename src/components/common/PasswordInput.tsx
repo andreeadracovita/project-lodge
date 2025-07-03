@@ -21,7 +21,7 @@ export default function PasswordInput({ id, name, value, handleChange }) {
 				name={name}
 				value={value}
 				onChange={handleChange}
-				placeholder="Password"
+				placeholder="Password *"
 				autoComplete="off"
 			/>
 			<div className="mx-2">

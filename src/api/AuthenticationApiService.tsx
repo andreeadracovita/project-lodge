@@ -1,7 +1,7 @@
 import { apiClient } from "/src/api/ApiClient";
 
 export const checkUserExists
-	= (email) => apiClient.get(`/auth/exists/${ email }`);
+	= (payload) => apiClient.post("/auth/exists", payload);
 
 export const executeJwtAuthenticationService
 	= (email, password) => apiClient.post("/auth/login", { email, password });

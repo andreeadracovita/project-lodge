@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import { updateUser } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 
 export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [email, setEmail] = useState(value);
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		setEmail(value);
@@ -17,15 +19,16 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
-		// TODO
 		updateUser({ email: email })
 			.then(response => {
-				if (response.data?.isAvailable === false) {
-					// TODO Show error with unavailable email
-					console.log("Email is already associated with an account!");
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
 					setEmail(value);
+					return;
 				}
 				clearSectionHandler();
+				setErrors([]);
 			})
 			.catch(error => {
 				console.error(error);
@@ -41,8 +44,11 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 				<div className="col-8">
 					{
 						isFocused
-						? <input id="email" name="email" value={email} onChange={handleChange} className={formClassNames} />
-						: <span>{email}</span>
+						? <>
+							<input id="email" name="email" value={email} onChange={handleChange} className={formClassNames} />
+							<FormError errors={errors} />
+						</>
+						: <span>{value}</span>
 					}
 				</div>
 				<div className="col-2 d-flex justify-content-end align-items-start">

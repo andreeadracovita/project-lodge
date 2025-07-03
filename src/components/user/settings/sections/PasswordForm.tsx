@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import { updateUserPassword } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 import PasswordInput from "/src/components/common/PasswordInput";
 
 export default function PasswordForm({ isFocused, showSectionHandler, clearSectionHandler }) {
@@ -10,6 +11,7 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 		oldPassword: "",
 		newPassword: ""
 	});
+	const [errors, setErrors] = useState([]);
 
 	function handleChange(event): void {
 		const { name, value } = event.target;
@@ -23,13 +25,16 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
-		if (input.newPassword === "") {
-			// TODO: error
-			return;
-		}
 		updateUserPassword({ old_password: input.oldPassword, new_password: input.newPassword })
-			.then(() => {
+			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
 				clearSectionHandler();
+				setErrors([]);
+				setInput({ oldPassword: "", newPassword: "" });
 			})
 			.catch((error) => {
 				console.error(error);
@@ -61,6 +66,8 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 								value={input.newPassword}
 								handleChange={handleChange}
 							/>
+
+							<FormError errors={errors} />
 						</>
 						: <span>*****</span>
 					}

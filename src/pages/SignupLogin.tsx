@@ -5,8 +5,9 @@ import * as Icon from "react-bootstrap-icons";
 
 import { checkUserExists } from "/src/api/AuthenticationApiService";
 import { createAccount } from "/src/api/AuthenticationApiService";
-import { useAuth } from "/src/components/security/AuthContext";
+import FormError from "/src/components/common/FormError";
 import PasswordInput from "/src/components/common/PasswordInput";
+import { useAuth } from "/src/components/security/AuthContext";
 
 enum FormState {
 	Email,
@@ -26,38 +27,35 @@ export default function SignupLogin() {
 		lastName: "",
 		password: ""
 	});
-
-	const [passwordStrength, setPasswordStrength] = useState("weak");
-	const [showLoginError, setShowLoginError] = useState(false);
-
-	const errorsText = [
-		`Password strength: ${passwordStrength}`,
-		"Can't contain your name or email address",
-		"At least 8 characters",
-		"Contains a number or a symbol"
-	];
+	const [errors, setErrors] = useState([]);
 
 	function onBackClicked() {
 		setFormState(FormState.Email);
+		setErrors([]);
 	}
 
 	async function onContinueClicked() {
-		try {
-			const response = await checkUserExists(input.email);
+		checkUserExists({ email: input.email })
+			.then(response => {
+				if (response.data.errors) {
+					setErrors(response.data.errors);
+					return;
+				}
 
-			if (response.data?.userExists) {
-				setFormState(FormState.Password);
-			} else {
-				setFormState(FormState.Signup);
-			}
-		} catch (error) {
-			console.error(error);
-		}
+				if (response.data?.userExists) {
+					setFormState(FormState.Password);
+				} else {
+					setFormState(FormState.Signup);
+				}
+				setErrors([]);
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 
 	function handleChange(event) {
 		const { value, name } = event.target;
-		setShowLoginError(false);
 
 		setInput((prevValue) => {
 			return {
@@ -69,10 +67,9 @@ export default function SignupLogin() {
 
 	async function handleLogin() {
 		if (await authContext.login(input.email, input.password)) {
-			setShowLoginError(false);
 			navigate(location?.path || "/");
 		} else {
-			setShowLoginError(true);
+			setErrors(["Incorrect email and password combination"]);
 		}
 	}
 
@@ -91,7 +88,11 @@ export default function SignupLogin() {
 				last_name: input.lastName
 			};
 			createAccount(payload)
-				.then(() => {
+				.then(response => {
+					if (response.data.errors) {
+						setErrors(response.data.errors);
+						return;
+					}
 					handleLogin();
 				})
 				.catch(error => {
@@ -139,6 +140,7 @@ export default function SignupLogin() {
 							onChange={handleChange}
 							placeholder="Email"
 						/>
+						<FormError errors={errors} />
 						<button
 							type="button"
 							className="btn-pill w-100 section-container"
@@ -153,12 +155,7 @@ export default function SignupLogin() {
 					<div>
 						<h2 className="section-heading">Welcome back</h2>
 						<PasswordInput id="password" name="password" value={input.password} handleChange={handleChange} />
-						{
-							showLoginError &&
-							<div>
-								<p style={{"color": "red"}}>Incorrect email and password combination</p>
-							</div>
-						}
+						<FormError errors={errors} />
 						<button
 							type="submit"
 							className="btn-pill w-100 section-container"
@@ -178,7 +175,7 @@ export default function SignupLogin() {
 							name="firstName"
 							value={input.firstName} 
 							onChange={handleChange}
-							placeholder="First name"
+							placeholder="First name *"
 						/>
 						<input
 							type="text"
@@ -186,7 +183,7 @@ export default function SignupLogin() {
 							name="lastName"
 							value={input.lastName} 
 							onChange={handleChange}
-							placeholder="Last name"
+							placeholder="Last name *"
 						/>
 
 						<label htmlFor="email" className="section-heading section-container">Contact info</label>
@@ -197,23 +194,18 @@ export default function SignupLogin() {
 							name="email"
 							value={input.email}
 							onChange={handleChange}
-							placeholder="Email"
+							placeholder="Email *"
 						/>
 
 						<label htmlFor="password" className="section-heading section-container">Password</label>
-						<PasswordInput id="password" name="password" value={input.password} handleChange={handleChange} />
-
-						<div className="mt-10">
-							{
-								errorsText.map((error, i) => 
-									<p key={i} className="error-font">
-										<Icon.CheckCircleFill size={16} color="green" />
-										<Icon.XCircleFill size={16} color="#CC0000" />
-										<span className="ms-1">{error}</span>
-									</p>
-								)
-							}
-						</div>
+						<PasswordInput
+							id="password"
+							name="password"
+							value={input.password}
+							handleChange={handleChange}
+						/>
+						
+						<FormError errors={errors} />
 						<button
 							type="submit"
 							className="btn-pill w-100 section-container"

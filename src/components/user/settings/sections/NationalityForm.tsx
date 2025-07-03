@@ -3,10 +3,12 @@ import countries from "react-select-country-list";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import CountrySelect from "/src/components/common/CountrySelect";
+import FormError from "/src/components/common/FormError";
 import { updateUser } from "/src/api/BackendApiService";
 
 export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [countryCode, setCountryCode] = useState(value);
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		setCountryCode(value);
@@ -19,8 +21,15 @@ export default function NationalityForm({ value, isFocused, showSectionHandler, 
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
 		updateUser({ country_code: countryCode })
-			.then(() => {
+			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					setCountryCode(value);
+					return;
+				}
 				clearSectionHandler();
+				setErrors([]);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -36,8 +45,11 @@ export default function NationalityForm({ value, isFocused, showSectionHandler, 
 				<div className="col-8">
 					{
 						isFocused
-						? <CountrySelect id="nationality" initialValue={countryCode} handleFormChange={handleChange} />
-						: <span>{countryCode ? countries().getLabel(countryCode) : ""}</span>
+						? <>
+							<CountrySelect id="nationality" initialValue={countryCode} handleFormChange={handleChange} />
+							<FormError errors={errors} />
+						</>
+						: <span>{value ? countries().getLabel(value) : ""}</span>
 					}
 					
 				</div>

@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import { updateUser } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 
 export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSectionHandler, clearSectionHandler }) {
 	const [input, setInput] = useState({
 		firstName: firstNameValue,
 		lastName: lastNameValue
 	});
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		setInput({
@@ -30,8 +32,18 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 	function handleSubmit(event: Event): void {
 		event.preventDefault();
 		updateUser({ first_name: input.firstName, last_name: input.lastName })
-			.then(() => {
+			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					setInput({
+						firstName: firstNameValue,
+						lastName: lastNameValue
+					});
+					return;
+				}
 				clearSectionHandler();
+				setErrors([]);
 				authContext.setUserConfig();
 			})
 			.catch((error) => {
@@ -54,9 +66,11 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 	
 							<label htmlFor="last-name">Last name</label>
 							<input id="last-name" name="lastName" value={input.lastName} onChange={handleChange} className={formClassNames} />
+
+							<FormError errors={errors} />
 						</>
 						: <>
-							<span>{input.firstName} {input.lastName}</span>
+							<span>{firstNameValue} {lastNameValue}</span>
 						</>
 					}
 					
