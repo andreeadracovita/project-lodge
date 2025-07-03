@@ -58,8 +58,13 @@ export default function PropertyDescription({property}) {
 				}
 			</div>
 			<div className="btn-pill-outline mt-6">Show more</div>
-			<hr />
-			<AvailabilitySection propertyId={property.id}/>
+			{
+				property.is_listed &&
+				<>
+					<hr />
+					<AvailabilitySection />
+				</>
+			}
 			<hr />
 			<h2 className="section-heading">Experiences around</h2>
 			<div className="mt-10">

@@ -58,7 +58,7 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 	const convertedTotalPrice = convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate);
 
 	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
-	const guestsString = guests + (guests > 1 ? " guests" : " guest");
+	const guestsString = guests ? ", " + guests + (guests > 1 ? " guests" : " guest") : undefined;
 	const priceString = (isPreview ? Math.round(siteCurrencyTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
 
 	return (
@@ -92,7 +92,7 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 								<div className="lato-bold property-card-price d-block">{priceString}</div>
 							</div>
 							: <div className="text-end mt-3">
-								<div className="text-muted d-block">{nightsString}, {guestsString}</div>
+								<div className="text-muted d-block">{nightsString} {guestsString}</div>
 								<div className="mt-6 lato-bold property-card-price d-block">{priceString}</div>
 							</div>
 						}

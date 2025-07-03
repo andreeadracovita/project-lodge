@@ -252,7 +252,7 @@ export default function EditPropertyForm() {
 							/>
 						</div>
 						<div className="col-6">
-							<div className="col-8 pt-5 ms-5 sticky">
+							<div className="col-7 pt-5 ms-5 sticky">
 								<div id="preview">
 									<PropertyListItem
 										isPreview={true}
@@ -260,8 +260,8 @@ export default function EditPropertyForm() {
 											id: 0,
 											title: input.title,
 											city: input.city,
-											country: countries().getLabel(input.country),
-											price: input.priceNight,
+											country: input.country,
+											price_night_site: input.priceNight,
 											images_url_array: imagesUrlArray
 										}}
 										checkIn={previewCheckIn}

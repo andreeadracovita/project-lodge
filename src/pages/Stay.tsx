@@ -35,6 +35,12 @@ export default function Stay() {
 				property &&
 				<div className="container section-container">
 					<div>
+						{
+							!property.is_listed &&
+							<div className="text-muted mb-2">
+								UNPUBLISHED
+							</div>
+						}
 						<h1 className="page-heading">{property.title}</h1>
 						<p>
 							<Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
@@ -42,15 +48,20 @@ export default function Stay() {
 						<Rating score={property.rating} reviewsNo={property.reviews_no} />
 					</div>
 					<div className="mt-3">
-						<PropertyPhotoGrid urlArray={property.images_url_array.map(url => fileStorage + url)} />
+						<PropertyPhotoGrid
+							urlArray={property.images_url_array ? property.images_url_array.map(url => fileStorage + url) : []}
+						/>
 					</div>
 					<div className="mt-5 row">
 						<div className="col-8">
 							<PropertyDescription property={property} />
 						</div>
-						<div className="col-4">
-							<BookingCard price={property.price_night_site} />
-						</div>
+						{
+							property.is_listed &&
+							<div className="col-4">
+								<BookingCard price={property.price_night_site} />
+							</div>
+						}
 					</div>
 					<hr />
 					<PropertyReviews property={property} />
