@@ -43,7 +43,7 @@ export default function ReviewForm({ propertyId }) {
 	
 	return (
 		<form onSubmit={handleSubmit}>
-			<label className="mt-10">How do you rate your overall experience? <span className="error-text">*</span></label>
+			<label className="mt-10">How do you rate your overall experience? <span className="text-red">*</span></label>
 			<StarRating value={input.rating} handleChange={handleChange} />
 
 			<label htmlFor="title" className="mt-10">Short description</label>

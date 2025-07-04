@@ -80,7 +80,7 @@ export default function FormPartDescription({
 
 	return (
 		<form onSubmit={onDescriptionSubmit}>
-			<label htmlFor="description">Let guests know about your property</label>
+			<label htmlFor="description">Let guests know about your property <span className="text-red">*</span></label>
 			<textarea
 				id="description"
 				className={stylingFormTextArea}
@@ -89,6 +89,7 @@ export default function FormPartDescription({
 				readOnly={!isEditable}
 				onChange={isEditable ? handleChange : undefined}
 				rows="3"
+				required
 			>
 				Describe your property here
 			</textarea>
@@ -96,7 +97,7 @@ export default function FormPartDescription({
 			<p className="mt-3 mb-1">How many people can stay?</p>
 			<div className="row">
 				<div className="col-2">
-					<label htmlFor="guests">Guests</label>
+					<label htmlFor="guests">Guests <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
 					<input
@@ -107,13 +108,14 @@ export default function FormPartDescription({
 						value={input.guests}
 						readOnly={!isEditable}
 						onChange={isEditable ? handleChange : undefined}
+						required
 					/>
 				</div>
 			</div>
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="beds">Beds</label>
+					<label htmlFor="beds">Beds <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
 					<input
@@ -124,13 +126,14 @@ export default function FormPartDescription({
 						value={input.beds}
 						readOnly={!isEditable}
 						onChange={isEditable ? handleChange : undefined}
+						required
 					/>
 				</div>
 			</div>
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="bedrooms">Bedrooms</label>
+					<label htmlFor="bedrooms">Bedrooms <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
 					<input
@@ -141,13 +144,14 @@ export default function FormPartDescription({
 						value={input.bedrooms}
 						readOnly={!isEditable}
 						onChange={isEditable ? handleChange : undefined}
+						required
 					/>
 				</div>
 			</div>
 
 			<div className="row mt-2">
 				<div className="col-2">
-					<label htmlFor="bathrooms">Bathrooms</label>
+					<label htmlFor="bathrooms">Bathrooms <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
 					<input
@@ -158,6 +162,7 @@ export default function FormPartDescription({
 						value={input.bathrooms}
 						readOnly={!isEditable}
 						onChange={isEditable ? handleChange : undefined}
+						required
 					/>
 				</div>
 			</div>

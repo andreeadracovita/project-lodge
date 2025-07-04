@@ -34,7 +34,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 
 	return (
 		<form onSubmit={onSubmit}>
-			<label htmlFor="price">How much will guests pay for a night at your property?</label>
+			<label htmlFor="price">How much will guests pay for a night at your property? <span className="text-red">*</span></label>
 			<div className="d-flex align-items-center">
 				<input
 					id="price"
@@ -44,6 +44,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					value={input.priceNight}
 					readOnly={!isEditable}
 					onChange={isEditable ? handleChange : undefined}
+					required
 				/>
 				<div className="ms-3 lato-bold">{input.localCurrency} per night</div>
 			</div>

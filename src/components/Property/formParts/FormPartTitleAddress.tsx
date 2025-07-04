@@ -161,8 +161,8 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 	
 	return (
 		<form onSubmit={onSubmit}>
-			{ showError && <span className="error-text d-block">Errors present!</span> }
-			<label htmlFor="title">Title</label>
+			{ showError && <span className="text-red d-block">Errors present!</span> }
+			<label htmlFor="title">Title <span className="text-red">*</span></label>
 			<input
 				id="title"
 				type="text"
@@ -171,9 +171,10 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				value={input.title}
 				readOnly={!isEditable}
 				onChange={handleChange}
+				required
 			/>
 
-			<label htmlFor="buildingType" className="mt-2">Type of building</label>
+			<label htmlFor="buildingType" className="mt-2">Type of building <span className="text-red">*</span></label>
 			<select
 				id="buildingType"
 				className={stylingFormControl100}
@@ -181,6 +182,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				value={input.buildingType ?? 1}
 				readOnly={!isEditable}
 				onChange={handleChange}
+				required
 			>
 				{
 					buildingTypes.map(type => 
@@ -190,7 +192,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				
 			</select>
 
-			<label htmlFor="rentalType" className="mt-2">Type of rental</label>
+			<label htmlFor="rentalType" className="mt-2">Type of rental <span className="text-red">*</span></label>
 			<select
 				id="rentalType"
 				className={stylingFormControl100}
@@ -198,6 +200,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				value={input.rentalType ?? 1}
 				readOnly={!isEditable}
 				onChange={handleChange}
+				required
 			>
 				{
 					rentalTypes.map(type => 
@@ -208,7 +211,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 
 			<div id="address">
 				<h2 className="section-heading">Address</h2>
-				<label htmlFor="street" className="mt-2">Street</label>
+				<label htmlFor="street" className="mt-2">Street <span className="text-red">*</span></label>
 				<input
 					id="street"
 					type="text"
@@ -217,8 +220,9 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					value={input.street}
 					readOnly={!isEditable}
 					onChange={handleChange}
+					required
 				/>
-				<label htmlFor="streetNo" className="mt-2">Street number</label>
+				<label htmlFor="streetNo" className="mt-2">Street number <span className="text-red">*</span></label>
 				<input
 					id="streetNo"
 					type="text"
@@ -227,8 +231,9 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					value={input.streetNo}
 					readOnly={!isEditable}
 					onChange={handleChange}
+					required
 				/>
-				<label htmlFor="city" className="mt-2">City</label>
+				<label htmlFor="city" className="mt-2">City <span className="text-red">*</span></label>
 				<input
 					id="city"
 					type="text"
@@ -237,8 +242,9 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					value={input.city}
 					readOnly={!isEditable}
 					onChange={handleChange}
+					required
 				/>
-				<label htmlFor="country" className="mt-2">Country</label>
+				<label htmlFor="country" className="mt-2">Country <span className="text-red">*</span></label>
 				{
 					isEditable
 					? <CountrySelect id="country" initialValue={input.country} handleFormChange={handleChangeCountry} />

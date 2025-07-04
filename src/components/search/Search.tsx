@@ -37,6 +37,15 @@ export default function Search() {
 	}, [searchParams.get("check_out")]);
 
 	function onSearchClicked() {
+		if (!input.destination) {
+			document.getElementById("destination").focus();
+			return;
+		}
+		if (!input.checkIn || !input.checkOut) {
+			console.log("Focus date");
+			document.getElementById("date-range").focus();
+			return;
+		}
 		navigate(`/search-results?destination=${input.destination}&check_in=${input.checkIn}&check_out=${input.checkOut}&guests=${input.guests}`);
 	}
 
@@ -70,6 +79,7 @@ export default function Search() {
 						value={input.destination}
 						onChange={handleChange}
 						autoComplete="off"
+						required
 					/>
 				</div>
 
@@ -77,7 +87,11 @@ export default function Search() {
 
 				<div className="d-flex w-50 justify-content-center align-items-center">
 					<Icon.CalendarRange size={24} />
-					<div className="dropdown-center d-flex align-items-center cursor-pointer">
+					<div
+						id="date-range"
+						className="dropdown-center d-flex align-items-center cursor-pointer focusable rounded-pill"
+						tabIndex="0"
+					>
 						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown">
 							<span className="me-2">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>
 							—
@@ -104,12 +118,12 @@ export default function Search() {
 						name="guests"
 						value={input.guests}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<button
 					id="search-button"
 					type="button"
-					// className="btn rounded-pill brand-color-background"
 					className="btn-round"
 					onClick={onSearchClicked}
 				>

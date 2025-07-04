@@ -39,8 +39,8 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 		<form onSubmit={onPhotosSubmit} encType="multipart/form-data">
 			<PropertyPhotoGrid urlArray={input.photos}/>
 
-			<label htmlFor="main-photo" className="lato-bold mt-3">Add photos</label>
-			<p className="mb-3">The first photo will be displayed in search results</p>
+			<label htmlFor="main-photo" className="lato-bold mt-3">Add photos <span className="text-red">*</span></label>
+			<div className="mb-3">The first photo will be displayed in search results</div>
 			<input
 				type="file"
 				className="form-control rounded-pill w-50"
@@ -48,6 +48,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 				multiple="multiple"
 				onChange={handleChangePhotos}
 				accept="image/png, image/jpeg"
+				required
 			/>
 
 			<button

@@ -82,31 +82,83 @@ export default function BookingForm() {
 			<h1 className="page-heading">Enter your details</h1>
 			<div className="d-flex align-items-center" style={{color: "green"}}>
 				<Icon.CheckCircle size={16} />
-				<span className="ms-2">Almost done! Just fill in the <span style={{color: "red"}}>*</span> required info</span>
+				<span className="ms-2">Almost done! Just fill in the <span className="text-red">*</span> required info</span>
 			</div>
 			<form onSubmit={onSubmit}>
-				<label htmlFor="first-name">First name <span style={{color: "red"}}>*</span></label>
-				<input id="first-name" type="text" className="form-control" name="firstName" value={ input.firstName } onChange={handleChange} />
+				<label htmlFor="first-name">First name <span className="text-red">*</span></label>
+				<input
+					id="first-name"
+					type="text"
+					className="form-control"
+					name="firstName"
+					value={input.firstName}
+					onChange={handleChange}
+					required
+				/>
 
-				<label htmlFor="last-name">Last name <span style={{color: "red"}}>*</span></label>
-				<input id="last-name" type="text" className="form-control" name="lastName" value={ input.lastName } onChange={handleChange} />
+				<label htmlFor="last-name">Last name <span className="text-red">*</span></label>
+				<input
+					id="last-name"
+					type="text"
+					className="form-control"
+					name="lastName"
+					value={input.lastName}
+					onChange={handleChange}
+				/>
 
-				<label htmlFor="email">Email <span style={{color: "red"}}>*</span></label>
-				<input id="email" type="text" className="form-control" name="email" value={ input.email } onChange={handleChange} />
+				<label htmlFor="email">Email <span className="text-red">*</span></label>
+				<input
+					id="email"
+					type="text"
+					className="form-control"
+					name="email"
+					value={input.email}
+					onChange={handleChange}
+					required
+				/>
 
 				<hr />
+
 				<h2 className="section-heading">Address</h2>
-				<label htmlFor="address">Street and street number <span style={{color: "red"}}>*</span></label>
-				<input id="address" type="text" className="form-control" name="address" value={ input.address } onChange={handleChange} />
+				<label htmlFor="address">Street and street number <span className="text-red">*</span></label>
+				<input
+					id="address"
+					type="text"
+					className="form-control"
+					name="address"
+					value={input.address}
+					onChange={handleChange}
+					required
+				/>
 
-				<label htmlFor="city">City <span style={{color: "red"}}>*</span></label>
-				<input id="city" type="text" className="form-control" name="city" value={ input.city } onChange={handleChange} />
+				<label htmlFor="city">City <span className="text-red">*</span></label>
+				<input
+					id="city"
+					type="text"
+					className="form-control"
+					name="city"
+					value={input.city}
+					onChange={handleChange}
+					required
+				/>
 
-				<label htmlFor="country-code">Country <span style={{color: "red"}}>*</span></label>
-				<CountrySelect id="nationality" initialValue={input.countryCode} handleFormChange={handleCountryChange} />
+				<label htmlFor="country-code">Country <span className="text-red">*</span></label>
+				<CountrySelect
+					id="nationality"
+					initialValue={input.countryCode}
+					handleFormChange={handleCountryChange}
+				/>
 
-				<label htmlFor="phone-number">Phone number <span style={{color: "red"}}>*</span></label>
-				<input id="phone-number" type="text" className="form-control" name="phoneNo" value={ input.phoneNo } onChange={handleChange} />
+				<label htmlFor="phone-number">Phone number <span className="text-red">*</span></label>
+				<input
+					id="phone-number"
+					type="text"
+					className="form-control"
+					name="phoneNo"
+					value={input.phoneNo}
+					onChange={handleChange}
+					required
+				/>
 				
 				<div className="d-flex justify-content-end">
 					<button type="submit" className="mt-4 btn-pill">Finish booking</button>

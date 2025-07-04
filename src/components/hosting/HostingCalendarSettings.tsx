@@ -89,6 +89,7 @@ export default function HostingCalendarSettings() {
 								name="price"
 								value={priceInput}
 								onChange={(e) => setPriceInput(e.target.value)}
+								required
 							/>
 							<div>{selectedProp?.local_currency}</div>
 							<div className="mt-6 btn-text-underline" onClick={() => setShowEdit(false)}>Dismiss</div>
