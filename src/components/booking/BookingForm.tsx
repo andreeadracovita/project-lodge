@@ -2,8 +2,10 @@ import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+import countries from "react-select-country-list";
 
 import { createBooking } from "/src/api/BackendApiService";
+import CountrySelect from "/src/components/common/CountrySelect";
 
 export default function BookingForm() {
 	const navigate = useNavigate();
@@ -15,13 +17,11 @@ export default function BookingForm() {
 		email: "",
 		address: "",
 		city: "",
-		country: "",
+		countryCode: "",
 		phoneNo: ""
 	});
 
-	// useEffect to retrieve booking info related to property, price
-
-	function onChange(event) {
+	function handleChange(event) {
 		const { name, value } = event.target;
 		setInput(prevValue => {
 			return {
@@ -31,10 +31,19 @@ export default function BookingForm() {
 		});
 	}
 
+	function handleCountryChange(value) {
+		const countryLabel = countries().getLabel(value);
+		setInput((prevValue) => {
+			return {
+				...prevValue,
+				countryCode: value
+			}
+		});
+	}
+
 	function onSubmit(event) {
 		event.preventDefault();
 
-		// TODO: Validate input
 		const checkIn = searchParams.get("check_in");
 		const checkOut = searchParams.get("check_out");
 		const guests = searchParams.get("guests");
@@ -53,7 +62,7 @@ export default function BookingForm() {
 			email: input.email,
 			address: input.address,
 			city: input.city,
-			country: input.country,
+			country: input.countryCode,
 			phone_number: input.phoneNo
 		})
 			.then(response => {
@@ -76,28 +85,28 @@ export default function BookingForm() {
 				<span className="ms-2">Almost done! Just fill in the <span style={{color: "red"}}>*</span> required info</span>
 			</div>
 			<form onSubmit={onSubmit}>
-				<label htmlFor="first-name">First name</label>
-				<input id="first-name" type="text" className="form-control rounded-pill" name="firstName" value={ input.firstName } onChange={onChange} />
+				<label htmlFor="first-name">First name <span style={{color: "red"}}>*</span></label>
+				<input id="first-name" type="text" className="form-control" name="firstName" value={ input.firstName } onChange={handleChange} />
 
-				<label htmlFor="last-name">Last name</label>
-				<input id="last-name" type="text" className="form-control rounded-pill" name="lastName" value={ input.lastName } onChange={onChange} />
+				<label htmlFor="last-name">Last name <span style={{color: "red"}}>*</span></label>
+				<input id="last-name" type="text" className="form-control" name="lastName" value={ input.lastName } onChange={handleChange} />
 
-				<label htmlFor="email">Email</label>
-				<input id="email" type="text" className="form-control rounded-pill" name="email" value={ input.email } onChange={onChange} />
+				<label htmlFor="email">Email <span style={{color: "red"}}>*</span></label>
+				<input id="email" type="text" className="form-control" name="email" value={ input.email } onChange={handleChange} />
 
 				<hr />
 				<h2 className="section-heading">Address</h2>
-				<label htmlFor="address">Address</label>
-				<input id="address" type="text" className="form-control rounded-pill" name="address" value={ input.address } onChange={onChange} />
+				<label htmlFor="address">Street and street number <span style={{color: "red"}}>*</span></label>
+				<input id="address" type="text" className="form-control" name="address" value={ input.address } onChange={handleChange} />
 
-				<label htmlFor="city">City</label>
-				<input id="city" type="text" className="form-control rounded-pill" name="city" value={ input.city } onChange={onChange} />
+				<label htmlFor="city">City <span style={{color: "red"}}>*</span></label>
+				<input id="city" type="text" className="form-control" name="city" value={ input.city } onChange={handleChange} />
 
-				<label htmlFor="country">Country</label>
-				<input id="country" type="text" className="form-control rounded-pill" name="country" value={ input.country } onChange={onChange} />
+				<label htmlFor="country-code">Country <span style={{color: "red"}}>*</span></label>
+				<CountrySelect id="nationality" initialValue={input.countryCode} handleFormChange={handleCountryChange} />
 
-				<label htmlFor="phone-number">Phone number</label>
-				<input id="phone-number" type="text" className="form-control rounded-pill" name="phoneNo" value={ input.phoneNo } onChange={onChange} />
+				<label htmlFor="phone-number">Phone number <span style={{color: "red"}}>*</span></label>
+				<input id="phone-number" type="text" className="form-control" name="phoneNo" value={ input.phoneNo } onChange={handleChange} />
 				
 				<div className="d-flex justify-content-end">
 					<button type="submit" className="mt-4 btn-pill">Finish booking</button>
