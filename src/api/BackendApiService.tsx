@@ -68,16 +68,10 @@ export const getPropertiesByUserId
 	= () => apiClient.get("/host/properties");
 
 export const createNewProperty
-	= (payload) => apiClient.post("/host/properties/new", payload);
+	= (payload) => apiClient.post("/host/property/new", payload);
 
 export const updateProperty
 	= (id, payload) => apiClient.patch(`/host/property/${id}`, payload);
-
-export const createNewPropertyDetailBase
-	= (payload) => apiClient.post("/host/property-details/new/base", payload);
-
-export const updatePropertyDetails
-	= (id, payload) => apiClient.patch(`/host/property-details/${id}`, payload);
 
 export const deletePropertyById
 	= (id) => apiClient.delete(`/host/property/${id}`);

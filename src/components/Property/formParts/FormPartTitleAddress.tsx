@@ -7,18 +7,18 @@ import countries from "react-select-country-list";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import {
 	createNewProperty,
-	createNewPropertyDetailBase,
 	updateProperty,
-	updatePropertyDetails,
 	getAllBuildingTypes,
 	getAllRentalTypes
 } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
+import FormError from "/src/components/common/FormError";
 
 export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, handleChangeCountry, advanceState }) {
 	const [showError, setShowError] = useState(false);
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		getAllBuildingTypes()
@@ -51,41 +51,26 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 		}
 	);
 
-
-	async function addPropertyDetail(propertyId: int) {
-		// Create details
-		// Parse select values as int
-		const payloadPropDetail = {
-			property_id: propertyId,
+	async function addProperty(geo) {
+		const payload = {
+			title: input.title,
+			geo,
+			city: input.city,
+			country: input.country,
 			street: input.street,
 			street_no: input.streetNo,
 			building_type_id: parseInt(input.buildingType),
 			rental_type_id: parseInt(input.rentalType),
 			local_currency: input.localCurrency
-		}
-		createNewPropertyDetailBase(payloadPropDetail)
-			.then(responsePropDetail => {
-				advanceState();
-			})
-			.catch(error => {
-				console.error(error);
-			})
-	}
-
-	async function addProperty(geo) {
-		const payloadProp = {
-			title: input.title,
-			geo,
-			city: input.city,
-			country: input.country,
-			is_listed: false
 		};
 		// Create a new entry
-		createNewProperty(payloadProp)
-			.then(responseProp => {
-				const propertyId = responseProp.data.id;
-				setPropertyId(propertyId);
-				addPropertyDetail(propertyId);
+		createNewProperty(payload)
+			.then(response => {
+				const propId = response.data.id;
+				if (propId) {
+					setPropertyId(propId);
+					advanceState();
+				}
 			})
 			.catch(error => {
 				console.error(error);
@@ -100,7 +85,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 		event.preventDefault();
 
 		if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
-			setShowError(true);
+			setErrors(["Fill in all mandatory fields (marked with *)"]);
 			return;
 		}
 
@@ -122,7 +107,13 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 							city: input.city,
 							country: input.country
 						})
-							.then(() => {
+							.then(response => {
+								const errors = response.data.errors;
+								if (errors) {
+									setErrors(errors);
+									return;
+								}
+
 								check++;
 								if (check === 2) {
 									advanceState();
@@ -133,7 +124,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 							});
 
 						// Parse select values as int
-						updatePropertyDetails(propertyId, {
+						updateProperty(propertyId, {
 							building_type_id: parseInt(input.buildingType),
 							rental_type_id: parseInt(input.rentalType),
 							street: input.street,
@@ -251,6 +242,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					: <div className={stylingFormControl100}>{countries().getLabel(input.country)}</div>
 				}
 			</div>
+			<FormError errors={errors} />
 
 			{
 				showButton &&

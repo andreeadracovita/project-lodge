@@ -34,7 +34,12 @@ export default function ReviewForm({ propertyId }) {
 
 		addReviewForBookingId(bookingId, input)
 			.then(response => {
-				// TODO
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
+				// TODO redirect somewhere?
 			})
 			.catch(error => {
 				console.error(error);

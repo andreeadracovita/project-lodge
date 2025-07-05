@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import "./FormPartDescription.css";
-import { getAllFeatures, getAllExperiences, updatePropertyDetails } from "/src/api/BackendApiService";
+import { getAllFeatures, getAllExperiences, updateProperty } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 import Multiselect from "/src/components/common/Multiselect";
 import { experienceIconMap, featuresIconMap } from "/src/utils/mappings";
 
@@ -19,6 +20,7 @@ export default function FormPartDescription({
 }) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		getAllFeatures()
@@ -61,7 +63,7 @@ export default function FormPartDescription({
 	function onDescriptionSubmit(event) {
 		event.preventDefault();
 		
-		updatePropertyDetails(propertyId, {
+		updateProperty(propertyId, {
 			description: input.description,
 			guests: input.guests,
 			beds: input.beds,
@@ -70,7 +72,12 @@ export default function FormPartDescription({
 			features_ids: input.featuresIds,
 			experiences_ids: input.experiencesIds
 		})
-			.then(() => {
+			.then(reponse => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
 				advanceState();
 			})
 			.catch((error) => {
@@ -188,6 +195,7 @@ export default function FormPartDescription({
 					// iconMap={experienceIconMap}
 				/>
 			</div>
+			<FormError errors={errors} />
 
 			{
 				showButton &&

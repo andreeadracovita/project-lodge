@@ -1,12 +1,14 @@
-import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
+import { useState } from "react";
+import * as Icon from "react-bootstrap-icons";
 
-import { updatePropertyDetails } from "/src/api/BackendApiService";
+import { updateProperty } from "/src/api/BackendApiService";
 import { useAuth } from "/src/components/security/AuthContext";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
 	const authContext = useAuth();
 	const currency = authContext.currency;
+	const [errors, setErrors] = useState([]);
 
 	const stylingFormControl = classNames(
 		"form-control",
@@ -20,11 +22,15 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 	function onSubmit(event) {
 		event.preventDefault();
 
-		updatePropertyDetails(propertyId, {
-			price: input.priceNight,
-			currency: authContext.currency
+		updateProperty(propertyId, {
+			price: input.priceNight
 		})
-			.then(() => {
+			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
 				advanceState();
 			})
 			.catch((error) => {
@@ -50,6 +56,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 			</div>
 			<div className="mt-6 text-muted">Prices are set in the local currency of the property.</div>
 			<div className="mt-6 text-muted">Price can be adjusted from the Property Management page.</div>
+			<FormError errors={errors} />
 
 			{
 				showButton &&

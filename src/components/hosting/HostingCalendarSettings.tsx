@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
-import { getPropertiesByUserId, updatePropertyDetails } from "/src/api/BackendApiService";
+import { getPropertiesByUserId, updateProperty } from "/src/api/BackendApiService";
 
 /**
  * HostingCalendarSettings retrieves all managed properties by hostId for dropdown select and sets searchParams
@@ -42,7 +42,7 @@ export default function HostingCalendarSettings() {
 	}
 
 	function savePrice() {
-		updatePropertyDetails(selectedProp.id, {
+		updateProperty(selectedProp.id, {
 			price: priceInput
 		})
 			.then(() => {

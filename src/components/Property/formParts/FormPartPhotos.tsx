@@ -1,9 +1,12 @@
+import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
+import { uploadPhotos, updateProperty } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
-import { uploadPhotos, updatePropertyDetails } from "/src/api/BackendApiService";
 
 export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
+	const [errors, setErrors] = useState([]);
 	
 	async function onPhotosSubmit(event) {
 		event.preventDefault();
@@ -21,8 +24,13 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 
 		uploadPhotos(data)
 			.then(response => {
-				updatePropertyDetails(propertyId, { images_url_array: response.data.filenames })
-					.then(() => {
+				updateProperty(propertyId, { images_url_array: response.data.filenames })
+					.then(response => {
+						const errors = response.data.errors;
+						if (errors) {
+							setErrors(errors);
+							return;
+						}
 						setImagesUrlArray(response.data.filenames);
 						advanceState();
 					})
@@ -50,6 +58,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 				accept="image/png, image/jpeg"
 				required
 			/>
+			<FormError errors={errors} />
 
 			<button
 				id="go-to-pricing-button"
