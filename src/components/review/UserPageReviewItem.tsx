@@ -13,8 +13,8 @@ export default function UserPageReviewItem({ reviewData }) {
 	useEffect(() => {
 		getPropertyById(reviewData.property_id)
 			.then(response => {
-				if (response.data.length === 1) {
-					setProperty(response.data[0]);
+				if (response.data) {
+					setProperty(response.data);
 				}
 			})
 			.catch(error => {

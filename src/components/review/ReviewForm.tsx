@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import StarRating from "./StarRating";
 import { addReviewForBookingId } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 
 export default function ReviewForm({ propertyId }) {
+	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [input, setInput] = useState({
 		rating: 0,
@@ -12,6 +15,7 @@ export default function ReviewForm({ propertyId }) {
 		body: "",
 		property_id: propertyId
 	});
+	const [errors, setErrors] = useState([]);
 	const bookingId = searchParams.get("booking_id");
 
 	function handleChange(event) {
@@ -28,10 +32,6 @@ export default function ReviewForm({ propertyId }) {
 	function handleSubmit(event) {
 		event.preventDefault();
 
-		if (!bookingId || input.rating === 0) {
-			return;
-		}
-
 		addReviewForBookingId(bookingId, input)
 			.then(response => {
 				const errors = response.data.errors;
@@ -39,7 +39,7 @@ export default function ReviewForm({ propertyId }) {
 					setErrors(errors);
 					return;
 				}
-				// TODO redirect somewhere?
+				navigate("/myaccount/reviews");
 			})
 			.catch(error => {
 				console.error(error);
@@ -52,7 +52,15 @@ export default function ReviewForm({ propertyId }) {
 			<StarRating value={input.rating} handleChange={handleChange} />
 
 			<label htmlFor="title" className="mt-10">Short description</label>
-			<input id="title" type="text" name="title" value={input.title} onChange={handleChange} className="form-control w-75"/>
+			<input
+				id="title"
+				type="text"
+				name="title"
+				value={input.title}
+				onChange={handleChange}
+				className="form-control w-75"
+				maxLength="80"
+			/>
 
 			<label htmlFor="body" className="mt-10">Tell us more about your stay</label>
 			<textarea
@@ -65,9 +73,10 @@ export default function ReviewForm({ propertyId }) {
 			>
 				Your review here ...
 			</textarea>
+			<FormError errors={errors} />
 
 			<button type="submit" className="btn-pill mt-10">Submit review</button>
-			<button className="btn-pill-outline ms-2">Dismiss</button>
+			<button className="btn-pill-outline ms-2" onClick={() => navigate("/trips")}>Dismiss</button>
 		</form>
 	);
 }

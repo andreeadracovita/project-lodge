@@ -45,7 +45,15 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 					{
 						isFocused
 						? <>
-							<input id="email" name="email" value={email} onChange={handleChange} className={formClassNames} />
+							<input
+								id="email"
+								name="email"
+								value={email}
+								onChange={handleChange}
+								className={formClassNames}
+								maxLength="50"
+								required
+							/>
 							<FormError errors={errors} />
 						</>
 						: <span>{value}</span>

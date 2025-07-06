@@ -13,16 +13,17 @@ export default function PasswordInput({ id, name, value, handleChange }) {
 	}
 	
 	return (
-		<div className="d-flex align-items-center mt-10 rounded-pill pill-container">
+		<div className="d-flex align-items-center mt-10 form-control">
 			<input
 				id={id}
 				type={type}
-				className="form-control search-field rounded-pill"
+				className="form-control search-field"
 				name={name}
 				value={value}
 				onChange={handleChange}
-				placeholder="Password *"
+				placeholder="Password"
 				autoComplete="off"
+				maxLength="50"
 			/>
 			<div className="mx-2">
 			{

@@ -6,6 +6,7 @@ import countries from "react-select-country-list";
 
 import { createBooking } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
+import FormError from "/src/components/common/FormError";
 
 export default function BookingForm() {
 	const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function BookingForm() {
 		countryCode: "",
 		phoneNo: ""
 	});
+	const [errors, setErrors] = useState([]);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -66,6 +68,11 @@ export default function BookingForm() {
 			phone_number: input.phoneNo
 		})
 			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
 				if (response.data) {
 					const bookingId = response.data.id;
 					const pinCode = response.data.pin_code;
@@ -93,6 +100,7 @@ export default function BookingForm() {
 					name="firstName"
 					value={input.firstName}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
 
@@ -104,6 +112,8 @@ export default function BookingForm() {
 					name="lastName"
 					value={input.lastName}
 					onChange={handleChange}
+					maxLength="50"
+					required
 				/>
 
 				<label htmlFor="email">Email <span className="text-red">*</span></label>
@@ -114,6 +124,7 @@ export default function BookingForm() {
 					name="email"
 					value={input.email}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
 
@@ -128,6 +139,7 @@ export default function BookingForm() {
 					name="address"
 					value={input.address}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
 
@@ -139,6 +151,7 @@ export default function BookingForm() {
 					name="city"
 					value={input.city}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
 
@@ -157,8 +170,10 @@ export default function BookingForm() {
 					name="phoneNo"
 					value={input.phoneNo}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
+				<FormError errors={errors} />
 				
 				<div className="d-flex justify-content-end">
 					<button type="submit" className="mt-4 btn-pill">Finish booking</button>

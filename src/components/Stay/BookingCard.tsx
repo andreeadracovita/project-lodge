@@ -44,16 +44,6 @@ export default function BookingCard({price}) {
 
 		const tempSiteTotalPrice = price * tempNightCount;
 		setSiteTotalPrice(tempSiteTotalPrice);
-
-		// getConvertedPrice(authContext.currency, tempSiteTotalPrice)
-		// 	.then(response => {
-		// 		if (response.data) {
-		// 			setConvertedTotalPrice(response.data.converted);
-		// 		}
-		// 	})
-		// 	.catch(error => {
-		// 		console.error(error);
-		// 	});
 		setConvertedTotalPrice(convertToPreferredCurrency(tempSiteTotalPrice, authContext.exchangeRate));
 	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
 
@@ -73,6 +63,13 @@ export default function BookingCard({price}) {
 	}
 
 	function handleBookClick() {
+		const checkIn = searchParams.get("check_in");
+		const checkOut = searchParams.get("check_out");
+		if (!checkIn || !checkOut) {
+			// TODO focus check-in/out field like in search
+			console.log("Invalid check-in and check-out");
+			return;
+		}
 		navigate(`/book?id=${searchParams.get("id")}&guests=${input.guests}&check_in=${searchParams.get("check_in")}&check_out=${searchParams.get("check_out")}`);
 	}
 

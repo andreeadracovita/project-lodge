@@ -134,11 +134,13 @@ export default function SignupLogin() {
 						<h2 className="section-heading">Welcome to Lodge</h2>
 						<input
 							type="text"
-							className="form-control rounded-pill mt-10"
+							className="form-control mt-10"
 							name="email"
 							value={input.email} 
 							onChange={handleChange}
 							placeholder="Email"
+							maxLength="50"
+							required
 						/>
 						<FormError errors={errors} />
 						<button
@@ -171,30 +173,36 @@ export default function SignupLogin() {
 						<input
 							id="first-name"
 							type="text"
-							className="form-control rounded-pill mt-10"
+							className="form-control mt-10"
 							name="firstName"
 							value={input.firstName} 
 							onChange={handleChange}
 							placeholder="First name *"
+							maxLength="50"
+							required
 						/>
 						<input
 							type="text"
-							className="form-control rounded-pill mt-2"
+							className="form-control mt-2"
 							name="lastName"
 							value={input.lastName} 
 							onChange={handleChange}
 							placeholder="Last name *"
+							maxLength="50"
+							required
 						/>
 
 						<label htmlFor="email" className="section-heading section-container">Contact info</label>
 						<input
 							id="email"
 							type="text"
-							className="form-control rounded-pill mt-10"
+							className="form-control mt-10"
 							name="email"
 							value={input.email}
 							onChange={handleChange}
 							placeholder="Email *"
+							maxLength="50"
+							required
 						/>
 
 						<label htmlFor="password" className="section-heading section-container">Password</label>

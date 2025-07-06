@@ -53,7 +53,6 @@ export default function FormPartDescription({
 
 	const stylingFormControl = classNames(
 		"form-control",
-		"rounded-pill",
 		"w-100",
 		{
 			"text-muted": !isEditable
@@ -72,7 +71,7 @@ export default function FormPartDescription({
 			features_ids: input.featuresIds,
 			experiences_ids: input.experiencesIds
 		})
-			.then(reponse => {
+			.then(response => {
 				const errors = response.data.errors;
 				if (errors) {
 					setErrors(errors);

@@ -22,12 +22,11 @@ export default function Review() {
 			.then(responseAuth => {
 				const data = responseAuth.data;
 				if (data && data.isAuthorized) {
-					// Is authorized: load page content
 					const propertyId = data.property_id;
 					getPropertyById(propertyId)
 						.then(response => {
-							if (response.data?.length > 0) {
-								setProperty(response.data[0]);
+							if (response.data) {
+								setProperty(response.data);
 							}
 						})
 						.catch(error => {

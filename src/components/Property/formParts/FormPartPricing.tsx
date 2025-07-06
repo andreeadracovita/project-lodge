@@ -3,6 +3,7 @@ import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import { updateProperty } from "/src/api/BackendApiService";
+import FormError from "/src/components/common/FormError";
 import { useAuth } from "/src/components/security/AuthContext";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
@@ -12,7 +13,6 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 
 	const stylingFormControl = classNames(
 		"form-control",
-		"rounded-pill",
 		"w-25",
 		{
 			"text-muted": !isEditable

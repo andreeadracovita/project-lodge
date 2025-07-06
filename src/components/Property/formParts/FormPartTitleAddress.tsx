@@ -15,7 +15,6 @@ import CountrySelect from "/src/components/common/CountrySelect";
 import FormError from "/src/components/common/FormError";
 
 export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, handleChangeCountry, advanceState }) {
-	const [showError, setShowError] = useState(false);
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
 	const [errors, setErrors] = useState([]);
@@ -44,14 +43,16 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 
 	const stylingFormControl100 = classNames(
 		"form-control",
-		"rounded-pill",
 		"w-100",
 		{
 			"text-muted": !isEditable
 		}
 	);
 
-	async function addProperty(geo) {
+	/**
+	 * Create a new property
+	 */
+	async function createProperty(geo) {
 		const payload = {
 			title: input.title,
 			geo,
@@ -63,9 +64,13 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 			rental_type_id: parseInt(input.rentalType),
 			local_currency: input.localCurrency
 		};
-		// Create a new entry
 		createNewProperty(payload)
 			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
 				const propId = response.data.id;
 				if (propId) {
 					setPropertyId(propId);
@@ -73,6 +78,35 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				}
 			})
 			.catch(error => {
+				console.error(error);
+			});
+	}
+
+	/**
+	 * Update existing property
+	 */
+	async function patchProperty(geo) {
+		const payload = {
+			title: input.title,
+			geo,
+			city: input.city,
+			country: input.country,
+			building_type_id: parseInt(input.buildingType),
+			rental_type_id: parseInt(input.rentalType),
+			street: input.street,
+			street_no: input.streetNo,
+			local_currency: input.localCurrency
+		};
+		updateProperty(propertyId, payload)
+			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
+				advanceState();
+			})
+			.catch((error) => {
 				console.error(error);
 			});
 	}
@@ -98,51 +132,12 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					const data = response.data[0];
 					const geo = { x: data.lat, y: data.lon };
 					if (!propertyId) {
-						addProperty(geo);
+						createProperty(geo);
 					} else {
-						let check = 0;
-						// Update property
-						updateProperty(propertyId, {
-							title: input.title,
-							city: input.city,
-							country: input.country
-						})
-							.then(response => {
-								const errors = response.data.errors;
-								if (errors) {
-									setErrors(errors);
-									return;
-								}
-
-								check++;
-								if (check === 2) {
-									advanceState();
-								}
-							})
-							.catch((error) => {
-								console.error(error);
-							});
-
-						// Parse select values as int
-						updateProperty(propertyId, {
-							building_type_id: parseInt(input.buildingType),
-							rental_type_id: parseInt(input.rentalType),
-							street: input.street,
-							street_no: input.streetNo,
-							local_currency: input.localCurrency
-						})
-							.then(() => {
-								check++;
-								if (check === 2) {
-									advanceState();
-								}
-							})
-							.catch((error) => {
-								console.error(error);
-							});
+						patchProperty(geo);
 					}
 				} else {
-					setShowError(true);
+					setErrors(["No geolocation identified for given address"]);
 				}
 			})
 			.catch(error => {
@@ -152,7 +147,6 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 	
 	return (
 		<form onSubmit={onSubmit}>
-			{ showError && <span className="text-red d-block">Errors present!</span> }
 			<label htmlFor="title">Title <span className="text-red">*</span></label>
 			<input
 				id="title"
@@ -162,6 +156,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 				value={input.title}
 				readOnly={!isEditable}
 				onChange={handleChange}
+				maxLength="50"
 				required
 			/>
 
@@ -211,6 +206,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					value={input.street}
 					readOnly={!isEditable}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
 				<label htmlFor="streetNo" className="mt-2">Street number <span className="text-red">*</span></label>
@@ -222,6 +218,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					value={input.streetNo}
 					readOnly={!isEditable}
 					onChange={handleChange}
+					maxLength="10"
 					required
 				/>
 				<label htmlFor="city" className="mt-2">City <span className="text-red">*</span></label>
@@ -233,6 +230,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 					value={input.city}
 					readOnly={!isEditable}
 					onChange={handleChange}
+					maxLength="50"
 					required
 				/>
 				<label htmlFor="country" className="mt-2">Country <span className="text-red">*</span></label>

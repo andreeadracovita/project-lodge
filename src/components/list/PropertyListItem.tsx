@@ -52,7 +52,7 @@ export default function PropertyListItem({ isPreview, item, guests, checkIn, che
 		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkInParam}&check_out=${checkOutParam}`
 		: "#";
 
-	const imgUrl = item.images_url_array.length > 0 ? fileStorage + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
 	
 	const siteCurrencyTotalPrice = item.price_night_site * nightsCount;
 	const convertedTotalPrice = convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate);
