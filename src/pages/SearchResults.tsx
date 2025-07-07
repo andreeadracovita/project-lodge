@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 
-import { getAllProperties } from "/src/api/BackendApiService";
+import { getPropertiesForQuery } from "/src/api/BackendApiService";
 import Search from "/src/components/search/Search";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 import MapView from "/src/components/map/MapView";
@@ -18,16 +18,20 @@ export default function SearchResults() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
-		getAllProperties()
+		const payload = {
+			destination: searchParams.get("destination"),
+			check_in: searchParams.get("check_in"),
+			check_out: searchParams.get("check_out"),
+			guests: searchParams.get("guests")
+		};
+		getPropertiesForQuery(payload)
 			.then(response => {
-				if (response.data.length > 0) {
-					setProperties(response.data);
-				}
+				setProperties(response.data);
 			})
 			.catch(error => {
 				console.error(error);
-			})
-	}, []);
+			});
+	}, [searchParams.get("destination"), searchParams.get("check_in"), searchParams.get("check_out"), searchParams.get("guests")]);
 
 	useEffect(() => {
 		setLocation(searchParams.get("destination"));

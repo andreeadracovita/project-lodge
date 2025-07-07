@@ -19,6 +19,9 @@ export default function Calendar() {
 	const [isRangePicked, setIsRangePicked] = useState(true);
 
 	useEffect(() => {
+		if (!propertyId) {
+			return;
+		}
 		// Check check-in - check-out availability from search parameters. If unavailable, clear values.
 		const checkIn = searchParams.get("check_in");
 		const checkOut = searchParams.get("check_out");

@@ -47,6 +47,9 @@ export const uploadPhotos
 export const getAllProperties
 	= () => apiClient.get("/property/all");
 
+export const getPropertiesForQuery
+	= (payload) => apiClient.post("/property/query", payload);
+
 export const getPropertyById
 	= (id) => apiClient.get(`/property/id/${id}`);
 

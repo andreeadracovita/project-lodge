@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import Calendar from "../Calendar/Calendar";
@@ -8,6 +8,7 @@ import { dayMonYear } from "/src/utils/DateFormatUtils";
 import "./Search.css";
 
 export default function Search() {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -15,7 +16,7 @@ export default function Search() {
 		destination: searchParams.get("destination") ?? "",
 		checkIn: searchParams.get("check_in") ?? "",
 		checkOut: searchParams.get("check_out") ?? "",
-		guests: searchParams.get("guests") ?? ""
+		guests: searchParams.get("guests") ?? 1
 	});
 
 	useEffect(() => {
@@ -46,7 +47,15 @@ export default function Search() {
 			document.getElementById("date-range").focus();
 			return;
 		}
-		navigate(`/search-results?destination=${input.destination}&check_in=${input.checkIn}&check_out=${input.checkOut}&guests=${input.guests}`);
+		if (location.pathname === "/search-results") {
+			searchParams.set("destination", input.destination);
+			searchParams.set("check_in", input.checkIn);
+			searchParams.set("check_out", input.checkOut);
+			searchParams.set("guests", input.guests);
+			setSearchParams(searchParams);
+		} else {
+			navigate(`/search-results?destination=${input.destination}&check_in=${input.checkIn}&check_out=${input.checkOut}&guests=${input.guests}`);
+		}
 	}
 
 	function handleChange(event) {
@@ -113,7 +122,6 @@ export default function Search() {
 						id="guests"
 						type="number"
 						className="form-control search-field rounded-pill w-auto"
-						placeholder="1"
 						aria-label="number of guests"
 						name="guests"
 						value={input.guests}
