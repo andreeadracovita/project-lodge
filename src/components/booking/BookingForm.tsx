@@ -2,7 +2,6 @@ import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
-import countries from "react-select-country-list";
 
 import { createBooking } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
@@ -34,7 +33,6 @@ export default function BookingForm() {
 	}
 
 	function handleCountryChange(value) {
-		const countryLabel = countries().getLabel(value);
 		setInput((prevValue) => {
 			return {
 				...prevValue,

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
+import countries from "react-select-country-list";
 
 import { getPropertiesForQuery } from "/src/api/BackendApiService";
 import Search from "/src/components/search/Search";
@@ -19,7 +20,8 @@ export default function SearchResults() {
 
 	useEffect(() => {
 		const payload = {
-			destination: searchParams.get("destination"),
+			country: searchParams.get("country"),
+			city: searchParams.get("city"),
 			check_in: searchParams.get("check_in"),
 			check_out: searchParams.get("check_out"),
 			guests: searchParams.get("guests")
@@ -31,23 +33,17 @@ export default function SearchResults() {
 			.catch(error => {
 				console.error(error);
 			});
-	}, [searchParams.get("destination"), searchParams.get("check_in"), searchParams.get("check_out"), searchParams.get("guests")]);
+	}, [searchParams.get("country"), searchParams.get("city"), searchParams.get("check_in"), searchParams.get("check_out"), searchParams.get("guests")]);
 
 	useEffect(() => {
-		setLocation(searchParams.get("destination"));
-	}, [searchParams.get("destination")]);
+		const countryCode = searchParams.get("country");
+		const countryFull = countries().getLabel(countryCode);
+		const city = searchParams.get("city");
+		setLocation(city + ", " + countryFull);
 
-	useEffect(() => {
-		const points = [];
-		properties.map(p => {
-			points.push([p.geo.x, p.geo.y]);
-		});
-		setPoints(points);
-	}, [properties]);
-
-	useEffect(() => {
+		const searchQuery = city + "+" + countryFull;
 		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
-		axios.get(`https://geocode.maps.co/search?q=${location}&api_key=${apiKey}`)
+		axios.get(`https://geocode.maps.co/search?q=${searchQuery}&api_key=${apiKey}`)
 			.then(response => {
 				if (response.data.length > 0) {
 					const data = response.data[0];
@@ -57,7 +53,15 @@ export default function SearchResults() {
 			.catch(error => {
 				console.error(error);
 			});
-	}, [location]);
+	}, [searchParams.get("country"), searchParams.get("city")]);
+
+	useEffect(() => {
+		const points = [];
+		properties?.map(p => {
+			points.push([p.geo.x, p.geo.y]);
+		});
+		setPoints(points);
+	}, [properties]);
 
 	return (
 		<div className="container section-container">

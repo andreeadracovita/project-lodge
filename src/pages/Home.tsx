@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAllProperties, getAllExperiences } from "/src/api/BackendApiService";
+import { getPropertiesForHome, getAllExperiences } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
 import CarouselView from "/src/components/list/CarouselView";
 import Search from "/src/components/search/Search";
@@ -23,8 +23,7 @@ export default function Home() {
 
 	useEffect(() => {
 		setBackgroundImage(fileStorage + getRandomLandingImage());
-
-		getAllProperties()
+		getPropertiesForHome()
 			.then(response => {
 				if (response.data.length > 0) {
 					setProperties(response.data);

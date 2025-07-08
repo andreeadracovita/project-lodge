@@ -43,9 +43,8 @@ export const uploadPhotos
 	= (payload) => apiClient.post("/upload/photos", payload);
 
 // Property -------------------------------------------------------------------
-// Testing purposes: there will never be a case when we need to fetch all properties without a filter
-export const getAllProperties
-	= () => apiClient.get("/property/all");
+export const getPropertiesForHome
+	= () => apiClient.get("/property/home");
 
 export const getPropertiesForQuery
 	= (payload) => apiClient.post("/property/query", payload);
@@ -60,10 +59,6 @@ export const getBookedByPropertyIdForDate
 // Date format: 2025-08-01
 export const getPropertyAvailability
 	= (id, checkIn, checkOut) => apiClient.get(`/property/availability?id=${id}&check_in=${checkIn}&check_out=${checkOut}`);
-
-// Filters: country, city, proximity, price, rental type, experiences, property type
-export const getPropertiesFilteredBy
-	= (payload) => apiClient.post(`/property/filter`, payload);
 
 // Host -----------------------------------------------------------------------
 // Protected routes
