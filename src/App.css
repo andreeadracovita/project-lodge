@@ -197,13 +197,14 @@ a {
 
 #landing-greeting-section {
   background-color: black;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 400px;
 }
 
 #landing-greeting-section-container {
+  box-shadow: 50px -40px 30px 40px black inset, -50px -40px 30px 40px black inset;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100%;
   display: flex;
   flex-direction: column;

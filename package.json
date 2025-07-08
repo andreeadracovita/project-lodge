@@ -13,6 +13,7 @@
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "classnames": "^2.5.1",
+    "country-state-city": "^3.2.1",
     "country-to-currency": "^2.0.2",
     "dotenv": "^16.5.0",
     "image-type": "^6.0.0",

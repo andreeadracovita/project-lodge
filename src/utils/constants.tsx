@@ -28,8 +28,8 @@ export const landingImages = [
 	"landing_0.jpg",
 	"landing_1.jpg",
 	"landing_2.jpg",
-	"landing_3.jpg",
-	"landing_4.jpg"
+	"landing_4.jpg",
+	"landing_5.jpg"
 ];
 
 // Trending destinations

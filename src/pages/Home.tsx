@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { getAllProperties, getAllExperiences } from "/src/api/BackendApiService";
 import ListView, { ListItemType } from "/src/components/list/ListView";
+import CarouselView from "/src/components/list/CarouselView";
 import Search from "/src/components/search/Search";
 import { greetingMessage, trendingDestinations } from "/src/utils/constants";
 import { experienceIconMap } from "/src/utils/mappings";
@@ -16,6 +17,9 @@ export default function Home() {
 	const [backgroundImage, setBackgroundImage] = useState();
 	const [experiences, setExperiences] = useState([]);
 	const [properties, setProperties] = useState([]);
+	const checkIn = new Date();
+	let checkOut = new Date();
+	checkOut.setDate(checkOut.getDate() + 2);
 
 	useEffect(() => {
 		setBackgroundImage(fileStorage + getRandomLandingImage());
@@ -43,8 +47,8 @@ export default function Home() {
 
 	return (
 		<>
-			<div id="landing-greeting-section" style={{ backgroundImage: `url(${backgroundImage})`}}>
-				<div id="landing-greeting-section-container" className="container">
+			<div id="landing-greeting-section">
+				<div id="landing-greeting-section-container" className="container" style={{ backgroundImage: `url(${backgroundImage})`}}>
 					<div id="home-search-bar" className="mb-4">
 						<Search />
 					</div>
@@ -65,7 +69,8 @@ export default function Home() {
 						}
 					</div>
 					<div className="mt-4">
-						<ListView listItemType={ListItemType.Property} items={properties} cols={4} isCompact={true} />
+						<CarouselView items={properties} checkIn={checkIn} checkOut={checkOut} />
+						{/*<ListView listItemType={ListItemType.Property} items={properties} cols={4} isCompact={true} />*/}
 					</div>
 				</div>
 
