@@ -1,26 +1,52 @@
 import * as Icon from "react-bootstrap-icons";
 
 import "./CarouselView.css";
+import PlaceTypeItem from "./PlaceTypeItem";
 import PropertyListItem from "./PropertyListItem";
+import { ListItemType } from "/src/components/list/ListItemType";
 
-export default function CarouselView({ items, checkIn, checkOut }) {
+type CarouselViewProps = {
+	id: number;
+	listItemType: ListItemType;
+	items: Array;
+	checkIn: string; // formatted string 2025-04-10
+	checkOut: string; // formatted string 2025-04-10
+	guests: number;
+};
+
+export default function CarouselView({ id, listItemType, items, checkIn, checkOut, guests }: CarouselViewProps) {
+
+	function renderItemByType(item) {
+		switch (listItemType) {
+			case ListItemType.Property:
+				return <PropertyListItem
+					isPreview={false}
+					item={item}
+					checkIn={new Date(checkIn)}
+					checkOut={new Date(checkOut)}
+					guests={guests}
+					isCompact={true}
+				/>;
+			case ListItemType.PlaceType:
+				return <PlaceTypeItem
+					item={item}
+					checkIn={checkIn}
+					checkOut={checkOut}
+					guests={guests}
+				/>;
+			default: return;
+		}
+	}
 	
 	return (
-		<div id="carouselView" className="carousel slide">
+		<div id={id} className="carousel slide">
 			<div className="carousel-inner">
 				<div className="carousel-item active">
 					<div className="d-flex p-2">
 					{
 						items.slice(0, 4).map((item, i) =>
 							<div key={i} className="col-3 pe-2">
-								<PropertyListItem
-									isPreview={false}
-									item={item}
-									guests={1}
-									checkIn={checkIn}
-									checkOut={checkOut}
-									isCompact={true}
-								/>
+								{ renderItemByType(item) }
 							</div>
 						)
 					}
@@ -31,27 +57,18 @@ export default function CarouselView({ items, checkIn, checkOut }) {
 					{
 						items.slice(4, 8).map((item, i) =>
 							<div key={i} className="col-3 pe-2">
-								<PropertyListItem
-									isPreview={false}
-									item={item}
-									guests={1}
-									checkIn={checkIn}
-									checkOut={checkOut}
-									isCompact={true}
-								/>
+								{ renderItemByType(item) }
 							</div>
 						)
 					}
 					</div>
 				</div>
 			</div>
-			<button className="carousel-control-prev" type="button" data-bs-target="#carouselView" data-bs-slide="prev">
-				<span className="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span className="visually-hidden">Previous</span>
+			<button className="carousel-control-prev" type="button" data-bs-target={`#${id}`} data-bs-slide="prev">
+				<div className="btn-round" aria-hidden="true"><Icon.ChevronLeft size={24} /></div>
 			</button>
-			<button className="carousel-control-next" type="button" data-bs-target="#carouselView" data-bs-slide="next">
-				<span className="carousel-control-next-icon" aria-hidden="true"></span>
-				<span className="visually-hidden">Next</span>
+			<button className="carousel-control-next" type="button" data-bs-target={`#${id}`} data-bs-slide="next">
+				<div className="btn-round" aria-hidden="true"><Icon.ChevronRight size={24} /></div>
 			</button>
 		</div>
 	);

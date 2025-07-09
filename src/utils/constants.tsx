@@ -32,36 +32,58 @@ export const landingImages = [
 	"landing_5.jpg"
 ];
 
-// Trending destinations
+// Trending destinations for home page
 export const trendingDestinations = [
 	{
 		city: "Zürich",
-		country: "Switzerland",
+		country: "CH",
 		url: "zurich.jpg"
 	},
 	{
 		city: "Reykjavik",
-		country: "Iceland",
-		url: "reykjavik.jpg"
+		country: "IS",
+		url: "iceland.jpg"
 	},
 	{
-		city: "Olbia",
-		country: "Italy",
-		url: "olbia.jpg"
-	},
-	{
-		city: "Nikko",
-		country: "Japan",
-		url: "nikko.jpg"
-	},
-	{
-		city: "Cinque Terre",
-		country: "Italy",
+		city: "Manarola",
+		country: "IT",
 		url: "cinque-terre.jpg"
 	},
 	{
-		city: "Lavaux",
-		country: "Switzerland",
-		url: "lavaux.jpg"
+		city: "Paris",
+		country: "FR",
+		url: "france.jpg"
+	},
+];
+
+// Building types for home page
+export const placeTypes = [
+	{
+		name: "Hotel",
+		url: "hotel.jpg"
+	},
+	{
+		name: "Apartment",
+		url: "apartment.jpg"
+	},
+	{
+		name: "Villa",
+		url: "villa.jpg"
+	},
+	{
+		name: "Cabin",
+		url: "cabin.jpg"
+	},
+	{
+		name: "Chalet",
+		url: "chalet.jpg"
+	},
+	{
+		name: "Ryokan",
+		url: "ryokan.jpg"
+	},
+	{
+		name: "Bnb",
+		url: "bnb.jpg"
 	},
 ]

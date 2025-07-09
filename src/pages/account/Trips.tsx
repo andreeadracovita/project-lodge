@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { getAllBookings } from "/src/api/BackendApiService";
-import ListView, { ListItemType } from "/src/components/list/ListView";
+import ListView from "/src/components/list/ListView";
+import { ListItemType } from "/src/components/list/ListItemType";
 import { fileStorage } from "/src/utils/constants";
 import CallToTravel from "/src/components/trips/CallToTravel";
 import CurrentTrip from "/src/components/trips/CurrentTrip";

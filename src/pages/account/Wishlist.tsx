@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
 import { getAllWishlisted } from "/src/api/BackendApiService";
-import ListView, { ListItemType } from "/src/components/list/ListView";
+import ListView from "/src/components/list/ListView";
+import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
 
 export default function Wishlist() {
 	const [properties, setProperties] = useState([]);
 	const center = [47.36264, 8.55256];
+	const checkIn = new Date();
+	let checkOut = new Date();
+	checkOut.setDate(checkOut.getDate() + 2);
+	const guests = 1;
 
 	useEffect(() => {
 		getAllWishlisted()
@@ -24,7 +29,14 @@ export default function Wishlist() {
 	return (
 		<div className="container section-container">
 			<h1 className="page-heading">Wishlist</h1>
-			<ListView listItemType={ListItemType.Property} items={properties} cols={4} />
+			<ListView
+				listItemType={ListItemType.Property}
+				items={properties}
+				checkIn={checkIn}
+				checkOut={checkOut}
+				guests={guests}
+				cols={4}
+			/>
 		</div>
 	);
 }

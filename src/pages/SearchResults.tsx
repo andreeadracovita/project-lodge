@@ -6,7 +6,8 @@ import countries from "react-select-country-list";
 
 import { getPropertiesForQuery } from "/src/api/BackendApiService";
 import Search from "/src/components/search/Search";
-import ListView, { ListItemType } from "/src/components/list/ListView";
+import ListView from "/src/components/list/ListView";
+import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
 import Filter from "/src/components/filter/Filter";
 
@@ -15,16 +16,25 @@ export default function SearchResults() {
 	const [location, setLocation] = useState("");
 	const [locationGeo, setLocationGeo] = useState([0, 0]);
 	const [points, setPoints] = useState([]);
+	const [checkIn, setCheckIn] = useState();
+	const [checkOut, setCheckOut] = useState();
+	const [guests, setGuests] = useState();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
+		const checkInParam = searchParams.get("check_in");
+		const checkOutParam = searchParams.get("check_out");
+		const guestsParam = parseInt(searchParams.get("guests"));
+		setCheckIn(new Date(checkInParam));
+		setCheckOut(new Date(checkOutParam));
+		setGuests(guestsParam)
 		const payload = {
 			country: searchParams.get("country"),
 			city: searchParams.get("city"),
-			check_in: searchParams.get("check_in"),
-			check_out: searchParams.get("check_out"),
-			guests: searchParams.get("guests")
+			check_in: checkInParam,
+			check_out: checkOutParam,
+			guests: guestsParam
 		};
 		getPropertiesForQuery(payload)
 			.then(response => {
@@ -80,7 +90,15 @@ export default function SearchResults() {
 				</div>
 				<div className="col-9">
 					<h1 className="page-heading">{location}: {properties.length} results found</h1>
-					<ListView listItemType={ListItemType.Property} items={properties} cols={3} isCompact={false} />
+					<ListView
+						listItemType={ListItemType.Property}
+						items={properties}
+						checkIn={checkIn}
+						checkOut={checkOut}
+						guests={guests}
+						cols={3}
+						isCompact={false}
+					/>
 				</div>
 	        </div>
 		</div>

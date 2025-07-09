@@ -3,23 +3,23 @@ import countries from "react-select-country-list";
 
 import { fileStorage } from "/src/utils/constants";
 
-type DestinationItem = {
+type PlaceType = {
 	// city: string;
-	country: string;
+	name: string;
 	url: string;
 };
 
-type DestinationListItemProps = {
-	item: DestinationItem;
-	checkIn: string;
-	checkOut: string;
+type PlaceTypeItemProps = {
+	item: PlaceType;
+	checkIn: string; // formatted string 2025-04-10
+	checkOut: string; // formatted string 2025-04-10
 };
 
-export default function DestinationListItem({ item, checkIn, checkOut }: DestinationListItemProps) {
+export default function PlaceTypeItem({ item, checkIn, checkOut }: PlaceTypeItemProps) {
 
 	const linkPath = {
 		pathname: `/search-results`,
-		search: `?country=${item.country}&check_in=${checkIn}&check_out=${checkOut}`
+		search: `?check_in=${checkIn}&check_out=${checkOut}&guests=2&type=${item.name.toLowerCase()}`
 	};
 	
 	return (
@@ -28,7 +28,7 @@ export default function DestinationListItem({ item, checkIn, checkOut }: Destina
 					<div>
 						<img src={fileStorage + item.url} className="list-item-photo mb-2" />
 						<div>
-							<p className="lato-bold">{countries().getLabel(item.country)}</p>
+							<p className="lato-bold">{item.name}</p>
 						</div>
 					</div>
 				

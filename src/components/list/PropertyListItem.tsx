@@ -29,27 +29,21 @@ export type PropertyItem = {
 type PropertyListItemProps = {
 	isPreview: boolean;
 	item: PropertyItem;
-	checkIn: Date;
-	checkOut: Date;
+	checkIn: string; // formatted string 2025-04-10
+	checkOut: string; // formatted string 2025-04-10
 };
 
 export default function PropertyListItem({ isPreview, item, guests, checkIn, checkOut, hidePrice, hideWishlist, isCompact }: PropertyListItemProps) {
 	const authContext = useAuth();
-	let displayDate = "";
-	let checkInParam = "";
-	let checkOutParam = "";
 	let nightsCount = 1;
 	if (checkIn && checkOut) {
-		// 1 May - 2 May (Year if not current)
-		displayDate = checkIn.getDate() + " " + checkIn.toLocaleString('default', {month: 'long'}) +
-		" - " + checkOut.getDate() + " " + checkOut.toLocaleString('default', {month: 'long'});
-		checkInParam = yearDashMonthDashDay(checkIn);
-		checkOutParam = yearDashMonthDashDay(checkOut);
-		nightsCount = getNightsCount(checkIn, checkOut);
+		const checkInDate = new Date(checkIn);
+		const checkOutDate = new Date(checkOut);
+		nightsCount = getNightsCount(checkInDate, checkOutDate);
 	}
 
 	const linkPath = !isPreview
-		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkInParam}&check_out=${checkOutParam}`
+		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`
 		: "#";
 
 	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;

@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "/src/components/security/AuthContext";
 import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
 import { getPropertiesByUserId } from "/src/api/BackendApiService";
-import ListView, { ListItemType } from "/src/components/list/ListView";
+import ListView from "/src/components/list/ListView";
+import { ListItemType } from "/src/components/list/ListItemType";
 
 // Page path: /hosting/properties
 export default function Properties() {
