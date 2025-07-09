@@ -23,15 +23,16 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 		}
 
 		uploadPhotos(data)
-			.then(response => {
-				updateProperty(propertyId, { images_url_array: response.data.filenames })
-					.then(response => {
-						const errors = response.data.errors;
+			.then(uploadResponse => {
+				const filenames = uploadResponse.data.filenames;
+				updateProperty(propertyId, { images_url_array: filenames })
+					.then(updateResponse => {
+						const errors = updateResponse.data.errors;
 						if (errors) {
 							setErrors(errors);
 							return;
 						}
-						setImagesUrlArray(response.data.filenames);
+						setImagesUrlArray(filenames);
 						advanceState();
 					})
 					.catch((error) => {

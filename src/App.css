@@ -80,6 +80,10 @@ a {
   text-decoration: none;
   color: black;
 }
+
+svg {
+  pointer-events: none;
+}
 /* End: Tag overrides --------------------------------------------------------- */
 
 /* Start: Font ---------------------------------------------------------------- */
@@ -384,4 +388,8 @@ a {
 .focusable:focus {
   border-color: var(--light-brand-color);
   box-shadow: 0 0 0 0.25rem var(--light-brand-color);
+}
+
+.bubble-click {
+  pointer-events: none;
 }

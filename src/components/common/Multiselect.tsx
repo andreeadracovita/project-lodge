@@ -17,7 +17,7 @@ export default function Multiselect({ options, selectedIds, handleChange, isEdit
 	}
 	
 	return (
-		<>
+		<div id="multiselect">
 		{
 			selectedIds && options &&
 			<>
@@ -26,11 +26,13 @@ export default function Multiselect({ options, selectedIds, handleChange, isEdit
 					selectedIds.map((id) => {
 						const found = options.find(opt => opt.id == id);
 						if (found) {
-							return <span
+							return <div
 								key={found.id}
 								id={found.id}
 								className={classNames(
 									"features-list-item",
+									"d-flex",
+									"align-items-center",
 									{
 										"selectable-item": isEditable,
 										"selected-feature": isEditable && isIdSelected(found.id)
@@ -38,10 +40,11 @@ export default function Multiselect({ options, selectedIds, handleChange, isEdit
 								)}
 								onClick={isEditable ? handleChange : undefined}
 							>
-								{ iconMap && iconMap.get(found.name) } { capitalizeFirstLetter(found.name) }
-							</span>
+								{ iconMap && iconMap.get(found.name) }
+								<span className="ms-1 bubble-click">{ capitalizeFirstLetter(found.name) }</span>
+							</div>
 						}
-					})	
+					})
 				}
 				</div>
 				{
@@ -49,26 +52,29 @@ export default function Multiselect({ options, selectedIds, handleChange, isEdit
 					<div id="unselected" className="d-flex flex-wrap">
 						{
 							options && options.map(opt => 
-								<span
+								<div
 									key={opt.id}
 									id={opt.id}
 									className={classNames(
 										"features-list-item",
 										"selectable-item",
+										"d-flex",
+										"align-items-center",
 										{
 											"d-none": isIdSelected(opt.id)
 										}
 									)}
 									onClick={handleChange}
 								>
-									{ iconMap && iconMap.get(opt.name) } { capitalizeFirstLetter(opt.name) }
-								</span>
-							)	
+									{ iconMap && iconMap.get(opt.name) }
+									<span className="ms-1 bubble-click">{ capitalizeFirstLetter(opt.name) }</span>
+								</div>
+							)
 						}
 					</div>
 				}
 			</>
 		}
-		</>
+		</div>
 	);
 }
