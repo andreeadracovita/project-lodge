@@ -13,6 +13,9 @@ export const availableCurrencies = ["EUR", "USD", "CHF", "GBP"];
 
 export const defaultLanguage = "en-GB";
 
+// Used for map coordinates when no geo data is available
+export const genericMapCenter = [47.36264, 8.55256];
+
 // Available languages
 export const availableLanguages = [
 	{ label: "English", value: "en-GB" },
@@ -28,8 +31,7 @@ export const landingImages = [
 	"landing_0.jpg",
 	"landing_1.jpg",
 	"landing_2.jpg",
-	"landing_4.jpg",
-	"landing_5.jpg"
+	"landing_3.jpg"
 ];
 
 // Trending destinations for home page

@@ -49,6 +49,10 @@ export default function Review() {
 					<PropertyListItem
 						isPreview={true}
 						item={property}
+						checkIn={""}
+						checkOut={""}
+						guests={1}
+						nightsCount={1}
 					/>
 				</div>
 				<div className="col-9">

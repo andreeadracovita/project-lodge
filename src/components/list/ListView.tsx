@@ -7,7 +7,7 @@ import PropertyListItem from "./PropertyListItem";
 import BookingListItem from "./BookingListItem";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
-export default function ListView({ listItemType, items, checkIn, checkOut, guests, cols, setNeedsRefresh, isCompact }) {
+export default function ListView({ listItemType, items, checkIn, checkOut, nightsCount, guests, cols, setNeedsRefresh, isCompact }) {
 
 	const gridClassNames = classNames(
 		"row",
@@ -24,16 +24,18 @@ export default function ListView({ listItemType, items, checkIn, checkOut, guest
 				return <PropertyListItem
 					isPreview={false}
 					item={item}
-					guests={guests}
 					checkIn={checkIn}
 					checkOut={checkOut}
+					guests={guests}
+					nightsCount={nightsCount}
 					isCompact={isCompact}
 				/>;
 			case ListItemType.Destination:
 				return <DestinationListItem
 					item={item}
-					checkIn={yearDashMonthDashDay(checkIn)}
-					checkOut={yearDashMonthDashDay(checkOut)}
+					checkIn={checkIn}
+					checkOut={checkOut}
+					guests={guests}
 				/>;
 			case ListItemType.HostingProperty:
 				return <HostingPropertyListItem item={item} setNeedsRefresh={setNeedsRefresh} />;

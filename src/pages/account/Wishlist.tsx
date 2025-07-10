@@ -5,14 +5,16 @@ import { getAllWishlisted } from "/src/api/BackendApiService";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
+import { genericMapCenter } from "/src/utils/constants";
 
 export default function Wishlist() {
 	const [properties, setProperties] = useState([]);
-	const center = [47.36264, 8.55256];
+	const center = genericMapCenter;
 	const checkIn = new Date();
 	let checkOut = new Date();
-	checkOut.setDate(checkOut.getDate() + 2);
+	checkOut.setDate(checkOut.getDate() + 1);
 	const guests = 1;
+	const nightsCount = 1;
 
 	useEffect(() => {
 		getAllWishlisted()
@@ -35,6 +37,7 @@ export default function Wishlist() {
 				checkIn={checkIn}
 				checkOut={checkOut}
 				guests={guests}
+				nightsCount={nightsCount}
 				cols={4}
 			/>
 		</div>

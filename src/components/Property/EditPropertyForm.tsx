@@ -266,6 +266,8 @@ export default function EditPropertyForm() {
 										}}
 										checkIn={previewCheckIn}
 										checkOut={previewCheckOut}
+										nightsCount={1}
+										guests={1}
 									/>
 								</div>
 							</div>

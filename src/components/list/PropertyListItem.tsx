@@ -7,7 +7,6 @@ import { useAuth } from "/src/components/security/AuthContext";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
 import { fileStorage } from "/src/utils/constants";
-import { getNightsCount } from "/src/utils/DateFormatUtils";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 type Geo = {
@@ -33,14 +32,18 @@ type PropertyListItemProps = {
 	checkOut: string; // formatted string 2025-04-10
 };
 
-export default function PropertyListItem({ isPreview, item, guests, checkIn, checkOut, hidePrice, hideWishlist, isCompact }: PropertyListItemProps) {
+export default function PropertyListItem({
+	isPreview,
+	item,
+	guests,
+	checkIn,
+	checkOut,
+	nightsCount,
+	hidePrice,
+	hideWishlist,
+	isCompact
+}: PropertyListItemProps) {
 	const authContext = useAuth();
-	let nightsCount = 1;
-	if (checkIn && checkOut) {
-		const checkInDate = new Date(checkIn);
-		const checkOutDate = new Date(checkOut);
-		nightsCount = getNightsCount(checkInDate, checkOutDate);
-	}
 
 	const linkPath = !isPreview
 		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`

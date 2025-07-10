@@ -9,7 +9,7 @@ import { greetingMessage, trendingDestinations, placeTypes } from "/src/utils/co
 import { experienceIconMap } from "/src/utils/mappings";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { fileStorage, landingImages } from "/src/utils/constants";
-import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay, getNightsCount } from "/src/utils/DateFormatUtils";
 
 function getRandomLandingImage() {
 	return landingImages[Math.floor(Math.random() * landingImages.length)];
@@ -30,6 +30,7 @@ export default function Home() {
 
 	const checkInParam = yearDashMonthDashDay(checkIn);
 	const checkOutParam = yearDashMonthDashDay(checkOut);
+	const nightsCount = getNightsCount(checkIn, checkOut);
 	const guests = 1;
 
 	useEffect(() => {
@@ -67,17 +68,7 @@ export default function Home() {
 
 			<div className="container">
 				<div id="experience" className="section-container">
-					<p className="section-heading">Explore by experience</p>
-					<div>
-						{
-							experiences.map((exp, i) => 
-								<span key={i} className="features-list-item">
-									{/*{ experienceIconMap.get(exp.name) }*/}
-									{ capitalizeFirstLetter(exp.name) }
-								</span>
-							)
-						}
-					</div>
+					<p className="section-heading">Explore with us</p>
 					<div className="mt-4">
 						<CarouselView
 							id="properties-carousel"
@@ -85,6 +76,7 @@ export default function Home() {
 							items={properties}
 							checkIn={checkInParam}
 							checkOut={checkOutParam}
+							nightsCount={nightsCount}
 							guests={guests}
 						/>
 					</div>
@@ -96,8 +88,8 @@ export default function Home() {
 						<ListView
 							listItemType={ListItemType.Destination}
 							items={trendingDestinations}
-							checkIn={checkIn}
-							checkOut={checkOut}
+							checkIn={checkInParam}
+							checkOut={checkOutParam}
 							guests={guests}
 							cols={4}
 						/>

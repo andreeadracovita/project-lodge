@@ -10,15 +10,19 @@ import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
 import Filter from "/src/components/filter/Filter";
+import { getNightsCount } from "/src/utils/DateFormatUtils";
+import { genericMapCenter } from "/src/utils/constants";
 
 export default function SearchResults() {
 	const [properties, setProperties] = useState([]);
+	const [propCountString, setPropCountString] = useState("");
 	const [location, setLocation] = useState("");
 	const [locationGeo, setLocationGeo] = useState([0, 0]);
 	const [points, setPoints] = useState([]);
 	const [checkIn, setCheckIn] = useState();
 	const [checkOut, setCheckOut] = useState();
 	const [guests, setGuests] = useState();
+	const [nightsCount, setNightsCount] = useState();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -26,19 +30,27 @@ export default function SearchResults() {
 		const checkInParam = searchParams.get("check_in");
 		const checkOutParam = searchParams.get("check_out");
 		const guestsParam = parseInt(searchParams.get("guests"));
-		setCheckIn(new Date(checkInParam));
-		setCheckOut(new Date(checkOutParam));
-		setGuests(guestsParam)
+		const checkInDate = new Date(checkInParam);
+		const checkOutDate = new Date(checkOutParam);
+		setCheckIn(checkInDate);
+		setCheckOut(checkOutDate);
+		setNightsCount(getNightsCount(checkInDate, checkOutDate));
+		setGuests(guestsParam);
 		const payload = {
 			country: searchParams.get("country"),
 			city: searchParams.get("city"),
 			check_in: checkInParam,
 			check_out: checkOutParam,
-			guests: guestsParam
+			guests: guestsParam,
+			property_type: searchParams.get("ptype"),
+			rental_type: searchParams.get("rtype")
 		};
 		getPropertiesForQuery(payload)
 			.then(response => {
-				setProperties(response.data);
+				const data = response.data;
+				setProperties(data);
+				const propCount = data;
+				setPropCountString(`${data.length} ${data.length > 1 ? "results" : "result"}`);
 			})
 			.catch(error => {
 				console.error(error);
@@ -47,9 +59,18 @@ export default function SearchResults() {
 
 	useEffect(() => {
 		const countryCode = searchParams.get("country");
+		if (!countryCode) {
+			setLocationGeo(genericMapCenter);
+			return;
+		}
+		
 		const countryFull = countries().getLabel(countryCode);
 		const city = searchParams.get("city");
-		setLocation(city + ", " + countryFull);
+		if (city) {
+			setLocation(city + ", " + countryFull);
+		} else {
+			setLocation(countryFull);
+		}
 
 		const searchQuery = city + "+" + countryFull;
 		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
@@ -89,13 +110,14 @@ export default function SearchResults() {
 					</div>
 				</div>
 				<div className="col-9">
-					<h1 className="page-heading">{location}: {properties.length} results found</h1>
+					<h1 className="page-heading">{location}: {propCountString} found</h1>
 					<ListView
 						listItemType={ListItemType.Property}
 						items={properties}
 						checkIn={checkIn}
 						checkOut={checkOut}
 						guests={guests}
+						nightsCount={nightsCount}
 						cols={3}
 						isCompact={false}
 					/>

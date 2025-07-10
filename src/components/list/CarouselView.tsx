@@ -14,7 +14,7 @@ type CarouselViewProps = {
 	guests: number;
 };
 
-export default function CarouselView({ id, listItemType, items, checkIn, checkOut, guests }: CarouselViewProps) {
+export default function CarouselView({ id, listItemType, items, checkIn, checkOut, nightsCount, guests }: CarouselViewProps) {
 
 	function renderItemByType(item) {
 		switch (listItemType) {
@@ -22,9 +22,10 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 				return <PropertyListItem
 					isPreview={false}
 					item={item}
-					checkIn={new Date(checkIn)}
-					checkOut={new Date(checkOut)}
+					checkIn={checkIn}
+					checkOut={checkOut}
 					guests={guests}
+					nightsCount={nightsCount}
 					isCompact={true}
 				/>;
 			case ListItemType.PlaceType:

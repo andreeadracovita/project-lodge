@@ -205,7 +205,7 @@ svg {
 }
 
 #landing-greeting-section-container {
-  box-shadow: 50px -40px 30px 40px black inset, -50px -40px 30px 40px black inset;
+  box-shadow: 10px 0px 10px black inset, -10px 0px 10px black inset;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
