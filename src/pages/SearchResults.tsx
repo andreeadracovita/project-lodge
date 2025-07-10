@@ -5,15 +5,20 @@ import * as Icon from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
 import { getPropertiesForQuery } from "/src/api/BackendApiService";
-import Search from "/src/components/search/Search";
+import Filter from "/src/components/filter/Filter";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
-import Filter from "/src/components/filter/Filter";
+import Search from "/src/components/search/Search";
+import { useAuth } from "/src/components/security/AuthContext";
 import { getNightsCount } from "/src/utils/DateFormatUtils";
 import { genericMapCenter } from "/src/utils/constants";
+import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 export default function SearchResults() {
+	const authContext = useAuth();
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	const [properties, setProperties] = useState([]);
 	const [propCountString, setPropCountString] = useState("");
 	const [location, setLocation] = useState("");
@@ -24,7 +29,8 @@ export default function SearchResults() {
 	const [guests, setGuests] = useState();
 	const [nightsCount, setNightsCount] = useState();
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [lowestPrice, setLowestPrice] = useState(0);
+	const [highestPrice, setHighestPrice] = useState(0);
 
 	useEffect(() => {
 		const tempCheckInParam = searchParams.get("check_in");
@@ -54,6 +60,19 @@ export default function SearchResults() {
 				setProperties(data);
 				const propCount = data;
 				setPropCountString(`${data.length} ${data.length > 1 ? "results" : "result"}`);
+				if (data.length > 0) {
+					const firstPriceConverted = convertToPreferredCurrency(data[0].price_night_site, authContext.exchangeRate);
+					let tempLowestPrice = firstPriceConverted;
+					let tempHighestPrice = firstPriceConverted;
+
+					for (let i = 1; i < data.length; i++) {
+						const converted = convertToPreferredCurrency(data[i].price_night_site, authContext.exchangeRate);
+						tempLowestPrice = Math.min(tempLowestPrice, converted);
+						tempHighestPrice = Math.max(tempHighestPrice, converted);
+					}
+					setLowestPrice(Math.floor(tempLowestPrice));
+					setHighestPrice(Math.ceil(tempHighestPrice));
+				}
 			})
 			.catch(error => {
 				console.error(error);
@@ -109,21 +128,31 @@ export default function SearchResults() {
 						</span>
 					</div>
 					<div className="section-container">
-						<Filter />
+						<Filter
+							city={searchParams.get("city")}
+							lowestPrice={lowestPrice}
+							highestPrice={highestPrice}
+						/>
 					</div>
 				</div>
 				<div className="col-9">
 					<h1 className="page-heading">{location}: {propCountString} found</h1>
-					<ListView
-						listItemType={ListItemType.Property}
-						items={properties}
-						checkIn={checkInParam}
-						checkOut={checkOutParam}
-						guests={guests}
-						nightsCount={nightsCount}
-						cols={3}
-						isCompact={false}
-					/>
+					<div className="d-flex flex-wrap">
+						<div className="filter-pill">Filters</div>
+						<div className="filter-pill">here</div>
+					</div>
+					<div className="mt-10">
+						<ListView
+							listItemType={ListItemType.Property}
+							items={properties}
+							checkIn={checkInParam}
+							checkOut={checkOutParam}
+							guests={guests}
+							nightsCount={nightsCount}
+							cols={3}
+							isCompact={false}
+						/>
+					</div>
 				</div>
 	        </div>
 		</div>

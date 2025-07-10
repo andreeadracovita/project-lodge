@@ -233,6 +233,18 @@ svg {
   padding: 6px 10px;
 }
 
+.filter-pill {
+  border: 1px solid var(--brand-color);
+  background-color: var(--light-brand-color);
+  color: var(--brand-color);
+  border-radius: 50rem;
+  min-width: 60px;
+  margin: 0.25rem;
+  margin-inline-end: 0.25rem;
+  text-align: center;
+  padding: 6px 10px;
+}
+
 .account-card {
   height: 172px;
 }
@@ -403,4 +415,8 @@ svg {
 
 .bubble-click {
   pointer-events: none;
+}
+
+.range-slider__thumb {
+  background-color: var(--brand-color);
 }
