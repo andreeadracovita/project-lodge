@@ -4,6 +4,7 @@
 	border-radius: 50%;
 	top: 16px;
 	right: 16px;
+	border: 1px solid var(--light-grey);
 }
 
 .outline-heart-icon {

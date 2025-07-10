@@ -19,28 +19,31 @@ export default function SearchResults() {
 	const [location, setLocation] = useState("");
 	const [locationGeo, setLocationGeo] = useState([0, 0]);
 	const [points, setPoints] = useState([]);
-	const [checkIn, setCheckIn] = useState();
-	const [checkOut, setCheckOut] = useState();
+	const [checkInParam, setCheckInParam] = useState();
+	const [checkOutParam, setCheckOutParam] = useState();
 	const [guests, setGuests] = useState();
 	const [nightsCount, setNightsCount] = useState();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
-		const checkInParam = searchParams.get("check_in");
-		const checkOutParam = searchParams.get("check_out");
-		const guestsParam = parseInt(searchParams.get("guests"));
-		const checkInDate = new Date(checkInParam);
-		const checkOutDate = new Date(checkOutParam);
-		setCheckIn(checkInDate);
-		setCheckOut(checkOutDate);
+		const tempCheckInParam = searchParams.get("check_in");
+		const tempCheckOutParam = searchParams.get("check_out");
+		setCheckInParam(tempCheckInParam);
+		setCheckOutParam(tempCheckOutParam);
+		
+		const checkInDate = new Date(tempCheckInParam);
+		const checkOutDate = new Date(tempCheckOutParam);
 		setNightsCount(getNightsCount(checkInDate, checkOutDate));
+
+		const guestsParam = parseInt(searchParams.get("guests"));
 		setGuests(guestsParam);
+
 		const payload = {
 			country: searchParams.get("country"),
 			city: searchParams.get("city"),
-			check_in: checkInParam,
-			check_out: checkOutParam,
+			check_in: tempCheckInParam,
+			check_out: tempCheckOutParam,
 			guests: guestsParam,
 			property_type: searchParams.get("ptype"),
 			rental_type: searchParams.get("rtype")
@@ -114,8 +117,8 @@ export default function SearchResults() {
 					<ListView
 						listItemType={ListItemType.Property}
 						items={properties}
-						checkIn={checkIn}
-						checkOut={checkOut}
+						checkIn={checkInParam}
+						checkOut={checkOutParam}
 						guests={guests}
 						nightsCount={nightsCount}
 						cols={3}

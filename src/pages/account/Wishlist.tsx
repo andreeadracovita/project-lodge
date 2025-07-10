@@ -6,15 +6,18 @@ import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
 import { genericMapCenter } from "/src/utils/constants";
+import { yearDashMonthDashDay, getNightsCount } from "/src/utils/DateFormatUtils";
 
 export default function Wishlist() {
 	const [properties, setProperties] = useState([]);
-	const center = genericMapCenter;
 	const checkIn = new Date();
 	let checkOut = new Date();
 	checkOut.setDate(checkOut.getDate() + 1);
+
+	const checkInParam = yearDashMonthDashDay(checkIn);
+	const checkOutParam = yearDashMonthDashDay(checkOut);
+	const nightsCount = getNightsCount(checkIn, checkOut);
 	const guests = 1;
-	const nightsCount = 1;
 
 	useEffect(() => {
 		getAllWishlisted()
@@ -34,9 +37,8 @@ export default function Wishlist() {
 			<ListView
 				listItemType={ListItemType.Property}
 				items={properties}
-				checkIn={checkIn}
-				checkOut={checkOut}
-				guests={guests}
+				checkIn={checkInParam}
+				checkOut={checkOutParam}
 				nightsCount={nightsCount}
 				cols={4}
 			/>

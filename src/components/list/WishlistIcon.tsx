@@ -48,12 +48,11 @@ export default function WishlistIcon({ itemId, isPreview }) {
 	);
 	
 	return (
-		<div className="white-circle position-absolute cursor-pointer">
+		<div className="white-circle position-absolute cursor-pointer" onClick={handleHeartClick}>
 			<Icon.HeartFill
 				size={20}
 				color={isFavorite || isPreview ? "#ff3131" : "white"}
 				className={heartClass}
-				onClick={handleHeartClick}
 			/>
 		</div>
 	);
