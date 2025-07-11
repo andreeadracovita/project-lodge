@@ -137,10 +137,6 @@ export default function SearchResults() {
 				</div>
 				<div className="col-9">
 					<h1 className="page-heading">{location}: {propCountString} found</h1>
-					<div className="d-flex flex-wrap">
-						<div className="filter-pill">Filters</div>
-						<div className="filter-pill">here</div>
-					</div>
 					<div className="mt-10">
 						<ListView
 							listItemType={ListItemType.Property}
