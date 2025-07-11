@@ -1,0 +1,7 @@
+#range-slider .range-slider__range {
+  background: var(--brand-color);
+}
+
+#range-slider .range-slider__thumb {
+  background: var(--brand-color);
+}

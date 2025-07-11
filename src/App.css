@@ -67,10 +67,6 @@ main {
   margin-bottom: 2rem;
 }
 
-/*label {
-  margin-top: 0.75rem;
-}*/
-
 hr {
   border-top: 1px solid var(--light-grey);
   opacity: 1;
@@ -85,6 +81,16 @@ svg {
   pointer-events: none;
 }
 /* End: Tag overrides --------------------------------------------------------- */
+
+/* Start: Bootstrap overrides ------------------------------------------------- */
+.form-check-input:checked {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+}
+.form-check-input:focus {
+  border-color: var(--light-brand-color);
+}
+/* End: Bootstrap overriders -------------------------------------------------- */
 
 /* Start: Font ---------------------------------------------------------------- */
 .greeting-message {
@@ -235,7 +241,7 @@ svg {
 
 .filter-pill {
   border: 1px solid var(--brand-color);
-  background-color: var(--light-brand-color);
+  /*background-color: var(--light-brand-color);*/
   color: var(--brand-color);
   border-radius: 50rem;
   min-width: 60px;
@@ -415,8 +421,4 @@ svg {
 
 .bubble-click {
   pointer-events: none;
-}
-
-.range-slider__thumb {
-  background-color: var(--brand-color);
 }

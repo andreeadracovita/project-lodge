@@ -8,7 +8,7 @@ import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import {
 	createNewProperty,
 	updateProperty,
-	getAllBuildingTypes,
+	getAllPropertyTypes,
 	getAllRentalTypes
 } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
@@ -20,7 +20,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
-		getAllBuildingTypes()
+		getAllPropertyTypes()
 			.then(response => {
 				if (response.data.length > 0) {
 					setBuildingTypes(response.data);
