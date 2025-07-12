@@ -35,7 +35,6 @@ export default function SearchResults() {
 	const [highestPrice, setHighestPrice] = useState(0);
 
 	useEffect(() => {
-		console.log("Search params have changed");
 		const tempCheckInParam = searchParams.get("check_in");
 		const tempCheckOutParam = searchParams.get("check_out");
 		setCheckInParam(tempCheckInParam);
