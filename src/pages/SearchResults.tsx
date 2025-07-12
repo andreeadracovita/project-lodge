@@ -99,6 +99,10 @@ export default function SearchResults() {
 			}
 			setLowestPrice(Math.floor(tempLowestPrice));
 			setHighestPrice(Math.ceil(tempHighestPrice));
+
+			// TODO reset budget when retrieving new properties?
+			// searchParams.delete("plow");
+			// searchParams.delete("phigh");
 		}
 	}, [authContext.exchangeRate, properties]);
 

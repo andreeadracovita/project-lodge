@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { getPropertiesForHome, getAllExperiences } from "/src/api/BackendApiService";
+import { getPropertiesForHome, getAllPropertyTypes } from "/src/api/BackendApiService";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import CarouselView from "/src/components/list/CarouselView";
 import Search from "/src/components/search/Search";
-import { greetingMessage, trendingDestinations, placeTypes } from "/src/utils/constants";
+import { greetingMessage, trendingDestinations } from "/src/utils/constants";
 import { experienceIconMap } from "/src/utils/mappings";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import { fileStorage, landingImages } from "/src/utils/constants";
@@ -17,8 +17,8 @@ function getRandomLandingImage() {
 
 export default function Home() {
 	const [backgroundImage, setBackgroundImage] = useState();
-	const [experiences, setExperiences] = useState([]);
 	const [properties, setProperties] = useState([]);
+	const [propertyTypes, setPropertyTypes] = useState([]);
 
 	// First Saturday
 	const checkIn = new Date();
@@ -37,19 +37,14 @@ export default function Home() {
 		setBackgroundImage(fileStorage + getRandomLandingImage());
 		getPropertiesForHome()
 			.then(response => {
-				if (response.data.length > 0) {
-					setProperties(response.data);
-				}
+				setProperties(response.data);
 			})
 			.catch(error => {
 				console.error(error);
 			});
-
-		getAllExperiences()
+		getAllPropertyTypes()
 			.then(response => {
-				if (response.data.length > 0) {
-					setExperiences(response.data);
-				}
+				setPropertyTypes(response.data);
 			})
 			.catch(error => {
 				console.error(error);
@@ -102,7 +97,7 @@ export default function Home() {
 						<CarouselView
 							id="property-type-carousel"
 							listItemType={ListItemType.PlaceType}
-							items={placeTypes}
+							items={propertyTypes}
 							checkIn={checkInParam}
 							checkOut={checkOutParam}
 							guests={guests}

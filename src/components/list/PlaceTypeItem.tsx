@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import countries from "react-select-country-list";
 
 import { fileStorage } from "/src/utils/constants";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 type PlaceType = {
 	name: string;
@@ -16,19 +17,18 @@ type PlaceTypeItemProps = {
 };
 
 export default function PlaceTypeItem({ item, checkIn, checkOut, guests }: PlaceTypeItemProps) {
-
 	const linkPath = {
 		pathname: `/search-results`,
-		search: `?check_in=${checkIn}&check_out=${checkOut}&guests=${guests}&ptype=${item.name.toLowerCase()}`
+		search: `?check_in=${checkIn}&check_out=${checkOut}&guests=${guests}&ptype=${item.id}`
 	};
 	
 	return (
 		<Link to={linkPath}>
 			<div className="mb-3">
 					<div>
-						<img src={fileStorage + item.url} className="list-item-photo mb-2" />
+						<img src={fileStorage + item.img_url} className="list-item-photo mb-2" />
 						<div>
-							<p className="lato-bold">{item.name}</p>
+							<p className="lato-bold">{capitalizeFirstLetter(item.name)}</p>
 						</div>
 					</div>
 				

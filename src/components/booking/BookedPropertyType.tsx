@@ -9,19 +9,14 @@ export default function BookedPropertyType({ rentalTypeId, buildingTypeId }) {
 	useEffect(() => {
 		getAllPropertyTypes()
 			.then(response => {
-				if (response.data.length > 0) {
-					setPropertyTypes(response.data);
-				}
+				setPropertyTypes(response.data);
 			})
 			.catch(error => {
 				console.error(error);
 			});
-
 		getAllRentalTypes()
 			.then(response => {
-				if (response.data.length > 0) {
-					setRentalTypes(response.data);
-				}
+				setRentalTypes(response.data);
 			})
 			.catch(error => {
 				console.error(error);

@@ -57,35 +57,3 @@ export const trendingDestinations = [
 		url: "france.jpg"
 	},
 ];
-
-// Building types for home page
-export const placeTypes = [
-	{
-		name: "Hotel",
-		url: "hotel.jpg"
-	},
-	{
-		name: "Apartment",
-		url: "apartment.jpg"
-	},
-	{
-		name: "Villa",
-		url: "villa.jpg"
-	},
-	{
-		name: "Cabin",
-		url: "cabin.jpg"
-	},
-	{
-		name: "Chalet",
-		url: "chalet.jpg"
-	},
-	{
-		name: "Ryokan",
-		url: "ryokan.jpg"
-	},
-	{
-		name: "Bnb",
-		url: "bnb.jpg"
-	},
-]
