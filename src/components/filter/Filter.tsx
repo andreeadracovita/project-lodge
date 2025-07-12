@@ -31,7 +31,6 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 
 	useEffect(() => {
 		if (!searchParams.get("plow")) {
-			console.log("updates range");
 			setRangeValue([lowestPrice, highestPrice]);
 		}
 	}, [lowestPrice, highestPrice]);

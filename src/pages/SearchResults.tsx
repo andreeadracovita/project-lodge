@@ -20,6 +20,8 @@ export default function SearchResults() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [properties, setProperties] = useState([]);
+	const [budgetProperties, setBudgetProperties] = useState([]);
+
 	const [propCountString, setPropCountString] = useState("");
 	const [location, setLocation] = useState("");
 	const [locationGeo, setLocationGeo] = useState([0, 0]);
@@ -54,38 +56,52 @@ export default function SearchResults() {
 			guests: guestsParam,
 			property_type: searchParams.get("ptype"),
 			rental_type: searchParams.get("rtype"),
-			budget: [searchParams.get("plow"), searchParams.get("phigh")],
 			beds: searchParams.get("beds"),
 			bedrooms: searchParams.get("bedrooms"),
 			bathrooms: searchParams.get("bathrooms"),
 			features: searchParams.get("feat") ? searchParams.get("feat").split(",").map(Number) : null,
-			experiences: searchParams.get("feat") ? searchParams.get("exp")?.split(",").map(Number) : null
+			experiences: searchParams.get("exp") ? searchParams.get("exp")?.split(",").map(Number) : null
 		};
 
 		getPropertiesForQuery(payload)
 			.then(response => {
 				const data = response.data;
 				setProperties(data);
-				const propCount = data;
-				setPropCountString(`${data.length} ${data.length > 1 ? "results" : "result"}`);
-				if (data.length > 0) {
-					const firstPriceConverted = convertToPreferredCurrency(data[0].price_night_site, authContext.exchangeRate);
-					let tempLowestPrice = firstPriceConverted;
-					let tempHighestPrice = firstPriceConverted;
-
-					for (let i = 1; i < data.length; i++) {
-						const converted = convertToPreferredCurrency(data[i].price_night_site, authContext.exchangeRate);
-						tempLowestPrice = Math.min(tempLowestPrice, converted);
-						tempHighestPrice = Math.max(tempHighestPrice, converted);
-					}
-					setLowestPrice(Math.floor(tempLowestPrice));
-					setHighestPrice(Math.ceil(tempHighestPrice));
-				}
 			})
 			.catch(error => {
 				console.error(error);
 			});
-	}, [searchParams]);
+	}, [
+		searchParams.get("country"),
+		searchParams.get("city"),
+		searchParams.get("check_in"),
+		searchParams.get("check_out"),
+		searchParams.get("guests"),
+		searchParams.get("ptype"),
+		searchParams.get("rtype"),
+		searchParams.get("beds"),
+		searchParams.get("bedrooms"),
+		searchParams.get("bathrooms"),
+		searchParams.get("feat"),
+		searchParams.get("exp")
+	]);
+
+	// AuthContext exchangeRate may be fetched later from DB
+	useEffect(() => {
+		if (properties.length > 0) {
+			const firstPriceConverted = convertToPreferredCurrency(properties[0].price_night_site, authContext.exchangeRate);
+			let tempLowestPrice = firstPriceConverted;
+			let tempHighestPrice = firstPriceConverted;
+
+			for (let i = 1; i < properties.length; i++) {
+				const converted = convertToPreferredCurrency(properties[i].price_night_site, authContext.exchangeRate);
+				tempLowestPrice = Math.min(tempLowestPrice, converted);
+				tempHighestPrice = Math.max(tempHighestPrice, converted);
+			}
+			setLowestPrice(Math.floor(tempLowestPrice));
+			setHighestPrice(Math.ceil(tempHighestPrice));
+		}
+	}, [authContext.exchangeRate, properties]);
 
 	useEffect(() => {
 		const countryCode = searchParams.get("country");
@@ -124,6 +140,23 @@ export default function SearchResults() {
 		setPoints(points);
 	}, [properties]);
 
+	useEffect(() => {
+		console.log("update budget props");
+		const low = searchParams.get("plow");
+		const high = searchParams.get("phigh");
+		if (low && high) {
+			const temp = properties.filter(prop => {
+				const converted = convertToPreferredCurrency(prop.price_night_site, authContext.exchangeRate);
+				return (parseInt(low) <= converted && converted <= parseInt(high));
+			});
+			setBudgetProperties(temp);
+			setPropCountString(`${temp.length} ${temp.length > 1 ? "results" : "result"}`);
+		} else {
+			setBudgetProperties(properties);
+			setPropCountString(`${properties.length} ${properties.length > 1 ? "results" : "result"}`);
+		}
+	}, [properties, authContext.exchangeRate, searchParams.get("plow"), searchParams.get("phigh")]);
+
 	return (
 		<div className="container section-container">
 			<Search />
@@ -148,7 +181,7 @@ export default function SearchResults() {
 					<div className="mt-10">
 						<ListView
 							listItemType={ListItemType.Property}
-							items={properties}
+							items={budgetProperties}
 							checkIn={checkInParam}
 							checkOut={checkOutParam}
 							guests={guests}
