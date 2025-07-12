@@ -109,11 +109,27 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 				[name]: newValues
 			};
 		});
-		searchParams.set(name, newValues.join(","));
+		if (newValues.length > 0) {
+			searchParams.set(name, newValues.join(","));
+			
+		} else {
+			searchParams.delete(name);
+		}
 		setSearchParams(searchParams);
 	}
 
 	function clearFilters() {
+		searchParams.delete("beds");
+		searchParams.delete("bedrooms");
+		searchParams.delete("bathrooms");
+		searchParams.delete("feat");
+		searchParams.delete("exp");
+		searchParams.delete("plow");
+		searchParams.delete("phigh");
+		searchParams.delete("ptype");
+		searchParams.delete("rtype");
+		setSearchParams(searchParams);
+
 		setRangeValue([lowestPrice, highestPrice]);
 		setFilter({
 			beds: 1,
@@ -230,6 +246,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 								id="beds"
 								type="number"
 								className="form-control"
+								min="1"
 								name="beds"
 								value={filter.beds}
 								onChange={handleInputChange}
@@ -246,6 +263,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 								id="bedrooms"
 								type="number"
 								className="form-control"
+								min="1"
 								name="bedrooms"
 								value={filter.bedrooms}
 								onChange={handleInputChange}
@@ -262,6 +280,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 								id="guests"
 								type="number"
 								className="form-control"
+								min="1"
 								name="bathrooms"
 								value={filter.bathrooms}
 								onChange={handleInputChange}

@@ -33,6 +33,7 @@ export default function SearchResults() {
 	const [highestPrice, setHighestPrice] = useState(0);
 
 	useEffect(() => {
+		console.log("Search params have changed");
 		const tempCheckInParam = searchParams.get("check_in");
 		const tempCheckOutParam = searchParams.get("check_out");
 		setCheckInParam(tempCheckInParam);
@@ -52,8 +53,15 @@ export default function SearchResults() {
 			check_out: tempCheckOutParam,
 			guests: guestsParam,
 			property_type: searchParams.get("ptype"),
-			rental_type: searchParams.get("rtype")
+			rental_type: searchParams.get("rtype"),
+			budget: [searchParams.get("plow"), searchParams.get("phigh")],
+			beds: searchParams.get("beds"),
+			bedrooms: searchParams.get("bedrooms"),
+			bathrooms: searchParams.get("bathrooms"),
+			features: searchParams.get("feat") ? searchParams.get("feat").split(",").map(Number) : null,
+			experiences: searchParams.get("feat") ? searchParams.get("exp")?.split(",").map(Number) : null
 		};
+
 		getPropertiesForQuery(payload)
 			.then(response => {
 				const data = response.data;
@@ -77,7 +85,7 @@ export default function SearchResults() {
 			.catch(error => {
 				console.error(error);
 			});
-	}, [searchParams.get("country"), searchParams.get("city"), searchParams.get("check_in"), searchParams.get("check_out"), searchParams.get("guests")]);
+	}, [searchParams]);
 
 	useEffect(() => {
 		const countryCode = searchParams.get("country");
