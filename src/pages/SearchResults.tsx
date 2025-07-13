@@ -24,7 +24,7 @@ export default function SearchResults() {
 
 	const [propCountString, setPropCountString] = useState("");
 	const [location, setLocation] = useState("");
-	const [locationGeo, setLocationGeo] = useState([0, 0]);
+	const [locationGeo, setLocationGeo] = useState(genericMapCenter);
 	const [points, setPoints] = useState([]);
 	const [checkInParam, setCheckInParam] = useState();
 	const [checkOutParam, setCheckOutParam] = useState();

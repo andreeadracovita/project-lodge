@@ -13,6 +13,7 @@ import {
 } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
 import FormError from "/src/components/common/FormError";
+import MapView from "/src/components/map/MapView";
 import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 export default function FormPartTitleAddress({
@@ -27,6 +28,7 @@ export default function FormPartTitleAddress({
 }) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
+	const [locationGeo, setLocationGeo] = useState();
 	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
@@ -59,13 +61,37 @@ export default function FormPartTitleAddress({
 		}
 	);
 
+	async function handleLocateClick() {
+		if (input.city === "" || input.country === "" || input.street === "") {
+			setErrors(["Fill in address fields"]);
+			return;
+		}
+
+		const countryLabel = countries().getLabel(input.country);
+		const address = input.city + "+" + input.street + "+" + countryLabel;
+		getGeolocation(address)
+			.then(response => {
+				if (response.data.length > 0) {
+					setErrors([]);
+					const data = response.data[0];
+					setLocationGeo([data.lat, data.lon]);
+				} else {
+					// TODO get geo for city+country
+					setErrors(["No geolocation identified for given address"]);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
+
 	/**
 	 * Create a new property
 	 */
-	async function createProperty(geo) {
+	async function createProperty() {
 		const payload = {
 			title: input.title,
-			geo,
+			geo: { x: locationGeo[0], y: locationGeo[1] },
 			city: input.city,
 			country: input.country,
 			street: input.street,
@@ -95,10 +121,10 @@ export default function FormPartTitleAddress({
 	/**
 	 * Update existing property
 	 */
-	async function patchProperty(geo) {
+	async function patchProperty() {
 		const payload = {
 			title: input.title,
-			geo,
+			geo: { x: locationGeo[0], y: locationGeo[1] },
 			city: input.city,
 			country: input.country,
 			building_type_id: parseInt(input.buildingType),
@@ -133,25 +159,11 @@ export default function FormPartTitleAddress({
 			return;
 		}
 
-		const countryLabel = countries().getLabel(input.country);
-		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + countryLabel;
-		getGeolocation(address)
-			.then(response => {
-				if (response.data.length > 0) {
-					const data = response.data[0];
-					const geo = { x: data.lat, y: data.lon };
-					if (!propertyId) {
-						createProperty(geo);
-					} else {
-						patchProperty(geo);
-					}
-				} else {
-					setErrors(["No geolocation identified for given address"]);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
+		if (!propertyId) {
+			createProperty();
+		} else {
+			patchProperty();
+		}
 	}
 	
 	return (
@@ -247,6 +259,19 @@ export default function FormPartTitleAddress({
 					isEditable
 					? <CountrySelect id="country" initialValue={input.country} handleFormChange={handleChangeCountry} />
 					: <div className={stylingFormControl100}>{countries().getLabel(input.country)}</div>
+				}
+				<div className="btn-pill mt-10" onClick={handleLocateClick}>Locate on map</div>
+				{
+					locationGeo &&
+					<div className="mt-10">
+						<MapView
+							height={"300px"}
+							center={locationGeo}
+							zoom={14}
+							points={[]}
+							markCenter={true}
+							updateCenterPosition={(pos) => { console.log(pos) }} />
+					</div>
 				}
 			</div>
 			<FormError errors={errors} />

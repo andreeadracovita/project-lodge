@@ -9,7 +9,7 @@ export const getUserNameAndAvatar
 
 /**
  * Fetch an array of objects representing locations associated with the given address.
- * param address - string uniting address with +, example: Zurich+Rotwandstrasse+38+Switzerland
+ * @param address - string uniting address with +, example: Zurich+Rotwandstrasse+38+Switzerland
  */
 export const getGeolocation
 	= (address) => apiClient(`/misc/geo/${address}`);
