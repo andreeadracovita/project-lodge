@@ -7,6 +7,13 @@ export const getExchangeRateForTarget
 export const getUserNameAndAvatar
 	= (id) => apiClient(`/misc/user/${id}`);
 
+/**
+ * Fetch an array of objects representing locations associated with the given address.
+ * param address - string uniting address with +, example: Zurich+Rotwandstrasse+38+Switzerland
+ */
+export const getGeolocation
+	= (address) => apiClient(`/misc/geo/${address}`);
+
 // User -----------------------------------------------------------------------
 export const getUserConfig
 	= () => apiClient.get("/user/config");

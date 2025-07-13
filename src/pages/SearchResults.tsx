@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 import * as Icon from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
-import { getPropertiesForQuery } from "/src/api/BackendApiService";
+import { getGeolocation, getPropertiesForQuery } from "/src/api/BackendApiService";
 import Filter from "/src/components/filter/Filter";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
@@ -53,13 +53,14 @@ export default function SearchResults() {
 			check_in: tempCheckInParam,
 			check_out: tempCheckOutParam,
 			guests: guestsParam,
-			property_type: searchParams.get("ptype"),
-			rental_type: searchParams.get("rtype"),
+			property_type: searchParams.get("ptype") ? searchParams.get("ptype").split(",").map(Number) : null,
+			rental_type: searchParams.get("rtype") ? searchParams.get("rtype").split(",").map(Number) : null,
 			beds: searchParams.get("beds"),
 			bedrooms: searchParams.get("bedrooms"),
 			bathrooms: searchParams.get("bathrooms"),
 			features: searchParams.get("feat") ? searchParams.get("feat").split(",").map(Number) : null,
-			experiences: searchParams.get("exp") ? searchParams.get("exp")?.split(",").map(Number) : null
+			experiences: searchParams.get("exp") ? searchParams.get("exp").split(",").map(Number) : null,
+			distance: searchParams.get("dist")
 		};
 
 		getPropertiesForQuery(payload)
@@ -82,7 +83,8 @@ export default function SearchResults() {
 		searchParams.get("bedrooms"),
 		searchParams.get("bathrooms"),
 		searchParams.get("feat"),
-		searchParams.get("exp")
+		searchParams.get("exp"),
+		searchParams.get("dist")
 	]);
 
 	// AuthContext exchangeRate may be fetched later from DB
@@ -121,9 +123,8 @@ export default function SearchResults() {
 			setLocation(countryFull);
 		}
 
-		const searchQuery = city + "+" + countryFull;
-		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
-		axios.get(`https://geocode.maps.co/search?q=${searchQuery}&api_key=${apiKey}`)
+		const address = city ? city + "+" + countryFull : countryFull;
+		getGeolocation(address)
 			.then(response => {
 				if (response.data.length > 0) {
 					const data = response.data[0];

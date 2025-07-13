@@ -16,6 +16,13 @@ export default function FilterBudget({ lowestPrice, highestPrice }) {
 		}
 	}, [lowestPrice, highestPrice]);
 
+	// Reset when clearing filters
+	useEffect(() => {
+		if (!searchParams.get("plow") && searchParams.get("phigh")) {
+			setRangeValue([lowestPrice, highestPrice]);
+		}
+	}, [searchParams.get("plow"), searchParams.get("phigh")]);
+
 	function updateRangeParams() {
 		searchParams.set("plow", rangeValue[0]);
 		searchParams.set("phigh", rangeValue[1]);

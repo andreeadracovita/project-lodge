@@ -1,4 +1,4 @@
-export default function FilterDistance() {
+export default function FilterDistance({ filterData, city, handleInputChange }) {
 	
 	return (
 		<div id="distance">
@@ -11,7 +11,8 @@ export default function FilterDistance() {
 						type="radio"
 						name="dist"
 						value="1"
-						onChange={() => {}}
+						onChange={handleInputChange}
+						checked={filterData.dist === "1"}
 					/>
 					<label className="form-check-label" htmlFor="center-distance-1">Less than 1km</label>
 				</div>
@@ -22,7 +23,8 @@ export default function FilterDistance() {
 						type="radio"
 						name="dist"
 						value="3"
-						onChange={() => {}}
+						onChange={handleInputChange}
+						checked={filterData.dist === "3"}
 					/>
 					<label className="form-check-label" htmlFor="center-distance-3">Less than 3km</label>
 				</div>
@@ -33,7 +35,8 @@ export default function FilterDistance() {
 						type="radio"
 						name="dist"
 						value="5"
-						onChange={() => {}}
+						onChange={handleInputChange}
+						checked={filterData.dist === "5"}
 					/>
 					<label className="form-check-label" htmlFor="center-distance-5">Less than 5km</label>
 				</div>

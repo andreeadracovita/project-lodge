@@ -4,17 +4,27 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 import {
 	createNewProperty,
-	updateProperty,
 	getAllPropertyTypes,
-	getAllRentalTypes
+	getAllRentalTypes,
+	getGeolocation,
+	updateProperty
 } from "/src/api/BackendApiService";
 import CountrySelect from "/src/components/common/CountrySelect";
 import FormError from "/src/components/common/FormError";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
-export default function FormPartTitleAddress({ isEditable, showButton, input, propertyId, setPropertyId, handleChange, handleChangeCountry, advanceState }) {
+export default function FormPartTitleAddress({
+	isEditable,
+	showButton,
+	input,
+	propertyId,
+	setPropertyId,
+	handleChange,
+	handleChangeCountry,
+	advanceState
+}) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
 	const [errors, setErrors] = useState([]);
@@ -125,8 +135,7 @@ export default function FormPartTitleAddress({ isEditable, showButton, input, pr
 
 		const countryLabel = countries().getLabel(input.country);
 		const address = input.city + "+" + input.street + "+" + input.streetNo + "+" + countryLabel;
-		const apiKey = import.meta.env.VITE_GEOCODE_API_KEY;
-		axios.get(`https://geocode.maps.co/search?q=${address}&api_key=${apiKey}`)
+		getGeolocation(address)
 			.then(response => {
 				if (response.data.length > 0) {
 					const data = response.data[0];

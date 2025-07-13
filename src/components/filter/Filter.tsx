@@ -21,7 +21,8 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 		rtype: searchParams.get("rtype")?.split(",").map(Number) ?? [],
 		ptype: searchParams.get("ptype")?.split(",").map(Number) ?? [],
 		exp: searchParams.get("exp")?.split(",").map(Number) ?? [],
-		feat: searchParams.get("feat")?.split(",").map(Number) ?? []
+		feat: searchParams.get("feat")?.split(",").map(Number) ?? [],
+		dist: searchParams.get("dist")
 	});
 
 	function handleInputChange(event) {
@@ -71,9 +72,9 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 		searchParams.delete("phigh");
 		searchParams.delete("ptype");
 		searchParams.delete("rtype");
+		searchParams.delete("dist");
 		setSearchParams(searchParams);
 
-		setRangeValue([lowestPrice, highestPrice]);
 		setFilter({
 			beds: 1,
 			bedrooms: 1,
@@ -81,7 +82,8 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 			rtype: [],
 			ptype: [],
 			exp: [],
-			feat: []
+			feat: [],
+			dist: null
 		});
 	}
 	
@@ -104,7 +106,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 				city &&
 				<>
 					<hr />
-					<FilterDistance filterData={filter} />
+					<FilterDistance filterData={filter} city={city} handleInputChange={handleInputChange} />
 				</>
 			}
 			<hr />
