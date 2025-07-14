@@ -102,7 +102,7 @@ export default function FormPartDescription({
 
 			<p className="mt-3 mb-1">How many people can stay?</p>
 			<div className="row">
-				<div className="col-2">
+				<div className="col-4">
 					<label htmlFor="guests">Guests <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
@@ -120,7 +120,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div className="row mt-2">
-				<div className="col-2">
+				<div className="col-4">
 					<label htmlFor="beds">Beds <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
@@ -138,7 +138,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div className="row mt-2">
-				<div className="col-2">
+				<div className="col-4">
 					<label htmlFor="bedrooms">Bedrooms <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
@@ -156,7 +156,7 @@ export default function FormPartDescription({
 			</div>
 
 			<div className="row mt-2">
-				<div className="col-2">
+				<div className="col-4">
 					<label htmlFor="bathrooms">Bathrooms <span className="text-red">*</span></label>
 				</div>
 				<div className="col-4">
@@ -173,7 +173,7 @@ export default function FormPartDescription({
 				</div>
 			</div>
 
-			<div id="features">
+			<div id="features" className="mt-10">
 				<h2 className="section-heading">Features</h2>
 				<Multiselect
 					options={features}
@@ -184,7 +184,8 @@ export default function FormPartDescription({
 				/>
 			</div>
 
-			<div id="experiences">
+			<div id="experiences" className="mt-10">
+				<h2 className="section-heading">Features</h2>
 				<label htmlFor="experiences" className="mt-3">What experiences can guests have in the area?</label>
 				<Multiselect
 					options={experiences}

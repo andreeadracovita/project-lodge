@@ -28,7 +28,7 @@ export default function FormPartTitleAddress({
 }) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
-	const [locationGeo, setLocationGeo] = useState();
+	const [geoCoords, setGeoCoords] = useState();
 	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
@@ -53,6 +53,10 @@ export default function FormPartTitleAddress({
 			});
 	}, []);
 
+	useEffect(() => {
+		console.log("Geo:", geoCoords);
+	}, [geoCoords]);
+
 	const stylingFormControl100 = classNames(
 		"form-control",
 		"w-100",
@@ -74,10 +78,25 @@ export default function FormPartTitleAddress({
 				if (response.data.length > 0) {
 					setErrors([]);
 					const data = response.data[0];
-					setLocationGeo([data.lat, data.lon]);
+					setGeoCoords([Number(data.lat), Number(data.lon)]);
+
+					console.log([Number(data.lat), Number(data.lon)]);
 				} else {
-					// TODO get geo for city+country
-					setErrors(["No geolocation identified for given address"]);
+					getGeolocation(input.city + "+" + countryLabel)
+						.then(response => {
+							if (response.data.length > 0) {
+								setErrors([]);
+								const data = response.data[0];
+								setGeoCoords([Number(data.lat), Number(data.lon)]);
+
+								console.log([Number(data.lat), Number(data.lon)]);
+							} else {
+								setErrors(["No geographical location identified for given address. Check if city and country are correct."]);
+							}
+						})
+						.catch(error => {
+							console.error(error);
+						});
 				}
 			})
 			.catch(error => {
@@ -91,7 +110,7 @@ export default function FormPartTitleAddress({
 	async function createProperty() {
 		const payload = {
 			title: input.title,
-			geo: { x: locationGeo[0], y: locationGeo[1] },
+			geo: { x: geoCoords[0], y: geoCoords[1] },
 			city: input.city,
 			country: input.country,
 			street: input.street,
@@ -124,7 +143,7 @@ export default function FormPartTitleAddress({
 	async function patchProperty() {
 		const payload = {
 			title: input.title,
-			geo: { x: locationGeo[0], y: locationGeo[1] },
+			geo: { x: geoCoords[0], y: geoCoords[1] },
 			city: input.city,
 			country: input.country,
 			building_type_id: parseInt(input.buildingType),
@@ -154,7 +173,7 @@ export default function FormPartTitleAddress({
 	async function onSubmit() {
 		event.preventDefault();
 
-		if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "") {
+		if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "" || !geoCoords) {
 			setErrors(["Fill in all mandatory fields (marked with *)"]);
 			return;
 		}
@@ -216,7 +235,7 @@ export default function FormPartTitleAddress({
 				}
 			</select>
 
-			<div id="address">
+			<div id="address" className="mt-10">
 				<h2 className="section-heading">Address</h2>
 				<label htmlFor="street" className="mt-2">Street <span className="text-red">*</span></label>
 				<input
@@ -260,19 +279,24 @@ export default function FormPartTitleAddress({
 					? <CountrySelect id="country" initialValue={input.country} handleFormChange={handleChangeCountry} />
 					: <div className={stylingFormControl100}>{countries().getLabel(input.country)}</div>
 				}
-				<div className="btn-pill mt-10" onClick={handleLocateClick}>Locate on map</div>
 				{
-					locationGeo &&
+					isEditable && geoCoords &&
 					<div className="mt-10">
 						<MapView
 							height={"300px"}
-							center={locationGeo}
+							center={geoCoords}
 							zoom={14}
-							points={[]}
-							markCenter={true}
-							updateCenterPosition={(pos) => { console.log(pos) }} />
+							points={[geoCoords]}
+							isEditable={true}
+							updatePinPosition={setGeoCoords}
+						/>
+						<div>Drag pin on map to your property's location</div>
 					</div>
 				}
+				{
+					isEditable && !geoCoords && <div className="btn-pill mt-10" onClick={handleLocateClick}>Locate on map</div>
+				}
+				
 			</div>
 			<FormError errors={errors} />
 

@@ -43,7 +43,7 @@ export default function FormPartReview({ input, propertyId }) {
 				onButtonClicked={() => {}}
 			/>
 
-			<h2 className="section-heading">Description</h2>
+			<h2 className="section-heading mt-10">Description</h2>
 			<FormPartDescription
 				isEditable={false}
 				showButton={false}
@@ -54,7 +54,7 @@ export default function FormPartReview({ input, propertyId }) {
 				handleChangeMultiselect={() => {}}
 			/>
 
-			<h2 className="section-heading">Pricing</h2>
+			<h2 className="section-heading mt-10">Pricing</h2>
 			<FormPartPricing
 				isEditable={false}
 				showButton={false}
@@ -71,7 +71,7 @@ export default function FormPartReview({ input, propertyId }) {
 						name="save"
 						className="btn-pill d-flex align-items-center"
 					>
-						Save edit <Icon.ChevronRight />
+						Save <Icon.ChevronRight />
 					</button>
 					{
 						input.isListed === false &&
@@ -81,7 +81,7 @@ export default function FormPartReview({ input, propertyId }) {
 							name="publish"
 							className="btn-pill ms-2 d-flex align-items-center"
 						>
-							Publish property <Icon.ChevronRight />
+							Save and publish property <Icon.ChevronRight />
 						</button>
 					}
 				</div>
