@@ -11,3 +11,7 @@
 	left: auto;
 	display: none;
 }
+
+#fullscreen-map .ol-zoom {
+	display: block;
+}

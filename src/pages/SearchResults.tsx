@@ -1,18 +1,15 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import * as Icon from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
-import { getGeolocation, getPropertiesForQuery } from "/src/api/BackendApiService";
+import { getPropertiesForQuery } from "/src/api/BackendApiService";
 import Filter from "/src/components/filter/Filter";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
-import MapView from "/src/components/map/MapView";
 import Search from "/src/components/search/Search";
+import SearchResultsMap from "/src/components/searchResults/SearchResultsMap";
 import { useAuth } from "/src/components/security/AuthContext";
 import { getNightsCount } from "/src/utils/DateFormatUtils";
-import { genericMapCenter } from "/src/utils/constants";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 export default function SearchResults() {
@@ -21,11 +18,9 @@ export default function SearchResults() {
 
 	const [properties, setProperties] = useState([]);
 	const [budgetProperties, setBudgetProperties] = useState([]);
+	const [location, setLocation] = useState();
 
 	const [propCountString, setPropCountString] = useState("");
-	const [location, setLocation] = useState("");
-	const [locationGeo, setLocationGeo] = useState(genericMapCenter);
-	const [points, setPoints] = useState([]);
 	const [checkInParam, setCheckInParam] = useState();
 	const [checkOutParam, setCheckOutParam] = useState();
 	const [guests, setGuests] = useState();
@@ -87,6 +82,16 @@ export default function SearchResults() {
 		searchParams.get("dist")
 	]);
 
+	useEffect(() => {
+		const countryFull = countries().getLabel(searchParams.get("country"));
+		const city = searchParams.get("city");
+		if (city) {
+			setLocation(city + ", " + countryFull);
+		} else {
+			setLocation(countryFull);
+		}
+	}, [searchParams.get("country"), searchParams.get("city")]);
+
 	// AuthContext exchangeRate may be fetched later from DB
 	useEffect(() => {
 		if (properties.length > 0) {
@@ -107,42 +112,6 @@ export default function SearchResults() {
 			// searchParams.delete("phigh");
 		}
 	}, [authContext.exchangeRate, properties]);
-
-	useEffect(() => {
-		const countryCode = searchParams.get("country");
-		if (!countryCode) {
-			setLocationGeo(genericMapCenter);
-			return;
-		}
-		
-		const countryFull = countries().getLabel(countryCode);
-		const city = searchParams.get("city");
-		if (city) {
-			setLocation(city + ", " + countryFull);
-		} else {
-			setLocation(countryFull);
-		}
-
-		const address = city ? city + "+" + countryFull : countryFull;
-		getGeolocation(address)
-			.then(response => {
-				if (response.data.length > 0) {
-					const data = response.data[0];
-					setLocationGeo([data.lat, data.lon]);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}, [searchParams.get("country"), searchParams.get("city")]);
-
-	useEffect(() => {
-		const points = [];
-		properties?.map(p => {
-			points.push([p.geo.x, p.geo.y]);
-		});
-		setPoints(points);
-	}, [properties]);
 
 	useEffect(() => {
 		console.log("update budget props");
@@ -166,12 +135,13 @@ export default function SearchResults() {
 			<Search />
 			<div className="section-container row">
 				<div className="col-3">
-					<div className="position-relative">
-						<MapView height={"200px"} center={locationGeo} zoom={6} points={[]} />
-						<span className="btn btn-dark rounded-pill position-absolute top-50 start-50 translate-middle d-flex align-items-center">
-							<span className="me-2">Show map</span><Icon.Map color="white" />
-						</span>
-					</div>
+					<SearchResultsMap
+						items={budgetProperties}
+						checkInParam={checkInParam}
+						checkOutParam={checkOutParam}
+						guests={guests}
+						nightsCount={nightsCount}
+					/>
 					<div className="section-container">
 						<Filter
 							city={searchParams.get("city")}

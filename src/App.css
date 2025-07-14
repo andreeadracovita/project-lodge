@@ -422,3 +422,19 @@ svg {
 .bubble-click {
   pointer-events: none;
 }
+
+#modal-dialog {
+  max-width: 100%;
+}
+
+#map-modal-container {
+  height: 100vh;
+}
+
+#map-view-list-container {
+  overflow: scroll;
+}
+
+#modalBody {
+  overflow: hidden;
+}

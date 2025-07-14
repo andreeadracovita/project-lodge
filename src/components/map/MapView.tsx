@@ -20,7 +20,7 @@ import { genericMapCenter } from "/src/utils/constants";
 
 // Center = [long, lat]
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
-export default function MapView({ width, height, center, zoom, points, isEditable, updatePinPosition }) {
+export default function MapView({ id, width, height, center, zoom, points, isEditable, updatePinPosition }) {
 	class Drag extends PointerInteraction {
 	  constructor() {
 	    super({
@@ -130,6 +130,10 @@ export default function MapView({ width, height, center, zoom, points, isEditabl
 	};
 
 	useEffect(() => {
+		if (!id) {
+			return;
+		}
+
 		useGeographic();
 
 		const features = [];
@@ -142,7 +146,7 @@ export default function MapView({ width, height, center, zoom, points, isEditabl
 
 		const map = new Map({
 			...(isEditable && {interactions: defaultInteractions().extend([new Drag()])}),
-			target: "map",
+			target: id,
 			view: new View({
 				center: center ? [center[1], center[0]] : genericMapCenter,
 				zoom: zoom,
@@ -168,9 +172,9 @@ export default function MapView({ width, height, center, zoom, points, isEditabl
 		// });
 		// map.addOverlay(popup);
 
-		// return () => {
-		// 	map.setTarget(null);
-		// };
+		return () => {
+			map.setTarget(null);
+		};
 	  }, [center, points]);
 
 	const mapStyle = {
@@ -180,7 +184,7 @@ export default function MapView({ width, height, center, zoom, points, isEditabl
 
 	return (
 		<>
-			<div id="map" style={mapStyle}></div>
+			<div id={id} style={mapStyle}></div>
 			{/*<div id="popup">Overlay</div>*/}
 		</>
 	)
