@@ -22,38 +22,38 @@ import { genericMapCenter } from "/src/utils/constants";
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
 export default function MapView({ id, width, height, center, zoom, points, isEditable, updatePinPosition }) {
 	class Drag extends PointerInteraction {
-	  constructor() {
-	    super({
-	      handleDownEvent: handleDownEvent,
-	      handleDragEvent: handleDragEvent,
-	      handleMoveEvent: handleMoveEvent,
-	      handleUpEvent: handleUpEvent,
-	    });
+		constructor() {
+			super({
+				handleDownEvent: handleDownEvent,
+				handleDragEvent: handleDragEvent,
+				handleMoveEvent: handleMoveEvent,
+				handleUpEvent: handleUpEvent,
+		});
 
-	    /**
-	     * @type {import('ol/coordinate.js').Coordinate}
-	     * @private
-	     */
-	    this.coordinate_ = null;
+		/**
+		* @type {import('ol/coordinate.js').Coordinate}
+		* @private
+		*/
+		this.coordinate_ = null;
 
-	    /**
-	     * @type {string|undefined}
-	     * @private
-	     */
-	    this.cursor_ = 'pointer';
+		/**
+		* @type {string|undefined}
+		* @private
+		*/
+		this.cursor_ = 'pointer';
 
-	    /**
-	     * @type {Feature}
-	     * @private
-	     */
-	    this.feature_ = null;
+		/**
+		* @type {Feature}
+		* @private
+		*/
+		this.feature_ = null;
 
-	    /**
-	     * @type {string|undefined}
-	     * @private
-	     */
-	    this.previousCursor_ = undefined;
-	  }
+		/**
+		* @type {string|undefined}
+		* @private
+		*/
+		this.previousCursor_ = undefined;
+		}
 	}
 
 	/**
@@ -138,9 +138,12 @@ export default function MapView({ id, width, height, center, zoom, points, isEdi
 
 		const features = [];
 		if (points.length > 0) {
+			console.log(points.length);
 			points.forEach(p => {
 				const point = new Point([p[1], p[0]]);
-				features.push(new Feature(point));
+				const feature = new Feature(point);
+				console.log("lat, lon, uid", p[0], p[1], feature.ol_uid);
+				features.push(feature);
 			});
 		}
 
@@ -164,13 +167,29 @@ export default function MapView({ id, width, height, center, zoom, points, isEdi
 			]
 		});
 
-		// const element = document.getElementById("popup");
+		let selected = null;
+		map.on("pointerup", function (e) {
+			if (selected !== null) {
+				// selected.setStyle(undefined);
+				selected = null;
+			}
 
-		// const popup = new Overlay({
-		// 	element: element,
-		// 	stopEvent: false,
-		// });
-		// map.addOverlay(popup);
+			map.forEachFeatureAtPixel(e.pixel, function (f) {
+				selected = f;
+				// f.setStyle({
+				// 	"circle-radius": 10,
+				// 	"circle-fill-color": "red",
+				// 	"circle-stroke-width": 2,
+				// 	"circle-stroke-color": "white"
+				// });
+				console.log(selected);
+				return true;
+			});
+
+			if (selected) {
+				console.log(selected);
+			}
+		});
 
 		return () => {
 			map.setTarget(null);
@@ -185,7 +204,6 @@ export default function MapView({ id, width, height, center, zoom, points, isEdi
 	return (
 		<>
 			<div id={id} style={mapStyle}></div>
-			{/*<div id="popup">Overlay</div>*/}
 		</>
 	)
 }

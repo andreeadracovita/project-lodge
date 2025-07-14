@@ -65,7 +65,7 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div id="modalBody" className="modal-body row">
-							<div id="map-view-list-container" className="col-4 py-2" style={{ height: document.getElementById("modalBody")?.offsetHeight - 32 }}>
+							<div id="map-view-list-container" className="col-4 py-2" style={{ height: document.getElementById("modalBody") ? document.getElementById("modalBody")?.offsetHeight - 32 : "500px" }}>
 								<ListView
 									listItemType={ListItemType.Property}
 									items={items}
@@ -80,7 +80,7 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 							<div className="col-8">
 								<MapView
 									id={"fullscreen-map"}
-									height={document.getElementById("modalBody")?.offsetHeight - 32}
+									height={document.getElementById("modalBody") ? document.getElementById("modalBody")?.offsetHeight - 32 : "500px"}
 									center={locationGeo}
 									zoom={6}
 									points={points}
