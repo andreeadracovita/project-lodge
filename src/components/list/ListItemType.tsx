@@ -3,5 +3,6 @@ export enum ListItemType {
 	Destination,
 	HostingProperty,
 	Booking,
-	PlaceType
+	PlaceType,
+	SmallProperty
 };

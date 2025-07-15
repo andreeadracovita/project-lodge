@@ -28,8 +28,13 @@ export type PropertyItem = {
 type PropertyListItemProps = {
 	isPreview: boolean;
 	item: PropertyItem;
+	guests: number;
 	checkIn: string; // formatted string 2025-04-10
 	checkOut: string; // formatted string 2025-04-10
+	nightsCount: number;
+	hidePrice: boolean;
+	hideWishlist: boolean;
+	isCompact: boolean;
 };
 
 export default function PropertyListItem({

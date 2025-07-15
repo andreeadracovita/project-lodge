@@ -1,17 +1,18 @@
 import classNames from "classnames";
 
+import BookingListItem from "./BookingListItem";
 import DestinationListItem from "./DestinationListItem";
 import HostingPropertyListItem from "./HostingPropertyListItem";
 import { ListItemType } from "./ListItemType";
 import PropertyListItem from "./PropertyListItem";
-import BookingListItem from "./BookingListItem";
+import SmallPropertyListItem from "./SmallPropertyListItem";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 export default function ListView({ listItemType, items, checkIn, checkOut, nightsCount, guests, cols, setNeedsRefresh, isCompact }) {
 
 	const gridClassNames = classNames(
 		"row",
-		"g-4",
+		"g-2",
 		"row-cols-1",
 		"row-cols-sm-2",
 		"row-cols-md-3",
@@ -41,6 +42,14 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 				return <HostingPropertyListItem item={item} setNeedsRefresh={setNeedsRefresh} />;
 			case ListItemType.Booking:
 				return <BookingListItem item={item} />
+			case ListItemType.SmallProperty:
+				return <SmallPropertyListItem
+					item={item}
+					checkIn={checkIn}
+					checkOut={checkOut}
+					guests={guests}
+					nightsCount={nightsCount}
+				/>;
 			default: return;
 		}
 	}

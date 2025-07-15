@@ -20,7 +20,7 @@ import { genericMapCenter } from "/src/utils/constants";
 
 // Center = [long, lat]
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
-export default function MapView({ id, width, height, center, zoom, points, isEditable, updatePinPosition }) {
+export default function MapView({ id, width, height, center, zoom, points, isEditable, updatePinPosition, updateIdsMap }) {
 	class Drag extends PointerInteraction {
 		constructor() {
 			super({
@@ -138,13 +138,16 @@ export default function MapView({ id, width, height, center, zoom, points, isEdi
 
 		const features = [];
 		if (points.length > 0) {
-			console.log(points.length);
+			const olIds = [];
 			points.forEach(p => {
 				const point = new Point([p[1], p[0]]);
 				const feature = new Feature(point);
-				console.log("lat, lon, uid", p[0], p[1], feature.ol_uid);
+				olIds.push(feature.ol_uid);
 				features.push(feature);
 			});
+			if (updateIdsMap) {
+				updateIdsMap(olIds);
+			}
 		}
 
 		const map = new Map({

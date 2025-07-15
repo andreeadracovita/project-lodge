@@ -1,0 +1,64 @@
+import { Link } from "react-router-dom";
+import countries from "react-select-country-list";
+
+import "./SmallPropertyListItem.css";
+import WishlistIcon from "./WishlistIcon";
+import Rating from "/src/components/common/Rating";
+import { useAuth } from "/src/components/security/AuthContext";
+import { fileStorage } from "/src/utils/constants";
+import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
+import type { PropertyItem } from "./PropertyListItem";
+
+type PropertyListItemProps = {
+	item: PropertyItem;
+	guests: number;
+	checkIn: string; // formatted string 2025-04-10
+	checkOut: string; // formatted string 2025-04-10
+	nightsCount: number;
+};
+
+export default function SmallPropertyListItem({
+	item,
+	guests,
+	checkIn,
+	checkOut,
+	nightsCount
+}) {
+	const authContext = useAuth();
+
+	const linkPath = `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`;
+	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
+
+	const siteCurrencyTotalPrice = item.price_night_site * nightsCount;
+	const convertedTotalPrice = convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate);
+
+	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
+	const guestsString = guests ? ", " + guests + (guests > 1 ? " guests" : " guest") : undefined;
+	const priceString = convertedTotalPrice + " " + authContext.currency;
+
+	return (
+		<div className="p-2">
+			<div className="row small-property-item border-section p-2">
+				<div className="col-4 p-0">
+					<Link to={linkPath}><img src={imgUrl} className="cover-image mb-2" /></Link>
+				</div>
+				<div className="col-8 position-relative">
+					<Link to={linkPath}>
+						<div className="property-card-details">
+							<div className="property-card-heading">{item.title}</div>
+							<div className="mt-6">
+								<Rating score={item.rating} reviewsNo={item.reviews_no} />
+							</div>
+							<div className="mt-6">{item.city}, {countries().getLabel(item.country)}</div>
+							<div className="price-container text-end">
+								<div className="text-muted d-block">{nightsString}</div>
+								<div className="lato-bold property-card-price d-block">{priceString}</div>
+							</div>
+						</div>
+					</Link>
+					<WishlistIcon itemId={item.id} />
+				</div>
+			</div>
+		</div>
+	)
+}

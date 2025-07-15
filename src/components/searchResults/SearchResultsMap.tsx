@@ -13,6 +13,7 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [locationGeo, setLocationGeo] = useState(genericMapCenter);
 	const [points, setPoints] = useState([]);
+	const olIdToCardIdMap = new Map();
 
 	useEffect(() => {
 		const countryCode = searchParams.get("country");
@@ -67,14 +68,13 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 						<div id="modalBody" className="modal-body row">
 							<div id="map-view-list-container" className="col-4 py-2" style={{ height: document.getElementById("modalBody") ? document.getElementById("modalBody")?.offsetHeight - 32 : "500px" }}>
 								<ListView
-									listItemType={ListItemType.Property}
+									listItemType={ListItemType.SmallProperty}
 									items={items}
 									checkIn={checkInParam}
 									checkOut={checkOutParam}
 									guests={guests}
 									nightsCount={nightsCount}
-									cols={2}
-									isCompact={false}
+									cols={1}
 								/>
 							</div>
 							<div className="col-8">
