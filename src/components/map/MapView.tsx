@@ -20,7 +20,18 @@ import { genericMapCenter } from "/src/utils/constants";
 
 // Center = [long, lat]
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
-export default function MapView({ id, width, height, center, zoom, points, isEditable, updatePinPosition, updateIdsMap }) {
+export default function MapView({
+	id,
+	width,
+	height,
+	center,
+	zoom,
+	points,
+	isEditable,
+	updatePinPosition,
+	updateIdsMap,
+	handleHighlightItem
+}) {
 	class Drag extends PointerInteraction {
 		constructor() {
 			super({
@@ -179,19 +190,9 @@ export default function MapView({ id, width, height, center, zoom, points, isEdi
 
 			map.forEachFeatureAtPixel(e.pixel, function (f) {
 				selected = f;
-				// f.setStyle({
-				// 	"circle-radius": 10,
-				// 	"circle-fill-color": "red",
-				// 	"circle-stroke-width": 2,
-				// 	"circle-stroke-color": "white"
-				// });
-				console.log(selected);
+				handleHighlightItem(selected.ol_uid);
 				return true;
 			});
-
-			if (selected) {
-				console.log(selected);
-			}
 		});
 
 		return () => {
@@ -206,7 +207,7 @@ export default function MapView({ id, width, height, center, zoom, points, isEdi
 
 	return (
 		<>
-			<div id={id} style={mapStyle}></div>
+			<div id={id} style={mapStyle} className="map"></div>
 		</>
 	)
 }

@@ -38,7 +38,7 @@ export default function SmallPropertyListItem({
 
 	return (
 		<div className="p-2">
-			<div className="row small-property-item border-section p-2">
+			<div id={`small-prop-` + item.id} className="row small-property-item border-section p-2" tabIndex="0">
 				<div className="col-4 p-0">
 					<Link to={linkPath}><img src={imgUrl} className="cover-image mb-2" /></Link>
 				</div>

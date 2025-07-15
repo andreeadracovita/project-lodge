@@ -7,9 +7,8 @@
 
 .small-property-item {
 	height: 190px;
-	border-radius: var(--border-radius);
 }
 
-.highlight-card {
+.small-property-item:focus {
 	box-shadow: 0px 3px 15px rgba(0,0,0,0.15);
 }

@@ -49,6 +49,16 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 		});
 		setPoints(points);
 	}, [items]);
+
+	function updateIdsMap(idArray) {
+		for (let i = 0; i < idArray.length; i++) {
+			olIdToCardIdMap.set(idArray[i], `small-prop-` + items[i].id);
+		}
+	}
+
+	function handleHighlightItem(olId) {
+		document.getElementById(olIdToCardIdMap.get(olId)).focus();
+	}
 	
 	return (
 		<div className="position-relative">
@@ -66,7 +76,7 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div id="modalBody" className="modal-body row">
-							<div id="map-view-list-container" className="col-4 py-2" style={{ height: document.getElementById("modalBody") ? document.getElementById("modalBody")?.offsetHeight - 32 : "500px" }}>
+							<div id="map-view-list-container" className="col-4 py-2" style={{ height: window.innerHeight - 80}}>
 								<ListView
 									listItemType={ListItemType.SmallProperty}
 									items={items}
@@ -80,11 +90,13 @@ export default function SearchResultsMap({ items, checkInParam, checkOutParam, g
 							<div className="col-8">
 								<MapView
 									id={"fullscreen-map"}
-									height={document.getElementById("modalBody") ? document.getElementById("modalBody")?.offsetHeight - 32 : "500px"}
+									height={ window.innerHeight - 80 }
 									center={locationGeo}
 									zoom={6}
 									points={points}
 									isEditable={false}
+									updateIdsMap={updateIdsMap}
+									handleHighlightItem={handleHighlightItem}
 								/>
 							</div>
 						</div>
