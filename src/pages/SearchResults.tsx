@@ -3,11 +3,12 @@ import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
 
 import { getPropertiesForQuery } from "/src/api/BackendApiService";
-import Filter from "/src/components/filter/Filter";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
-import Search from "/src/components/search/Search";
-import SearchResultsMap from "/src/components/searchResults/SearchResultsMap";
+
+import { getGeolocation } from "/src/api/BackendApiService";
+import SearchResultsListView from "/src/components/searchResults/SearchResultsListView";
+import SearchResultsMapView from "/src/components/searchResults/SearchResultsMapView";
 import { useAuth } from "/src/components/security/AuthContext";
 import { getNightsCount } from "/src/utils/DateFormatUtils";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
@@ -16,9 +17,12 @@ export default function SearchResults() {
 	const authContext = useAuth();
 	const [searchParams, setSearchParams] = useSearchParams();
 
+	const [isFullscreenMap, setIsFullscreenMap] = useState(false);
 	const [properties, setProperties] = useState([]);
 	const [budgetProperties, setBudgetProperties] = useState([]);
 	const [location, setLocation] = useState();
+	const [locationGeo, setLocationGeo] = useState([]);
+	const [boundingbox, setBoundingbox] = useState();
 
 	const [propCountString, setPropCountString] = useState("");
 	const [checkInParam, setCheckInParam] = useState();
@@ -90,6 +94,24 @@ export default function SearchResults() {
 		} else {
 			setLocation(countryFull);
 		}
+
+		const address = city ? city + "+" + countryFull : countryFull;
+		getGeolocation(address)
+			.then(response => {
+				if (response.data.length > 0) {
+					const data = response.data[0];
+					setLocationGeo([Number(data.lat), Number(data.lon)]);
+					setBoundingbox([
+						Number(data.boundingbox[0]),
+						Number(data.boundingbox[1]),
+						Number(data.boundingbox[2]),
+						Number(data.boundingbox[3]),
+					]);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}, [searchParams.get("country"), searchParams.get("city")]);
 
 	// AuthContext exchangeRate may be fetched later from DB
@@ -131,41 +153,36 @@ export default function SearchResults() {
 	}, [properties, authContext.exchangeRate, searchParams.get("plow"), searchParams.get("phigh")]);
 
 	return (
-		<div className="container section-container">
-			<Search />
-			<div className="section-container row">
-				<div className="col-3">
-					<SearchResultsMap
-						items={budgetProperties}
-						checkInParam={checkInParam}
-						checkOutParam={checkOutParam}
-						guests={guests}
-						nightsCount={nightsCount}
-					/>
-					<div className="section-container">
-						<Filter
-							city={searchParams.get("city")}
-							lowestPrice={lowestPrice}
-							highestPrice={highestPrice}
-						/>
-					</div>
-				</div>
-				<div className="col-9">
-					<h1 className="page-heading">{location}: {propCountString} found</h1>
-					<div className="mt-10">
-						<ListView
-							listItemType={ListItemType.Property}
-							items={budgetProperties}
-							checkIn={checkInParam}
-							checkOut={checkOutParam}
-							guests={guests}
-							nightsCount={nightsCount}
-							cols={3}
-							isCompact={false}
-						/>
-					</div>
-				</div>
-	        </div>
+		<div>
+		{
+			isFullscreenMap
+			? <SearchResultsMapView
+				items={budgetProperties}
+				checkInParam={checkInParam}
+				checkOutParam={checkOutParam}
+				guests={guests}
+				nightsCount={nightsCount}
+				locationGeo={locationGeo}
+				boundingbox={boundingbox}
+				propCountString={propCountString}
+				setIsFullscreenMap={setIsFullscreenMap}
+			/>
+			: <SearchResultsListView
+				items={budgetProperties}
+				checkInParam={checkInParam}
+				checkOutParam={checkOutParam}
+				guests={guests}
+				nightsCount={nightsCount}
+				locationGeo={locationGeo}
+				locationString={location}
+				boundingbox={boundingbox}
+				lowestPrice={lowestPrice}
+				highestPrice={highestPrice}
+				propCountString={propCountString}
+				setIsFullscreenMap={setIsFullscreenMap}
+			/>
+		}
+		
 		</div>
 	);
 }

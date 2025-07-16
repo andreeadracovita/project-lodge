@@ -38,26 +38,28 @@ export default function SmallPropertyListItem({
 
 	return (
 		<div className="p-2">
-			<div id={`small-prop-` + item.id} className="row small-property-item border-section p-2" tabIndex="0">
-				<div className="col-4 p-0">
-					<Link to={linkPath}><img src={imgUrl} className="cover-image mb-2" /></Link>
-				</div>
-				<div className="col-8 position-relative">
-					<Link to={linkPath}>
-						<div className="property-card-details">
-							<div className="property-card-heading">{item.title}</div>
-							<div className="mt-6">
-								<Rating score={item.rating} reviewsNo={item.reviews_no} />
-							</div>
-							<div className="mt-6">{item.city}, {countries().getLabel(item.country)}</div>
-							<div className="price-container text-end">
-								<div className="text-muted d-block">{nightsString}</div>
-								<div className="lato-bold property-card-price d-block">{priceString}</div>
+			<div className="position-relative">
+				<Link to={linkPath}>
+					<div id={`small-prop-` + item.id} className="row small-property-item border-section p-2" tabIndex="0">
+						<div className="col-4 p-0">
+							<img src={imgUrl} className="cover-image mb-2" />
+						</div>
+						<div className="col-8">
+							<div className="property-card-details">
+								<div className="property-card-heading">{item.title}</div>
+								<div className="mt-6">
+									<Rating score={item.rating} reviewsNo={item.reviews_no} />
+								</div>
+								<div className="mt-6">{item.city}, {countries().getLabel(item.country)}</div>
+								<div className="price-container text-end">
+									<div className="text-muted d-block">{nightsString}</div>
+									<div className="lato-bold property-card-price d-block">{priceString}</div>
+								</div>
 							</div>
 						</div>
-					</Link>
-					<WishlistIcon itemId={item.id} />
-				</div>
+					</div>
+				</Link>
+				<WishlistIcon itemId={item.id} />
 			</div>
 		</div>
 	)

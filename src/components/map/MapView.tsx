@@ -11,9 +11,9 @@ import Point from 'ol/geom/Point.js';
 import Overlay from 'ol/Overlay.js';
 import Feature from 'ol/Feature.js';
 import {defaults as defaultInteractions} from 'ol/interaction/defaults.js';
-import Modify from 'ol/interaction/Modify.js';
-import Select from 'ol/interaction/Select.js';
 import PointerInteraction from 'ol/interaction/Pointer.js';
+import * as olProj from 'ol/proj';
+import * as olExtent from 'ol/extent';
 
 import "./MapView.css";
 import { genericMapCenter } from "/src/utils/constants";
@@ -22,10 +22,10 @@ import { genericMapCenter } from "/src/utils/constants";
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
 export default function MapView({
 	id,
-	width,
 	height,
 	center,
 	zoom,
+	boundingbox,
 	points,
 	isEditable,
 	updatePinPosition,
@@ -161,6 +161,16 @@ export default function MapView({
 			}
 		}
 
+		if (boundingbox) {
+			const min = [boundingbox[2], boundingbox[0]];
+			const max = [boundingbox[3], boundingbox[1]];
+			const feat1 = new Feature(new Point(min));
+			const feat2 = new Feature(new Point(max));
+			features.push(feat1);
+			features.push(feat2);
+		}
+		
+
 		const map = new Map({
 			...(isEditable && {interactions: defaultInteractions().extend([new Drag()])}),
 			target: id,
@@ -181,28 +191,47 @@ export default function MapView({
 			]
 		});
 
-		let selected = null;
-		map.on("pointerup", function (e) {
-			if (selected !== null) {
-				// selected.setStyle(undefined);
-				selected = null;
-			}
+		// Compute width as 100% of its parent
+		const width = document.getElementById(id)?.parentElement.clientWidth;
+		map.setSize([width, height]);
 
-			map.forEachFeatureAtPixel(e.pixel, function (f) {
-				selected = f;
-				handleHighlightItem(selected.ol_uid);
-				return true;
+		if (boundingbox) {
+			var view = map.getView();
+			// Extent: minx, miny, maxx, maxy
+			// view.fit(boundingbox, {padding: [0, 0, 0, 0]});
+			const min = [boundingbox[2], boundingbox[0]];
+			const max = [boundingbox[3], boundingbox[1]];
+			var boundingExtent = olExtent.boundingExtent([min, max]);
+			// let res = view.getResolution();
+			view.fit(boundingExtent); //, map.getSize(), {padding: [0, 0, 0, 0]}
+			const res = view.getResolutionForExtent(boundingExtent, [width, height]);
+			view.setResolution(res);
+		}
+
+		if (handleHighlightItem) {
+			let selected = null;
+			map.on("pointerup", function (e) {
+				if (selected !== null) {
+					// selected.setStyle(undefined);
+					selected = null;
+				}
+
+				map.forEachFeatureAtPixel(e.pixel, function (f) {
+					selected = f;
+					handleHighlightItem(selected.ol_uid);
+					return true;
+				});
 			});
-		});
-
+		}
+		
 		return () => {
 			map.setTarget(null);
 		};
-	  }, [center, points]);
+	  }, [center, points, boundingbox]);
 
 	const mapStyle = {
-		width: width ?? "100%",
-		height: height ?? "1000px"
+		width: "100%",
+		height: height + "px"
 	};
 
 	return (

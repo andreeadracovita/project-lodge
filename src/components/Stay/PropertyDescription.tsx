@@ -83,7 +83,8 @@ export default function PropertyDescription({property}) {
 			<h2 className="section-heading">Area</h2>
 			<div className="mt-10">
 				<MapView
-					height={"350px"}
+					id="map"
+					height={350}
 					center={[property.geo.x, property.geo.y]}
 					zoom={14}
 					points={[[property.geo.x, property.geo.y]]}

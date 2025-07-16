@@ -64,13 +64,10 @@ export default function PropertyListItem({
 	const priceString = (isPreview ? Math.round(siteCurrencyTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
 
 	return (
-		<div className="mb-3">
-			<div className="position-relative card-item" style={{ height: isCompact ? "410px" : "550px" }}>
-				<Link to={linkPath}><img src={imgUrl} className="list-item-photo mb-2" /></Link>
-				
-				{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} /> }
-
-				<Link to={linkPath}>
+		<div className="position-relative">
+			<Link to={linkPath}>
+				<div className="card-item" style={{ height: isCompact ? "410px" : "550px" }}>
+					<img src={imgUrl} className="list-item-photo mb-2" />
 					<div className="property-card-details">
 						<div className="property-card-heading">{item.title}</div>
 						<div className="mt-6">
@@ -100,8 +97,9 @@ export default function PropertyListItem({
 						}
 						</div>
 					</div>
-				</Link>
-			</div>
+				</div>
+			</Link>
+			{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} /> }
 		</div>
 	);
 }

@@ -178,7 +178,8 @@ export default function BookingConfirmation() {
 					<div className="section-container">
 						<div className="section-heading">Area</div>
 						<MapView
-							height={"350px"}
+							id="map"
+							height={350}
 							center={[property.geo.x, property.geo.y]}
 							zoom={15}
 							points={[[property.geo.x, property.geo.y]]}

@@ -212,7 +212,7 @@ svg {
 
 #landing-greeting-section-container {
   box-shadow: 10px 0px 10px black inset, -10px 0px 10px black inset;
-  object-fit: cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100%;

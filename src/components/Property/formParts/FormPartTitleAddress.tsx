@@ -283,7 +283,8 @@ export default function FormPartTitleAddress({
 					isEditable && geoCoords &&
 					<div className="mt-10">
 						<MapView
-							height={"300px"}
+							id="map"
+							height={300}
 							center={geoCoords}
 							zoom={14}
 							points={[geoCoords]}
