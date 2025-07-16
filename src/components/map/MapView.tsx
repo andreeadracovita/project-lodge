@@ -161,16 +161,6 @@ export default function MapView({
 			}
 		}
 
-		if (boundingbox) {
-			const min = [boundingbox[2], boundingbox[0]];
-			const max = [boundingbox[3], boundingbox[1]];
-			const feat1 = new Feature(new Point(min));
-			const feat2 = new Feature(new Point(max));
-			features.push(feat1);
-			features.push(feat2);
-		}
-		
-
 		const map = new Map({
 			...(isEditable && {interactions: defaultInteractions().extend([new Drag()])}),
 			target: id,

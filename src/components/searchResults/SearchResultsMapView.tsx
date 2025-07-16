@@ -45,12 +45,12 @@ export default function SearchResultsMapView({
 	}
 	
 	return (
-		<div className="container section-container">
+		<div className="container mt-6">
 			<div className="row">
-				<div id="map-view-list-container" className="col-4 py-2" style={{ height: window.innerHeight - 80}}>
+				<div id="map-view-list-container" className="col-4 py-2" style={{ height: window.innerHeight - 90}}>
 					<span className="btn-pill" onClick={() => setIsFullscreenMap(false)}>
 						<span className="me-1">Back to list</span>
-						<Icon.Map color="white" />
+						<Icon.List color="white" />
 					</span>
 					<ListView
 						listItemType={ListItemType.SmallProperty}
@@ -65,7 +65,7 @@ export default function SearchResultsMapView({
 				<div id="map-container" className="col-8">
 					<MapView
 						id="fullscreen-map"
-						height={window.innerHeight - 80}
+						height={window.innerHeight - 90}
 						center={locationGeo}
 						boundingbox={boundingbox}
 						zoom={14}

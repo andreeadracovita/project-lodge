@@ -38,10 +38,12 @@ export default function SearchResultsListView({
 							points={[]}
 							isEditable={false}
 						/>
-						<span className="btn-pill position-absolute top-50 start-50 translate-middle d-flex align-items-center">
-							<div className="me-2 d-flex align-items-center" onClick={() => setIsFullscreenMap(true)}>
-								<span className="me-1">Show map</span><Icon.Map color="white" />
-							</div>
+						<span
+							className="btn-pill position-absolute top-50 start-50 translate-middle"
+							onClick={() => setIsFullscreenMap(true)}
+						>
+							<span className="me-1">Show map</span>
+							<Icon.Map color="white" />
 						</span>
 					</div>
 					<div className="section-container">

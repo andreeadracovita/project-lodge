@@ -5,7 +5,8 @@ import { siteName } from "/src/utils/constants";
 
 const noFooterPaths = [
 	"/hosting/calendar",
-	"/messages"
+	"/messages",
+	"/search-results"
 ];
 
 export default function Footer() {
