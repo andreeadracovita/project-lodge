@@ -8,6 +8,7 @@ import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 import Rating from "/src/components/common/Rating";
 import { fileStorage } from "/src/utils/constants";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
+import { capitalizeFirstLetter } from "/src/utils/StringUtils";
 
 type Geo = {
 	x: number,
@@ -48,6 +49,7 @@ export default function PropertyListItem({
 	hideWishlist,
 	isCompact
 }: PropertyListItemProps) {
+	console.log(item);
 	const authContext = useAuth();
 
 	const linkPath = !isPreview
@@ -62,6 +64,11 @@ export default function PropertyListItem({
 	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
 	const guestsString = guests ? ", " + guests + (guests > 1 ? " guests" : " guest") : undefined;
 	const priceString = (isPreview ? Math.round(siteCurrencyTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
+
+	const isRoom = item.rental_type === "room";
+	const bedsString = item.beds + (parseInt(item.beds) > 1 ? " beds" : " bed");
+	const bedroomsString = item.bedrooms + (parseInt(item.bedrooms) > 1 ? " bedrooms" : " bedroom");
+	const bathroomsString = item.bathrooms + (parseInt(item.bathrooms) > 1 ? " bathrooms" : " bathroom");
 
 	return (
 		<div className="position-relative">
@@ -78,9 +85,12 @@ export default function PropertyListItem({
 							!isCompact &&
 							<div>
 								<hr />
-								<div>Cottage</div>
-								<div className="mt-6">Entire holiday home · 2 bedrooms · 1 bathroom</div>
-								<div className="mt-6">2 beds</div>
+								<div>{isRoom ? "Room" : capitalizeFirstLetter(item.property_type) }</div>
+								{
+									!isRoom &&
+									<div className="mt-6">Entire holiday home · {bedroomsString} · {bathroomsString}</div>
+								}
+								<div className="mt-6">{bedsString}</div>
 							</div>
 						}
 						<div className="price-container">
