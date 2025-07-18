@@ -73,6 +73,7 @@ export default function SearchResultsMapView({
 						isEditable={false}
 						updateIdsMap={updateIdsMap}
 						handleHighlightItem={handleHighlightItem}
+						// shouldShowText={true}
 					/>
 				</div>
 			</div>

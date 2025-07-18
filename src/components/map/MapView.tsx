@@ -9,9 +9,15 @@ import VectorSource from 'ol/source/Vector.js';
 import VectorLayer from 'ol/layer/Vector.js';
 import Point from 'ol/geom/Point.js';
 import Overlay from 'ol/Overlay.js';
+import Fill from 'ol/style/Fill.js';
+import Stroke from 'ol/style/Stroke.js';
+import Style from 'ol/style/Style.js';
+import CircleStyle from 'ol/style/Circle.js';
+import Text from 'ol/style/Text.js';
 import Feature from 'ol/Feature.js';
 import {defaults as defaultInteractions} from 'ol/interaction/defaults.js';
 import PointerInteraction from 'ol/interaction/Pointer.js';
+import RegularShape from 'ol/style/RegularShape.js';
 import * as olProj from 'ol/proj';
 import * as olExtent from 'ol/extent';
 
@@ -30,7 +36,8 @@ export default function MapView({
 	isEditable,
 	updatePinPosition,
 	updateIdsMap,
-	handleHighlightItem
+	handleHighlightItem,
+	shouldShowText
 }) {
 	class Drag extends PointerInteraction {
 		constructor() {
@@ -133,12 +140,48 @@ export default function MapView({
 	}
 
 	// If markCenter, create singular pin to position location on map with drag action
-	const pinStyle = {
-		"circle-radius": 10,
-		"circle-fill-color": "#371590",
-		"circle-stroke-width": 2,
-		"circle-stroke-color": "white"
-	};
+	const pinStyle = new Style({
+		image: new CircleStyle({
+			radius: 10,
+			fill: new Fill({
+				color: "#371590",
+			}),
+			stroke: new Stroke({
+				color: "white",
+				width: 2,
+			}),
+		}),
+	});
+
+	const priceTagStyle = new Style({
+		image: new RegularShape({
+			fill: new Fill({
+				color: "#371590",
+			}),
+			stroke: new Stroke({
+				color: "white",
+				width: 2,
+			}),
+			radius: 50 / Math.SQRT2,
+			radius2: 50,
+			points: 4,
+			angle: 0,
+			scale: [1, 0.5],
+		}),
+	});
+
+	const labelStyle = new Style({
+		text: new Text({
+			font: '13px Calibri,sans-serif',
+			fill: new Fill({
+				color: '#000',
+			}),
+			stroke: new Stroke({
+		 		color: '#fff',
+				width: 4,
+			}),
+		}),
+	});
 
 	useEffect(() => {
 		if (!id) {
@@ -161,6 +204,14 @@ export default function MapView({
 			}
 		}
 
+		const style = [];
+		if (shouldShowText) {
+			style.push(priceTagStyle);
+			style.push(labelStyle);
+		} else {
+			style.push(pinStyle);
+		}
+
 		const map = new Map({
 			...(isEditable && {interactions: defaultInteractions().extend([new Drag()])}),
 			target: id,
@@ -176,7 +227,14 @@ export default function MapView({
 					source: new VectorSource({
 						features: features,
 					}),
-					style: pinStyle
+					style: function (feature) {
+						if (shouldShowText) {
+							labelStyle
+								.getText()
+								.setText(['120 GBP', '']);
+							}
+						return style;
+					},
 				})
 			]
 		});
