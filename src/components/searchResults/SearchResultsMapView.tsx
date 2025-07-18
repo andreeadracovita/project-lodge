@@ -4,6 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
+import { useAuth } from "/src/components/security/AuthContext";
 
 export default function SearchResultsMapView({
 	items,
@@ -15,9 +16,12 @@ export default function SearchResultsMapView({
 	boundingbox,
 	setIsFullscreenMap
 }) {
+	console.log(items);
+	const authContext = useAuth();
 	const [points, setPoints] = useState([]);
 	const [showFullscreenMap, setShowFullscreenMap] = useState(false);
 	const olIdToCardIdMap = new Map();
+	const olIdToPriceMap = new Map();
 
 	useEffect(() => {
 		if (!items || items.length === 0) {
@@ -33,6 +37,7 @@ export default function SearchResultsMapView({
 	function updateIdsMap(idArray) {
 		for (let i = 0; i < idArray.length; i++) {
 			olIdToCardIdMap.set(idArray[i], `small-prop-` + items[i].id);
+			olIdToPriceMap.set(idArray[i], items[i].price_total_converted + " " + authContext.currency);
 		}
 	}
 
@@ -73,7 +78,8 @@ export default function SearchResultsMapView({
 						isEditable={false}
 						updateIdsMap={updateIdsMap}
 						handleHighlightItem={handleHighlightItem}
-						// shouldShowText={true}
+						shouldShowText={true}
+						priceMap={olIdToPriceMap}
 					/>
 				</div>
 			</div>

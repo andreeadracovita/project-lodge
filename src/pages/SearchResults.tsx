@@ -41,7 +41,8 @@ export default function SearchResults() {
 		
 		const checkInDate = new Date(tempCheckInParam);
 		const checkOutDate = new Date(tempCheckOutParam);
-		setNightsCount(getNightsCount(checkInDate, checkOutDate));
+		const tempNightsCount = getNightsCount(checkInDate, checkOutDate);
+		setNightsCount(tempNightsCount);
 
 		const guestsParam = parseInt(searchParams.get("guests"));
 		setGuests(guestsParam);
@@ -65,7 +66,15 @@ export default function SearchResults() {
 		getPropertiesForQuery(payload)
 			.then(response => {
 				const data = response.data;
-				setProperties(data);
+				setProperties(data.map(prop => {
+					console.log(nightsCount);
+					const priceConverted = Math.ceil(convertToPreferredCurrency(Number(prop.price_night_site) * tempNightsCount, authContext.exchangeRate));
+					return {
+						...prop,
+						price_total_converted: priceConverted
+							
+					};
+				}));
 			})
 			.catch(error => {
 				console.error(error);

@@ -30,7 +30,7 @@ export default function SmallPropertyListItem({
 	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
 
 	const siteCurrencyTotalPrice = item.price_night_site * nightsCount;
-	const convertedTotalPrice = convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate);
+	const convertedTotalPrice = Math.ceil(convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate));
 
 	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
 	const guestsString = guests ? ", " + guests + (guests > 1 ? " guests" : " guest") : undefined;

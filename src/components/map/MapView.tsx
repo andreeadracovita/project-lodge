@@ -37,7 +37,8 @@ export default function MapView({
 	updatePinPosition,
 	updateIdsMap,
 	handleHighlightItem,
-	shouldShowText
+	shouldShowText,
+	priceMap
 }) {
 	class Drag extends PointerInteraction {
 		constructor() {
@@ -231,8 +232,8 @@ export default function MapView({
 						if (shouldShowText) {
 							labelStyle
 								.getText()
-								.setText(['120 GBP', '']);
-							}
+								.setText([priceMap.get(feature.ol_uid), '']);
+						}
 						return style;
 					},
 				})
