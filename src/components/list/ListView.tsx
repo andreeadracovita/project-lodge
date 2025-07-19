@@ -14,8 +14,8 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 		"row",
 		"g-2",
 		"row-cols-1",
-		"row-cols-sm-2",
-		"row-cols-md-3",
+		`row-cols-sm-${cols - 2}`,
+		`row-cols-md-${cols - 1}`,
 		`row-cols-lg-${cols}`
 	);
 

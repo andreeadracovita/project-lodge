@@ -26,8 +26,8 @@ export default function SearchResultsListView({
 	return (
 		<div className="container section-container">
 			<Search />
-			<div className="section-container row">
-				<div className="col-3">
+			<div className="section-container d-flex">
+				<div className="search-page-fixed-width-left">
 					<div className="position-relative">
 						<MapView
 							id="mini-map"
@@ -54,7 +54,7 @@ export default function SearchResultsListView({
 						/>
 					</div>
 				</div>
-				<div className="col-9">
+				<div className="ms-2">
 					<h1 className="page-heading">{locationString}: {propCountString} found</h1>
 					<div className="mt-10">
 						<ListView

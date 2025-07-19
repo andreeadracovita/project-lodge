@@ -16,7 +16,6 @@ export default function SearchResultsMapView({
 	boundingbox,
 	setIsFullscreenMap
 }) {
-	console.log(items);
 	const authContext = useAuth();
 	const [points, setPoints] = useState([]);
 	const [showFullscreenMap, setShowFullscreenMap] = useState(false);
@@ -51,8 +50,12 @@ export default function SearchResultsMapView({
 	
 	return (
 		<div className="container mt-6">
-			<div className="row">
-				<div id="map-view-list-container" className="col-4 py-2" style={{ height: window.innerHeight - 90}}>
+			<div className="d-flex">
+				<div
+					id="map-view-list-container"
+					className="map-view-list p-2"
+					style={{ height: window.innerHeight - 90}}
+				>
 					<span className="btn-pill" onClick={() => setIsFullscreenMap(false)}>
 						<span className="me-1">Back to list</span>
 						<Icon.List color="white" />
@@ -67,7 +70,7 @@ export default function SearchResultsMapView({
 						cols={1}
 					/>
 				</div>
-				<div id="map-container" className="col-8">
+				<div className="ms-2 w-100">
 					<MapView
 						id="fullscreen-map"
 						height={window.innerHeight - 90}
