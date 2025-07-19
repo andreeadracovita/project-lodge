@@ -154,35 +154,41 @@ export default function MapView({
 		}),
 	});
 
-	const priceTagStyle = new Style({
-		image: new RegularShape({
-			fill: new Fill({
-				color: "#371590",
-			}),
-			stroke: new Stroke({
-				color: "white",
-				width: 2,
-			}),
-			radius: 50 / Math.SQRT2,
-			radius2: 50,
-			points: 4,
-			angle: 0,
-			scale: [1, 0.5],
+	const priceTagStyle = [
+		new Style({
+			image: new RegularShape({
+				fill: new Fill({
+					color: "#371590",
+				}),
+				stroke: new Stroke({
+					color: "white",
+					width: 2,
+				}),
+				radius: 50 / Math.SQRT2,
+				radius2: 50,
+				points: 4,
+				angle: 0,
+				scale: [1, 0.5],
+			})
 		}),
-	});
+		new Style({
+			text: new Text({
+				font: 'bold 13px Calibri,sans-serif',
+				fill: new Fill({
+					color: '#fff',
+				}),
+			}),
+		})
+	];
 
-	const labelStyle = new Style({
-		text: new Text({
-			font: '13px Calibri,sans-serif',
-			fill: new Fill({
-				color: '#000',
-			}),
-			stroke: new Stroke({
-		 		color: '#fff',
-				width: 4,
-			}),
-		}),
-	});
+	// const labelStyle = new Style({
+	// 	text: new Text({
+	// 		font: 'bold 13px Calibri,sans-serif',
+	// 		fill: new Fill({
+	// 			color: '#fff',
+	// 		}),
+	// 	}),
+	// });
 
 	useEffect(() => {
 		if (!id) {
@@ -205,12 +211,11 @@ export default function MapView({
 			}
 		}
 
-		const style = [];
+		let style = [];
 		if (shouldShowText) {
-			style.push(priceTagStyle);
-			style.push(labelStyle);
+			style = priceTagStyle;
 		} else {
-			style.push(pinStyle);
+			style = [pinStyle];
 		}
 
 		const map = new Map({
@@ -230,7 +235,7 @@ export default function MapView({
 					}),
 					style: function (feature) {
 						if (shouldShowText) {
-							labelStyle
+							priceTagStyle[1]
 								.getText()
 								.setText([priceMap.get(feature.ol_uid), '']);
 						}

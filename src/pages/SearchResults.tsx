@@ -66,15 +66,7 @@ export default function SearchResults() {
 		getPropertiesForQuery(payload)
 			.then(response => {
 				const data = response.data;
-				setProperties(data.map(prop => {
-					console.log(nightsCount);
-					const priceConverted = Math.ceil(convertToPreferredCurrency(Number(prop.price_night_site) * tempNightsCount, authContext.exchangeRate));
-					return {
-						...prop,
-						price_total_converted: priceConverted
-							
-					};
-				}));
+				setProperties(data);
 			})
 			.catch(error => {
 				console.error(error);
@@ -126,6 +118,7 @@ export default function SearchResults() {
 	// AuthContext exchangeRate may be fetched later from DB
 	useEffect(() => {
 		if (properties.length > 0) {
+			// Compute lowest price, highest price for budget filter
 			const firstPriceConverted = convertToPreferredCurrency(properties[0].price_night_site, authContext.exchangeRate);
 			let tempLowestPrice = firstPriceConverted;
 			let tempHighestPrice = firstPriceConverted;
@@ -137,10 +130,6 @@ export default function SearchResults() {
 			}
 			setLowestPrice(Math.floor(tempLowestPrice));
 			setHighestPrice(Math.ceil(tempHighestPrice));
-
-			// TODO reset budget when retrieving new properties?
-			// searchParams.delete("plow");
-			// searchParams.delete("phigh");
 		}
 	}, [authContext.exchangeRate, properties]);
 
@@ -153,10 +142,28 @@ export default function SearchResults() {
 				const converted = convertToPreferredCurrency(prop.price_night_site, authContext.exchangeRate);
 				return (parseInt(low) <= converted && converted <= parseInt(high));
 			});
-			setBudgetProperties(temp);
+			// setBudgetProperties(temp);
+			setBudgetProperties(temp.map(prop => {
+				console.log(nightsCount);
+				const priceConverted = Math.ceil(convertToPreferredCurrency(Number(prop.price_night_site) * nightsCount, authContext.exchangeRate));
+				return {
+					...prop,
+					price_total_converted: priceConverted
+						
+				};
+			}));
 			setPropCountString(`${temp.length} ${temp.length > 1 ? "results" : "result"}`);
 		} else {
-			setBudgetProperties(properties);
+			// setBudgetProperties(properties);
+			setBudgetProperties(properties.map(prop => {
+				console.log(nightsCount);
+				const priceConverted = Math.ceil(convertToPreferredCurrency(Number(prop.price_night_site) * nightsCount, authContext.exchangeRate));
+				return {
+					...prop,
+					price_total_converted: priceConverted
+						
+				};
+			}));
 			setPropCountString(`${properties.length} ${properties.length > 1 ? "results" : "result"}`);
 		}
 	}, [properties, authContext.exchangeRate, searchParams.get("plow"), searchParams.get("phigh")]);
