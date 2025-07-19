@@ -433,10 +433,6 @@ svg {
   height: 100vh;
 }
 
-#map-view-list-container {
-  overflow: scroll;
-}
-
 #modalBody {
   overflow: hidden;
 }
@@ -444,9 +440,4 @@ svg {
 .search-page-fixed-width-left {
   min-width: 280px;
   max-width: 280px;
-}
-
-.map-view-list {
-  min-width: 380px;
-  max-width: 380px;
 }

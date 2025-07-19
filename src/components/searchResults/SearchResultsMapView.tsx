@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
+import "./SearchResultsMapView.css";
 import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
@@ -52,23 +53,24 @@ export default function SearchResultsMapView({
 		<div className="container mt-6">
 			<div className="d-flex">
 				<div
-					id="map-view-list-container"
-					className="map-view-list p-2"
-					style={{ height: window.innerHeight - 90}}
+					id="map-view-left-container"
+					style={{ height: window.innerHeight - 90 }}
 				>
 					<span className="btn-pill" onClick={() => setIsFullscreenMap(false)}>
-						<span className="me-1">Back to list</span>
+						<span className="me-1">Show list</span>
 						<Icon.List color="white" />
 					</span>
-					<ListView
-						listItemType={ListItemType.SmallProperty}
-						items={items}
-						checkIn={checkInParam}
-						checkOut={checkOutParam}
-						guests={guests}
-						nightsCount={nightsCount}
-						cols={1}
-					/>
+					<div id="map-view-list-container" className="mt-6 p-2" style={{ height: window.innerHeight - 90 - 42 }}>
+						<ListView
+							listItemType={ListItemType.SmallProperty}
+							items={items}
+							checkIn={checkInParam}
+							checkOut={checkOutParam}
+							guests={guests}
+							nightsCount={nightsCount}
+							cols={1}
+						/>
+					</div>
 				</div>
 				<div className="ms-2 w-100">
 					<MapView
