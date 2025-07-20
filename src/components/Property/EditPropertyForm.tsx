@@ -1,4 +1,5 @@
 import axios from "axios";
+import classNames from "classnames";
 import countryToCurrency from "country-to-currency";
 import { useState, useEffect } from "react";
 import * as Icon from "react-bootstrap-icons";
@@ -156,125 +157,184 @@ export default function EditPropertyForm() {
 		});
 	}
 
+	function getClassName(state) {
+		return classNames(
+			"lato-bold",
+			"d-flex",
+			"align-items-center",
+			{
+				"brand-font-color": formState > state
+			}
+		);
+	}
+
 	return (
-		<div className="section-container">
-			{
-				formState === 0 &&
-				<div id="state-title-address" className="row">
-					<div className="col-6">
-						<h1 className="page-heading">{ pageTitle }</h1>
-						<FormPartTitleAddress
-							isEditable={true}
-							showButton={true}
-							input={input}
-							propertyId={propertyId}
-							setPropertyId={setPropertyId}
-							handleChange={handleChange}
-							handleChangeCountry={handleChangeCountry}
-							advanceState={advanceState}
-						/>
-					</div>
-					<div className="col-6">
-						<img src="/graphics/add-property-house.jpg" className="add-property-img" />
-					</div>
+		<div>
+			<div className="section-container d-flex justify-content-between">
+				<div className={getClassName(0)}>
+					{
+						formState > 0
+						? <Icon.CheckCircle size={24} />
+						: <Icon.Icon1Circle size={24} />
+					}
+					<span className="ms-2">Title and address</span>
 				</div>
-			}
-			{
-				formState === 1 &&
-				<div id="state-describe" className="row">
-					<div className="col-6">
-						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">Describe your property</h1>
-						<FormPartDescription
-							isEditable={true}
-							showButton={true}
-							showUnselectedFeatures={true}
-							input={input}
-							propertyId={propertyId}
-							handleChange={handleChange}
-							handleChangeFeatureMultiselect={(event) => handleChangeMultiselect(event, "featuresIds")}
-							handleChangeExperienceMultiselect={(event) => handleChangeMultiselect(event, "experiencesIds")}
-							advanceState={advanceState}
-						/>
-					</div>
-					<div className="col-6">
-						<img src="/graphics/add-property-room.jpg" className="add-property-img" />
-					</div>
+				<div style={{ width: "50px"}}><hr /></div>
+				<div className={getClassName(1)}>
+					{
+						formState > 1
+						? <Icon.CheckCircle size={24} />
+						: <Icon.Icon2Circle size={24} />
+					}
+					<span className="ms-2">Description</span>
 				</div>
-			}
-			{
-				formState === 2 &&
-				<div id="state-photos">
-					<FormBackButton onButtonClicked={onBackClicked} />
-					<h1 className="page-heading">Showcase your property</h1>
-					<FormPartPhotos
-						isEditable={true}
-						showButton={true}
-						input={input}
-						propertyId={propertyId}
-						handleChangePhotos={handleChangePhotos}
-						setImagesUrlArray={setImagesUrlArray}
-						advanceState={advanceState}
-					/>
+				<div style={{ width: "50px"}}><hr /></div>
+				<div className={getClassName(2)}>
+					{
+						formState > 2
+						? <Icon.CheckCircle size={24} />
+						: <Icon.Icon3Circle size={24} />
+					}
+					<span className="ms-2">Photos</span>
 				</div>
-			}
-			{
-				formState === 3 &&
-				<div id="state-pricing" className="row">
-					<div className="col-6">
-						<FormBackButton onButtonClicked={onBackClicked} />
-						<h1 className="page-heading">Pricing</h1>
-						<FormPartPricing
-							isEditable={true}
-							showButton={true}
-							input={input}
-							propertyId={propertyId}
-							handleChange={handleChange}
-							advanceState={advanceState}
-						/>
-					</div>
-					<div className="col-6">
-						<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
-					</div>
+				<div style={{ width: "50px"}}><hr /></div>
+				<div className={getClassName(3)}>
+					{
+						formState > 3
+						? <Icon.CheckCircle size={24} />
+						: <Icon.Icon4Circle size={24} />
+					}
+					<span className="ms-2">Pricing</span>
 				</div>
-			}
-			{
-				formState === 4 &&
-				<div>
-					<div id="state-review" className="row">
+				<div style={{ width: "50px"}}><hr /></div>
+				<div className={getClassName(4)}>
+					{
+						formState > 4
+						? <Icon.CheckCircle size={24} />
+						: <Icon.Icon5Circle size={24} />
+					}
+					<span className="ms-2">Review</span>
+				</div>
+			</div>
+			<div className="section-container">
+				{
+					formState === 0 &&
+					<div id="state-title-address" className="row">
 						<div className="col-6">
-							<FormBackButton onButtonClicked={onBackClicked} />
-							<h1 className="page-heading">Review your property</h1>
-							<FormPartReview
+							<h1 className="page-heading">{ pageTitle }</h1>
+							<FormPartTitleAddress
+								isEditable={true}
+								showButton={true}
 								input={input}
 								propertyId={propertyId}
-								submitButtonText={endButtonText}
+								setPropertyId={setPropertyId}
+								handleChange={handleChange}
+								handleChangeCountry={handleChangeCountry}
+								advanceState={advanceState}
 							/>
 						</div>
 						<div className="col-6">
-							<div className="col-7 pt-5 ms-5 sticky">
-								<div id="preview">
-									<PropertyListItem
-										isPreview={true}
-										item={{
-											id: 0,
-											title: input.title,
-											city: input.city,
-											country: input.country,
-											price_night_site: input.priceNight,
-											images_url_array: imagesUrlArray
-										}}
-										checkIn={previewCheckIn}
-										checkOut={previewCheckOut}
-										nightsCount={1}
-										guests={1}
-									/>
+							<img src="/graphics/add-property-house.jpg" className="add-property-img" />
+						</div>
+					</div>
+				}
+				{
+					formState === 1 &&
+					<div id="state-describe" className="row">
+						<div className="col-6">
+							<FormBackButton onButtonClicked={onBackClicked} />
+							<h1 className="page-heading">Describe your property</h1>
+							<FormPartDescription
+								isEditable={true}
+								showButton={true}
+								showUnselectedFeatures={true}
+								input={input}
+								propertyId={propertyId}
+								handleChange={handleChange}
+								handleChangeFeatureMultiselect={(event) => handleChangeMultiselect(event, "featuresIds")}
+								handleChangeExperienceMultiselect={(event) => handleChangeMultiselect(event, "experiencesIds")}
+								advanceState={advanceState}
+							/>
+						</div>
+						<div className="col-6">
+							<img src="/graphics/add-property-room.jpg" className="add-property-img" />
+						</div>
+					</div>
+				}
+				{
+					formState === 2 &&
+					<div id="state-photos">
+						<FormBackButton onButtonClicked={onBackClicked} />
+						<h1 className="page-heading">Showcase your property</h1>
+						<FormPartPhotos
+							isEditable={true}
+							showButton={true}
+							input={input}
+							propertyId={propertyId}
+							handleChangePhotos={handleChangePhotos}
+							setImagesUrlArray={setImagesUrlArray}
+							advanceState={advanceState}
+						/>
+					</div>
+				}
+				{
+					formState === 3 &&
+					<div id="state-pricing" className="row">
+						<div className="col-6">
+							<FormBackButton onButtonClicked={onBackClicked} />
+							<h1 className="page-heading">Pricing</h1>
+							<FormPartPricing
+								isEditable={true}
+								showButton={true}
+								input={input}
+								propertyId={propertyId}
+								handleChange={handleChange}
+								advanceState={advanceState}
+							/>
+						</div>
+						<div className="col-6">
+							<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
+						</div>
+					</div>
+				}
+				{
+					formState === 4 &&
+					<div>
+						<div id="state-review" className="row">
+							<div className="col-6">
+								<FormBackButton onButtonClicked={onBackClicked} />
+								<h1 className="page-heading">Review your property</h1>
+								<FormPartReview
+									input={input}
+									propertyId={propertyId}
+									submitButtonText={endButtonText}
+								/>
+							</div>
+							<div className="col-6">
+								<div className="col-7 pt-5 ms-5 sticky">
+									<div id="preview">
+										<PropertyListItem
+											isPreview={true}
+											item={{
+												id: 0,
+												title: input.title,
+												city: input.city,
+												country: input.country,
+												price_night_site: input.priceNight,
+												images_url_array: imagesUrlArray
+											}}
+											checkIn={previewCheckIn}
+											checkOut={previewCheckOut}
+											nightsCount={1}
+											guests={1}
+										/>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			}
+				}
+			</div>
 		</div>
 	);
 }
