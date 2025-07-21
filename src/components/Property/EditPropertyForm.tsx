@@ -53,14 +53,13 @@ export default function EditPropertyForm() {
 
 	useEffect(() => {
 		// Editing an existing property
-		if (searchParams.get("id")) {
-			setPropertyId(searchParams.get("id"));
-
-			// Init propertyId, input, imagesUrlArray with data from db
-			getPropertyById(searchParams.get("id"))
+		const propId = searchParams.get("id");
+		if (propId) {
+			setPropertyId(propId);
+			getPropertyById(propId)
 				.then(response => {
-					if (response.data?.length > 0) {
-						const data = response.data[0];
+					const data = response.data;
+					if (data) {
 						const photos = data.images_url_array;
 						setInput({
 							title: data.title,
