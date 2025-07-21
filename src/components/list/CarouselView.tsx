@@ -43,7 +43,7 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 		<div id={id} className="carousel slide">
 			<div className="carousel-inner">
 				<div className="carousel-item active">
-					<div className="d-flex p-2">
+					<div className="d-flex p-3">
 					{
 						items.slice(0, 4).map((item, i) =>
 							<div key={i} className="col-3 pe-2">
@@ -65,11 +65,23 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 					</div>
 				</div>
 			</div>
-			<button className="carousel-control-prev" type="button" data-bs-target={`#${id}`} data-bs-slide="prev">
-				<div className="btn-round" aria-hidden="true"><Icon.ChevronLeft size={24} /></div>
+			<button
+				className="btn-round position-absolute top-50 start-0 translate-middle-y"
+				aria-hidden="true"
+				type="button"
+				data-bs-target={`#${id}`}
+				data-bs-slide="prev"
+			>
+				<Icon.ChevronLeft size={24} color="white" />
 			</button>
-			<button className="carousel-control-next" type="button" data-bs-target={`#${id}`} data-bs-slide="next">
-				<div className="btn-round" aria-hidden="true"><Icon.ChevronRight size={24} /></div>
+			<button
+				className="btn-round position-absolute top-50 end-0 translate-middle-y"
+				aria-hidden="true"
+				type="button"
+				data-bs-target={`#${id}`}
+				data-bs-slide="next"
+			>
+				<Icon.ChevronRight size={24} color="white" />
 			</button>
 		</div>
 	);
