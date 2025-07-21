@@ -295,7 +295,8 @@ export default function FormPartTitleAddress({
 					</div>
 				}
 				{
-					isEditable && !geoCoords && <div className="btn-pill mt-10" onClick={handleLocateClick}>Locate on map</div>
+					isEditable && !geoCoords &&
+					<button className="btn-pill mt-10" type="button" onClick={handleLocateClick}>Locate on map</button>
 				}
 				
 			</div>
@@ -306,7 +307,7 @@ export default function FormPartTitleAddress({
 				<button
 					id="go-to-describe-place-button"
 					type="submit"
-					className="btn-pill my-5 d-flex align-items-center"
+					className="btn-pill my-5"
 				>
 					Describe place next <Icon.ChevronRight />
 				</button>

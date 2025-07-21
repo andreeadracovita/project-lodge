@@ -63,7 +63,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 				<button
 					id="go-to-pricing-button"
 					type="submit"
-					className="btn-pill my-5 d-flex align-items-center"
+					className="btn-pill my-5"
 				>
 					Review your property <Icon.ChevronRight />
 				</button>

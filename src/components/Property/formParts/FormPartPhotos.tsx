@@ -64,7 +64,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 			<button
 				id="go-to-pricing-button"
 				type="submit"
-				className="btn-pill my-5 d-flex align-items-center"
+				className="btn-pill my-5"
 			>
 				Pricing next <Icon.ChevronRight />
 			</button>

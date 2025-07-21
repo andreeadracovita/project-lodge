@@ -69,7 +69,7 @@ export default function FormPartReview({ input, propertyId }) {
 						id="publish-property-button"
 						type="submit"
 						name="save"
-						className="btn-pill d-flex align-items-center"
+						className="btn-pill"
 					>
 						Save <Icon.ChevronRight />
 					</button>
@@ -79,7 +79,7 @@ export default function FormPartReview({ input, propertyId }) {
 							id="publish-property-button"
 							type="submit"
 							name="publish"
-							className="btn-pill ms-2 d-flex align-items-center"
+							className="btn-pill ms-2"
 						>
 							Save and publish property <Icon.ChevronRight />
 						</button>

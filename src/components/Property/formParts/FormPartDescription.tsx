@@ -202,7 +202,7 @@ export default function FormPartDescription({
 				<button
 					id="go-to-add-photos-button"
 					type="submit"
-					className="btn-pill my-5 d-flex align-items-center"
+					className="btn-pill my-5"
 				>
 					Add photos next <Icon.ChevronRight />
 				</button>
