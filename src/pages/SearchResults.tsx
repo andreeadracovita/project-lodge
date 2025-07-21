@@ -17,42 +17,35 @@ export default function SearchResults() {
 	const authContext = useAuth();
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [isFullscreenMap, setIsFullscreenMap] = useState(false);
 	const [properties, setProperties] = useState([]);
-	const [budgetProperties, setBudgetProperties] = useState([]);
-	const [location, setLocation] = useState();
-	const [locationGeo, setLocationGeo] = useState([]);
-	const [boundingbox, setBoundingbox] = useState();
 
-	const [propCountString, setPropCountString] = useState("");
-	const [checkInParam, setCheckInParam] = useState();
-	const [checkOutParam, setCheckOutParam] = useState();
-	const [guests, setGuests] = useState();
+	// Shared between list and map view
+	const [isFullscreenMap, setIsFullscreenMap] = useState(false);
+	const [budgetProperties, setBudgetProperties] = useState([]);
+	const [geo, setGeo] = useState({
+		coordinate: [],
+		boundingbox: null
+	});
 	const [nightsCount, setNightsCount] = useState();
 
-	const [lowestPrice, setLowestPrice] = useState(0);
-	const [highestPrice, setHighestPrice] = useState(0);
+	// Needs to stay here because this is where we have access to all fetched props. Children get only budget props.
+	const [priceRange, setPriceRange] = useState([0, 0]);
 
 	useEffect(() => {
 		const tempCheckInParam = searchParams.get("check_in");
 		const tempCheckOutParam = searchParams.get("check_out");
-		setCheckInParam(tempCheckInParam);
-		setCheckOutParam(tempCheckOutParam);
 		
 		const checkInDate = new Date(tempCheckInParam);
 		const checkOutDate = new Date(tempCheckOutParam);
 		const tempNightsCount = getNightsCount(checkInDate, checkOutDate);
 		setNightsCount(tempNightsCount);
 
-		const guestsParam = parseInt(searchParams.get("guests"));
-		setGuests(guestsParam);
-
 		const payload = {
 			country: searchParams.get("country"),
 			city: searchParams.get("city"),
 			check_in: tempCheckInParam,
 			check_out: tempCheckOutParam,
-			guests: guestsParam,
+			guests: parseInt(searchParams.get("guests")),
 			property_type: searchParams.get("ptype") ? searchParams.get("ptype").split(",").map(Number) : null,
 			rental_type: searchParams.get("rtype") ? searchParams.get("rtype").split(",").map(Number) : null,
 			beds: searchParams.get("beds"),
@@ -63,10 +56,35 @@ export default function SearchResults() {
 			distance: searchParams.get("dist")
 		};
 
+		// Fetch
 		getPropertiesForQuery(payload)
 			.then(response => {
 				const data = response.data;
 				setProperties(data);
+			})
+			.catch(error => {
+				console.error(error);
+			});
+
+		// Update geolocation
+		const countryFull = countries().getLabel(searchParams.get("country"));
+		const city = searchParams.get("city");
+
+		const address = city ? city + "+" + countryFull : countryFull;
+		getGeolocation(address)
+			.then(response => {
+				if (response.data.length > 0) {
+					const data = response.data[0];
+					setGeo({
+						coordinate: [Number(data.lat), Number(data.lon)],
+						boundingbox: [
+							Number(data.boundingbox[0]),
+							Number(data.boundingbox[1]),
+							Number(data.boundingbox[2]),
+							Number(data.boundingbox[3]),
+						]
+					});
+				}
 			})
 			.catch(error => {
 				console.error(error);
@@ -87,36 +105,7 @@ export default function SearchResults() {
 		searchParams.get("dist")
 	]);
 
-	useEffect(() => {
-		const countryFull = countries().getLabel(searchParams.get("country"));
-		const city = searchParams.get("city");
-		if (city) {
-			setLocation(city + ", " + countryFull);
-		} else {
-			setLocation(countryFull);
-		}
-
-		const address = city ? city + "+" + countryFull : countryFull;
-		getGeolocation(address)
-			.then(response => {
-				if (response.data.length > 0) {
-					const data = response.data[0];
-					setLocationGeo([Number(data.lat), Number(data.lon)]);
-					setBoundingbox([
-						Number(data.boundingbox[0]),
-						Number(data.boundingbox[1]),
-						Number(data.boundingbox[2]),
-						Number(data.boundingbox[3]),
-					]);
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
-	}, [searchParams.get("country"), searchParams.get("city")]);
-
-	// AuthContext exchangeRate may be fetched later from DB
-	useEffect(() => {
+	function computeMinMaxPrice() {
 		if (properties.length > 0) {
 			// Compute lowest price, highest price for budget filter
 			const firstPriceConverted = convertToPreferredCurrency(properties[0].price_night_site, authContext.exchangeRate);
@@ -128,13 +117,14 @@ export default function SearchResults() {
 				tempLowestPrice = Math.min(tempLowestPrice, converted);
 				tempHighestPrice = Math.max(tempHighestPrice, converted);
 			}
-			setLowestPrice(Math.floor(tempLowestPrice));
-			setHighestPrice(Math.ceil(tempHighestPrice));
+			setPriceRange([Math.floor(tempLowestPrice), Math.ceil(tempHighestPrice)]);
 		}
-	}, [authContext.exchangeRate, properties]);
+	}
 
-	useEffect(() => {
-		console.log("update budget props");
+	function computeBudgetProperties() {
+		if (properties.length === 0 || !nightsCount) {
+			return;
+		}
 		const low = searchParams.get("plow");
 		const high = searchParams.get("phigh");
 		if (low && high) {
@@ -142,9 +132,7 @@ export default function SearchResults() {
 				const converted = convertToPreferredCurrency(prop.price_night_site, authContext.exchangeRate);
 				return (parseInt(low) <= converted && converted <= parseInt(high));
 			});
-			// setBudgetProperties(temp);
 			setBudgetProperties(temp.map(prop => {
-				console.log(nightsCount);
 				const priceConverted = Math.ceil(convertToPreferredCurrency(Number(prop.price_night_site) * nightsCount, authContext.exchangeRate));
 				return {
 					...prop,
@@ -152,11 +140,8 @@ export default function SearchResults() {
 						
 				};
 			}));
-			setPropCountString(`${temp.length} ${temp.length > 1 ? "results" : "result"}`);
 		} else {
-			// setBudgetProperties(properties);
 			setBudgetProperties(properties.map(prop => {
-				console.log(nightsCount);
 				const priceConverted = Math.ceil(convertToPreferredCurrency(Number(prop.price_night_site) * nightsCount, authContext.exchangeRate));
 				return {
 					...prop,
@@ -164,9 +149,19 @@ export default function SearchResults() {
 						
 				};
 			}));
-			setPropCountString(`${properties.length} ${properties.length > 1 ? "results" : "result"}`);
 		}
-	}, [properties, authContext.exchangeRate, searchParams.get("plow"), searchParams.get("phigh")]);
+	}
+
+	// AuthContext exchangeRate may be fetched later from DB
+	useEffect(() => {
+		computeMinMaxPrice();
+		computeBudgetProperties();
+	}, [authContext.exchangeRate, properties]);
+
+	useEffect(() => {
+		// When budget range changes, must select new budgetProperties and set new string
+		computeBudgetProperties();
+	}, [searchParams.get("plow"), searchParams.get("phigh")]);
 
 	return (
 		<div>
@@ -174,27 +169,15 @@ export default function SearchResults() {
 			isFullscreenMap
 			? <SearchResultsMapView
 				items={budgetProperties}
-				checkInParam={checkInParam}
-				checkOutParam={checkOutParam}
-				guests={guests}
 				nightsCount={nightsCount}
-				locationGeo={locationGeo}
-				boundingbox={boundingbox}
-				propCountString={propCountString}
+				geo={geo}
 				setIsFullscreenMap={setIsFullscreenMap}
 			/>
 			: <SearchResultsListView
 				items={budgetProperties}
-				checkInParam={checkInParam}
-				checkOutParam={checkOutParam}
-				guests={guests}
 				nightsCount={nightsCount}
-				locationGeo={locationGeo}
-				locationString={location}
-				boundingbox={boundingbox}
-				lowestPrice={lowestPrice}
-				highestPrice={highestPrice}
-				propCountString={propCountString}
+				geo={geo}
+				priceRange={priceRange}
 				setIsFullscreenMap={setIsFullscreenMap}
 			/>
 		}

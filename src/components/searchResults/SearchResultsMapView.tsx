@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
+import { useSearchParams } from "react-router";
 
 import "./SearchResultsMapView.css";
 import ListView from "/src/components/list/ListView";
@@ -9,19 +10,20 @@ import { useAuth } from "/src/components/security/AuthContext";
 
 export default function SearchResultsMapView({
 	items,
-	checkInParam,
-	checkOutParam,
-	guests,
 	nightsCount,
-	locationGeo,
-	boundingbox,
+	geo,
 	setIsFullscreenMap
 }) {
 	const authContext = useAuth();
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	const [points, setPoints] = useState([]);
 	const [showFullscreenMap, setShowFullscreenMap] = useState(false);
 	const olIdToCardIdMap = new Map();
 	const olIdToPriceMap = new Map();
+	const checkInParam = searchParams.get("check_in");
+	const checkOutParam = searchParams.get("check_out");
+	const guests = parseInt(searchParams.get("guests"));
 
 	useEffect(() => {
 		if (!items || items.length === 0) {
@@ -76,8 +78,8 @@ export default function SearchResultsMapView({
 					<MapView
 						id="fullscreen-map"
 						height={window.innerHeight - 90}
-						center={locationGeo}
-						boundingbox={boundingbox}
+						center={geo.coordinate}
+						boundingbox={geo.boundingbox}
 						zoom={14}
 						points={points}
 						isEditable={false}

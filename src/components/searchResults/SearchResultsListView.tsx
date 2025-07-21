@@ -1,5 +1,6 @@
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
+import countries from "react-select-country-list";
 
 import Filter from "/src/components/filter/Filter";
 import ListView from "/src/components/list/ListView";
@@ -9,19 +10,20 @@ import Search from "/src/components/search/Search";
 
 export default function SearchResultsListView({
 	items,
-	checkInParam,
-	checkOutParam,
-	guests,
 	nightsCount,
-	lowestPrice,
-	highestPrice,
-	locationGeo,
-	locationString,
-	boundingbox,
-	propCountString,
+	priceRange,
+	geo,
 	setIsFullscreenMap
 }) {
 	const [searchParams, setSearchParams] = useSearchParams();
+	const countString = `${items.length} ${items.length > 1 ? "results" : "result"}`;
+	const checkInParam = searchParams.get("check_in");
+	const checkOutParam = searchParams.get("check_out");
+	const guests = parseInt(searchParams.get("guests"));
+
+	const countryFull = countries().getLabel(searchParams.get("country"));
+	const city = searchParams.get("city");
+	const locationString = city ? city + ", " + countryFull : countryFull;
 	
 	return (
 		<div className="container section-container">
@@ -32,8 +34,8 @@ export default function SearchResultsListView({
 						<MapView
 							id="mini-map"
 							height={200}
-							center={locationGeo}
-							boundingbox={boundingbox}
+							center={geo.coordinate}
+							boundingbox={geo.boundingbox}
 							zoom={14}
 							points={[]}
 							isEditable={false}
@@ -48,14 +50,14 @@ export default function SearchResultsListView({
 					</div>
 					<div className="section-container">
 						<Filter
-							city={searchParams.get("city")}
-							lowestPrice={lowestPrice}
-							highestPrice={highestPrice}
+							city={city}
+							lowestPrice={priceRange[0]}
+							highestPrice={priceRange[1]}
 						/>
 					</div>
 				</div>
 				<div className="ms-2">
-					<h1 className="page-heading">{locationString}: {propCountString} found</h1>
+					<h1 className="page-heading">{locationString}: {countString} found</h1>
 					<div className="mt-10">
 						<ListView
 							listItemType={ListItemType.Property}
