@@ -97,11 +97,11 @@ export default function PropertyListItem({
 							isCompact
 							? <div className="d-flex align-items-center justify-content-end">
 								<div className="text-muted d-block me-2">{nightsString}</div>
-								<div className="lato-bold property-card-price d-block">{priceString}</div>
+								<div className="text-bold property-card-price d-block">{priceString}</div>
 							</div>
 							: <div className="text-end mt-3">
 								<div className="text-muted d-block">{nightsString} {guestsString}</div>
-								<div className="mt-6 lato-bold property-card-price d-block">{priceString}</div>
+								<div className="mt-6 text-bold property-card-price d-block">{priceString}</div>
 							</div>
 						}
 						</div>

@@ -10,7 +10,7 @@ export default function AccountCard({ iconName, iconSize, title, desc, url }) {
 				<div className="row">
 					<div className="col-10">
 						<Icon iconName={iconName} size={iconSize} />
-						<p className="lato-bold mt-3">{ title }</p>
+						<p className="text-bold mt-3">{ title }</p>
 						<p>{ desc }</p>
 					</div>
 					<div className="col-2 d-flex align-items-center justify-content-end">

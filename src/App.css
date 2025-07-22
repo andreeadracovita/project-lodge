@@ -14,7 +14,6 @@
   
   --body-font-size: 14px;
   --nav-font-size: 16px; /* Navbar links */
-  --greeting-message-font-size: 48px; /* 48 Message on home page */
   --headline-1-font-size: 32px; /* Account page title */
   --headline-2-font-size: 24px; /* Property page title, home sections heading */
   --headline-3-font-size: 20px; /* Search results title + bold, property price on card */
@@ -56,9 +55,12 @@ footer {
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
   color: var(--dark);
   font-size: var(--body-font-size);
 }
@@ -93,30 +95,12 @@ svg {
 /* End: Bootstrap overriders -------------------------------------------------- */
 
 /* Start: Font ---------------------------------------------------------------- */
-.greeting-message {
-  padding-top: 6rem;
-  color: white;
-  font-size: var(--greeting-message-font-size);
-  font-family: "League Spartan", sans-serif;
-  font-optical-sizing: auto;
+.text-bold {
   font-weight: 700;
-  font-style: normal;
-}
-
-.lato-bold {
-  font-family: "Lato", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.text-strong {
-  font-family: "Lato", sans-serif;
-  font-weight: 700;
-  font-style: normal;
 }
 
 .brand-font {
-  font-family: "League Spartan", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
@@ -137,7 +121,7 @@ svg {
 /* Page title */
 .page-heading {
   font-size: var(--headline-1-font-size);
-  font-family: "League Spartan", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;

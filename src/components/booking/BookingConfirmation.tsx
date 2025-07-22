@@ -105,8 +105,8 @@ export default function BookingConfirmation() {
 					<h1 className="page-heading">Your accommodation booking</h1>
 					
 					<div className="mt-10 border-section highlight w-25">
-						<div>Confirmation number: <span className="lato-bold">{bookingId}</span></div>
-						<div className="mt-6">PIN code: <span className="lato-bold">{pinCode}</span></div>
+						<div>Confirmation number: <span className="text-bold">{bookingId}</span></div>
+						<div className="mt-6">PIN code: <span className="text-bold">{pinCode}</span></div>
 					</div>
 
 					<div className="mt-10 section-heading heading">{property.title}</div>
@@ -117,7 +117,7 @@ export default function BookingConfirmation() {
 								<Icon.CalendarWeek size={24} />
 							</div>
 							<div className="ms-4">
-								<div className="text-strong">{weekdayMonYear(new Date(booking.check_in))} — {weekdayMonYear(new Date(booking.check_out))}</div>
+								<div className="text-bold">{weekdayMonYear(new Date(booking.check_in))} — {weekdayMonYear(new Date(booking.check_out))}</div>
 								<div>Check-in: {checkInTimes}</div>
 								<div>Check-out: {checkOutTimes}</div>
 							</div>
@@ -130,7 +130,7 @@ export default function BookingConfirmation() {
 								<Icon.GeoAltFill size={24} />
 							</div>
 							<div className="ms-4">
-								<div className="text-strong">Property address</div>
+								<div className="text-bold">Property address</div>
 								<div>Street {property.street} {property.street_no}, {property.city}, {countries().getLabel(property.country)}</div>
 								<div><a href={googleMapsLink} target="_blank" className="heading btn-text-underline">Google Map directions</a></div>
 							</div>
@@ -143,7 +143,7 @@ export default function BookingConfirmation() {
 								<Icon.TelephoneFill size={24} />
 							</div>
 							<div className="ms-4">
-								<div className="text-strong">Host contact</div>
+								<div className="text-bold">Host contact</div>
 								<div>Email: {booking.host_email}</div>
 							</div>
 						</div>

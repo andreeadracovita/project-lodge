@@ -56,7 +56,7 @@ export default function HostingCalendarSettings() {
 	
 	return (
 		<div className="border-section">
-			<div className="text-strong">Selected property</div>
+			<div className="text-bold">Selected property</div>
 			{
 				hostedProperties.length > 0 && selectedProp &&
 				<div>
@@ -96,7 +96,7 @@ export default function HostingCalendarSettings() {
 							<div className="btn-text-underline" onClick={savePrice}>Save</div>
 						</div>
 						: <div>
-							<div className="property-card-price text-strong">{selectedProp?.price_night_local} {selectedProp?.local_currency}</div>
+							<div className="property-card-price text-bold">{selectedProp?.price_night_local} {selectedProp?.local_currency}</div>
 							<div className="btn-text-underline" onClick={() => {
 								setPriceInput(selectedProp?.price_night_local);
 								setShowEdit(true);

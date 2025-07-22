@@ -19,7 +19,7 @@ export default function BookingPriceSection({ item }) {
 		<div className="border-section ">
 			<h2 className="property-card-heading">Your price summary</h2>
 			<div className="highlight text-end">
-				<div className="mt-10 property-card-price text-strong">Price { convertedTotalPrice } { authContext.currency }</div>
+				<div className="mt-10 property-card-price text-bold">Price { convertedTotalPrice } { authContext.currency }</div>
 				<div>In property currency: { localTotalPrice } { item.local_currency }</div>
 			</div>
 			<div className="mt-10">

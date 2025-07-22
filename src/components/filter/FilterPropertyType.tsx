@@ -18,7 +18,7 @@ export default function FilterPropertyType({ filterData, updateMultiselectParams
 	
 	return (
 		<div id="property">
-			<div className="text-strong">Property type</div>
+			<div className="text-bold">Property type</div>
 			<div className="mt-10">
 			{
 				propertyTypes.map((ptype, i) => 

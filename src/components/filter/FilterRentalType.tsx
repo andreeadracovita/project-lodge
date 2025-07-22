@@ -18,7 +18,7 @@ export default function FilterRentalType({ filterData, updateMultiselectParams }
 	
 	return (
 		<div id="rental">
-			<div className="text-strong">Rental type</div>
+			<div className="text-bold">Rental type</div>
 			<div className="mt-10">
 			{
 				rentalTypes.map((rtype, i) => 

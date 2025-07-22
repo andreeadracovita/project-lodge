@@ -31,7 +31,7 @@ export default function FilterBudget({ lowestPrice, highestPrice }) {
 
 	return (
 		<div id="budget">
-			<div className="text-strong">Your budget (per night)</div>
+			<div className="text-bold">Your budget (per night)</div>
 			<div className="mt-10">{rangeValue[0]} {authContext.currency} — {rangeValue[1]} {authContext.currency}</div>
 			<div className="mt-10">
 				<Slider

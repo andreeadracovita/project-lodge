@@ -16,22 +16,22 @@ export default function Book() {
 	return (
 		<div className="container section-container">
 			<Link to={ linkPath }>
-				<div className="lato-bold d-flex align-items-center">
+				<div className="text-bold d-flex align-items-center">
 					<Icon.ChevronLeft size={24} /><span className="ms-2">Back</span>
 				</div>
 			</Link>
 			<div className="section-container row">
-				<div className="col-2 lato-bold d-flex align-items-center">
+				<div className="col-2 text-bold d-flex align-items-center">
 					<Icon.CheckCircle size={24} />
 					<span className="ms-2">Your selection</span>
 				</div>
 				<div className="col-3"><hr /></div>
-				<div className="col-2 lato-bold d-flex align-items-center justify-content-center">
+				<div className="col-2 text-bold d-flex align-items-center justify-content-center">
 					<Icon.Icon2Circle size={24} />
 					<span className="ms-2">Your details</span>
 				</div>
 				<div className="col-3"><hr /></div>
-				<div className="col-2 lato-bold d-flex align-items-center justify-content-end">
+				<div className="col-2 text-bold d-flex align-items-center justify-content-end">
 					<Icon.Icon3Circle size={24} />
 					<span className="ms-2">Finish booking</span>
 				</div>

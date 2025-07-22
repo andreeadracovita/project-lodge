@@ -53,7 +53,7 @@ export default function SmallPropertyListItem({
 								<div className="mt-6">{item.city}, {countries().getLabel(item.country)}</div>
 								<div className="price-container text-end">
 									<div className="text-muted d-block">{nightsString}</div>
-									<div className="lato-bold property-card-price d-block">{priceString}</div>
+									<div className="text-bold property-card-price d-block">{priceString}</div>
 								</div>
 							</div>
 						</div>

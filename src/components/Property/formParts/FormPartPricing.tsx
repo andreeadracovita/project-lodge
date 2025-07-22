@@ -52,7 +52,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					onChange={isEditable ? handleChange : undefined}
 					required
 				/>
-				<div className="ms-3 lato-bold">{input.localCurrency} per night</div>
+				<div className="ms-3 text-bold">{input.localCurrency} per night</div>
 			</div>
 			<div className="mt-6 text-muted">Prices are set in the local currency of the property.</div>
 			<div className="mt-6 text-muted">Price can be adjusted from the Property Management page.</div>

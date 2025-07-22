@@ -158,7 +158,7 @@ export default function EditPropertyForm() {
 
 	function getClassName(state) {
 		return classNames(
-			"lato-bold",
+			"text-bold",
 			"d-flex",
 			"align-items-center",
 			{

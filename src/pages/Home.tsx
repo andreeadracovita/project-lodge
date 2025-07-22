@@ -64,46 +64,40 @@ export default function Home() {
 			<div className="container">
 				<div id="experience" className="section-container">
 					<p className="section-heading">Explore with us</p>
-					<div className="mt-4">
-						<CarouselView
-							id="properties-carousel"
-							listItemType={ListItemType.Property}
-							items={properties}
-							checkIn={checkInParam}
-							checkOut={checkOutParam}
-							nightsCount={nightsCount}
-							guests={guests}
-						/>
-					</div>
+					<CarouselView
+						id="properties-carousel"
+						listItemType={ListItemType.Property}
+						items={properties}
+						checkIn={checkInParam}
+						checkOut={checkOutParam}
+						nightsCount={nightsCount}
+						guests={guests}
+					/>
 				</div>
 
 				<div id="trending" className="section-container">
 					<p className="section-heading">Trending destinations</p>
-					<div className="mt-4">
-						<ListView
-							listItemType={ListItemType.Destination}
-							items={trendingDestinations}
-							checkIn={checkInParam}
-							checkOut={checkOutParam}
-							guests={guests}
-							cols={4}
-						/>
-					</div>
+					<ListView
+						listItemType={ListItemType.Destination}
+						items={trendingDestinations}
+						checkIn={checkInParam}
+						checkOut={checkOutParam}
+						guests={guests}
+						cols={4}
+					/>
 				</div>
 
 				<div id="type" className="section-container">
 					<p className="section-heading">Explore by property type</p>
-					<div className="mt-4">
-						<CarouselView
-							id="property-type-carousel"
-							listItemType={ListItemType.PlaceType}
-							items={propertyTypes}
-							checkIn={checkInParam}
-							checkOut={checkOutParam}
-							guests={guests}
-							cols={4}
-						/>
-					</div>
+					<CarouselView
+						id="property-type-carousel"
+						listItemType={ListItemType.PlaceType}
+						items={propertyTypes}
+						checkIn={checkInParam}
+						checkOut={checkOutParam}
+						guests={guests}
+						cols={4}
+					/>
 				</div>
 			</div>
 		</>

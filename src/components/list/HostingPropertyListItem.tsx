@@ -49,11 +49,11 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 				<img src={imgUrl} className="list-item-photo" />
 			</div>
 			<div className="col-6">
-				<p className="lato-bold">{item.title}</p>
+				<p className="text-bold">{item.title}</p>
 				<p>{item.city}, {countries().getLabel(item.country)}</p>
 				{
 					item.is_listed &&
-					<p className="lato-bold">Listed</p>
+					<p className="text-bold">Listed</p>
 				}
 				{
 					item.is_listed

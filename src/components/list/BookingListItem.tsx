@@ -53,7 +53,7 @@ export default function BookingListItem({item}: BookingListItemProp) {
 				</div>
 				<div className="col-8">
 					<Link to={bookingPath}>
-						<span className="d-block lato-bold">{item.title}</span>
+						<span className="d-block text-bold">{item.title}</span>
 						<span className="d-block">{item.city}, {countries().getLabel(item.country)}</span>
 						<span className="d-block text-muted">{dayMonYear(new Date(item.check_in))} — {dayMonYear(new Date(item.check_out))}</span>
 					</Link>

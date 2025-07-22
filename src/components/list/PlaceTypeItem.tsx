@@ -28,7 +28,7 @@ export default function PlaceTypeItem({ item, checkIn, checkOut, guests }: Place
 					<div>
 						<img src={fileStorage + item.img_url} className="list-item-photo mb-2" />
 						<div>
-							<p className="lato-bold">{capitalizeFirstLetter(item.name)}</p>
+							<p className="text-bold">{capitalizeFirstLetter(item.name)}</p>
 						</div>
 					</div>
 				

@@ -18,7 +18,7 @@ export default function FilterExperience({ filterData, updateMultiselectParams }
 	
 	return (
 		<div id="experiences">
-			<div className="text-strong">Experiences in the area</div>
+			<div className="text-bold">Experiences in the area</div>
 			<div className="mt-10">
 			{
 				experiences.map((exp, i) => 

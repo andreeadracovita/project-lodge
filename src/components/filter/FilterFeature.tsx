@@ -18,7 +18,7 @@ export default function FilterFeature({ filterData, updateMultiselectParams }) {
 	
 	return (
 		<div id="features">
-			<div className="text-strong">Features</div>
+			<div className="text-bold">Features</div>
 			<div className="mt-10">
 			{
 				features.map((feat, i) => 

@@ -31,7 +31,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }) {
 					<div className="d-flex">
 						<Avatar url={user.img_url} size={40} firstName={user.first_name} />
 						<div className="ms-2">
-							<div className="text-strong">{user.first_name}</div>
+							<div className="text-bold">{user.first_name}</div>
 							<div className="text-muted">{yearDashMonthDashDay(new Date(reviewData.created_at))}</div>
 						</div>
 					</div>
@@ -48,7 +48,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }) {
 					<div className="d-flex col-3">
 						<Avatar url={user.img_url} size={40} firstName={user.first_name} />
 						<div className="ms-2">
-							<div className="text-strong">{user.first_name}</div>
+							<div className="text-bold">{user.first_name}</div>
 							<div className="text-muted">{yearDashMonthDashDay(new Date(reviewData.created_at))}</div>
 						</div>
 					</div>

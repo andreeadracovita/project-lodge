@@ -2,7 +2,7 @@ export default function FilterDistance({ filterData, city, handleInputChange }) 
 	
 	return (
 		<div id="distance">
-			<div className="text-strong">Distance from center of {city}</div>
+			<div className="text-bold">Distance from center of {city}</div>
 			<div className="mt-10">
 				<div className="form-check">
 					<input

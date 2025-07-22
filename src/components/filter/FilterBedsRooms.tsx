@@ -2,7 +2,7 @@ export default function FilterBedsRooms({ filterData, handleInputChange }) {
 	
 	return (
 		<div id="beds-rooms">
-			<div className="text-strong">Bed & Rooms</div>
+			<div className="text-bold">Bed & Rooms</div>
 			<div className="mt-10">
 				<div className="row mt-6">
 					<div className="col-6">

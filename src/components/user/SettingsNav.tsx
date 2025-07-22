@@ -33,7 +33,7 @@ export default function SettingsNav({ iconName, iconSize, tabName, settingsTab, 
 	return (
 		<div className="m-3 cursor-pointer" onClick={() => updateSearchParams(settingsTab)}>
 			<Icon iconName={iconName} size={iconSize} />
-			<span className="ms-4 lato-bold" style={getStyle(settingsTab)}>{tabName}</span>
+			<span className="ms-4 text-bold" style={getStyle(settingsTab)}>{tabName}</span>
 		</div>
 	);
 }
