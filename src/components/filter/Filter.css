@@ -1,7 +1,11 @@
-#range-slider .range-slider__range {
-  background: var(--brand-color);
+.rc-slider-handle {
+  border: solid 2px var(--brand-color) !important;
+  opacity: 1 !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin-top: -6px !important;
 }
 
-#range-slider .range-slider__thumb {
-  background: var(--brand-color);
+.rc-slider-track {
+  background-color: var(--brand-color) !important;
 }
