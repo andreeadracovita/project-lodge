@@ -127,23 +127,28 @@ export const getPropertyBookedRanges
 export const getWishlistByUserId
 	= (userId) => apiClient.get(`/wishlist/user-id/${userId}`);
 
-// Messages -------------------------------------------------------------------
-export const getMessagesForUser1User2PropertyId
-	= (userId1, userId2, propertyId) => apiClient.get(`/message/${userId1}/${userId2}/${propertyId}`);
-
 // Reviews --------------------------------------------------------------------
 // Auth
 export const existsReviewForBookingId
 	= (bookingId) => apiClient.get(`/review/exists/booking/${bookingId}`);
-
-export const addReviewForBookingId
-	= (bookingId, payload) => apiClient.post(`/review/booking/${bookingId}`, payload); 
 
 export const getAllReviewsByLoggedUser
 	= () => apiClient.get("/review/all");
 
 export const getAuthorizationForReview
 	= (propertyId) => apiClient.get(`/review/authorize/booking/${propertyId}`);
+
+export const getAuthorizationForReviewEdit
+	= (reviewId) => apiClient.get(`/review/authorize/edit/${reviewId}`);
+
+export const addReviewForBookingId
+	= (bookingId, payload) => apiClient.post(`/review/booking/${bookingId}`, payload); 
+
+export const updateReviewById
+	= (reviewId, payload) => apiClient.patch(`/review/${reviewId}`, payload);
+
+export const deleteReviewById
+	= (reviewId) => apiClient.delete(`/review/${reviewId}`);
 
 // Non-auth
 export const getAllReviewsByPropertyId

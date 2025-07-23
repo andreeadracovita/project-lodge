@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
-import { getPropertyById } from "/src/api/BackendApiService";
+import { deleteReviewById, getPropertyById } from "/src/api/BackendApiService";
 import PropertyAvatar from "/src/components/common/PropertyAvatar";
 import Rating from "/src/components/common/Rating";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
-export default function UserPageReviewItem({ reviewData }) {
+export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
+	console.log(reviewData);
 	const [property, setProperty] = useState();
 
 	useEffect(() => {
@@ -21,6 +22,18 @@ export default function UserPageReviewItem({ reviewData }) {
 				console.error(error);
 			});
 	}, []);
+
+	function deleteReview() {
+		deleteReviewById(reviewData.id)
+			.then(response => {
+				if (response.status === 200) {
+					setNeedsRefresh(true);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}
 	
 	return (
 		<>
@@ -47,10 +60,27 @@ export default function UserPageReviewItem({ reviewData }) {
 						</div>
 						
 						<ul className="dropdown-menu dropdown-menu-end text-small">
-							<li><Link to="#" className="dropdown-item">Edit</Link></li>
+							<li><Link to={`/review?review_id=${reviewData.id}`} className="dropdown-item">Edit</Link></li>
 							<li><hr className="dropdown-divider" /></li>
-							<li><Link to="#" className="dropdown-item">Delete</Link></li>
+							<li><div className="dropdown-item cursor-pointer" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</div></li>
 						</ul>
+					</div>
+				</div>
+
+				<div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog">
+						<div className="modal-content">
+							<div className="modal-header">
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div className="modal-body">
+								Are you sure you want to delete the review?
+							</div>
+							<div className="modal-footer">
+								<div className="btn-pill" onClick={deleteReview} data-bs-dismiss="modal">Delete</div>
+								<div className="btn-pill" data-bs-dismiss="modal">Back</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
