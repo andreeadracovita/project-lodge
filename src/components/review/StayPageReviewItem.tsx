@@ -8,7 +8,10 @@ import Avatar from "/src/components/user/Avatar";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 export default function StayPageReviewItem({ reviewData, isCompact }) {
-	const [user, setUser] = useState();
+	const [user, setUser] = useState({
+		img_url: null,
+		first_name: "Deleted"
+	});
 
 	useEffect(() => {
 		getUserNameAndAvatar(reviewData.user_id)

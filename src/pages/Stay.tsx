@@ -29,6 +29,11 @@ export default function Stay() {
 			})
 	}, []);
 
+	function scrollToReviews() {
+		const reviewsSectionElement = document.getElementById("reviews");
+		reviewsSectionElement?.scrollIntoView();
+	}
+
 	return (
 		<>
 			{
@@ -45,7 +50,9 @@ export default function Stay() {
 						<p>
 							<Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
 						</p>
-						<Rating score={property.rating} reviewsNo={property.reviews_no} />
+						<span className="cursor-pointer" onClick={scrollToReviews}>
+							<Rating score={property.rating} reviewsNo={property.reviews_no} />
+						</span>
 					</div>
 					<div className="mt-3">
 						<PropertyPhotoGrid

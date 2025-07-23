@@ -19,7 +19,7 @@ export default function PropertyReviews({ property }) {
 	
 	return (
 		<>
-			<h2 className="section-heading">Guest reviews</h2>
+			<h2 id="reviews" className="section-heading">Guest reviews</h2>
 			<div className="mt-10">
 				<Rating score={property.rating} reviewsNo={property.reviews_no} />
 			</div>
