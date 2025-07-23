@@ -14,6 +14,7 @@
   
   --body-font-size: 14px;
   --nav-font-size: 16px; /* Navbar links */
+  --title-size: 16px; /* Review title */
   --headline-1-font-size: 32px; /* Account page title */
   --headline-2-font-size: 24px; /* Property page title, home sections heading */
   --headline-3-font-size: 20px; /* Search results title + bold, property price on card */
@@ -157,6 +158,11 @@ svg {
 
 .brand-font-color {
   color: var(--brand-color);
+}
+
+.title-text {
+  font-size: var(--title-size);
+  font-weight: 700;
 }
 /* End: Font ------------------------------------------------------------------ */
 
@@ -411,18 +417,6 @@ svg {
 
 .bubble-click {
   pointer-events: none;
-}
-
-#modal-dialog {
-  max-width: 100%;
-}
-
-#map-modal-container {
-  height: 100vh;
-}
-
-#modalBody {
-  overflow: hidden;
 }
 
 .search-page-fixed-width-left {

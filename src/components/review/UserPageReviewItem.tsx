@@ -8,7 +8,6 @@ import Rating from "/src/components/common/Rating";
 import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
 
 export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
-	console.log(reviewData);
 	const [property, setProperty] = useState();
 
 	useEffect(() => {
@@ -41,11 +40,12 @@ export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 			property &&
 			<div className="mt-10 border-section d-flex">
 				<div className="col-10 d-flex">
-					<PropertyAvatar url={property.images_url_array[0]} size={72} />
-
+					<Link to={`/stay?id=${reviewData.property_id}`}>
+						<PropertyAvatar url={property.images_url_array[0]} size={72} />
+					</Link>
 					<div className="ms-5">
 						<div>{property.title}</div>
-						<h2 className="section-heading">{reviewData.title}</h2>
+						<h2 className="title-text">{reviewData.title}</h2>
 						<div className="d-flex align-items-center">
 							<Rating score={reviewData.rating} />
 							<div className="ms-2">Reviewed on: {yearDashMonthDashDay(new Date(reviewData.created_at))}</div>

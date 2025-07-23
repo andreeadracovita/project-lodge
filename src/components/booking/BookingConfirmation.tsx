@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import countries from "react-select-country-list";
 
 import { getAllFeatures, getBookingById, getPropertyById, cancelBooking } from "/src/api/BackendApiService";
@@ -19,6 +20,8 @@ enum BookingStatus {
 
 export default function BookingConfirmation() {
 	const authContext = useAuth();
+	const navigate = useNavigate();
+
 	const [booking, setBooking] = useState();
 	const [property, setProperty] = useState();
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -161,7 +164,9 @@ export default function BookingConfirmation() {
 						<div className="mt-6">
 							
 						</div>
-						<div className="heading btn-text-underline">View accommodation page</div>
+						<div className="heading btn-text-underline" onClick={() => navigate(`/stay?id=${property.id}`)}>
+							View accommodation page
+						</div>
 					</div>
 
 					<div className="section-container">
