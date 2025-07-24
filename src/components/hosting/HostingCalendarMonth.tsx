@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 import HostingCalendarDay from "./HostingCalendarDay";
 import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
-import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay } from "/src/utils/dateUtils";
 
 export default function HostingCalendarMonth({ id, month, year }) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];

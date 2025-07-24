@@ -10,8 +10,8 @@ import { getGeolocation } from "/src/api/BackendApiService";
 import SearchResultsListView from "/src/components/searchResults/SearchResultsListView";
 import SearchResultsMapView from "/src/components/searchResults/SearchResultsMapView";
 import { useAuth } from "/src/components/security/AuthContext";
-import { getNightsCount } from "/src/utils/DateFormatUtils";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
+import { getNightsCount } from "/src/utils/dateUtils";
 
 export default function SearchResults() {
 	const authContext = useAuth();

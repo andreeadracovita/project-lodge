@@ -1,5 +1,5 @@
 import { Icon } from "/src/components/common/Icon";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 import { featuresIconMap } from "/src/utils/mappings";
 
 export default function Feature({ name, isLarge }) {

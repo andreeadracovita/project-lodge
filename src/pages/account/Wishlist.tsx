@@ -6,7 +6,7 @@ import ListView from "/src/components/list/ListView";
 import { ListItemType } from "/src/components/list/ListItemType";
 import MapView from "/src/components/map/MapView";
 import { genericMapCenter } from "/src/utils/constants";
-import { yearDashMonthDashDay, getNightsCount } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay, getNightsCount } from "/src/utils/dateUtils";
 
 export default function Wishlist() {
 	const [properties, setProperties] = useState([]);

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useState } from "react";
 
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 /**
  * Options are an array of objects with id and name: [ {id, name}, {id, name}, ...];

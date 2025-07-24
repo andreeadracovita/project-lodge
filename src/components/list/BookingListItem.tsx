@@ -4,7 +4,7 @@ import countries from "react-select-country-list";
 
 import { existsReviewForBookingId } from "/src/api/BackendApiService";
 import { fileStorage } from "/src/utils/constants";
-import { dayMonYear } from "/src/utils/DateFormatUtils";
+import { dayMonYear } from "/src/utils/dateUtils";
 
 type BookingListItemProp = {
 	id: number,

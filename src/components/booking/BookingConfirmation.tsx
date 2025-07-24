@@ -10,7 +10,7 @@ import Feature from "/src/components/common/Feature";
 import MapView from "/src/components/map/MapView";
 import { useAuth } from "/src/components/security/AuthContext";
 import { checkInTimes, checkOutTimes } from "/src/utils/constants";
-import { weekdayMonYear } from "/src/utils/DateFormatUtils";
+import { weekdayMonYear } from "/src/utils/dateUtils";
 
 enum BookingStatus {
 	confirmed = "confirmed",

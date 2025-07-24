@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { deleteReviewById, getPropertyById } from "/src/api/BackendApiService";
 import PropertyAvatar from "/src/components/common/PropertyAvatar";
 import Rating from "/src/components/common/Rating";
-import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay } from "/src/utils/dateUtils";
 
 export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 	const [property, setProperty] = useState();

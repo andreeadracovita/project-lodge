@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getAllExperiences } from "/src/api/BackendApiService";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 export default function FilterExperience({ filterData, updateMultiselectParams }) {
 	const [experiences, setExperiences] = useState([]);

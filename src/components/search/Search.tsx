@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Search.css";
 import Calendar from "/src/components/calendar/Calendar";
 import CountrySelect from "/src/components/common/CountrySelect";
-import { dayMonYear } from "/src/utils/DateFormatUtils";
+import { dayMonYear } from "/src/utils/dateUtils";
 
 export default function Search() {
 	const location = useLocation();

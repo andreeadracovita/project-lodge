@@ -4,7 +4,7 @@ import countries from "react-select-country-list";
 
 import "./CurrentTrip.css";
 import { checkInTimes, checkOutTimes, fileStorage } from "/src/utils/constants";
-import { weekdayMonYear } from "/src/utils/DateFormatUtils";
+import { weekdayMonYear } from "/src/utils/dateUtils";
 
 export default function CurrentTrip({ item }) {
 	const googleMapsLink = `https://www.google.com/maps/place/${item.geo.x}N+${item.geo.y}E`;

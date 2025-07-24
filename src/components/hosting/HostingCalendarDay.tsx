@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useEffect } from "react";
 
 import "./HostingCalendarDay.css";
-import { compareDates } from "/src/utils/DateFormatUtils";
+import { compareDates } from "/src/utils/dateUtils";
 
 export default function HostingCalendarDay({ id, year, month, day }) {
 

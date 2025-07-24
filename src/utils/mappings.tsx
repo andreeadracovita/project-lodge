@@ -16,14 +16,3 @@ export const featuresIconMap = new Map<string, Icon>([
 	["AC", <Icon.Snow />],
 	["luggage storage", <Icon.Luggage />]
 ]);
-
-export const experienceIconMap = new Map<string, string>([
-	["adventure", "🥾"],
-	["beach", "🏖️"],
-	["culture", "🏛️"],
-	["entertainment", "🎸"],
-	["food", "🍝"],
-	["nature", "🌲"],
-	["social", "🍸"],
-	["sports", "⚽️"],
-]);

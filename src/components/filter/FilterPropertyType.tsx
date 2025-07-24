@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getAllPropertyTypes } from "/src/api/BackendApiService";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 export default function FilterPropertyType({ filterData, updateMultiselectParams }) {
 	const [propertyTypes, setPropertyTypes] = useState([]);

@@ -5,7 +5,7 @@ import { getPropertyById, getUserNameAndAvatar } from "/src/api/BackendApiServic
 import PropertyAvatar from "/src/components/common/PropertyAvatar";
 import Rating from "/src/components/common/Rating";
 import Avatar from "/src/components/user/Avatar";
-import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay } from "/src/utils/dateUtils";
 
 export default function StayPageReviewItem({ reviewData, isCompact }) {
 	const [user, setUser] = useState({

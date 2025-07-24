@@ -14,7 +14,7 @@ import {
 import CountrySelect from "/src/components/common/CountrySelect";
 import FormError from "/src/components/common/FormError";
 import MapView from "/src/components/map/MapView";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 export default function FormPartTitleAddress({
 	isEditable,

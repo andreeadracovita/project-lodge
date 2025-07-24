@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import countries from "react-select-country-list";
 
 import { fileStorage } from "/src/utils/constants";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 type PlaceType = {
 	name: string;

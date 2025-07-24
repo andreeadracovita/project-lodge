@@ -5,7 +5,7 @@ import * as Icon from "react-bootstrap-icons";
 import "./CalendarMonth.css";
 import CalendarDay from "./CalendarDay";
 import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
-import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay } from "/src/utils/dateUtils";
 
 /*
 	Month: 0 - 11

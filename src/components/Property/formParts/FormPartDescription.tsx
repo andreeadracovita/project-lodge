@@ -6,7 +6,6 @@ import "./FormPartDescription.css";
 import { getAllFeatures, getAllExperiences, updateProperty } from "/src/api/BackendApiService";
 import FormError from "/src/components/common/FormError";
 import Multiselect from "/src/components/common/Multiselect";
-import { experienceIconMap, featuresIconMap } from "/src/utils/mappings";
 
 export default function FormPartDescription({
 	isEditable,
@@ -192,7 +191,6 @@ export default function FormPartDescription({
 					selectedIds={input.experiencesIds}
 					handleChange={handleChangeExperienceMultiselect}
 					isEditable={isEditable}
-					// iconMap={experienceIconMap}
 				/>
 			</div>
 			<FormError errors={errors} />

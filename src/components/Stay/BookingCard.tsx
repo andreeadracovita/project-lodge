@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./BookingCard.css";
 import Calendar from "/src/components/calendar/Calendar";
 import { useAuth } from "/src/components/security/AuthContext";
-import { getNightsCount, dayMonYear } from "/src/utils/DateFormatUtils";
+import { getNightsCount, dayMonYear } from "/src/utils/dateUtils";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 export default function BookingCard({price}) {

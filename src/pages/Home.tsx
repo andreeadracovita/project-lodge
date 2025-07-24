@@ -6,10 +6,9 @@ import { ListItemType } from "/src/components/list/ListItemType";
 import CarouselView from "/src/components/list/CarouselView";
 import Search from "/src/components/search/Search";
 import { greetingMessage, trendingDestinations } from "/src/utils/constants";
-import { experienceIconMap } from "/src/utils/mappings";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 import { fileStorage, landingImages } from "/src/utils/constants";
-import { yearDashMonthDashDay, getNightsCount } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay, getNightsCount } from "/src/utils/dateUtils";
 
 function getRandomLandingImage() {
 	return landingImages[Math.floor(Math.random() * landingImages.length)];

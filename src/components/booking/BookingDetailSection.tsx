@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router";
 
 import BookedPropertyType from "/src/components/booking/BookedPropertyType";
 import { checkInTimes, checkOutTimes } from "/src/utils/constants";
-import { weekdayMonYear, getNightsCount } from "/src/utils/DateFormatUtils";
+import { weekdayMonYear, getNightsCount } from "/src/utils/dateUtils";
 
 export default function BookingDetailSection({ item }) {
 	const [searchParams, setSearchParams] = useSearchParams();

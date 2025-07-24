@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { weekdayMonYear } from "/src/utils/DateFormatUtils";
+import { weekdayMonYear } from "/src/utils/dateUtils";
 
 export default function ReservationItem({ item }) {
 	

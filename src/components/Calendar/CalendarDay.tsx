@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import { compareDates } from "/src/utils/DateFormatUtils";
+import { compareDates } from "/src/utils/dateUtils";
 
 export default function CalendarDay({ year, month, day, checkIn, checkOut, bookedDates, handleDateClicked }) {
 	const date = new Date(year, month, day);

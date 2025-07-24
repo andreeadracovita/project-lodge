@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import AvailabilitySection from "./AvailabilitySection";
+import { getAllFeatures, getAllExperiences } from "/src/api/BackendApiService";
 import Feature from "/src/components/common/Feature";
 import MapView from "/src/components/map/MapView";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
-import { getAllFeatures, getAllExperiences } from "/src/api/BackendApiService";
-import { experienceIconMap } from "/src/utils/mappings";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 export default function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);
@@ -73,7 +72,7 @@ export default function PropertyDescription({property}) {
 						const foundExperience = experiences.find(exp => exp.id == id);
 						if (foundExperience) {
 							return <span key={i} className="features-list-item">
-								{/* {experienceIconMap.get(foundExperience.name)} */}{capitalizeFirstLetter(foundExperience.name)}
+								{capitalizeFirstLetter(foundExperience.name)}
 							</span>
 						}
 					})

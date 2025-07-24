@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getAllRentalTypes } from "/src/api/BackendApiService";
-import { capitalizeFirstLetter } from "/src/utils/StringUtils";
+import { capitalizeFirstLetter } from "/src/utils/stringUtils";
 
 export default function FilterRentalType({ filterData, updateMultiselectParams }) {
 	const [rentalTypes, setRentalTypes] = useState([]);

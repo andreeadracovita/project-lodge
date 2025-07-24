@@ -2,7 +2,7 @@ import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
 import { useAuth } from "/src/components/security/AuthContext";
-import { getNightsCount } from "/src/utils/DateFormatUtils";
+import { getNightsCount } from "/src/utils/dateUtils";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
 export default function BookingPriceSection({ item }) {

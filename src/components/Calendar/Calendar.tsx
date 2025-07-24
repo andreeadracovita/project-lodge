@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router";
 import "./Calendar.css";
 import CalendarMonth from "./CalendarMonth";
 import { getPropertyAvailability } from "/src/api/BackendApiService";
-import { yearDashMonthDashDay } from "/src/utils/DateFormatUtils";
+import { yearDashMonthDashDay } from "/src/utils/dateUtils";
 
 export default function Calendar() {
 	const [searchParams, setSearchParams] = useSearchParams();
