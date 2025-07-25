@@ -44,7 +44,7 @@ export default function FilterBedsRooms({ filterData, handleInputChange }) {
 					</div>
 					<div className="col-6">
 						<input
-							id="guests"
+							id="bathrooms"
 							type="number"
 							className="form-control"
 							min="1"

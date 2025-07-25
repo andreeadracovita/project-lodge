@@ -153,7 +153,7 @@ export default function BookingForm() {
 					required
 				/>
 
-				<label htmlFor="country-code">Country <span className="text-red">*</span></label>
+				<label htmlFor="nationality">Country <span className="text-red">*</span></label>
 				<CountrySelect
 					id="nationality"
 					initialValue={input.countryCode}

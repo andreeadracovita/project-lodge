@@ -25,6 +25,17 @@ export default function BookingCard({price}) {
 	useEffect(() => {
 		const checkInParam = searchParams.get("check_in");
 		const checkOutParam = searchParams.get("check_out");
+		if (!checkInParam && !checkOutParam) {
+			setInput(prevValue => {
+				return {
+					...prevValue,
+					checkIn: undefined,
+					checkOut: undefined
+				};
+			});
+			return;
+		}
+
 		if (checkInParam) {
 			setInput(prevValue => {
 				return {
