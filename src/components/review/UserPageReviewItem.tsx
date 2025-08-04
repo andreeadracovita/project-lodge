@@ -60,8 +60,6 @@ export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 						</div>
 						
 						<ul className="dropdown-menu dropdown-menu-end text-small">
-							<li><Link to={`/review?review_id=${reviewData.id}`} className="dropdown-item">Edit</Link></li>
-							<li><hr className="dropdown-divider" /></li>
 							<li><div className="dropdown-item cursor-pointer" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</div></li>
 						</ul>
 					</div>

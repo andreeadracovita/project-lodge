@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
-import { getAuthorizationForReview, getAuthorizationForReviewEdit, getPropertyById } from "/src/api/BackendApiService";
+import { getAuthorizationForReview, getPropertyById } from "/src/api/BackendApiService";
 import ReviewForm from "/src/components/review/ReviewForm";
 import PropertyListItem from "/src/components/list/PropertyListItem";
 
@@ -10,63 +10,34 @@ export default function Review() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const navigate = useNavigate();
 	const bookingId = searchParams.get("booking_id");
-	const reviewId = searchParams.get("review_id");
-	const [isAuthorizedToReview, setIsAuthorizedToReview] = useState(true);
 	const [property, setProperty] = useState();
-	const [review, setReview] = useState();
 
 	useEffect(() => {
-		if (!bookingId && !reviewId) {
+		if (!bookingId) {
 			navigate("/");
 			return;
 		}
 
-		if (bookingId) {
-			getAuthorizationForReview(bookingId)
-				.then(responseAuth => {
-					const data = responseAuth.data;
-					if (data && data.isAuthorized) {
-						const propertyId = data.property_id;
-						getPropertyById(propertyId)
-							.then(response => {
-								if (response.data) {
-									setProperty(response.data);
-								}
-							})
-							.catch(error => {
-								console.error(error);
-							});
-					}
-				})
-				.catch(error => {
-					navigate("/");
-					console.error(error);
-				});
-		} else if (reviewId) {
-			getAuthorizationForReviewEdit(reviewId)
-				.then(responseAuth => {
-					console.log(responseAuth.status, responseAuth.data);
-					if (responseAuth.status === 200 && responseAuth.data.isAuthorized === true) {
-						console.log("OK");
-						const reviewData = responseAuth.data.review_data;
-						getPropertyById(reviewData.property_id)
-							.then(response => {
-								if (response.data) {
-									setProperty(response.data);
-								}
-							})
-							.catch(error => {
-								console.error(error);
-							});
-						setReview(reviewData);
-					}
-				})
-				.catch (error => {
-					navigate("/");
-					console.error(error);
-				});
-		}
-		
+		getAuthorizationForReview(bookingId)
+			.then(responseAuth => {
+				const data = responseAuth.data;
+				if (data && data.isAuthorized) {
+					const propertyId = data.property_id;
+					getPropertyById(propertyId)
+						.then(response => {
+							if (response.data) {
+								setProperty(response.data);
+							}
+						})
+						.catch(error => {
+							console.error(error);
+						});
+				}
+			})
+			.catch(error => {
+				navigate("/");
+				console.error(error);
+			});
 	}, []);
 	
 	return (
@@ -87,7 +58,7 @@ export default function Review() {
 				</div>
 				<div className="col-9">
 					<h1 className="page-heading">Review your stay</h1>
-					<ReviewForm propertyId={property.id} reviewData={review} />
+					<ReviewForm propertyId={property.id} />
 				</div>
 			</div>
 		}

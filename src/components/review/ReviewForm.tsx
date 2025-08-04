@@ -3,21 +3,19 @@ import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 import StarRating from "./StarRating";
-import { addReviewForBookingId, updateReviewById } from "/src/api/BackendApiService";
+import { addReviewForBookingId } from "/src/api/BackendApiService";
 import FormError from "/src/components/common/FormError";
 
-export default function ReviewForm({ propertyId, reviewData }) {
-	console.log(reviewData);
+export default function ReviewForm({ propertyId }) {
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [input, setInput] = useState({
-		rating: reviewData ? String(reviewData.rating) : 0,
-		title: reviewData ? reviewData.title : "",
-		body: reviewData ? reviewData.body : ""
+		rating: 0,
+		title: "",
+		body: ""
 	});
 	const [errors, setErrors] = useState([]);
 	const bookingId = searchParams.get("booking_id");
-	const reviewId = searchParams.get("review_id");
 
 	function handleChange(event) {
 		const { value, name } = event.target;
@@ -32,42 +30,27 @@ export default function ReviewForm({ propertyId, reviewData }) {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		if (!bookingId && !reviewId) {
+		if (!bookingId) {
 			return;
 		}
-		if (bookingId) {
-			const payload = {
-				rating: input.rating,
-				title: input.title,
-				body: input.body,
-				property_id: propertyId
-			};
-			addReviewForBookingId(bookingId, payload)
-				.then(response => {
-					const errors = response.data.errors;
-					if (errors) {
-						setErrors(errors);
-						return;
-					}
-					navigate("/myaccount/reviews");
-				})
-				.catch(error => {
-					console.error(error);
-				});
-		} else if (reviewId) {
-			updateReviewById(reviewId, input)
-				.then(response => {
-					const errors = response.data.errors;
-					if (errors) {
-						setErrors(errors);
-						return;
-					}
-					navigate("/myaccount/reviews");
-				})
-				.catch(error => {
-					console.error(error);
-				});
-		}
+		const payload = {
+			rating: input.rating,
+			title: input.title,
+			body: input.body,
+			property_id: propertyId
+		};
+		addReviewForBookingId(bookingId, payload)
+			.then(response => {
+				const errors = response.data.errors;
+				if (errors) {
+					setErrors(errors);
+					return;
+				}
+				navigate("/myaccount/reviews");
+			})
+			.catch(error => {
+				console.error(error);
+			});
 	}
 	
 	return (
@@ -101,7 +84,7 @@ export default function ReviewForm({ propertyId, reviewData }) {
 
 			<div className="d-flex mt-4">
 				<button type="submit" className="btn-pill">Submit review</button>
-				<div className="btn-pill-outline ms-2" onClick={() => navigate("/myaccount/reviews")}>Dismiss</div>
+				<div className="btn-pill-outline ms-2" onClick={() => navigate(-1)}>Dismiss</div>
 			</div>
 		</form>
 	);

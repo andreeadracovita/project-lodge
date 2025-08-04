@@ -138,14 +138,8 @@ export const getAllReviewsByLoggedUser
 export const getAuthorizationForReview
 	= (propertyId) => apiClient.get(`/review/authorize/booking/${propertyId}`);
 
-export const getAuthorizationForReviewEdit
-	= (reviewId) => apiClient.get(`/review/authorize/edit/${reviewId}`);
-
 export const addReviewForBookingId
 	= (bookingId, payload) => apiClient.post(`/review/booking/${bookingId}`, payload); 
-
-export const updateReviewById
-	= (reviewId, payload) => apiClient.patch(`/review/${reviewId}`, payload);
 
 export const deleteReviewById
 	= (reviewId) => apiClient.delete(`/review/${reviewId}`);
