@@ -36,14 +36,21 @@ export default function PropertyDescription({property}) {
 			});
 	}, []);
 
+	const guestsString = property.guests + " " + (property.guests > 1 ? "guests" : "guest");
+	const bedsString = property.beds + " " + (property.beds > 1 ? "beds" : "bed");
+	const bedroomsString = property.bedrooms + " " + (property.bedrooms > 1 ? "bedrooms" : "bedroom");
+	const bathroomsString = property.bathrooms + " " + (property.bathrooms > 1 ? "bathrooms" : "bathroom");
+
 	return (
 		<>
 			<h2 className="section-heading">About this property</h2>
 			<div className="mt-10">
 				{property.description.replace('\n', <br />)}
 			</div>
+			<div className="mt-6">Max {guestsString}</div>
+			<div className="mt-6">{bedsString}, {bedroomsString}, {bathroomsString}</div>
 			<div className="btn-pill-outline mt-6">Show more</div>
-			{/*<p className="btn btn-outline-dark rounded-pill">Show less</p>*/}
+			<div className="btn-pill-outline mt-6">Show less</div>
 			<hr />
 			<h2 className="section-heading">Features</h2>
 			<div className="mt-10">
@@ -57,6 +64,7 @@ export default function PropertyDescription({property}) {
 				}
 			</div>
 			<div className="btn-pill-outline mt-6">Show more</div>
+			<div className="btn-pill-outline mt-6">Show less</div>
 			{
 				property.is_listed &&
 				<>

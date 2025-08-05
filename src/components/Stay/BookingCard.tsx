@@ -8,7 +8,7 @@ import { useAuth } from "/src/components/security/AuthContext";
 import { getNightsCount, dayMonYear } from "/src/utils/dateUtils";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 
-export default function BookingCard({price}) {
+export default function BookingCard({price, maxGuests}) {
 	const authContext = useAuth();
 	const navigate = useNavigate();
 	const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
@@ -19,7 +19,7 @@ export default function BookingCard({price}) {
 	const [input, setInput] = useState({
 		checkIn: undefined,
 		checkOut: undefined,
-		guests: searchParams.get("guests") ?? 1
+		guests: Math.min(searchParams.get("guests"), maxGuests) ?? 1
 	});
 
 	useEffect(() => {
@@ -91,9 +91,9 @@ export default function BookingCard({price}) {
 				{input.guests} {input.guests > 1 ? <span>guests</span> : <span>guest</span>}, {nightsCount} {nightsCount > 1 ? <span>nights</span> : <span>night</span>}
 			</p>
 			<form>
-				<div className="form-field rounded-pill d-flex p-1 w-100">
-					<div className="dropdown-center w-100 cursor-pointer px-3">
-						<div id="dropdown-toggle" className="d-flex px-2 py-1 align-items-center justify-content-between" data-bs-toggle="dropdown">
+				<div className="form-field rounded-pill d-flex px-4 py-2 w-100">
+					<div className="dropdown-center w-100 cursor-pointer">
+						<div id="dropdown-toggle" className="d-flex align-items-center justify-content-between" data-bs-toggle="dropdown">
 							<span className="me-2">
 								<span className="d-block">{input.checkIn && "Check-in"}</span>
 								<span className="d-block">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>
@@ -110,16 +110,17 @@ export default function BookingCard({price}) {
 						</div>
 					</div>
 				</div>
-				<div className="form-field rounded-pill p-1 w-100 mt-3 ps-3">
-					<label htmlFor="guests" className="ms-2">Guests</label>
-					<br />
+				<div className="form-field rounded-pill w-100 mt-3 px-4 py-2 d-flex align-items-center">
+					<label htmlFor="guests">Guests</label>
 					<input
 						id="guests"
 						type="number"
-						className="form-control search-field rounded-pill w-25"
+						className="form-control search-field rounded-pill w-25 ms-2"
 						placeholder="Guests"
 						aria-label="number of guests"
 						name="guests"
+						max={maxGuests}
+						min={1}
 						value={input.guests}
 						onChange={handleChange}
 					/>

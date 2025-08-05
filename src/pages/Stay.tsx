@@ -66,7 +66,7 @@ export default function Stay() {
 						{
 							property.is_listed &&
 							<div className="col-4">
-								<BookingCard price={property.price_night_site} />
+								<BookingCard price={property.price_night_site} maxGuests={property.guests} />
 							</div>
 						}
 					</div>
