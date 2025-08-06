@@ -49,8 +49,8 @@ export default function PropertyDescription({property}) {
 			</div>
 			<div className="mt-6">Max {guestsString}</div>
 			<div className="mt-6">{bedsString}, {bedroomsString}, {bathroomsString}</div>
-			<div className="btn-pill-outline mt-6">Show more</div>
-			<div className="btn-pill-outline mt-6">Show less</div>
+			{/*<div className="btn-pill-outline mt-6">Show more</div>
+			<div className="btn-pill-outline mt-6">Show less</div>*/}
 			<hr />
 			<h2 className="section-heading">Features</h2>
 			<div className="mt-10">
@@ -63,8 +63,8 @@ export default function PropertyDescription({property}) {
 					})
 				}
 			</div>
-			<div className="btn-pill-outline mt-6">Show more</div>
-			<div className="btn-pill-outline mt-6">Show less</div>
+			{/*<div className="btn-pill-outline mt-6">Show more</div>
+			<div className="btn-pill-outline mt-6">Show less</div>*/}
 			{
 				property.is_listed &&
 				<>
