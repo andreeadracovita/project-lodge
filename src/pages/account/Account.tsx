@@ -47,6 +47,15 @@ export default function Account() {
 							url={`/myaccount/settings?tab=${SettingsTab.Preferences}`}
 						/>
 					</div>
+					<div className="col-4">
+						<AccountCard
+							iconName="Trash3"
+							iconSize={iconSize}
+							title="Delete account"
+							desc="Delete the current account"
+							url={`/myaccount/settings?tab=${SettingsTab.Security}`}
+						/>
+					</div>
 				</div>
 			</div>
 

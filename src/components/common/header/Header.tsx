@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
 import "./Header.css";
@@ -9,7 +9,6 @@ import { availableCurrencies, siteName } from "/src/utils/constants";
 
 export default function Header() {
 	const authContext = useAuth();
-	const navigate = useNavigate();
 
 	function logoutClicked() {
 		authContext.logout();

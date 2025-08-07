@@ -76,7 +76,7 @@ export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 							</div>
 							<div className="modal-footer">
 								<div className="btn-pill" onClick={deleteReview} data-bs-dismiss="modal">Delete</div>
-								<div className="btn-pill" data-bs-dismiss="modal">Back</div>
+								<div className="btn-pill-outline" data-bs-dismiss="modal">Back</div>
 							</div>
 						</div>
 					</div>
