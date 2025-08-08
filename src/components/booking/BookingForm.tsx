@@ -10,7 +10,6 @@ import FormError from "/src/components/common/FormError";
 export default function BookingForm() {
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
-	// TODO: pre-fill if user is logged-in
 	const [input, setInput] = useState({
 		firstName: "",
 		lastName: "",

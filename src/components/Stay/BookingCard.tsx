@@ -77,8 +77,7 @@ export default function BookingCard({price, maxGuests}) {
 		const checkIn = searchParams.get("check_in");
 		const checkOut = searchParams.get("check_out");
 		if (!checkIn || !checkOut) {
-			// TODO focus check-in/out field like in search
-			console.log("Invalid check-in and check-out");
+			document.getElementById("date-range").focus();
 			return;
 		}
 		navigate(`/book?id=${searchParams.get("id")}&guests=${input.guests}&check_in=${searchParams.get("check_in")}&check_out=${searchParams.get("check_out")}`);
@@ -92,7 +91,7 @@ export default function BookingCard({price, maxGuests}) {
 			</p>
 			<form>
 				<div className="form-field rounded-pill d-flex px-4 py-2 w-100">
-					<div className="dropdown-center w-100 cursor-pointer">
+					<div id="date-range" className="dropdown-center w-100 cursor-pointer focusable rounded-pill" tabIndex="0">
 						<div id="dropdown-toggle" className="d-flex align-items-center justify-content-between" data-bs-toggle="dropdown">
 							<span className="me-2">
 								<span className="d-block">{input.checkIn && "Check-in"}</span>

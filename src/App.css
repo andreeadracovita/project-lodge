@@ -423,3 +423,7 @@ svg {
   min-width: 280px;
   max-width: 280px;
 }
+
+.carousel-inner {
+  text-align: inherit;
+}
