@@ -10,6 +10,7 @@ import { getGeolocation } from "/src/api/BackendApiService";
 import SearchResultsListView from "/src/components/searchResults/SearchResultsListView";
 import SearchResultsMapView from "/src/components/searchResults/SearchResultsMapView";
 import { useAuth } from "/src/components/security/AuthContext";
+import { genericMapCenter } from "/src/utils/constants";
 import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
 import { getNightsCount } from "/src/utils/dateUtils";
 
@@ -23,7 +24,7 @@ export default function SearchResults() {
 	const [isFullscreenMap, setIsFullscreenMap] = useState(false);
 	const [budgetProperties, setBudgetProperties] = useState([]);
 	const [geo, setGeo] = useState({
-		coordinate: [],
+		coordinate: genericMapCenter,
 		boundingbox: null
 	});
 	const [nightsCount, setNightsCount] = useState();
@@ -67,28 +68,37 @@ export default function SearchResults() {
 			});
 
 		// Update geolocation
-		const countryFull = countries().getLabel(searchParams.get("country"));
+		const country = searchParams.get("country");
 		const city = searchParams.get("city");
 
-		const address = city ? city + "+" + countryFull : countryFull;
-		getGeolocation(address)
-			.then(response => {
-				if (response.data.length > 0) {
-					const data = response.data[0];
-					setGeo({
-						coordinate: [Number(data.lat), Number(data.lon)],
-						boundingbox: [
-							Number(data.boundingbox[0]),
-							Number(data.boundingbox[1]),
-							Number(data.boundingbox[2]),
-							Number(data.boundingbox[3]),
-						]
-					});
-				}
-			})
-			.catch(error => {
-				console.error(error);
-			});
+		let address = "";
+		if (city) {
+			address += city;
+		}
+		if (country) {
+			address += countries().getLabel(country);
+		}
+		
+		if (address !== "") {
+			getGeolocation(address)
+				.then(response => {
+					if (response.data.length > 0) {
+						const data = response.data[0];
+						setGeo({
+							coordinate: [Number(data.lat), Number(data.lon)],
+							boundingbox: [
+								Number(data.boundingbox[0]),
+								Number(data.boundingbox[1]),
+								Number(data.boundingbox[2]),
+								Number(data.boundingbox[3]),
+							]
+						});
+					}
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
 	}, [
 		searchParams.get("country"),
 		searchParams.get("city"),

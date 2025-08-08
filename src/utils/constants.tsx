@@ -14,7 +14,7 @@ export const availableCurrencies = ["EUR", "USD", "CHF", "GBP"];
 export const defaultLanguage = "en-GB";
 
 // Used for map coordinates when no geo data is available
-export const genericMapCenter = [47.36264, 8.55256];
+export const genericMapCenter = [64.141892, -21.947903];
 
 // Available languages
 export const availableLanguages = [

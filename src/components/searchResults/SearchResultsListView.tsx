@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
@@ -16,14 +17,25 @@ export default function SearchResultsListView({
 	setIsFullscreenMap
 }) {
 	const [searchParams, setSearchParams] = useSearchParams();
+
 	const countString = `${items.length} ${items.length > 1 ? "results" : "result"}`;
 	const checkInParam = searchParams.get("check_in");
 	const checkOutParam = searchParams.get("check_out");
 	const guests = parseInt(searchParams.get("guests"));
-
-	const countryFull = countries().getLabel(searchParams.get("country"));
 	const city = searchParams.get("city");
-	const locationString = city ? city + ", " + countryFull : countryFull;
+
+	function getLocationString() {
+		let locationString = "";
+		if (searchParams.get("country")) {
+			locationString = countries().getLabel(searchParams.get("country"));
+		}
+
+		const city = searchParams.get("city");
+		if (city) {
+			locationString = city + ", " + locationString;
+		}
+		return locationString;
+	}
 	
 	return (
 		<div className="container section-container">
@@ -57,7 +69,7 @@ export default function SearchResultsListView({
 					</div>
 				</div>
 				<div className="ms-2">
-					<h1 className="page-heading">{locationString}: {countString} found</h1>
+					<h1 className="page-heading">{getLocationString()}: {countString} found</h1>
 					<div className="mt-10">
 						<ListView
 							listItemType={ListItemType.Property}
