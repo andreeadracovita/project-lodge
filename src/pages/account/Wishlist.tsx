@@ -41,6 +41,7 @@ export default function Wishlist() {
 				checkOut={checkOutParam}
 				nightsCount={nightsCount}
 				cols={4}
+				isCompact={true}
 			/>
 		</div>
 	);
