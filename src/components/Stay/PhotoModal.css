@@ -16,7 +16,7 @@
 }
 
 #thumbnails-container {
-	overflow: scroll;
+	overflow-x: scroll;
 }
 
 .thumbnail {

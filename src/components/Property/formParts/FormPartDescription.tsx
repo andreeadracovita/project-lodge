@@ -6,6 +6,7 @@ import "./FormPartDescription.css";
 import { getAllFeatures, getAllExperiences, updateProperty } from "/src/api/BackendApiService";
 import FormError from "/src/components/common/FormError";
 import Multiselect from "/src/components/common/Multiselect";
+import { featuresIconMap } from "/src/utils/mappings";
 
 export default function FormPartDescription({
 	isEditable,

@@ -26,6 +26,7 @@ export default function EditPropertyForm() {
 		country: "",
 		street: "",
 		streetNo: "",
+		geo: null,
 
 		description: "",
 		buildingType: 1,
@@ -67,6 +68,7 @@ export default function EditPropertyForm() {
 							country: data.country,
 							street: data.street,
 							streetNo: data.street_no,
+							geo: [Number(data.geo.x), Number(data.geo.y)],
 							buildingType: data.building_type_id,
 							rentalType: data.rental_type_id,
 

@@ -26,10 +26,19 @@ export default function FormPartTitleAddress({
 	handleChangeCountry,
 	advanceState
 }) {
+	console.log(input);
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
 	const [geoCoords, setGeoCoords] = useState();
 	const [errors, setErrors] = useState([]);
+	let pickedGeo = [];
+
+	useEffect(() => {
+		console.log(input.geo);
+		if (input.geo) {
+			setGeoCoords(input.geo);
+		}
+	}, [input.geo]);
 
 	useEffect(() => {
 		getAllPropertyTypes()
@@ -53,9 +62,9 @@ export default function FormPartTitleAddress({
 			});
 	}, []);
 
-	useEffect(() => {
-		console.log("Geo:", geoCoords);
-	}, [geoCoords]);
+	function setPickedGeo(coords) {
+		pickedGeo = coords;
+	}
 
 	const stylingFormControl100 = classNames(
 		"form-control",
@@ -79,8 +88,6 @@ export default function FormPartTitleAddress({
 					setErrors([]);
 					const data = response.data[0];
 					setGeoCoords([Number(data.lat), Number(data.lon)]);
-
-					console.log([Number(data.lat), Number(data.lon)]);
 				} else {
 					getGeolocation(input.city + "+" + countryLabel)
 						.then(response => {
@@ -88,8 +95,6 @@ export default function FormPartTitleAddress({
 								setErrors([]);
 								const data = response.data[0];
 								setGeoCoords([Number(data.lat), Number(data.lon)]);
-
-								console.log([Number(data.lat), Number(data.lon)]);
 							} else {
 								setErrors(["No geographical location identified for given address. Check if city and country are correct."]);
 							}
@@ -110,7 +115,7 @@ export default function FormPartTitleAddress({
 	async function createProperty() {
 		const payload = {
 			title: input.title,
-			geo: { x: geoCoords[0], y: geoCoords[1] },
+			geo: { x: pickedGeo[0], y: pickedGeo[1] },
 			city: input.city,
 			country: input.country,
 			street: input.street,
@@ -143,7 +148,7 @@ export default function FormPartTitleAddress({
 	async function patchProperty() {
 		const payload = {
 			title: input.title,
-			geo: { x: geoCoords[0], y: geoCoords[1] },
+			geo: { x: pickedGeo[0], y: pickedGeo[1] },
 			city: input.city,
 			country: input.country,
 			building_type_id: parseInt(input.buildingType),
@@ -289,7 +294,7 @@ export default function FormPartTitleAddress({
 							zoom={14}
 							points={[geoCoords]}
 							isEditable={true}
-							updatePinPosition={setGeoCoords}
+							updatePinPosition={setPickedGeo}
 						/>
 						<div>Drag pin on map to your property's location</div>
 					</div>
