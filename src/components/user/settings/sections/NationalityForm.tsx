@@ -14,6 +14,13 @@ export default function NationalityForm({ value, isFocused, showSectionHandler, 
 		setCountryCode(value);
 	}, [value]);
 
+	useEffect(() => {
+		if (!isFocused) {
+			// Reset state
+			setCountryCode(value);
+		}
+	}, [isFocused]);
+
 	function handleChange(value): void {
 		setCountryCode(value);
 	}

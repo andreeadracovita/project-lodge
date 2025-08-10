@@ -17,6 +17,17 @@ export default function CurrencyForm({ value, isFocused, showSectionHandler, cle
 			setCurrency(value);
 		}
 	}, [value]);
+
+	useEffect(() => {
+		if (!isFocused) {
+			// Reset state
+			if (value !== null && value !== "") {
+				setCurrency(value);
+			} else {
+				setCurrency(authContext.currency);
+			}
+		}
+	}, [isFocused]);
 	
 	function handleChange(event: Event): void {
 		setCurrency(event.target.value);

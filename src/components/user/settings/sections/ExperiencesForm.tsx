@@ -26,6 +26,17 @@ export default function ExperiencesForm({ value, isFocused, showSectionHandler, 
 		}
 	}, [value]);
 
+	useEffect(() => {
+		if (!isFocused) {
+			// Reset state
+			if (value !== null) {
+				setExperiencesIds(value);
+			} else {
+				setExperiencesIds([]);
+			}
+		}
+	}, [isFocused]);
+
 	function handleChange(event) {
 		const item = parseInt(event.target.id);
 

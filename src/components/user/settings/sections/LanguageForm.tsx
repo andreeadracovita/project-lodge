@@ -17,6 +17,17 @@ export default function LanguageForm({ value, isFocused, showSectionHandler, cle
 			setLanguage(value);
 		}
 	}, [value]);
+
+	useEffect(() => {
+		if (!isFocused) {
+			// Reset state
+			if (value !== null && value !== "") {
+				setLanguage(value);
+			} else {
+				setLanguage(authContext.language);
+			}
+		}
+	}, [isFocused]);
 	
 	function handleChange(event: Event): void {
 		setLanguage(event.target.value);

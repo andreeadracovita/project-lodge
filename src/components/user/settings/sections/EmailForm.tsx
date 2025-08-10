@@ -12,6 +12,13 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 	useEffect(() => {
 		setEmail(value);
 	}, [value]);
+
+	useEffect(() => {
+		if (!isFocused) {
+			// Reset state
+			setEmail(value);
+		}
+	}, [isFocused]);
 	
 	function handleChange(event): void {
 		setEmail(event.target.value);

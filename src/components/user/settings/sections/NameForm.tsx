@@ -16,8 +16,18 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 		setInput({
 			firstName: firstNameValue,
 			lastName: lastNameValue
-		})
+		});
 	}, [firstNameValue, lastNameValue]);
+
+	useEffect(() => {
+		if (!isFocused) {
+			// Reset state
+			setInput({
+				firstName: firstNameValue,
+				lastName: lastNameValue
+			});
+		}
+	}, [isFocused]);
 
 	function handleChange(event): void {
 		const { name, value } = event.target;
