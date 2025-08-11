@@ -6,7 +6,7 @@ import CountrySelect from "/src/components/common/CountrySelect";
 import FormError from "/src/components/common/FormError";
 import { updateUser } from "/src/api/BackendApiService";
 
-export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
+export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [countryCode, setCountryCode] = useState(value);
 	const [errors, setErrors] = useState([]);
 
@@ -37,6 +37,7 @@ export default function NationalityForm({ value, isFocused, showSectionHandler, 
 				}
 				clearSectionHandler();
 				setErrors([]);
+				refreshUserData();
 			})
 			.catch((error) => {
 				console.error(error);

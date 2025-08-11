@@ -26,6 +26,22 @@ export default function Settings() {
 	const [activeSection, setActiveSection] = useState(SettingsSectionEnum.None);
 
 	useEffect(() => {
+		refreshUserData();
+	}, []);
+
+	useEffect(() => {
+		setActiveTab(searchParams.get("tab"));
+	}, [searchParams.get("tab")]);
+
+	function showSectionHandler(section: SettingsSectionEnum): void {
+		setActiveSection(section);
+	}
+
+	function clearSectionHandler(): void {
+		setActiveSection(SettingsSectionEnum.None);
+	}
+
+	function refreshUserData(): void {
 		getUserConfig()
 			.then(response => {
 				const data = response.data;
@@ -43,19 +59,7 @@ export default function Settings() {
 			})
 			.catch(error => {
 				console.error(error);
-			})
-	}, []);
-
-	useEffect(() => {
-		setActiveTab(searchParams.get("tab"));
-	}, [searchParams.get("tab")]);
-
-	function showSectionHandler(section: SettingsSectionEnum): void {
-		setActiveSection(section);
-	}
-
-	function clearSectionHandler(): void {
-		setActiveSection(SettingsSectionEnum.None);
+			});
 	}
 
 	return (
@@ -96,6 +100,7 @@ export default function Settings() {
 							showSectionHandler={showSectionHandler}
 							clearSectionHandler={clearSectionHandler}
 							activeSection={activeSection}
+							refreshUserData={refreshUserData}
 						/>
 					}
 					{
@@ -114,6 +119,7 @@ export default function Settings() {
 							showSectionHandler={showSectionHandler}
 							clearSectionHandler={clearSectionHandler}
 							activeSection={activeSection}
+							refreshUserData={refreshUserData}
 						/>
 					}
 				</div>

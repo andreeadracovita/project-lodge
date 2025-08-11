@@ -5,7 +5,7 @@ import { formClassNames } from "../formClassNames";
 import { updateUser } from "/src/api/BackendApiService";
 import FormError from "/src/components/common/FormError";
 
-export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSectionHandler, clearSectionHandler }) {
+export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [input, setInput] = useState({
 		firstName: firstNameValue,
 		lastName: lastNameValue
@@ -55,6 +55,7 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 				clearSectionHandler();
 				setErrors([]);
 				authContext.setUserConfig();
+				refreshUserData();
 			})
 			.catch((error) => {
 				console.error(error);

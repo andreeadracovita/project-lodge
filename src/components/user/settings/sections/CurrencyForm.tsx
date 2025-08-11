@@ -7,7 +7,7 @@ import FormError from "/src/components/common/FormError";
 import { useAuth } from "/src/components/security/AuthContext";
 import { availableCurrencies } from "/src/utils/constants";
 
-export default function CurrencyForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
+export default function CurrencyForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const authContext = useAuth();
 	const [currency, setCurrency] = useState(authContext.currency);
 	const [errors, setErrors] = useState([]);
@@ -45,6 +45,7 @@ export default function CurrencyForm({ value, isFocused, showSectionHandler, cle
 				clearSectionHandler();
 				setErrors([]);
 				authContext.setUserConfig();
+				refreshUserData();
 			})
 			.catch((error) => {
 				console.error(error);

@@ -5,7 +5,7 @@ import NameForm from "../sections/NameForm";
 import NationalityForm from "../sections/NationalityForm";
 import { getUserConfig } from "/src/api/BackendApiService";
 
-export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection }) {
+export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }) {
 
 	return (
 		<>
@@ -29,6 +29,7 @@ export default function PersonalDetails({ data, showSectionHandler, clearSection
 				isFocused={activeSection === SettingsSectionEnum.Name}
 				showSectionHandler={showSectionHandler}
 				clearSectionHandler={clearSectionHandler}
+				refreshUserData={refreshUserData}
 			/>
 			<hr />
 			<EmailForm
@@ -36,6 +37,7 @@ export default function PersonalDetails({ data, showSectionHandler, clearSection
 				isFocused={activeSection === SettingsSectionEnum.Email}
 				showSectionHandler={showSectionHandler}
 				clearSectionHandler={clearSectionHandler}
+				refreshUserData={refreshUserData}
 			/>
 			<hr />
 			<NationalityForm
@@ -43,6 +45,7 @@ export default function PersonalDetails({ data, showSectionHandler, clearSection
 				isFocused={activeSection === SettingsSectionEnum.Nationality}
 				showSectionHandler={showSectionHandler}
 				clearSectionHandler={clearSectionHandler}
+				refreshUserData={refreshUserData}
 			/>
 			<hr />
 		</>

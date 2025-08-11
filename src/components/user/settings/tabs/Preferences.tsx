@@ -3,7 +3,7 @@ import CurrencyForm from "../sections/CurrencyForm";
 import ExperiencesForm from "../sections/ExperiencesForm";
 import LanguageForm from "../sections/LanguageForm";
 
-export default function Preferences({ data, showSectionHandler, clearSectionHandler, activeSection }) {
+export default function Preferences({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }) {
 
 	return (
 		<>
@@ -15,13 +15,7 @@ export default function Preferences({ data, showSectionHandler, clearSectionHand
 				isFocused={activeSection === SettingsSectionEnum.Currency}
 				showSectionHandler={showSectionHandler}
 				clearSectionHandler={clearSectionHandler}
-			/>
-			<hr />
-			<LanguageForm
-				value={data.language}
-				isFocused={activeSection === SettingsSectionEnum.Language}
-				showSectionHandler={showSectionHandler}
-				clearSectionHandler={clearSectionHandler}
+				refreshUserData={refreshUserData}
 			/>
 			<hr />
 			<ExperiencesForm
@@ -29,6 +23,7 @@ export default function Preferences({ data, showSectionHandler, clearSectionHand
 				isFocused={activeSection === SettingsSectionEnum.Experiences}
 				showSectionHandler={showSectionHandler}
 				clearSectionHandler={clearSectionHandler}
+				refreshUserData={refreshUserData}
 			/>
 			<hr />
 		</>

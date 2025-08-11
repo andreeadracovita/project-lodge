@@ -5,7 +5,7 @@ import { formClassNames } from "../formClassNames";
 import { updateUser } from "/src/api/BackendApiService";
 import FormError from "/src/components/common/FormError";
 
-export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
+export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [email, setEmail] = useState(value);
 	const [errors, setErrors] = useState([]);
 
@@ -36,6 +36,7 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 				}
 				clearSectionHandler();
 				setErrors([]);
+				refreshUserData();
 			})
 			.catch(error => {
 				console.error(error);

@@ -4,7 +4,7 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { getAllExperiences, updateUser } from "/src/api/BackendApiService";
 import Multiselect from "/src/components/common/Multiselect";
 
-export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
+export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [experiencesIds, setExperiencesIds] = useState([]);
 	const [experiences, setExperiences] = useState();
 
@@ -54,6 +54,7 @@ export default function ExperiencesForm({ value, isFocused, showSectionHandler, 
 		updateUser({ experiences_ids: experiencesIds })
 			.then(() => {
 				clearSectionHandler();
+				refreshUserData();
 			})
 			.catch((error) => {
 				console.error(error);
