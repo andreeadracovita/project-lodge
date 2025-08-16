@@ -312,7 +312,7 @@ export default function EditPropertyForm() {
 								/>
 							</div>
 							<div className="col-6">
-								<div className="col-7 pt-5 ms-5 sticky">
+								<div className="col-6 pt-5 ms-5 sticky">
 									<div id="preview">
 										<PropertyListItem
 											isPreview={true}
@@ -328,6 +328,7 @@ export default function EditPropertyForm() {
 											checkOut={previewCheckOut}
 											nightsCount={1}
 											guests={1}
+											isCompact={true}
 										/>
 									</div>
 								</div>
