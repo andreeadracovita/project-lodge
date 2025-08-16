@@ -26,17 +26,16 @@ export default function FormPartTitleAddress({
 	handleChangeCountry,
 	advanceState
 }) {
-	console.log(input);
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
 	const [geoCoords, setGeoCoords] = useState();
 	const [errors, setErrors] = useState([]);
-	let pickedGeo = [];
+	let pickedGeo = input.geo ?? [];
 
 	useEffect(() => {
-		console.log(input.geo);
 		if (input.geo) {
 			setGeoCoords(input.geo);
+			pickedGeo = input.geo;
 		}
 	}, [input.geo]);
 
