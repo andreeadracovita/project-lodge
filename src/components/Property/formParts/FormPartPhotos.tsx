@@ -7,6 +7,19 @@ import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
 
 export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
 	const [errors, setErrors] = useState([]);
+
+	function handleChange(event) {
+		// Check for file limit
+		const files = event.target.files;
+		for (const file of files) {
+			if (file.size > 6 * 1024 * 1024) {
+				setErrors(["Image size is too big. All images must be smaller than 6 MB."]);
+				return;
+			}
+		}
+		setErrors([]);
+		handleChangePhotos(event);
+	}
 	
 	async function onPhotosSubmit(event) {
 		event.preventDefault();
@@ -55,10 +68,12 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 				className="form-control rounded-pill w-50"
 				name="photos"
 				multiple="multiple"
-				onChange={handleChangePhotos}
+				onChange={handleChange}
 				accept="image/png, image/jpeg"
 			/>
-			<FormError errors={errors} />
+			<div className="mt-6">
+				<FormError errors={errors} />
+			</div>
 
 			<button
 				id="go-to-pricing-button"
