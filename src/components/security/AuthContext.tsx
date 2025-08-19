@@ -136,11 +136,14 @@ export default function AuthProvider({ children }) {
 		sessionStorage.removeItem("lodgeLanguage");
 	}
 
-	function setSessionCurrency(value) {
+	function setSessionCurrency(value, forceRefresh) {
 		if (isAuthenticated) {
 			updateUser({ currency: value })
-				.then(() => {
-					setUserConfig();
+				.then(async () => {
+					await setUserConfig();
+					if (forceRefresh) {
+						window.location.reload();
+					}
 				})
 				.catch((error) => {
 					console.error(error);

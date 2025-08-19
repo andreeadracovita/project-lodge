@@ -32,13 +32,15 @@ export default function Header() {
 							{
 								availableCurrencies.map((currency, i) => 
 									<li key={i}>
-										<span className="dropdown-item cursor-pointer" onClick={() => {authContext.setSessionCurrency(currency)}}>
+										<span
+											className="dropdown-item cursor-pointer"
+											onClick={() => authContext.setSessionCurrency(currency, true)}
+										>
 											{currency}
 										</span>
 									</li>
 								)
 							}
-								
 							</ul>
 						</div>
 						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
