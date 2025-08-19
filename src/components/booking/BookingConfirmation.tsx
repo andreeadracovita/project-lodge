@@ -92,6 +92,7 @@ export default function BookingConfirmation() {
 			.then(response => {
 				if (response.status === 200) {
 					setShowCancel(false);
+					window.location.reload();
 				}
 			})
 			.catch(error => {
