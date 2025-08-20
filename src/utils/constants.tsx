@@ -37,23 +37,23 @@ export const landingImages = [
 // Trending destinations for home page
 export const trendingDestinations = [
 	{
-		city: "Zürich",
-		country: "CH",
-		url: "zurich.jpg"
-	},
-	{
 		city: "Reykjavik",
 		country: "IS",
 		url: "iceland.jpg"
 	},
 	{
+		city: "Fuji",
+		country: "JP",
+		url: "japan.jpg"
+	},
+	{
+		city: "Zermatt",
+		country: "CH",
+		url: "switzerland.jpg"
+	},
+	{
 		city: "Manarola",
 		country: "IT",
 		url: "cinque-terre.jpg"
-	},
-	{
-		city: "Paris",
-		country: "FR",
-		url: "france.jpg"
-	},
+	}
 ];
