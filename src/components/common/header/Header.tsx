@@ -17,13 +17,13 @@ export default function Header() {
 	return (
 		<header className="py-3">
 			<div className="container">
-				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<div className="col-lg-6 d-flex">
+				<div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start">
+					<div className="col-12 col-md-6 justify-content-center justify-content-md-start d-flex">
 						<Link to="/" className="mb-3 mb-md-0 link-body-emphasis text-decoration-none">
 							<span className="fs-2 brand-font brand-color-text">{ siteName }</span>
 						</Link>
 					</div>
-					<div className="col-lg-6 d-flex justify-content-end align-items-center nav-item-font">
+					<div className="col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-items-center nav-item-font">
 						<div className="dropdown">
 							<div id="dropdown-button" role="button" className="me-4" data-bs-toggle="dropdown">
 								<span className="btn-pill">{authContext.currency}</span>

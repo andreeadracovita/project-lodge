@@ -25,6 +25,10 @@ export default function Footer() {
 							<div className="col-6">
 								<small>© {currentYear} {siteName}</small>
 							</div>
+							<div className="col-6 text-end">
+								<div>Contact</div>
+								<div>Email: andreea.d.racovita@gmail.com</div>
+							</div>
 						</div>
 					</div>
 				</footer>
