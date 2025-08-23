@@ -13,10 +13,13 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 	const gridClassNames = classNames(
 		"row",
 		"g-2",
-		"row-cols-1",
+		`row-cols-${cols}`,
 		`row-cols-sm-${cols - 2}`,
 		`row-cols-md-${cols - 1}`,
-		`row-cols-lg-${cols}`
+		`row-cols-lg-${cols}`,
+		{
+			"row-cols-1": listItemType !== ListItemType.Destination
+		}
 	);
 
 	function renderItemByType(item) {

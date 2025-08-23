@@ -43,7 +43,7 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 		<div id={id} className="carousel slide">
 			<div className="carousel-inner">
 				<div className="carousel-item active">
-					<div className="d-flex p-3">
+					<div className="d-flex p-2">
 					{
 						items.slice(0, 4).map((item, i) =>
 							<div key={i} className="col-3 pe-2">

@@ -66,15 +66,29 @@ export default function Home() {
 			<div className="container">
 				<div id="experience" className="section-container">
 					<p className="section-heading">Explore with us</p>
-					<CarouselView
-						id="properties-carousel"
-						listItemType={ListItemType.Property}
-						items={properties}
-						checkIn={checkInParam}
-						checkOut={checkOutParam}
-						nightsCount={nightsCount}
-						guests={guests}
-					/>
+					<div className="d-none d-md-block">
+						<CarouselView
+							id="properties-carousel"
+							listItemType={ListItemType.Property}
+							items={properties}
+							checkIn={checkInParam}
+							checkOut={checkOutParam}
+							nightsCount={nightsCount}
+							guests={guests}
+						/>
+					</div>
+					<div className="d-block d-md-none">
+						<ListView
+							listItemType={ListItemType.SmallProperty}
+							items={properties.slice(0, 4)}
+							checkIn={checkInParam}
+							checkOut={checkOutParam}
+							guests={guests}
+							nightsCount={nightsCount}
+							cols={1}
+						/>
+					</div>
+					
 				</div>
 
 				<div id="trending" className="section-container">
