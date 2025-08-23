@@ -52,12 +52,15 @@ export default function Home() {
 
 	return (
 		<>
-			<div id="landing-greeting-section">
+			<div id="landing-greeting-section" className="d-none d-md-block">
 				<div id="landing-greeting-section-container" className="container" style={{ backgroundImage: `url(${backgroundImage})`}}>
 					<div id="home-search-bar" className="mb-4">
 						<Search />
 					</div>
 				</div>
+			</div>
+			<div id="home-search-mobile" className="mt-10 d-block d-md-none">
+				<Search />
 			</div>
 
 			<div className="container">
