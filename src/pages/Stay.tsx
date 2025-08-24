@@ -8,6 +8,7 @@ import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
 import PropertyDescription from "/src/components/stay/PropertyDescription";
 import PropertyReviews from "/src/components/stay/PropertyReviews";
 import BookingCard from "/src/components/stay/BookingCard";
+import BookingSectionMobile from "/src/components/stay/BookingSectionMobile";
 import Rating from "/src/components/common/Rating";
 import { fileStorage } from "/src/utils/constants";
 
@@ -38,40 +39,43 @@ export default function Stay() {
 		<>
 			{
 				property &&
-				<div className="container section-container">
-					<div>
-						{
-							!property.is_listed &&
-							<div className="text-muted mb-2">
-								UNPUBLISHED
-							</div>
-						}
-						<h1 className="page-heading">{property.title}</h1>
-						<p>
-							<Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
-						</p>
-						<span className="cursor-pointer" onClick={scrollToReviews}>
-							<Rating score={property.rating} reviewsNo={property.reviews_no} />
-						</span>
-					</div>
-					<div className="mt-3">
-						<PropertyPhotoGrid
-							urlArray={property.images_url_array ? property.images_url_array.map(url => fileStorage + url) : []}
-						/>
-					</div>
-					<div className="mt-5 row">
-						<div className="col-8">
-							<PropertyDescription property={property} />
+				<div>
+					<div className="container section-container">
+						<div>
+							{
+								!property.is_listed &&
+								<div className="text-muted mb-2">
+									UNPUBLISHED
+								</div>
+							}
+							<h1 className="page-heading">{property.title}</h1>
+							<p>
+								<Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
+							</p>
+							<span className="cursor-pointer" onClick={scrollToReviews}>
+								<Rating score={property.rating} reviewsNo={property.reviews_no} />
+							</span>
 						</div>
-						{
-							property.is_listed &&
-							<div className="col-4">
-								<BookingCard price={property.price_night_site} maxGuests={property.guests} />
+						<div className="mt-3">
+							<PropertyPhotoGrid
+								urlArray={property.images_url_array ? property.images_url_array.map(url => fileStorage + url) : []}
+							/>
+						</div>
+						<div className="mt-5 row">
+							<div className="col-12 col-md-8">
+								<PropertyDescription property={property} />
 							</div>
-						}
+							{
+								property.is_listed &&
+								<div className="d-none d-md-block col-4">
+									<BookingCard price={property.price_night_site} maxGuests={property.guests} />
+								</div>
+							}
+						</div>
+						<hr />
+						<PropertyReviews property={property} />
 					</div>
-					<hr />
-					<PropertyReviews property={property} />
+					<BookingSectionMobile price={property.price_night_site} maxGuests={property.guests} />
 				</div>
 			}
 		</>

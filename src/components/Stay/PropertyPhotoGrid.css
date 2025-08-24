@@ -10,8 +10,22 @@
 	border-top-left-radius: var(--border-radius);
 }
 
+#property-photo-grid .main-img-mobile {
+	height: 300px;
+	border-top-right-radius: var(--border-radius);
+	border-top-left-radius: var(--border-radius);
+}
+
+#property-photo-grid .secondary-img-mobile {
+	height: 150px;
+}
+
 .bottom-right-radius {
 	border-bottom-right-radius: var(--border-radius);
+}
+
+.bottom-left-radius {
+	border-bottom-left-radius: var(--border-radius);
 }
 
 .top-right-radius {

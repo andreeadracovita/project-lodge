@@ -434,3 +434,7 @@ svg {
 .carousel-inner {
   text-align: inherit;
 }
+
+#mobile-book-container {
+  background-color: white;
+}
