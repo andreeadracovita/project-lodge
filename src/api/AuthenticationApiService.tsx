@@ -1,4 +1,4 @@
-import { apiClient } from "/src/api/ApiClient";
+import { apiClient } from "./ApiClient";
 
 export const checkUserExists
 	= (payload) => apiClient.post("/auth/exists", payload);
