@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { getAllFeatures } from "/src/api/BackendApiService";
-import { capitalizeFirstLetter } from "/src/utils/stringUtils";
+import { getAllFeatures } from "api/BackendApiService";
+import { capitalizeFirstLetter } from "utils/stringUtils";
 
 export default function FilterFeature({ filterData, updateMultiselectParams }) {
 	const [features, setFeatures] = useState([]);

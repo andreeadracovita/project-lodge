@@ -1,9 +1,9 @@
-import * as Icon from "react-bootstrap-icons";
+import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 
 import "./CarouselView.css";
 import PlaceTypeItem from "./PlaceTypeItem";
 import PropertyListItem from "./PropertyListItem";
-import { ListItemType } from "/src/components/list/ListItemType";
+import { ListItemType } from "components/list/ListItemType";
 
 type CarouselViewProps = {
 	id: number;
@@ -78,7 +78,7 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 						data-bs-target={`#${id}`}
 						data-bs-slide="prev"
 					>
-						<Icon.ChevronLeft size={24} color="white" />
+						<ChevronLeft size={24} color="white" />
 					</button>
 					<button
 						className="btn-round position-absolute top-50 end-0 translate-middle-y"
@@ -87,7 +87,7 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 						data-bs-target={`#${id}`}
 						data-bs-slide="next"
 					>
-						<Icon.ChevronRight size={24} color="white" />
+						<ChevronRight size={24} color="white" />
 					</button>
 				</>
 			}

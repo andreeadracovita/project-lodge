@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { useAuth } from "/src/components/security/AuthContext";
-import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
-import { getPropertiesByUserId } from "/src/api/BackendApiService";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
+import { useAuth } from "components/security/AuthContext";
+import HostingHeader, { HostingTab } from "components/hosting/HostingHeader";
+import { getPropertiesByUserId } from "api/BackendApiService";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
 
 // Page path: /hosting/properties
 export default function Properties() {

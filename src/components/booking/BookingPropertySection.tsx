@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
 
-import { getAllFeatures } from "/src/api/BackendApiService";
-import Rating from "/src/components/common/Rating";
-import Feature from "/src/components/common/Feature";
+import { getAllFeatures } from "api/BackendApiService";
+import Rating from "components/common/Rating";
+import Feature from "components/common/Feature";
 
 export default function BookingPropertySection({ item }) {
 	const [searchParams, setSearchParams] = useSearchParams();

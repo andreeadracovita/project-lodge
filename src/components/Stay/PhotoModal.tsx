@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 
 import "./PhotoModal.css";
 
@@ -64,14 +64,14 @@ export default function PhotoModal({ urlArray, initial }) {
 								type="button"
 								onClick={decrementActiveSlide}
 							>
-								<span><Icon.ChevronLeft size={24} color={"#000"} /></span>
+								<span><ChevronLeft size={24} color={"#000"} /></span>
 							</button>
 							<button
 								className="carousel-control-next"
 								type="button"
 								onClick={incrementActiveSlide}
 							>
-								<span><Icon.ChevronRight size={24} color={"#000"} /></span>
+								<span><ChevronRight size={24} color={"#000"} /></span>
 							</button>
 						</div>
 						<div id="thumbnails-container" className="mt-1 d-flex">

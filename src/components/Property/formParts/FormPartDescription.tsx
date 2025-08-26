@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronRight } from "react-bootstrap-icons";
 
 import "./FormPartDescription.css";
-import { getAllFeatures, getAllExperiences, updateProperty } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
-import Multiselect from "/src/components/common/Multiselect";
-import { featuresIconMap } from "/src/utils/mappings";
+import { getAllFeatures, getAllExperiences, updateProperty } from "api/BackendApiService";
+import FormError from "components/common/FormError";
+import Multiselect from "components/common/Multiselect";
+import { featuresIconMap } from "utils/mappings";
 
 export default function FormPartDescription({
 	isEditable,
@@ -203,7 +203,7 @@ export default function FormPartDescription({
 					type="submit"
 					className="btn-pill my-5"
 				>
-					Add photos next <Icon.ChevronRight />
+					Add photos next <ChevronRight />
 				</button>
 			}
 		</form>

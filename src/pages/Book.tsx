@@ -1,9 +1,9 @@
-import * as Icon from "react-bootstrap-icons";
+import { ChevronLeft, CheckCircle, Icon2Circle, Icon3Circle } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { Link } from "react-router-dom";
 
-import BookingForm from "/src/components/booking/BookingForm";
-import BookingSelection from "/src/components/booking/BookingSelection";
+import BookingForm from "components/booking/BookingForm";
+import BookingSelection from "components/booking/BookingSelection";
 
 export default function Book() {
 	const [searchParams, setSearchParams] = useSearchParams();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { getAllReviewsByLoggedUser } from "/src/api/BackendApiService";
-import UserPageReviewItem from "/src/components/review/UserPageReviewItem";
+import { getAllReviewsByLoggedUser } from "api/BackendApiService";
+import UserPageReviewItem from "components/review/UserPageReviewItem";
 
 export default function UserReviews() {
 	const [reviews, setReviews] = useState([]);

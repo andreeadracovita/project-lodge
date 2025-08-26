@@ -1,10 +1,9 @@
-import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
-import { useAuth } from "/src/components/security/AuthContext";
-import Avatar from "/src/components/user/Avatar";
-import AccountCard from "/src/components/user/AccountCard";
-import { SettingsTab } from "/src/components/user/SettingsNav";
+import { useAuth } from "components/security/AuthContext";
+import Avatar from "components/user/Avatar";
+import AccountCard from "components/user/AccountCard";
+import { SettingsTab } from "components/user/SettingsNav";
 
 export default function Account() {
 	const authContext = useAuth();

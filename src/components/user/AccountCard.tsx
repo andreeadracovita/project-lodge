@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Icon } from "/src/components/common/Icon";
+import { Icon } from "components/common/Icon";
 
 export default function AccountCard({ iconName, iconSize, title, desc, url }) {
 

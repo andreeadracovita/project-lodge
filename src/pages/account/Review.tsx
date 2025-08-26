@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
-import { getAuthorizationForReview, getPropertyById } from "/src/api/BackendApiService";
-import ReviewForm from "/src/components/review/ReviewForm";
-import PropertyListItem from "/src/components/list/PropertyListItem";
+import { getAuthorizationForReview, getPropertyById } from "api/BackendApiService";
+import ReviewForm from "components/review/ReviewForm";
+import PropertyListItem from "components/list/PropertyListItem";
 
 export default function Review() {
 	const [searchParams, setSearchParams] = useSearchParams();

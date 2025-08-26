@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import countries from "react-select-country-list";
 
-import { existsReviewForBookingId } from "/src/api/BackendApiService";
-import { fileStorage } from "/src/utils/constants";
-import { dayMonYear } from "/src/utils/dateUtils";
+import { existsReviewForBookingId } from "api/BackendApiService";
+import { fileStorage } from "utils/constants";
+import { dayMonYear } from "utils/dateUtils";
 
 type BookingListItemProp = {
 	id: number,

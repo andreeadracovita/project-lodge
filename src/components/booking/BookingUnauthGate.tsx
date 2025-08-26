@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { authorizeBookingAccess } from "/src/api/BackendApiService";
+import { authorizeBookingAccess } from "api/BackendApiService";
 
 export default function BookingUnauthGate({ setShowGate }) {
 	const [searchParams, setSearchParams] = useSearchParams();

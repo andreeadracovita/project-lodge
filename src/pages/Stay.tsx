@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import * as Icon from "react-bootstrap-icons";
+import { GeoAltFill } from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
-import { getPropertyById } from "/src/api/BackendApiService";
-import PropertyPhotoGrid from "/src/components/stay/PropertyPhotoGrid";
-import PropertyDescription from "/src/components/stay/PropertyDescription";
-import PropertyReviews from "/src/components/stay/PropertyReviews";
-import BookingCard from "/src/components/stay/BookingCard";
-import BookingSectionMobile from "/src/components/stay/BookingSectionMobile";
-import Rating from "/src/components/common/Rating";
-import { fileStorage } from "/src/utils/constants";
+import { getPropertyById } from "api/BackendApiService";
+import PropertyPhotoGrid from "components/stay/PropertyPhotoGrid";
+import PropertyDescription from "components/stay/PropertyDescription";
+import PropertyReviews from "components/stay/PropertyReviews";
+import BookingCard from "components/stay/BookingCard";
+import BookingSectionMobile from "components/stay/BookingSectionMobile";
+import Rating from "components/common/Rating";
+import { fileStorage } from "utils/constants";
 
 export default function Stay() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -50,7 +50,7 @@ export default function Stay() {
 							}
 							<h1 className="page-heading">{property.title}</h1>
 							<p>
-								<Icon.GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
+								<GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
 							</p>
 							<span className="cursor-pointer" onClick={scrollToReviews}>
 								<Rating score={property.rating} reviewsNo={property.reviews_no} />

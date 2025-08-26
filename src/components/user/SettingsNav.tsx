@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router";
 
-import { Icon } from "/src/components/common/Icon";
+import { Icon } from "components/common/Icon";
 
 export enum SettingsTab {
 	Details = "details",

@@ -4,25 +4,25 @@ import Map from "ol/map";
 import View from "ol/view";
 import TileLayer from "ol/layer/tile";
 import OSM from "ol/source/osm";
-import {useGeographic} from 'ol/proj';
-import VectorSource from 'ol/source/Vector.js';
-import VectorLayer from 'ol/layer/Vector.js';
-import Point from 'ol/geom/Point.js';
-import Overlay from 'ol/Overlay.js';
-import Fill from 'ol/style/Fill.js';
-import Stroke from 'ol/style/Stroke.js';
-import Style from 'ol/style/Style.js';
-import CircleStyle from 'ol/style/Circle.js';
-import Text from 'ol/style/Text.js';
-import Feature from 'ol/Feature.js';
-import {defaults as defaultInteractions} from 'ol/interaction/defaults.js';
-import PointerInteraction from 'ol/interaction/Pointer.js';
-import RegularShape from 'ol/style/RegularShape.js';
-import * as olProj from 'ol/proj';
-import * as olExtent from 'ol/extent';
+import {useGeographic} from "ol/proj";
+import VectorSource from "ol/source/Vector.js";
+import VectorLayer from "ol/layer/Vector.js";
+import Point from "ol/geom/Point.js";
+import Overlay from "ol/Overlay.js";
+import Fill from "ol/style/Fill.js";
+import Stroke from "ol/style/Stroke.js";
+import Style from "ol/style/Style.js";
+import CircleStyle from "ol/style/Circle.js";
+import Text from "ol/style/Text.js";
+import Feature from "ol/Feature.js";
+import {defaults as defaultInteractions} from "ol/interaction/defaults.js";
+import PointerInteraction from "ol/interaction/Pointer.js";
+import RegularShape from "ol/style/RegularShape.js";
+import * as olProj from "ol/proj";
+import * as olExtent from "ol/extent";
 
 import "./MapView.css";
-import { genericMapCenter } from "/src/utils/constants";
+import { genericMapCenter } from "utils/constants";
 
 // Center = [long, lat]
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]

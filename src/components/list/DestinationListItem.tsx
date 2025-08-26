@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import countries from "react-select-country-list";
 
-import { fileStorage } from "/src/utils/constants";
+import { fileStorage } from "utils/constants";
 
 type DestinationItem = {
 	country: string;

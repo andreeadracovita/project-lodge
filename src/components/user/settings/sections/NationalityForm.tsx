@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import countries from "react-select-country-list";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import CountrySelect from "/src/components/common/CountrySelect";
-import FormError from "/src/components/common/FormError";
-import { updateUser } from "/src/api/BackendApiService";
+import CountrySelect from "components/common/CountrySelect";
+import FormError from "components/common/FormError";
+import { updateUser } from "api/BackendApiService";
 
 export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [countryCode, setCountryCode] = useState(value);

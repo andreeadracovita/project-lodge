@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { apiClient } from "/src/api/ApiClient";
-import { executeJwtAuthenticationService } from "/src/api/AuthenticationApiService";
-import { getUserConfig, getExchangeRateForTarget, updateUser } from "/src/api/BackendApiService";
-import { defaultLanguage, siteCurrency } from "/src/utils/constants";
+import { apiClient } from "api/ApiClient";
+import { executeJwtAuthenticationService } from "api/AuthenticationApiService";
+import { getUserConfig, getExchangeRateForTarget, updateUser } from "api/BackendApiService";
+import { defaultLanguage, siteCurrency } from "utils/constants";
 
 export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);

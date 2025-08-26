@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import HostingHeader, { HostingTab } from "/src/components/hosting/HostingHeader";
-import ReservationsSection from "/src/components/hosting/ReservationsSection";
-import { getPartitionedBookings } from "/src/api/BackendApiService";
-import ReservationTabItem, { ReservationsTab } from "/src/components/hosting/ReservationTab";
-import { useAuth } from "/src/components/security/AuthContext";
+import HostingHeader, { HostingTab } from "components/hosting/HostingHeader";
+import ReservationsSection from "components/hosting/ReservationsSection";
+import { getPartitionedBookings } from "api/BackendApiService";
+import ReservationTabItem, { ReservationsTab } from "components/hosting/ReservationTab";
+import { useAuth } from "components/security/AuthContext";
 
 export default function HostingDashboard() {
 	const authContext = useAuth();

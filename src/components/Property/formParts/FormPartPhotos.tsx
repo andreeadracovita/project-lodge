@@ -1,9 +1,9 @@
 import { useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronRight } from "react-bootstrap-icons";
 
-import { uploadPhotos, updateProperty } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
-import PropertyPhotoGrid from "/src/components/Stay/PropertyPhotoGrid";
+import { uploadPhotos, updateProperty } from "api/BackendApiService";
+import FormError from "components/common/FormError";
+import PropertyPhotoGrid from "components/Stay/PropertyPhotoGrid";
 
 export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
 	const [errors, setErrors] = useState([]);
@@ -80,7 +80,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 				type="submit"
 				className="btn-pill my-5"
 			>
-				Pricing next <Icon.ChevronRight />
+				Pricing next <ChevronRight />
 			</button>
 		</form>
 	);

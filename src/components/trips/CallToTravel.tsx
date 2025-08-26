@@ -1,5 +1,5 @@
 import "./CallToTravel.css";
-import { fileStorage } from "/src/utils/constants";
+import { fileStorage } from "utils/constants";
 
 export default function CallToTravel() {
 	

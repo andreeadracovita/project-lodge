@@ -1,9 +1,9 @@
-import * as Icon from "react-bootstrap-icons";
+import { GeoAlt, CalendarRange, People, Search } from "react-bootstrap-icons";
 
 import "./SearchMobile.css";
-import Calendar from "/src/components/calendar/Calendar";
-import CountrySelect from "/src/components/common/CountrySelect";
-import { dayMonYear } from "/src/utils/dateUtils";
+import Calendar from "components/calendar/Calendar";
+import CountrySelect from "components/common/CountrySelect";
+import { dayMonYear } from "utils/dateUtils";
 
 export default function SearchMobile({input, handleCountryChange, handleChange, onCalendarClick, onSearchClicked}) {
 
@@ -11,7 +11,7 @@ export default function SearchMobile({input, handleCountryChange, handleChange, 
 		<div>
 			<div id="search-bar" className="p-0 m-2 border-section">
 				<div className="m-2 d-flex align-items-center">
-					<Icon.GeoAlt size={24} />
+					<GeoAlt size={24} />
 					<div className="w-50 ms-2">
 						<CountrySelect
 							id="country"
@@ -34,7 +34,7 @@ export default function SearchMobile({input, handleCountryChange, handleChange, 
 				</div>
 				<hr />
 				<div className="m-2 d-flex align-items-center">
-					<Icon.CalendarRange size={24} />
+					<CalendarRange size={24} />
 					<div
 						id="date-range"
 						className="dropdown-center d-flex align-items-center cursor-pointer focusable rounded-pill"
@@ -53,7 +53,7 @@ export default function SearchMobile({input, handleCountryChange, handleChange, 
 				</div>
 				<hr />
 				<div className="m-2 d-flex align-items-center ms-2">
-					<Icon.People size={24} />
+					<People size={24} />
 					<label htmlFor="guests" className="ms-2 mt-0">Guests:</label>
 					<input
 						id="guests"
@@ -72,7 +72,7 @@ export default function SearchMobile({input, handleCountryChange, handleChange, 
 					className="btn-rectangle-fill w-100"
 					onClick={onSearchClicked}
 				>
-					<Icon.Search id="search-icon" color="white" size={20} />
+					<Search id="search-icon" color="white" size={20} />
 					<span>Search</span>
 				</button>
 			</div>

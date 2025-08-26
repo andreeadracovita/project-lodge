@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronLeft } from "react-bootstrap-icons";
 
-import { checkUserExists } from "/src/api/AuthenticationApiService";
-import { createAccount } from "/src/api/AuthenticationApiService";
-import FormError from "/src/components/common/FormError";
-import PasswordInput from "/src/components/common/PasswordInput";
-import { useAuth } from "/src/components/security/AuthContext";
+import { checkUserExists } from "api/AuthenticationApiService";
+import { createAccount } from "api/AuthenticationApiService";
+import FormError from "components/common/FormError";
+import PasswordInput from "components/common/PasswordInput";
+import { useAuth } from "components/security/AuthContext";
 
 enum FormState {
 	Email,
@@ -108,7 +108,7 @@ export default function SignupLogin() {
 					<div className="col-2">
 						{
 							(formState === FormState.Signup || formState === FormState.Password) &&
-							<div className="cursor-pointer" onClick={onBackClicked}><Icon.ChevronLeft /></div>
+							<div className="cursor-pointer" onClick={onBackClicked}><ChevronLeft /></div>
 						}
 					</div>
 					<div className="col-8">

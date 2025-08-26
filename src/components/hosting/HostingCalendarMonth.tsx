@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
-import * as Icon from "react-bootstrap-icons";
 import classNames from "classnames";
 
 import HostingCalendarDay from "./HostingCalendarDay";
-import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
+import { getBookedByPropertyIdForDate } from "api/BackendApiService";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 export default function HostingCalendarMonth({ id, month, year }) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];

@@ -1,9 +1,9 @@
-import * as Icon from "react-bootstrap-icons";
+import { CreditCard, CurrencyExchange } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
-import { useAuth } from "/src/components/security/AuthContext";
-import { getNightsCount } from "/src/utils/dateUtils";
-import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
+import { useAuth } from "components/security/AuthContext";
+import { getNightsCount } from "utils/dateUtils";
+import { convertToPreferredCurrency } from "utils/conversionUtils";
 
 export default function BookingPriceSection({ item }) {
 	const authContext = useAuth();
@@ -26,13 +26,13 @@ export default function BookingPriceSection({ item }) {
 				<h3 className="property-card-heading">Price information</h3>
 				<div className="mt-10 row">
 					<div className="col-2 d-flex align-items-center">
-						<Icon.CurrencyExchange size={24} />
+						<CurrencyExchange size={24} />
 					</div>
 					<div className="col-10">This price is converted to show you the approximate cost in { authContext.currency }. You'll pay in { item.local_currency }. The exchange rate may change before you pay.</div>
 				</div>
 				<div className="mt-10 row">
 					<div className="col-2 d-flex align-items-center">
-						<Icon.CreditCard size={24} />
+						<CreditCard size={24} />
 					</div>
 					<div className="col-10">Bear in mind that your card issuer may charge you a foreign transaction fee.</div>
 				</div>

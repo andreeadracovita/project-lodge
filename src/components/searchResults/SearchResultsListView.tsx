@@ -1,13 +1,13 @@
 import { useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { Map } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
 
-import Filter from "/src/components/filter/Filter";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
-import MapView from "/src/components/map/MapView";
-import Search from "/src/components/search/Search";
+import Filter from "components/filter/Filter";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
+import MapView from "components/map/MapView";
+import Search from "components/search/Search";
 
 export default function SearchResultsListView({
 	items,
@@ -57,7 +57,7 @@ export default function SearchResultsListView({
 							onClick={() => setIsFullscreenMap(true)}
 						>
 							<span className="me-1">Show map</span>
-							<Icon.Map color="white" />
+							<Map color="white" />
 						</span>
 					</div>
 					<div className="section-container">

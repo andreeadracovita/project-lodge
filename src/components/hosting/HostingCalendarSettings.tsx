@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
-import { getPropertiesByUserId, updateProperty } from "/src/api/BackendApiService";
+import { getPropertiesByUserId, updateProperty } from "api/BackendApiService";
 
 /**
  * HostingCalendarSettings retrieves all managed properties by hostId for dropdown select and sets searchParams

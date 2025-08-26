@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { List } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
 import "./SearchResultsMapView.css";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
-import MapView from "/src/components/map/MapView";
-import { useAuth } from "/src/components/security/AuthContext";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
+import MapView from "components/map/MapView";
+import { useAuth } from "components/security/AuthContext";
 
 export default function SearchResultsMapView({
 	items,
@@ -60,7 +60,7 @@ export default function SearchResultsMapView({
 				>
 					<span className="btn-pill" onClick={() => setIsFullscreenMap(false)}>
 						<span className="me-1">Show list</span>
-						<Icon.List color="white" />
+						<List color="white" />
 					</span>
 					<div id="map-view-list-container" className="mt-6 p-2" style={{ height: window.innerHeight - 90 - 42 }}>
 						<ListView

@@ -3,10 +3,10 @@ import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 import "./BookingCard.css";
-import Calendar from "/src/components/calendar/Calendar";
-import { useAuth } from "/src/components/security/AuthContext";
-import { getNightsCount, dayMonYear } from "/src/utils/dateUtils";
-import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
+import Calendar from "components/calendar/Calendar";
+import { useAuth } from "components/security/AuthContext";
+import { getNightsCount, dayMonYear } from "utils/dateUtils";
+import { convertToPreferredCurrency } from "utils/conversionUtils";
 
 export default function BookingCard({price, maxGuests}) {
 	const authContext = useAuth();

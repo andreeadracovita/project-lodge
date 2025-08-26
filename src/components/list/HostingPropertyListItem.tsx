@@ -1,7 +1,8 @@
-import { fileStorage } from "/src/utils/constants";
-import { deletePropertyById, updateProperty } from "/src/api/BackendApiService";
 import { useNavigate } from "react-router-dom";
 import countries from "react-select-country-list";
+
+import { deletePropertyById, updateProperty } from "api/BackendApiService";
+import { fileStorage } from "utils/constants";
 
 type HostingPropertyListItemProps = {
 	item: PropertyItem,

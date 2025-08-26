@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import { useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronRight } from "react-bootstrap-icons";
 
-import { updateProperty } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
-import { useAuth } from "/src/components/security/AuthContext";
+import { updateProperty } from "api/BackendApiService";
+import FormError from "components/common/FormError";
+import { useAuth } from "components/security/AuthContext";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
 	const authContext = useAuth();
@@ -65,7 +65,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 					type="submit"
 					className="btn-pill my-5"
 				>
-					Review your property <Icon.ChevronRight />
+					Review your property <ChevronRight />
 				</button>
 			}
 		</form>

@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
-import { updateUserPassword } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
-import PasswordInput from "/src/components/common/PasswordInput";
+import { updateUserPassword } from "api/BackendApiService";
+import FormError from "components/common/FormError";
+import PasswordInput from "components/common/PasswordInput";
 
 export default function PasswordForm({ isFocused, showSectionHandler, clearSectionHandler }) {
 	const [input, setInput] = useState({

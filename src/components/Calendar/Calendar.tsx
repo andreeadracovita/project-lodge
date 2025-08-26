@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { Eraser } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
 import "./Calendar.css";
 import CalendarMonth from "./CalendarMonth";
-import { getPropertyAvailability } from "/src/api/BackendApiService";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
+import { getPropertyAvailability } from "api/BackendApiService";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 export default function Calendar() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -126,7 +126,7 @@ export default function Calendar() {
 				/>
 			</div>
 			<div className="mt-10 d-flex align-items-center cursor-pointer" onClick={clearSelection}>
-				<Icon.Eraser size={20} />
+				<Eraser size={20} />
 				<span className="ms-1">Clear selection</span>
 			</div>
 		</div>

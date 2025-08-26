@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 
-import Calendar from "/src/components/Calendar/Calendar";
-import { dayMonYear } from "/src/utils/dateUtils";
+import Calendar from "components/Calendar/Calendar";
+import { dayMonYear } from "utils/dateUtils";
 
 export default function AvailabilitySection() {
 	const [searchParams, setSearchParams] = useSearchParams();

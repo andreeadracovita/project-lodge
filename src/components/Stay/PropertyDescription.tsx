@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import AvailabilitySection from "./AvailabilitySection";
-import { getAllFeatures, getAllExperiences } from "/src/api/BackendApiService";
-import Feature from "/src/components/common/Feature";
-import MapView from "/src/components/map/MapView";
-import { capitalizeFirstLetter } from "/src/utils/stringUtils";
+import { getAllFeatures, getAllExperiences } from "api/BackendApiService";
+import Feature from "components/common/Feature";
+import MapView from "components/map/MapView";
+import { capitalizeFirstLetter } from "utils/stringUtils";
 
 export default function PropertyDescription({property}) {
 	const [features, setFeatures] = useState([]);

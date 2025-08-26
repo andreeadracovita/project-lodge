@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { getAllFeatures, getAllExperiences, getAllReviewsByPropertyId } from "/src/api/BackendApiService";
-import Rating from "/src/components/common/Rating";
-import StayPageReviewItem from "/src/components/review/StayPageReviewItem";
+import { getAllFeatures, getAllExperiences, getAllReviewsByPropertyId } from "api/BackendApiService";
+import Rating from "components/common/Rating";
+import StayPageReviewItem from "components/review/StayPageReviewItem";
 
 export default function PropertyReviews({ property }) {
 	const [reviews, setReviews] = useState([]);

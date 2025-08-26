@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import { getAllExperiences, updateUser } from "/src/api/BackendApiService";
-import Multiselect from "/src/components/common/Multiselect";
+import { getAllExperiences, updateUser } from "api/BackendApiService";
+import Multiselect from "components/common/Multiselect";
 
 export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [experiencesIds, setExperiencesIds] = useState([]);

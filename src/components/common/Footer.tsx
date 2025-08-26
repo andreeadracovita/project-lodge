@@ -1,7 +1,6 @@
-import * as Icon from "react-bootstrap-icons";
 import { useLocation } from "react-router-dom";
 
-import { siteName } from "/src/utils/constants";
+import { siteName } from "utils/constants";
 
 const noFooterPaths = [
 	"/hosting/calendar",

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { checkViewBookingAuthorization } from "/src/api/BackendApiService";
-import BookingConfirmation from "/src/components/booking/BookingConfirmation";
-import BookingUnauthGate from "/src/components/booking/BookingUnauthGate";
-import { useAuth } from "/src/components/security/AuthContext";
+import { checkViewBookingAuthorization } from "api/BackendApiService";
+import BookingConfirmation from "components/booking/BookingConfirmation";
+import BookingUnauthGate from "components/booking/BookingUnauthGate";
+import { useAuth } from "components/security/AuthContext";
 
 export default function Booking() {
 	const authContext = useAuth();

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { ThreeDots } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
-import { deleteReviewById, getPropertyById } from "/src/api/BackendApiService";
-import PropertyAvatar from "/src/components/common/PropertyAvatar";
-import Rating from "/src/components/common/Rating";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
+import { deleteReviewById, getPropertyById } from "api/BackendApiService";
+import PropertyAvatar from "components/common/PropertyAvatar";
+import Rating from "components/common/Rating";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 	const [property, setProperty] = useState();
@@ -56,7 +56,7 @@ export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 				<div className="col-2 d-flex justify-content-end">
 					<div className="dropdown">
 						<div id="dropdown-button" role="button" className="btn-more d-flex align-items-center justify-content-center" data-bs-toggle="dropdown">
-							<Icon.ThreeDots />
+							<ThreeDots />
 						</div>
 						
 						<ul className="dropdown-menu dropdown-menu-end text-small">

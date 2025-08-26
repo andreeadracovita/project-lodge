@@ -1,11 +1,11 @@
-import * as Icon from "react-bootstrap-icons";
+import { ChevronRight } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 import FormPartTitleAddress from "./FormPartTitleAddress";
 import FormPartDescription from "./FormPartDescription";
 import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
-import { updateProperty } from "/src/api/BackendApiService";
+import { updateProperty } from "api/BackendApiService";
 
 export default function FormPartReview({ input, propertyId }) {
 	const navigate = useNavigate();
@@ -71,7 +71,7 @@ export default function FormPartReview({ input, propertyId }) {
 						name="save"
 						className="btn-pill"
 					>
-						Save <Icon.ChevronRight />
+						Save <ChevronRight />
 					</button>
 					{
 						input.isListed === false &&
@@ -81,7 +81,7 @@ export default function FormPartReview({ input, propertyId }) {
 							name="publish"
 							className="btn-pill ms-2"
 						>
-							Save and publish property <Icon.ChevronRight />
+							Save and publish property <ChevronRight />
 						</button>
 					}
 				</div>

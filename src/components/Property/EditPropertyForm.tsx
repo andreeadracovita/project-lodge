@@ -2,7 +2,7 @@ import axios from "axios";
 import classNames from "classnames";
 import countryToCurrency from "country-to-currency";
 import { useState, useEffect } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { CheckCircle, Icon1Circle, Icon2Circle, Icon3Circle, Icon4Circle, Icon5Circle } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
 
@@ -13,9 +13,9 @@ import FormPartDescription from "./formParts/FormPartDescription";
 import FormPartPhotos from "./formParts/FormPartPhotos";
 import FormPartPricing from "./formParts/FormPartPricing";
 import FormPartReview from "./formParts/FormPartReview";
-import PropertyListItem from "/src/components/list/PropertyListItem";
-import { getPropertyById } from "/src/api/BackendApiService";
-import { fileStorage } from "/src/utils/constants";
+import PropertyListItem from "components/list/PropertyListItem";
+import { getPropertyById } from "api/BackendApiService";
+import { fileStorage } from "utils/constants";
 
 export default function EditPropertyForm() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -175,8 +175,8 @@ export default function EditPropertyForm() {
 				<div className={getClassName(0)}>
 					{
 						formState > 0
-						? <Icon.CheckCircle size={24} />
-						: <Icon.Icon1Circle size={24} />
+						? <CheckCircle size={24} />
+						: <Icon1Circle size={24} />
 					}
 					<span className="ms-2">Title and address</span>
 				</div>
@@ -184,8 +184,8 @@ export default function EditPropertyForm() {
 				<div className={getClassName(1)}>
 					{
 						formState > 1
-						? <Icon.CheckCircle size={24} />
-						: <Icon.Icon2Circle size={24} />
+						? <CheckCircle size={24} />
+						: <Icon2Circle size={24} />
 					}
 					<span className="ms-2">Description</span>
 				</div>
@@ -193,8 +193,8 @@ export default function EditPropertyForm() {
 				<div className={getClassName(2)}>
 					{
 						formState > 2
-						? <Icon.CheckCircle size={24} />
-						: <Icon.Icon3Circle size={24} />
+						? <CheckCircle size={24} />
+						: <Icon3Circle size={24} />
 					}
 					<span className="ms-2">Photos</span>
 				</div>
@@ -202,8 +202,8 @@ export default function EditPropertyForm() {
 				<div className={getClassName(3)}>
 					{
 						formState > 3
-						? <Icon.CheckCircle size={24} />
-						: <Icon.Icon4Circle size={24} />
+						? <CheckCircle size={24} />
+						: <Icon4Circle size={24} />
 					}
 					<span className="ms-2">Pricing</span>
 				</div>
@@ -211,8 +211,8 @@ export default function EditPropertyForm() {
 				<div className={getClassName(4)}>
 					{
 						formState > 4
-						? <Icon.CheckCircle size={24} />
-						: <Icon.Icon5Circle size={24} />
+						? <CheckCircle size={24} />
+						: <Icon5Circle size={24} />
 					}
 					<span className="ms-2">Review</span>
 				</div>

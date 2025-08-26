@@ -3,8 +3,8 @@ import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
 import StarRating from "./StarRating";
-import { addReviewForBookingId } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
+import { addReviewForBookingId } from "api/BackendApiService";
+import FormError from "components/common/FormError";
 
 export default function ReviewForm({ propertyId }) {
 	const navigate = useNavigate();

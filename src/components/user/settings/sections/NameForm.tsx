@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
-import { updateUser } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
+import { updateUser } from "api/BackendApiService";
+import FormError from "components/common/FormError";
 
 export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const [input, setInput] = useState({

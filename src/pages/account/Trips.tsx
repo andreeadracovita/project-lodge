@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { getAllBookings } from "/src/api/BackendApiService";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
-import { fileStorage } from "/src/utils/constants";
-import CallToTravel from "/src/components/trips/CallToTravel";
-import CurrentTrip from "/src/components/trips/CurrentTrip";
+import { getAllBookings } from "api/BackendApiService";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
+import { fileStorage } from "utils/constants";
+import CallToTravel from "components/trips/CallToTravel";
+import CurrentTrip from "components/trips/CurrentTrip";
 
 /**
  * Trips are displayed in 3 sections:

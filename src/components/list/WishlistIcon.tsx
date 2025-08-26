@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { HeartFill } from "react-bootstrap-icons";
 
 import "./WishlistIcon.css";
-import { getIsPropertyWishlisted, toggleWishlistProperty } from "/src/api/BackendApiService";
-import { useAuth } from "/src/components/security/AuthContext";
+import { getIsPropertyWishlisted, toggleWishlistProperty } from "api/BackendApiService";
+import { useAuth } from "components/security/AuthContext";
 
 export default function WishlistIcon({ itemId, isPreview }) {
 	const authContext = useAuth();
@@ -49,7 +49,7 @@ export default function WishlistIcon({ itemId, isPreview }) {
 	
 	return (
 		<div className="white-circle position-absolute cursor-pointer" onClick={handleHeartClick}>
-			<Icon.HeartFill
+			<HeartFill
 				size={20}
 				color={isFavorite || isPreview ? "#ff3131" : "white"}
 				className={heartClass}

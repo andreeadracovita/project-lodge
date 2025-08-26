@@ -3,7 +3,7 @@ import AvatarForm from "../sections/AvatarForm";
 import EmailForm from "../sections/EmailForm";
 import NameForm from "../sections/NameForm";
 import NationalityForm from "../sections/NationalityForm";
-import { getUserConfig } from "/src/api/BackendApiService";
+import { getUserConfig } from "api/BackendApiService";
 
 export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }) {
 

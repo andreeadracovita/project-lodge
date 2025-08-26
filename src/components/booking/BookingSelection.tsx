@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { getPropertyById } from "/src/api/BackendApiService";
-import BookingPropertySection from "/src/components/booking/BookingPropertySection";
-import BookingDetailSection from "/src/components/booking/BookingDetailSection";
-import BookingPriceSection from "/src/components/booking/BookingPriceSection";
+import { getPropertyById } from "api/BackendApiService";
+import BookingPropertySection from "components/booking/BookingPropertySection";
+import BookingDetailSection from "components/booking/BookingDetailSection";
+import BookingPriceSection from "components/booking/BookingPriceSection";
 
 export default function BookingSelection() {
 	const [searchParams, setSearchParams] = useSearchParams();

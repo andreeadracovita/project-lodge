@@ -1,11 +1,11 @@
 import { useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { CheckCircle } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
-import { createBooking } from "/src/api/BackendApiService";
-import CountrySelect from "/src/components/common/CountrySelect";
-import FormError from "/src/components/common/FormError";
+import { createBooking } from "api/BackendApiService";
+import CountrySelect from "components/common/CountrySelect";
+import FormError from "components/common/FormError";
 
 export default function BookingForm() {
 	const navigate = useNavigate();
@@ -85,7 +85,7 @@ export default function BookingForm() {
 		<>
 			<h1 className="page-heading">Enter your details</h1>
 			<div className="d-flex align-items-center" style={{color: "green"}}>
-				<Icon.CheckCircle size={16} />
+				<CheckCircle size={16} />
 				<span className="ms-2">Almost done! Just fill in the <span className="text-red">*</span> required info</span>
 			</div>
 			<form onSubmit={onSubmit}>

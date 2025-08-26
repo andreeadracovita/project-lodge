@@ -3,12 +3,12 @@ import countries from "react-select-country-list";
 
 import "./PropertyListItem.css";
 import WishlistIcon from "./WishlistIcon";
-import { useAuth } from "/src/components/security/AuthContext";
-import Rating from "/src/components/common/Rating";
-import { fileStorage } from "/src/utils/constants";
-import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
-import { capitalizeFirstLetter } from "/src/utils/stringUtils";
+import { useAuth } from "components/security/AuthContext";
+import Rating from "components/common/Rating";
+import { fileStorage } from "utils/constants";
+import { convertToPreferredCurrency } from "utils/conversionUtils";
+import { yearDashMonthDashDay } from "utils/dateUtils";
+import { capitalizeFirstLetter } from "utils/stringUtils";
 
 type Geo = {
 	x: number,

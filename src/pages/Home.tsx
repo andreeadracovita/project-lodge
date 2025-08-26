@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { getPropertiesForHome, getAllPropertyTypes } from "/src/api/BackendApiService";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
-import CarouselView from "/src/components/list/CarouselView";
-import Search from "/src/components/search/Search";
-import { greetingMessage, trendingDestinations } from "/src/utils/constants";
-import { capitalizeFirstLetter } from "/src/utils/stringUtils";
-import { fileStorage, landingImages } from "/src/utils/constants";
-import { yearDashMonthDashDay, getNightsCount } from "/src/utils/dateUtils";
+import { getPropertiesForHome, getAllPropertyTypes } from "api/BackendApiService";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
+import CarouselView from "components/list/CarouselView";
+import Search from "components/search/Search";
+import { greetingMessage, trendingDestinations } from "utils/constants";
+import { capitalizeFirstLetter } from "utils/stringUtils";
+import { fileStorage, landingImages } from "utils/constants";
+import { yearDashMonthDashDay, getNightsCount } from "utils/dateUtils";
 
 function getRandomLandingImage() {
 	return landingImages[Math.floor(Math.random() * landingImages.length)];

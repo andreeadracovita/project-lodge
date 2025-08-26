@@ -1,4 +1,4 @@
-import * as icons from 'react-bootstrap-icons';
+import * as icons from "react-bootstrap-icons";
 
 interface IconProps extends icons.IconProps {
   // Cannot use "name" as it is a valid SVG attribute

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
-import { updateUser } from "/src/api/BackendApiService";
-import FormError from "/src/components/common/FormError";
-import { useAuth } from "/src/components/security/AuthContext";
-import { availableCurrencies } from "/src/utils/constants";
+import { updateUser } from "api/BackendApiService";
+import FormError from "components/common/FormError";
+import { useAuth } from "components/security/AuthContext";
+import { availableCurrencies } from "utils/constants";
 
 export default function CurrencyForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
 	const authContext = useAuth();

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import PasswordForm from "../sections/PasswordForm";
-import { deleteAccount, getPropertiesByUserId } from "/src/api/BackendApiService";
-import { useAuth } from "/src/components/security/AuthContext";
+import { deleteAccount, getPropertiesByUserId } from "api/BackendApiService";
+import { useAuth } from "components/security/AuthContext";
 
 export default function LoginSecurity({ data, showSectionHandler, clearSectionHandler, activeSection }) {
 	const authContext = useAuth();

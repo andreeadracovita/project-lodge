@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { getCalendarBookingsForPropertyId } from "/src/api/BackendApiService";
-import HostingCalendarMonth from "/src/components/hosting/HostingCalendarMonth";
+import { getCalendarBookingsForPropertyId } from "api/BackendApiService";
+import HostingCalendarMonth from "components/hosting/HostingCalendarMonth";
 
 function createBookedTag(dayElementId, tagText) {
 	const dayElement = document.getElementById(`${dayElementId}`);

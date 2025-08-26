@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from "rc-slider";
 import { useSearchParams } from "react-router";
 
-import { useAuth } from "/src/components/security/AuthContext";
+import "rc-slider/assets/index.css";
+import { useAuth } from "components/security/AuthContext";
 
 export default function FilterBudget({ lowestPrice, highestPrice }) {
 	const authContext = useAuth();

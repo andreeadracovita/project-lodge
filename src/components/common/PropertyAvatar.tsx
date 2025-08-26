@@ -1,4 +1,4 @@
-import { fileStorage } from "/src/utils/constants";
+import { fileStorage } from "utils/constants";
 
 export default function PropertyAvatar({ url, size }) {
 	

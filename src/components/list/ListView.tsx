@@ -6,7 +6,7 @@ import HostingPropertyListItem from "./HostingPropertyListItem";
 import { ListItemType } from "./ListItemType";
 import PropertyListItem from "./PropertyListItem";
 import SmallPropertyListItem from "./SmallPropertyListItem";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 export default function ListView({ listItemType, items, checkIn, checkOut, nightsCount, guests, cols, setNeedsRefresh, isCompact }) {
 

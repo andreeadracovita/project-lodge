@@ -1,10 +1,10 @@
-import * as Icon from "react-bootstrap-icons";
+import { GeoAltFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import countries from "react-select-country-list";
 
 import "./CurrentTrip.css";
-import { checkInTimes, checkOutTimes, fileStorage } from "/src/utils/constants";
-import { weekdayMonYear } from "/src/utils/dateUtils";
+import { checkInTimes, checkOutTimes, fileStorage } from "utils/constants";
+import { weekdayMonYear } from "utils/dateUtils";
 
 export default function CurrentTrip({ item }) {
 	const googleMapsLink = `https://www.google.com/maps/place/${item.geo.x}N+${item.geo.y}E`;
@@ -18,7 +18,7 @@ export default function CurrentTrip({ item }) {
 					<h2 className="nav-item-font">Current trip</h2>
 					<div className="mt-10 section-heading">{item.title}</div>
 					<div className="mt-6 d-flex align-items-center">
-						<Icon.GeoAltFill size={18} />
+						<GeoAltFill size={18} />
 						{item.city}, {item.street} {item.street_no}, {countries().getLabel(item.country)}
 					</div>
 					<div className="mt-6">

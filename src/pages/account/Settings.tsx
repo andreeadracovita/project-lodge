@@ -2,12 +2,12 @@ import { PersonGear, ShieldLock, Sliders } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-import { getUserConfig } from "/src/api/BackendApiService";
-import PersonalDetails from "/src/components/user/settings/tabs/PersonalDetails";
-import LoginSecurity from "/src/components/user/settings/tabs/LoginSecurity";
-import Preferences from "/src/components/user/settings/tabs/Preferences";
-import SettingsNav, { SettingsTab } from "/src/components/user/SettingsNav";
-import { SettingsSectionEnum } from "/src/components/user/settings/SettingsSectionEnum";
+import { getUserConfig } from "api/BackendApiService";
+import PersonalDetails from "components/user/settings/tabs/PersonalDetails";
+import LoginSecurity from "components/user/settings/tabs/LoginSecurity";
+import Preferences from "components/user/settings/tabs/Preferences";
+import SettingsNav, { SettingsTab } from "components/user/SettingsNav";
+import { SettingsSectionEnum } from "components/user/settings/SettingsSectionEnum";
 
 export default function Settings() {
 	const [data, setData] = useState({

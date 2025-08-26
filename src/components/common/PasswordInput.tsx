@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 
 export default function PasswordInput({ id, name, value, handleChange }) {
 	const [type, setType] = useState("password");
@@ -29,10 +29,10 @@ export default function PasswordInput({ id, name, value, handleChange }) {
 			{
 				type === "password"
 				? <span onClick={handleTypeToggle} className="cursor-pointer">
-					<Icon.Eye size={26} />
+					<Eye size={26} />
 				</span>
 				: <span onClick={handleTypeToggle} className="cursor-pointer">
-					<Icon.EyeSlash size={26} />
+					<EyeSlash size={26} />
 				</span>
 			}
 			</div>

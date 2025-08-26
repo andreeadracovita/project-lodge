@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
 
-import { getAllWishlisted } from "/src/api/BackendApiService";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
-import MapView from "/src/components/map/MapView";
-import { genericMapCenter } from "/src/utils/constants";
-import { yearDashMonthDashDay, getNightsCount } from "/src/utils/dateUtils";
+import { getAllWishlisted } from "api/BackendApiService";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
+import MapView from "components/map/MapView";
+import { genericMapCenter } from "utils/constants";
+import { yearDashMonthDashDay, getNightsCount } from "utils/dateUtils";
 
 export default function Wishlist() {
 	const [properties, setProperties] = useState([]);

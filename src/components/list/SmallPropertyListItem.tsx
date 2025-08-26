@@ -3,10 +3,11 @@ import countries from "react-select-country-list";
 
 import "./SmallPropertyListItem.css";
 import WishlistIcon from "./WishlistIcon";
-import Rating from "/src/components/common/Rating";
-import { useAuth } from "/src/components/security/AuthContext";
-import { fileStorage } from "/src/utils/constants";
-import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
+import Rating from "components/common/Rating";
+import { useAuth } from "components/security/AuthContext";
+import { fileStorage } from "utils/constants";
+import { convertToPreferredCurrency } from "utils/conversionUtils";
+
 import type { PropertyItem } from "./PropertyListItem";
 
 type PropertyListItemProps = {

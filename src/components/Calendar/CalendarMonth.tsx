@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 
 import "./CalendarMonth.css";
 import CalendarDay from "./CalendarDay";
-import { getBookedByPropertyIdForDate } from "/src/api/BackendApiService";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
+import { getBookedByPropertyIdForDate } from "api/BackendApiService";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 /*
 	Month: 0 - 11
@@ -83,11 +83,11 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 			<div>
 				<div className="d-flex">
 					<div className="col-2">
-						{chevronLeft && <span className="cursor-pointer"><Icon.ChevronLeft onClick={onLeftChevronClicked} /></span>}
+						{chevronLeft && <span className="cursor-pointer"><ChevronLeft onClick={onLeftChevronClicked} /></span>}
 					</div>
 					<div className="col-8 text-center">{monthNames[month]} {year}</div>
 					<div className="col-2 d-flex justify-content-end">
-						{chevronRight && <span className="cursor-pointer"><Icon.ChevronRight onClick={onRightChevronClicked} /></span>}
+						{chevronRight && <span className="cursor-pointer"><ChevronRight onClick={onRightChevronClicked} /></span>}
 					</div>
 				</div>
 				<div className="days-grid mt-2">

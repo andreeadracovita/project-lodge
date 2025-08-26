@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 import "./StayPageReviewItem.css";
-import { getPropertyById, getUserNameAndAvatar } from "/src/api/BackendApiService";
-import PropertyAvatar from "/src/components/common/PropertyAvatar";
-import Rating from "/src/components/common/Rating";
-import Avatar from "/src/components/user/Avatar";
-import { yearDashMonthDashDay } from "/src/utils/dateUtils";
+import { getPropertyById, getUserNameAndAvatar } from "api/BackendApiService";
+import PropertyAvatar from "components/common/PropertyAvatar";
+import Rating from "components/common/Rating";
+import Avatar from "components/user/Avatar";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 export default function StayPageReviewItem({ reviewData, isCompact }) {
 	const [user, setUser] = useState({

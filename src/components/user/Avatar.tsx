@@ -1,4 +1,4 @@
-import { fileStorage } from "/src/utils/constants";
+import { fileStorage } from "utils/constants";
 import "./Avatar.css";
 
 export default function Avatar({ url, size, previewAvatar, firstName }) {

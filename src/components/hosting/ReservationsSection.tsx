@@ -1,8 +1,8 @@
-import * as Icon from "react-bootstrap-icons";
+import { JournalCheck } from "react-bootstrap-icons";
 
 import "./ReservationsSection.css";
-import { ReservationsTab } from "/src/components/hosting/ReservationTab";
-import ReservationItem from "/src/components/hosting/ReservationItem";
+import { ReservationsTab } from "components/hosting/ReservationTab";
+import ReservationItem from "components/hosting/ReservationItem";
 
 export default function ReservationsSection({ tab, items }) {
 	
@@ -23,7 +23,7 @@ export default function ReservationsSection({ tab, items }) {
 			{
 				items.length === 0 &&
 				<div className="d-flex flex-wrap justify-content-center">
-					<Icon.JournalCheck size={28} className="w-100" />
+					<JournalCheck size={28} className="w-100" />
 					<div id="free-message" className="mt-10 text-center">{getFreeMessage()}</div>
 				</div>
 			}

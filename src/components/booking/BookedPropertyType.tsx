@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAllPropertyTypes, getAllRentalTypes } from "/src/api/BackendApiService";
+import { getAllPropertyTypes, getAllRentalTypes } from "api/BackendApiService";
 
 export default function BookedPropertyType({ rentalTypeId, buildingTypeId }) {
 	const [rentalTypes, setRentalTypes] = useState([]);

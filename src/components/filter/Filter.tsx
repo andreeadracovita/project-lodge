@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { Eraser } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
 import "./Filter.css";
@@ -112,7 +112,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 			<hr />
 			<div id="clear-filters">
 				<div className="mt-10 d-flex align-items-center cursor-pointer" onClick={clearFilters}>
-					<Icon.Eraser size={20} />
+					<Eraser size={20} />
 					<span className="ms-1">Clear filters</span>
 				</div>
 			</div>

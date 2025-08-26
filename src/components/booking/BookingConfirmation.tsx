@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { CalendarWeek, GeoAltFill, TelephoneFill } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import countries from "react-select-country-list";
 
-import { getAllFeatures, getBookingById, getPropertyById, cancelBooking } from "/src/api/BackendApiService";
-import BookedPropertyType from "/src/components/booking/BookedPropertyType";
-import Feature from "/src/components/common/Feature";
-import MapView from "/src/components/map/MapView";
-import { useAuth } from "/src/components/security/AuthContext";
-import { checkInTimes, checkOutTimes } from "/src/utils/constants";
-import { weekdayMonYear } from "/src/utils/dateUtils";
+import { getAllFeatures, getBookingById, getPropertyById, cancelBooking } from "api/BackendApiService";
+import BookedPropertyType from "components/booking/BookedPropertyType";
+import Feature from "components/common/Feature";
+import MapView from "components/map/MapView";
+import { useAuth } from "components/security/AuthContext";
+import { checkInTimes, checkOutTimes } from "utils/constants";
+import { weekdayMonYear } from "utils/dateUtils";
 
 enum BookingStatus {
 	confirmed = "confirmed",
@@ -118,7 +118,7 @@ export default function BookingConfirmation() {
 					<div className="mt-10">
 						<div className="d-flex align-items-center">
 							<div className="">
-								<Icon.CalendarWeek size={24} />
+								<CalendarWeek size={24} />
 							</div>
 							<div className="ms-4">
 								<div className="text-bold">{weekdayMonYear(new Date(booking.check_in))} — {weekdayMonYear(new Date(booking.check_out))}</div>
@@ -131,7 +131,7 @@ export default function BookingConfirmation() {
 					<div className="mt-10">
 						<div className="d-flex align-items-center">
 							<div className="">
-								<Icon.GeoAltFill size={24} />
+								<GeoAltFill size={24} />
 							</div>
 							<div className="ms-4">
 								<div className="text-bold">Property address</div>
@@ -144,7 +144,7 @@ export default function BookingConfirmation() {
 					<div className="mt-10">
 						<div className="d-flex align-items-center">
 							<div className="">
-								<Icon.TelephoneFill size={24} />
+								<TelephoneFill size={24} />
 							</div>
 							<div className="ms-4">
 								<div className="text-bold">Host contact</div>

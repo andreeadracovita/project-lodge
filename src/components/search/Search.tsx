@@ -1,15 +1,14 @@
 import { Country, City }  from "country-state-city";
 import { useEffect, useMemo, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./Search.css";
 import SearchDesktop from "./SearchDesktop";
 import SearchMobile from "./SearchMobile";
-import Calendar from "/src/components/calendar/Calendar";
-import CountrySelect from "/src/components/common/CountrySelect";
-import { dayMonYear } from "/src/utils/dateUtils";
+import Calendar from "components/calendar/Calendar";
+import CountrySelect from "components/common/CountrySelect";
+import { dayMonYear } from "utils/dateUtils";
 
 export default function Search() {
 	const location = useLocation();

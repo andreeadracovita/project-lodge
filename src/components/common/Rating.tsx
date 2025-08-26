@@ -1,5 +1,3 @@
-import * as Icon from "react-bootstrap-icons";
-
 import "./Rating.css";
 
 export default function Rating({score, reviewsNo}) {

@@ -3,9 +3,9 @@ import { useState } from "react";
 import "./AvatarForm.css";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
-import Avatar from "/src/components/user/Avatar";
-import { updateUser, uploadAvatar } from "/src/api/BackendApiService";
-import { useAuth } from "/src/components/security/AuthContext";
+import Avatar from "components/user/Avatar";
+import { updateUser, uploadAvatar } from "api/BackendApiService";
+import { useAuth } from "components/security/AuthContext";
 
 export default function AvatarForm({ isFocused, showSectionHandler, clearSectionHandler }) {
 	const authContext = useAuth();

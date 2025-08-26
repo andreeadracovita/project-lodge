@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import * as Icon from "react-bootstrap-icons";
 
 import "./Header.css";
-import { useAuth } from "/src/components/security/AuthContext";
-import Avatar from "/src/components/user/Avatar";
-import { availableCurrencies, siteName } from "/src/utils/constants";
+import { useAuth } from "components/security/AuthContext";
+import Avatar from "components/user/Avatar";
+import { availableCurrencies, siteName } from "utils/constants";
 
 export default function Header() {
 	const authContext = useAuth();

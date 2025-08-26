@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
 
-import { getPropertiesForQuery } from "/src/api/BackendApiService";
-import ListView from "/src/components/list/ListView";
-import { ListItemType } from "/src/components/list/ListItemType";
+import { getPropertiesForQuery } from "api/BackendApiService";
+import ListView from "components/list/ListView";
+import { ListItemType } from "components/list/ListItemType";
 
-import { getGeolocation } from "/src/api/BackendApiService";
-import SearchResultsListView from "/src/components/searchResults/SearchResultsListView";
-import SearchResultsMapView from "/src/components/searchResults/SearchResultsMapView";
-import { useAuth } from "/src/components/security/AuthContext";
-import { genericMapCenter } from "/src/utils/constants";
-import { convertToPreferredCurrency } from "/src/utils/conversionUtils";
-import { getNightsCount } from "/src/utils/dateUtils";
+import { getGeolocation } from "api/BackendApiService";
+import SearchResultsListView from "components/searchResults/SearchResultsListView";
+import SearchResultsMapView from "components/searchResults/SearchResultsMapView";
+import { useAuth } from "components/security/AuthContext";
+import { genericMapCenter } from "utils/constants";
+import { convertToPreferredCurrency } from "utils/conversionUtils";
+import { getNightsCount } from "utils/dateUtils";
 
 export default function SearchResults() {
 	const authContext = useAuth();

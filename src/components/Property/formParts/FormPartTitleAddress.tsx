@@ -1,7 +1,7 @@
 import axios from "axios";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
+import { ChevronRight } from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
 import {
@@ -10,11 +10,11 @@ import {
 	getAllRentalTypes,
 	getGeolocation,
 	updateProperty
-} from "/src/api/BackendApiService";
-import CountrySelect from "/src/components/common/CountrySelect";
-import FormError from "/src/components/common/FormError";
-import MapView from "/src/components/map/MapView";
-import { capitalizeFirstLetter } from "/src/utils/stringUtils";
+} from "api/BackendApiService";
+import CountrySelect from "components/common/CountrySelect";
+import FormError from "components/common/FormError";
+import MapView from "components/map/MapView";
+import { capitalizeFirstLetter } from "utils/stringUtils";
 
 export default function FormPartTitleAddress({
 	isEditable,
@@ -313,7 +313,7 @@ export default function FormPartTitleAddress({
 					type="submit"
 					className="btn-pill my-5"
 				>
-					Describe place next <Icon.ChevronRight />
+					Describe place next <ChevronRight />
 				</button>
 			}
 		</form>
