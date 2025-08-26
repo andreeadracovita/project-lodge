@@ -3,7 +3,7 @@ export const siteName = "Lodge";
 export const greetingMessage = "The best time to travel";
 
 // Paths
-export const fileStorage = "http://localhost:3000/";
+export const fileStorage = "https://project-lodge-backend.onrender.com/";
 
 // Currency
 export const siteCurrency = "EUR";

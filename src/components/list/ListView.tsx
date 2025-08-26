@@ -13,13 +13,15 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 	const gridClassNames = classNames(
 		"row",
 		"g-2",
-		`row-cols-${cols}`,
-		`row-cols-sm-${cols - 2}`,
+		`row-cols-1`,
+		`row-cols-sm-1`,
 		`row-cols-md-${cols - 1}`,
-		`row-cols-lg-${cols}`,
-		{
-			"row-cols-1": listItemType !== ListItemType.Destination
-		}
+		`row-cols-lg-${cols}`
+	);
+
+	const destinationGridClassNames = classNames(
+		"row",
+		`row-cols-${cols}`
 	);
 
 	function renderItemByType(item) {
@@ -58,7 +60,7 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 	}
 	
 	return (
-		<div className={gridClassNames}>
+		<div className={ listItemType !== ListItemType.Destination ? gridClassNames : destinationGridClassNames }>
 		{
 			items.map((item, i) =>
 				<div key={i} className="col">
