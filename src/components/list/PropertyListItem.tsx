@@ -49,7 +49,7 @@ export default function PropertyListItem({
 	hideWishlist,
 	isCompact
 }: PropertyListItemProps) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 
 	const linkPath = !isPreview
 		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`

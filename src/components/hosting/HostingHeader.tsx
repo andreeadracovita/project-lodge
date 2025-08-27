@@ -1,15 +1,16 @@
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
-export enum HostingTab {
-	Dashboard,
-	Calendar,
-	Properties,
-	Messages
-};
+export const HostingTab = {
+	Dashboard: "Dashboard",
+	Calendar: "Calendar",
+	Properties: "Properties",
+	Messages: "Messages"
+} as const;
+export type HostingTab = (typeof HostingTab)[keyof typeof HostingTab];
 
 export default function HostingHeader({ current }) {
-	function getClassNames(tab) {
+	function getClassNames(tab: HostingTab) {
 		return classNames(
 			"btn-pill-hover-only",
 			{

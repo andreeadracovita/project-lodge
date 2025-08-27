@@ -59,7 +59,7 @@ export default function FormPartDescription({
 		}
 	);
 
-	function onDescriptionSubmit(event) {
+	function onDescriptionSubmit(event: any) {
 		event.preventDefault();
 		
 		updateProperty(propertyId, {

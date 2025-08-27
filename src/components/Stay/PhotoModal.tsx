@@ -31,7 +31,7 @@ export default function PhotoModal({ urlArray, initial }) {
 		<div
 			id="photos-modal"
 			className="modal fade"
-			tabIndex="-1"
+			tabIndex={-1}
 			aria-labelledby="photosModalLabel"
 			aria-hidden="true"
 		>

@@ -25,7 +25,7 @@ export default function SmallPropertyListItem({
 	checkOut,
 	nightsCount
 }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 
 	const linkPath = `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`;
 	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
@@ -41,7 +41,7 @@ export default function SmallPropertyListItem({
 		<div className="p-2">
 			<div className="position-relative">
 				<Link to={linkPath}>
-					<div id={`small-prop-` + item.id} className="row small-property-item border-section p-2" tabIndex="0">
+					<div id={`small-prop-` + item.id} className="row small-property-item border-section p-2" tabIndex={0}>
 						<div className="col-4 p-0">
 							<img src={imgUrl} className="cover-image mb-2" />
 						</div>

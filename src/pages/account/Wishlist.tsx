@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { getAllWishlisted } from "api/BackendApiService";
 import ListView from "components/list/ListView";
 import { ListItemType } from "components/list/ListItemType";
-import MapView from "components/map/MapView";
-import { genericMapCenter } from "utils/constants";
 import { yearDashMonthDashDay, getNightsCount } from "utils/dateUtils";
 
 export default function Wishlist() {
@@ -16,7 +14,6 @@ export default function Wishlist() {
 	const checkInParam = yearDashMonthDashDay(checkIn);
 	const checkOutParam = yearDashMonthDashDay(checkOut);
 	const nightsCount = getNightsCount(checkIn, checkOut);
-	const guests = 1;
 
 	useEffect(() => {
 		getAllWishlisted()
@@ -41,6 +38,8 @@ export default function Wishlist() {
 				nightsCount={nightsCount}
 				cols={4}
 				isCompact={true}
+				guests={undefined}
+				setNeedsRefresh={undefined}
 			/>
 		</div>
 	);

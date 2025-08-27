@@ -20,11 +20,11 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 		}
 	}, [isFocused]);
 	
-	function handleChange(event): void {
+	function handleChange(event: any): void {
 		setEmail(event.target.value);
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUser({ email: email })
 			.then(response => {
@@ -59,7 +59,7 @@ export default function EmailForm({ value, isFocused, showSectionHandler, clearS
 								value={email}
 								onChange={handleChange}
 								className={formClassNames}
-								maxLength="50"
+								maxLength={50}
 								required
 							/>
 							<FormError errors={errors} />

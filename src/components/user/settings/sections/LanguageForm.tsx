@@ -7,8 +7,15 @@ import FormError from "components/common/FormError";
 import { useAuth } from "components/security/AuthContext";
 import { availableLanguages } from "utils/constants";
 
-export default function LanguageForm({ value, isFocused, showSectionHandler, clearSectionHandler }) {
-	const authContext = useAuth();
+type LanguageFormProps = {
+	value: string | undefined,
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any
+};
+
+export default function LanguageForm({ value, isFocused, showSectionHandler, clearSectionHandler }: LanguageFormProps) {
+	const authContext: any = useAuth();
 	const [language, setLanguage] = useState(authContext.language);
 	const [errors, setErrors] = useState([]);
 
@@ -29,14 +36,14 @@ export default function LanguageForm({ value, isFocused, showSectionHandler, cle
 		}
 	}, [isFocused]);
 	
-	function handleChange(event: Event): void {
+	function handleChange(event: any): void {
 		setLanguage(event.target.value);
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUser({ language: language })
-			.then(response => {
+			.then(() => {
 				if (errors) {
 					setErrors(errors);
 					setLanguage(value);
@@ -76,11 +83,13 @@ export default function LanguageForm({ value, isFocused, showSectionHandler, cle
 							</select>
 							<FormError errors={errors} />
 						</>
-						: <span>{
-							value 
-							? availableLanguages.find(l => l.value === value).label
-							: availableLanguages.find(l => l.value === authContext.language).label
-						}</span>
+						: <span>
+							{
+								value 
+								? availableLanguages.find(l => l.value === value)?.label
+								: availableLanguages.find(l => l.value === authContext.language)?.label
+							}
+						</span>
 					}
 				</div>
 				<div className="col-2 d-flex justify-content-end align-items-start">

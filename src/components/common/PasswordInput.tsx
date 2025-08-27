@@ -23,7 +23,7 @@ export default function PasswordInput({ id, name, value, handleChange }) {
 				onChange={handleChange}
 				placeholder="Password *"
 				autoComplete="off"
-				maxLength="50"
+				maxLength={50}
 			/>
 			<div className="mx-2">
 			{

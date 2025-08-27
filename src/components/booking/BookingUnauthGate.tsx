@@ -10,7 +10,7 @@ export default function BookingUnauthGate({ setShowGate }) {
 		pinCode: searchParams.get("pin")
 	});
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { value, name } = event.target;
 
 		setInput((prevValue) => {
@@ -21,7 +21,7 @@ export default function BookingUnauthGate({ setShowGate }) {
 		});
 	}
 
-	function handleFormSubmit(event) {
+	function handleFormSubmit(event: any) {
 		event.preventDefault();
 		authorizeBookingAccess({
 			confirmation_number: input.confirmationNo,

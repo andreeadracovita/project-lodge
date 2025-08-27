@@ -4,8 +4,16 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { getAllExperiences, updateUser } from "api/BackendApiService";
 import Multiselect from "components/common/Multiselect";
 
-export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
-	const [experiencesIds, setExperiencesIds] = useState([]);
+type ExperiencesFormProps = {
+	value: number[],
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	refreshUserData: any
+};
+
+export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }: ExperiencesFormProps) {
+	const [experiencesIds, setExperiencesIds] = useState<number[]>([]);
 	const [experiences, setExperiences] = useState();
 
 	useEffect(() => {
@@ -37,7 +45,7 @@ export default function ExperiencesForm({ value, isFocused, showSectionHandler, 
 		}
 	}, [isFocused]);
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const item = parseInt(event.target.id);
 
 		let newValues = Array.from(experiencesIds);
@@ -49,7 +57,7 @@ export default function ExperiencesForm({ value, isFocused, showSectionHandler, 
 		setExperiencesIds(newValues);
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUser({ experiences_ids: experiencesIds })
 			.then(() => {
@@ -73,6 +81,7 @@ export default function ExperiencesForm({ value, isFocused, showSectionHandler, 
 						selectedIds={experiencesIds}
 						handleChange={handleChange}
 						isEditable={isFocused}
+						iconMap={undefined}
 					/>
 				</div>
 				<div className="col-2 d-flex justify-content-end align-items-start">

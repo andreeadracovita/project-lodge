@@ -79,7 +79,7 @@ export default function MapView({
 	 * @param {import('ol/MapBrowserEvent.js').default} evt Map browser event.
 	 * @return {boolean} `true` to start the drag sequence.
 	 */
-	function handleDownEvent(evt) {
+	function handleDownEvent(evt: any) {
 		const map = evt.map;
 
 		const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
@@ -97,7 +97,7 @@ export default function MapView({
 	/**
 	 * @param {import('ol/MapBrowserEvent.js').default} evt Map browser event.
 	 */
-	function handleDragEvent(evt) {
+	function handleDragEvent(evt: any) {
 		const deltaX = evt.coordinate[0] - this.coordinate_[0];
 		const deltaY = evt.coordinate[1] - this.coordinate_[1];
 
@@ -111,7 +111,7 @@ export default function MapView({
 	/**
 	 * @param {import('ol/MapBrowserEvent.js').default} evt Event.
 	 */
-	function handleMoveEvent(evt) {
+	function handleMoveEvent(evt: any) {
 		if (this.cursor_) {
 			const map = evt.map;
 			const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
@@ -133,7 +133,7 @@ export default function MapView({
 	/**
 	 * @return {boolean} `false` to stop the drag sequence.
 	 */
-	function handleUpEvent(evt) {
+	function handleUpEvent(evt: any) {
 		updatePinPosition([this.coordinate_[1], this.coordinate_[0]]);
 		this.coordinate_ = null;
 		this.feature_ = null;

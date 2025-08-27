@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import { checkViewBookingAuthorization } from "api/BackendApiService";
 import BookingConfirmation from "components/booking/BookingConfirmation";
@@ -7,8 +8,9 @@ import BookingUnauthGate from "components/booking/BookingUnauthGate";
 import { useAuth } from "components/security/AuthContext";
 
 export default function Booking() {
-	const authContext = useAuth();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const authContext: any = useAuth();
+	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
 	const [showGate, setShowGate] = useState(true);
 	const bookingId = searchParams.get("id");
 

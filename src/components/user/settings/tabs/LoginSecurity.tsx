@@ -5,8 +5,14 @@ import PasswordForm from "../sections/PasswordForm";
 import { deleteAccount, getPropertiesByUserId } from "api/BackendApiService";
 import { useAuth } from "components/security/AuthContext";
 
-export default function LoginSecurity({ data, showSectionHandler, clearSectionHandler, activeSection }) {
-	const authContext = useAuth();
+type LoginSecurityProps = {
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	activeSection: SettingsSectionEnum
+};
+
+export default function LoginSecurity({ showSectionHandler, clearSectionHandler, activeSection }: LoginSecurityProps) {
+	const authContext: any = useAuth();
 	const [canDelete, setCanDelete] = useState(false);
 
 	useEffect(() => {
@@ -50,7 +56,7 @@ export default function LoginSecurity({ data, showSectionHandler, clearSectionHa
 			<div
 				id="deleteAccountModal"
 				className="modal fade"
-				tabIndex="-1"
+				tabIndex={-1}
 				aria-labelledby="deleteAccountModalLabel"
 				aria-hidden="true"
 			>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "react-bootstrap-icons";
@@ -9,25 +8,26 @@ import FormError from "components/common/FormError";
 import PasswordInput from "components/common/PasswordInput";
 import { useAuth } from "components/security/AuthContext";
 
-enum FormState {
-	Email,
-	Password,
-	Signup
-};
+const FormState = {
+	Email: "Email",
+	Password: "Password",
+	Signup: "Signup",
+} as const;
+type FormState = (typeof FormState)[keyof typeof FormState];
 
 export default function SignupLogin() {
 	const navigate = useNavigate();
-	const authContext = useAuth();
-	const { location } = useLocation();
+	const authContext: any = useAuth();
+	const location = useLocation();
 
-	const [formState, setFormState] = useState(FormState.Email);
+	const [formState, setFormState] = useState<FormState>(FormState.Email);
 	const [input, setInput] = useState({
 		email: "",
 		firstName: "",
 		lastName: "",
 		password: ""
 	});
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<Array<string>>([]);
 
 	function onBackClicked() {
 		setFormState(FormState.Email);
@@ -54,7 +54,7 @@ export default function SignupLogin() {
 			});
 	}
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { value, name } = event.target;
 
 		setInput((prevValue) => {
@@ -67,13 +67,13 @@ export default function SignupLogin() {
 
 	async function handleLogin() {
 		if (await authContext.login(input.email, input.password)) {
-			navigate(location?.path || "/");
+			navigate(location?.pathname || "/");
 		} else {
 			setErrors(["Incorrect email and password combination"]);
 		}
 	}
 
-	async function onFormSubmit(event) {
+	async function onFormSubmit(event: any) {
 		event.preventDefault();
 
 		if (formState === FormState.Password) {
@@ -139,7 +139,7 @@ export default function SignupLogin() {
 							value={input.email} 
 							onChange={handleChange}
 							placeholder="Email"
-							maxLength="50"
+							maxLength={50}
 							required
 						/>
 						<FormError errors={errors} />
@@ -178,7 +178,7 @@ export default function SignupLogin() {
 							value={input.firstName} 
 							onChange={handleChange}
 							placeholder="First name *"
-							maxLength="50"
+							maxLength={50}
 							required
 						/>
 						<input
@@ -188,7 +188,7 @@ export default function SignupLogin() {
 							value={input.lastName} 
 							onChange={handleChange}
 							placeholder="Last name *"
-							maxLength="50"
+							maxLength={50}
 							required
 						/>
 
@@ -201,7 +201,7 @@ export default function SignupLogin() {
 							value={input.email}
 							onChange={handleChange}
 							placeholder="Email *"
-							maxLength="50"
+							maxLength={50}
 							required
 						/>
 

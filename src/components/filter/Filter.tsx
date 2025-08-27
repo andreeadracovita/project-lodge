@@ -25,7 +25,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 		dist: searchParams.get("dist")
 	});
 
-	function handleInputChange(event) {
+	function handleInputChange(event: any) {
 		const { name, value } = event.target;
 		setFilter(prevValue => {
 			return {
@@ -37,7 +37,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 		setSearchParams(searchParams);
 	}
 
-	function updateMultiselectParams(event) {
+	function updateMultiselectParams(event: any) {
 		const { name, value } = event.target;
 		const item = parseInt(event.target.value);
 

@@ -9,7 +9,7 @@ import FormError from "components/common/FormError";
 
 export default function BookingForm() {
 	const navigate = useNavigate();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [input, setInput] = useState({
 		firstName: "",
 		lastName: "",
@@ -21,7 +21,7 @@ export default function BookingForm() {
 	});
 	const [errors, setErrors] = useState([]);
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { name, value } = event.target;
 		setInput(prevValue => {
 			return {
@@ -40,7 +40,7 @@ export default function BookingForm() {
 		});
 	}
 
-	function onSubmit(event) {
+	function onSubmit(event: any) {
 		event.preventDefault();
 
 		const checkIn = searchParams.get("check_in");
@@ -97,7 +97,7 @@ export default function BookingForm() {
 					name="firstName"
 					value={input.firstName}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 
@@ -109,7 +109,7 @@ export default function BookingForm() {
 					name="lastName"
 					value={input.lastName}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 
@@ -121,7 +121,7 @@ export default function BookingForm() {
 					name="email"
 					value={input.email}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 
@@ -136,7 +136,7 @@ export default function BookingForm() {
 					name="address"
 					value={input.address}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 
@@ -148,7 +148,7 @@ export default function BookingForm() {
 					name="city"
 					value={input.city}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 
@@ -167,7 +167,7 @@ export default function BookingForm() {
 					name="phoneNo"
 					value={input.phoneNo}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 				<FormError errors={errors} />

@@ -67,7 +67,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }) {
 				<div
 					id="detailedReviewModal"
 					className="modal fade"
-					tabIndex="-1"
+					tabIndex={-1}
 					aria-labelledby="detailedReviewModalLabel"
 					aria-hidden="true"
 				>

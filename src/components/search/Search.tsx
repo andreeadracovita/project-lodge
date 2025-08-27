@@ -62,7 +62,7 @@ export default function Search() {
 		}
 	}
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { value, name } = event.target;
 
 		setInput((prevValue) => {
@@ -82,7 +82,7 @@ export default function Search() {
 		});
 	}
 
-	function onCalendarClick(event) {
+	function onCalendarClick(event: any) {
 		event.stopPropagation();
 	}
 

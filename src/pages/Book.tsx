@@ -6,7 +6,7 @@ import BookingForm from "components/booking/BookingForm";
 import BookingSelection from "components/booking/BookingSelection";
 
 export default function Book() {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
 	const guests = searchParams.get("guests");
 	const checkIn = searchParams.get("check_in");
@@ -17,22 +17,22 @@ export default function Book() {
 		<div className="container section-container">
 			<Link to={ linkPath }>
 				<div className="text-bold d-flex align-items-center">
-					<Icon.ChevronLeft size={24} /><span className="ms-2">Back</span>
+					<ChevronLeft size={24} /><span className="ms-2">Back</span>
 				</div>
 			</Link>
 			<div className="section-container row">
 				<div className="col-2 text-bold d-flex align-items-center">
-					<Icon.CheckCircle size={24} />
+					<CheckCircle size={24} />
 					<span className="ms-2">Your selection</span>
 				</div>
 				<div className="col-3"><hr /></div>
 				<div className="col-2 text-bold d-flex align-items-center justify-content-center">
-					<Icon.Icon2Circle size={24} />
+					<Icon2Circle size={24} />
 					<span className="ms-2">Your details</span>
 				</div>
 				<div className="col-3"><hr /></div>
 				<div className="col-2 text-bold d-flex align-items-center justify-content-end">
-					<Icon.Icon3Circle size={24} />
+					<Icon3Circle size={24} />
 					<span className="ms-2">Finish booking</span>
 				</div>
 			</div>

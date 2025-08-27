@@ -17,7 +17,7 @@ export default function ReviewForm({ propertyId }) {
 	const [errors, setErrors] = useState([]);
 	const bookingId = searchParams.get("booking_id");
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { value, name } = event.target;
 
 		setInput((prevValue) => {
@@ -28,7 +28,7 @@ export default function ReviewForm({ propertyId }) {
 		});
 	}
 
-	function handleSubmit(event) {
+	function handleSubmit(event: any) {
 		event.preventDefault();
 		if (!bookingId) {
 			return;
@@ -66,7 +66,7 @@ export default function ReviewForm({ propertyId }) {
 				value={input.title}
 				onChange={handleChange}
 				className="form-control w-75"
-				maxLength="80"
+				maxLength={80}
 			/>
 
 			<label htmlFor="body" className="mt-10">Tell us more about your stay</label>

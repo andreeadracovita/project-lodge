@@ -8,7 +8,7 @@ import PropertyPhotoGrid from "components/Stay/PropertyPhotoGrid";
 export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
 	const [errors, setErrors] = useState([]);
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		// Check for file limit
 		const files = event.target.files;
 		for (const file of files) {
@@ -21,7 +21,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 		handleChangePhotos(event);
 	}
 	
-	async function onPhotosSubmit(event) {
+	async function onPhotosSubmit(event: any) {
 		event.preventDefault();
 
 		const files = event.target.photos.files;

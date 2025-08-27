@@ -1,14 +1,24 @@
+import * as icons from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
 import { Icon } from "components/common/Icon";
 
-export enum SettingsTab {
-	Details = "details",
-	Security = "security",
-	Preferences = "preferences"
+export const SettingsTab = {
+  Details: "details",
+  Security: "security",
+  Preferences: "preferences",
+} as const;
+export type SettingsTab = (typeof SettingsTab)[keyof typeof SettingsTab];
+
+type SettingsNavProps = {
+	iconName: keyof typeof icons;
+	iconSize: number;
+	tabName: string;
+	settingsTab: SettingsTab;
+	activeSection: string | undefined;
 };
 
-export default function SettingsNav({ iconName, iconSize, tabName, settingsTab, activeSection }) {
+export default function SettingsNav({ iconName, iconSize, tabName, settingsTab, activeSection }: SettingsNavProps) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	function isActive(settingsTab: SettingsTab) {

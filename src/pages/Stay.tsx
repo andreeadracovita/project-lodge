@@ -13,8 +13,8 @@ import Rating from "components/common/Rating";
 import { fileStorage } from "utils/constants";
 
 export default function Stay() {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [property, setProperty] = useState();
+	const [searchParams] = useSearchParams();
+	const [property, setProperty] = useState<any>();
 
 	const id = searchParams.get("id");
 
@@ -58,7 +58,7 @@ export default function Stay() {
 						</div>
 						<div className="mt-3">
 							<PropertyPhotoGrid
-								urlArray={property.images_url_array ? property.images_url_array.map(url => fileStorage + url) : []}
+								urlArray={property.images_url_array ? property.images_url_array.map((url: string) => fileStorage + url) : []}
 							/>
 						</div>
 						<div className="mt-5 row">

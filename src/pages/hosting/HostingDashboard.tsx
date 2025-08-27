@@ -7,10 +7,10 @@ import ReservationTabItem, { ReservationsTab } from "components/hosting/Reservat
 import { useAuth } from "components/security/AuthContext";
 
 export default function HostingDashboard() {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 
 	const tabs = [ReservationsTab.CheckingOut, ReservationsTab.Current, ReservationsTab.Arriving, ReservationsTab.Upcoming];
-	const [activeTab, setActiveTab] = useState(ReservationsTab.CheckingOut);
+	const [activeTab, setActiveTab] = useState<ReservationsTab>(ReservationsTab.CheckingOut);
 
 	const [checkingOut, setCheckingOut] = useState([]);
 	const [current, setCurrent] = useState([]);
@@ -41,13 +41,13 @@ export default function HostingDashboard() {
 		}
 	}
 
-	function getItemsCount(tab) {
+	function getItemsCount(tab: ReservationsTab): number {
 		switch (tab) {
 			case ReservationsTab.Arriving: return arriving.length;
 			case ReservationsTab.CheckingOut: return checkingOut.length;
 			case ReservationsTab.Current: return current.length;
 			case ReservationsTab.Upcoming: return upcoming.length;
-			default: return [];
+			default: return 0;
 		}
 	}
 

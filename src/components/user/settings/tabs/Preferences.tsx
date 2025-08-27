@@ -1,9 +1,16 @@
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import CurrencyForm from "../sections/CurrencyForm";
 import ExperiencesForm from "../sections/ExperiencesForm";
-import LanguageForm from "../sections/LanguageForm";
 
-export default function Preferences({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }) {
+type PreferencesProps = {
+	data: any,
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	activeSection: SettingsSectionEnum,
+	refreshUserData: any
+};
+
+export default function Preferences({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }: PreferencesProps) {
 
 	return (
 		<>

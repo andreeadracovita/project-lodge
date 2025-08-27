@@ -6,7 +6,15 @@ import CountrySelect from "components/common/CountrySelect";
 import FormError from "components/common/FormError";
 import { updateUser } from "api/BackendApiService";
 
-export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
+type NationalityFormProps = {
+	value: string | null,
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	refreshUserData: any
+};
+
+export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }: NationalityFormProps) {
 	const [countryCode, setCountryCode] = useState(value);
 	const [errors, setErrors] = useState([]);
 
@@ -21,11 +29,11 @@ export default function NationalityForm({ value, isFocused, showSectionHandler, 
 		}
 	}, [isFocused]);
 
-	function handleChange(value): void {
+	function handleChange(value: string): void {
 		setCountryCode(value);
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUser({ country_code: countryCode })
 			.then(response => {

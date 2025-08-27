@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { getAllBookings } from "api/BackendApiService";
 import ListView from "components/list/ListView";
 import { ListItemType } from "components/list/ListItemType";
-import { fileStorage } from "utils/constants";
 import CallToTravel from "components/trips/CallToTravel";
 import CurrentTrip from "components/trips/CurrentTrip";
 
@@ -53,7 +52,17 @@ export default function Trips() {
 			{
 				currentBookings.length > 1 && 
 				<div className="mt-10">
-					<ListView listItemType={ListItemType.Booking} items={currentBookings.slice(1)} cols={3} />
+					<ListView
+						listItemType={ListItemType.Booking}
+						items={currentBookings.slice(1)}
+						cols={3}
+						checkIn={undefined}
+						checkOut={undefined}
+						nightsCount={undefined}
+						guests={undefined}
+						isCompact={undefined}
+						setNeedsRefresh={undefined}
+					/>
 				</div>
 			}
 
@@ -61,7 +70,17 @@ export default function Trips() {
 				upcomingBookings.length > 0 &&
 				<div className="section-container">
 					<h2 className="section-heading">Upcoming trips</h2>
-					<ListView listItemType={ListItemType.Booking} items={upcomingBookings} cols={3} />
+					<ListView
+						listItemType={ListItemType.Booking}
+						items={upcomingBookings}
+						cols={3}
+						checkIn={undefined}
+						checkOut={undefined}
+						nightsCount={undefined}
+						guests={undefined}
+						isCompact={undefined}
+						setNeedsRefresh={undefined}
+					/>
 				</div>
 			}
 
@@ -70,7 +89,17 @@ export default function Trips() {
 				completedBookings.length > 0 &&
 				<div className="section-container">
 					<h2 className="section-heading">Completed trips</h2>
-					<ListView listItemType={ListItemType.Booking} items={completedBookings} cols={3} />
+					<ListView
+						listItemType={ListItemType.Booking}
+						items={completedBookings}
+						cols={3}
+						checkIn={undefined}
+						checkOut={undefined}
+						nightsCount={undefined}
+						guests={undefined}
+						isCompact={undefined}
+						setNeedsRefresh={undefined}
+					/>
 				</div>
 			}
 
@@ -78,7 +107,17 @@ export default function Trips() {
 				cancelledBookings.length > 0 &&
 				<div className="section-container">
 					<h2 className="section-heading">Cancelled trips</h2>
-					<ListView listItemType={ListItemType.Booking} items={cancelledBookings} cols={3} />
+					<ListView
+						listItemType={ListItemType.Booking}
+						items={cancelledBookings}
+						cols={3}
+						checkIn={undefined}
+						checkOut={undefined}
+						nightsCount={undefined}
+						guests={undefined}
+						isCompact={undefined}
+						setNeedsRefresh={undefined}
+					/>
 				</div>
 			}
 		</div>

@@ -9,7 +9,7 @@ import { getNightsCount, dayMonYear } from "utils/dateUtils";
 import { convertToPreferredCurrency } from "utils/conversionUtils";
 
 export default function BookingCard({price, maxGuests}) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const navigate = useNavigate();
 	const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
 	const [nightsCount, setNightsCount] = useState(0);
@@ -58,7 +58,7 @@ export default function BookingCard({price, maxGuests}) {
 		setConvertedTotalPrice(convertToPreferredCurrency(tempSiteTotalPrice, authContext.exchangeRate));
 	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { name, value } = event.target;
 		
 		setInput(prevValue => {
@@ -69,7 +69,7 @@ export default function BookingCard({price, maxGuests}) {
 		});
 	}
 
-	function onCalendarClick(event) {
+	function onCalendarClick(event: any) {
 		event.stopPropagation();
 	}
 
@@ -91,7 +91,7 @@ export default function BookingCard({price, maxGuests}) {
 			</p>
 			<form>
 				<div className="form-field rounded-pill d-flex px-4 py-2 w-100">
-					<div id="date-range" className="dropdown-center w-100 cursor-pointer focusable rounded-pill" tabIndex="0">
+					<div id="date-range" className="dropdown-center w-100 cursor-pointer focusable rounded-pill" tabIndex={0}>
 						<div id="dropdown-toggle" className="d-flex align-items-center justify-content-between" data-bs-toggle="dropdown">
 							<span className="me-2">
 								<span className="d-block">{input.checkIn && "Check-in"}</span>

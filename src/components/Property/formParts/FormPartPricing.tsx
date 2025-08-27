@@ -7,7 +7,7 @@ import FormError from "components/common/FormError";
 import { useAuth } from "components/security/AuthContext";
 
 export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const currency = authContext.currency;
 	const [errors, setErrors] = useState([]);
 
@@ -19,7 +19,7 @@ export default function FormPartPricing({ isEditable, showButton, input, propert
 		}
 	);
 
-	function onSubmit(event) {
+	function onSubmit(event: any) {
 		event.preventDefault();
 
 		updateProperty(propertyId, {

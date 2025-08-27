@@ -1,13 +1,21 @@
 import classNames from "classnames";
 
-export enum ReservationsTab {
-	Arriving,
-	CheckingOut,
-	Current,
-	Upcoming
-}
+export const ReservationsTab = {
+	Arriving: "Arriving",
+	CheckingOut: "CheckingOut",
+	Current: "Current",
+	Upcoming: "Upcoming"
+} as const;
+export type ReservationsTab = (typeof ReservationsTab)[keyof typeof ReservationsTab];
 
-export default function ReservationTabItem({ tab, activeTab, itemsCount, setActiveTab }) {
+type ReservationTabItemProps = {
+	tab: ReservationsTab;
+	activeTab: ReservationsTab;
+	itemsCount: number;
+	setActiveTab: any;
+};
+
+export default function ReservationTabItem({ tab, activeTab, itemsCount, setActiveTab }: ReservationTabItemProps) {
 
 	function handleTabClick() {
 		setActiveTab(tab);

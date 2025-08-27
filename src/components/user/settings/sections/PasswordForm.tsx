@@ -1,19 +1,24 @@
 import { useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import { formClassNames } from "../formClassNames";
 import { updateUserPassword } from "api/BackendApiService";
 import FormError from "components/common/FormError";
 import PasswordInput from "components/common/PasswordInput";
 
-export default function PasswordForm({ isFocused, showSectionHandler, clearSectionHandler }) {
+type PasswordFormProps = {
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any
+};
+
+export default function PasswordForm({ isFocused, showSectionHandler, clearSectionHandler }: PasswordFormProps) {
 	const [input, setInput] = useState({
 		oldPassword: "",
 		newPassword: ""
 	});
 	const [errors, setErrors] = useState([]);
 
-	function handleChange(event): void {
+	function handleChange(event: any): void {
 		const { name, value } = event.target;
 		setInput(prevVal => {
 			return {
@@ -23,7 +28,7 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 		});
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUserPassword({ old_password: input.oldPassword, new_password: input.newPassword })
 			.then(response => {

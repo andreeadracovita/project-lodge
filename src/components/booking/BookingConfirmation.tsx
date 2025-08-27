@@ -6,30 +6,27 @@ import countries from "react-select-country-list";
 
 import { getAllFeatures, getBookingById, getPropertyById, cancelBooking } from "api/BackendApiService";
 import BookedPropertyType from "components/booking/BookedPropertyType";
-import Feature from "components/common/Feature";
 import MapView from "components/map/MapView";
-import { useAuth } from "components/security/AuthContext";
 import { checkInTimes, checkOutTimes } from "utils/constants";
 import { weekdayMonYear } from "utils/dateUtils";
 
-enum BookingStatus {
-	confirmed = "confirmed",
-	completed = "completed",
-	cancelled = "cancelled"
-}
+const BookingStatus = {
+	Confirmed: "Confirmed",
+	Completed: "Completed",
+	Cancelled: "Cancelled",
+} as const;
+type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus];
 
 export default function BookingConfirmation() {
-	const authContext = useAuth();
 	const navigate = useNavigate();
 
 	const [booking, setBooking] = useState();
 	const [property, setProperty] = useState();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const bookingId = searchParams.get("id");
 	const pinCode = searchParams.get("pin");
 	const [showCancel, setShowCancel] = useState(true);
 	const [status, setStatus] = useState("");
-	const [propertyType, setPropertyType] = useState("");
 	const [googleMapsLink, setGoogleMapsLink] = useState("");
 	const [features, setFeatures] = useState([]);
 

@@ -6,7 +6,7 @@ import PropertyListItem from "./PropertyListItem";
 import { ListItemType } from "components/list/ListItemType";
 
 type CarouselViewProps = {
-	id: number;
+	id: string;
 	listItemType: ListItemType;
 	items: Array;
 	checkIn: string; // formatted string 2025-04-10

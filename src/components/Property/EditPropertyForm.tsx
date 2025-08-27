@@ -107,7 +107,7 @@ export default function EditPropertyForm() {
 		setFormState(formState - 1);
 	}
 
-	function handleChange(event) {
+	function handleChange(event: any) {
 		const { value, name } = event.target;
 
 		setInput((prevValue) => {
@@ -129,7 +129,7 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	async function handleChangePhotos(event) {
+	async function handleChangePhotos(event: any) {
 		const fileArray = Array.from(event.target.files);
 		const urls = fileArray.map((photo) => URL.createObjectURL(photo));
 
@@ -141,7 +141,7 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	function handleChangeMultiselect(event, name) {
+	function handleChangeMultiselect(event: any, name: string) {
 		const item = parseInt(event.target.id);
 
 		let newValues = input[name];

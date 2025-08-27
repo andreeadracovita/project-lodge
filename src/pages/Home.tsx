@@ -5,8 +5,7 @@ import ListView from "components/list/ListView";
 import { ListItemType } from "components/list/ListItemType";
 import CarouselView from "components/list/CarouselView";
 import Search from "components/search/Search";
-import { greetingMessage, trendingDestinations } from "utils/constants";
-import { capitalizeFirstLetter } from "utils/stringUtils";
+import { trendingDestinations } from "utils/constants";
 import { fileStorage, landingImages } from "utils/constants";
 import { yearDashMonthDashDay, getNightsCount } from "utils/dateUtils";
 
@@ -15,7 +14,7 @@ function getRandomLandingImage() {
 }
 
 export default function Home() {
-	const [backgroundImage, setBackgroundImage] = useState();
+	const [backgroundImage, setBackgroundImage] = useState<string>();
 	const [properties, setProperties] = useState([]);
 	const [propertyTypes, setPropertyTypes] = useState([]);
 
@@ -73,7 +72,6 @@ export default function Home() {
 							items={properties}
 							checkIn={checkInParam}
 							checkOut={checkOutParam}
-							nightsCount={nightsCount}
 							guests={guests}
 						/>
 					</div>
@@ -86,6 +84,8 @@ export default function Home() {
 							guests={guests}
 							nightsCount={nightsCount}
 							cols={1}
+							setNeedsRefresh={undefined}
+							isCompact={undefined}
 						/>
 					</div>
 					
@@ -100,6 +100,9 @@ export default function Home() {
 						checkOut={checkOutParam}
 						guests={guests}
 						cols={4}
+						nightsCount={undefined}
+						setNeedsRefresh={undefined}
+						isCompact={undefined}
 					/>
 				</div>
 
@@ -112,7 +115,6 @@ export default function Home() {
 						checkIn={checkInParam}
 						checkOut={checkOutParam}
 						guests={guests}
-						cols={4}
 					/>
 				</div>
 			</div>

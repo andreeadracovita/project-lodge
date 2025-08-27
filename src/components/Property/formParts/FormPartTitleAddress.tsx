@@ -174,7 +174,7 @@ export default function FormPartTitleAddress({
 	 * 1. Create property entry & property_details entry with partial details. (is_listed is false by default)
 	 * 2. If back and edit, patch entry with new details.
 	 */
-	async function onSubmit() {
+	async function onSubmit(event: any) {
 		event.preventDefault();
 
 		if (input.title === "" || input.city === "" || input.country === "" || input.street === "" || input.streetNo === "" || !geoCoords) {
@@ -200,7 +200,7 @@ export default function FormPartTitleAddress({
 				value={input.title}
 				readOnly={!isEditable}
 				onChange={handleChange}
-				maxLength="50"
+				maxLength={50}
 				required
 			/>
 
@@ -250,7 +250,7 @@ export default function FormPartTitleAddress({
 					value={input.street}
 					readOnly={!isEditable}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 				<label htmlFor="streetNo" className="mt-2">Street number <span className="text-red">*</span></label>
@@ -262,7 +262,7 @@ export default function FormPartTitleAddress({
 					value={input.streetNo}
 					readOnly={!isEditable}
 					onChange={handleChange}
-					maxLength="10"
+					maxLength={10}
 					required
 				/>
 				<label htmlFor="city" className="mt-2">City <span className="text-red">*</span></label>
@@ -274,7 +274,7 @@ export default function FormPartTitleAddress({
 					value={input.city}
 					readOnly={!isEditable}
 					onChange={handleChange}
-					maxLength="50"
+					maxLength={50}
 					required
 				/>
 				<label htmlFor="country" className="mt-2">Country <span className="text-red">*</span></label>

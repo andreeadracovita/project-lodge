@@ -8,7 +8,7 @@ import { updateUser, uploadAvatar } from "api/BackendApiService";
 import { useAuth } from "components/security/AuthContext";
 
 export default function AvatarForm({ isFocused, showSectionHandler, clearSectionHandler }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const [avatarUrl, setAvatarUrl] = useState();
 
 	function handleAvatarClick(): void {
@@ -16,7 +16,7 @@ export default function AvatarForm({ isFocused, showSectionHandler, clearSection
 		document.getElementById("avatar-input").click();
 	}
 
-	function handleUpload(event: Event): void {
+	function handleUpload(event: any): void {
 		const files = Array.from(event.target.files);
 		if (files.length > 0) {
 			const tempUrl = URL.createObjectURL(files[0]);
@@ -24,7 +24,7 @@ export default function AvatarForm({ isFocused, showSectionHandler, clearSection
 		}
 	}
 
-	async function handleSubmit(event): void {
+	async function handleSubmit(event: any): void {
 		event.preventDefault();
 
 		const files = event.target.avatar.files;

@@ -6,8 +6,8 @@ import { getNightsCount } from "utils/dateUtils";
 import { convertToPreferredCurrency } from "utils/conversionUtils";
 
 export default function BookingPriceSection({ item }) {
-	const authContext = useAuth();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const authContext: any = useAuth();
+	const [searchParams] = useSearchParams();
 	const checkInDate = new Date(searchParams.get("check_in"));
 	const checkOutDate = new Date(searchParams.get("check_out"));
 	const nightsCount = getNightsCount(checkInDate, checkOutDate);

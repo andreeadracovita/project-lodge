@@ -40,7 +40,7 @@ export default function SearchDesktop({input, handleCountryChange, handleChange,
 					<div
 						id="date-range"
 						className="dropdown-center d-flex align-items-center cursor-pointer focusable rounded-pill"
-						tabIndex="0"
+						tabIndex={0}
 					>
 						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown">
 							<span className="me-2">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>

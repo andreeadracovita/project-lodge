@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { useAuth } from "components/security/AuthContext";
 import HostingHeader, { HostingTab } from "components/hosting/HostingHeader";
 import { getPropertiesByUserId } from "api/BackendApiService";
 import ListView from "components/list/ListView";
@@ -8,7 +7,6 @@ import { ListItemType } from "components/list/ListItemType";
 
 // Page path: /hosting/properties
 export default function Properties() {
-	const authContext = useAuth();
 	const [hostedProperties, setHostedProperties] = useState([]);
 	const [needsRefresh, setNeedsRefresh] = useState(false);
 
@@ -37,6 +35,11 @@ export default function Properties() {
 						items={hostedProperties}
 						cols={3}
 						setNeedsRefresh={setNeedsRefresh}
+						checkIn={undefined}
+						checkOut={undefined}
+						nightsCount={undefined}
+						guests={undefined}
+						isCompact={undefined}
 					/>
 				</div>
 			</div>

@@ -14,7 +14,7 @@ export default function SearchResultsMapView({
 	geo,
 	setIsFullscreenMap
 }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [points, setPoints] = useState([]);

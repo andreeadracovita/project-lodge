@@ -8,7 +8,7 @@ import { useAuth } from "components/security/AuthContext";
 import { availableCurrencies } from "utils/constants";
 
 export default function CurrencyForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const [currency, setCurrency] = useState(authContext.currency);
 	const [errors, setErrors] = useState([]);
 
@@ -29,11 +29,11 @@ export default function CurrencyForm({ value, isFocused, showSectionHandler, cle
 		}
 	}, [isFocused]);
 	
-	function handleChange(event: Event): void {
+	function handleChange(event: any): void {
 		setCurrency(event.target.value);
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUser({ currency: currency })
 			.then(response => {

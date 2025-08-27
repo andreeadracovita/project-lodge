@@ -7,10 +7,10 @@ import ReviewForm from "components/review/ReviewForm";
 import PropertyListItem from "components/list/PropertyListItem";
 
 export default function Review() {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	const bookingId = searchParams.get("booking_id");
-	const [property, setProperty] = useState();
+	const [property, setProperty] = useState<any>();
 
 	useEffect(() => {
 		if (!bookingId) {
@@ -54,6 +54,8 @@ export default function Review() {
 						guests={1}
 						nightsCount={1}
 						isCompact={true}
+						hidePrice={true}
+						hideWishlist={false}
 					/>
 				</div>
 				<div className="col-9">

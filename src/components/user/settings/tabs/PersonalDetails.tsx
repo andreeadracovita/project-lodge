@@ -3,9 +3,16 @@ import AvatarForm from "../sections/AvatarForm";
 import EmailForm from "../sections/EmailForm";
 import NameForm from "../sections/NameForm";
 import NationalityForm from "../sections/NationalityForm";
-import { getUserConfig } from "api/BackendApiService";
 
-export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }) {
+type PersonalDetailsProps = {
+	data: any,
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	activeSection: SettingsSectionEnum,
+	refreshUserData: any
+};
+
+export default function PersonalDetails({ data, showSectionHandler, clearSectionHandler, activeSection, refreshUserData }: PersonalDetailsProps) {
 
 	return (
 		<>

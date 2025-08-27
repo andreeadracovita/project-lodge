@@ -7,7 +7,7 @@ import Avatar from "components/user/Avatar";
 import { availableCurrencies, siteName } from "utils/constants";
 
 export default function Header() {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 
 	function logoutClicked() {
 		authContext.logout();

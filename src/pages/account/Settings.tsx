@@ -1,4 +1,3 @@
-import { PersonGear, ShieldLock, Sliders } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
@@ -21,16 +20,16 @@ export default function Settings() {
 	});
 	const iconSize = 30;
 
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [activeTab, setActiveTab] = useState();
-	const [activeSection, setActiveSection] = useState(SettingsSectionEnum.None);
+	const [searchParams] = useSearchParams();
+	const [activeTab, setActiveTab] = useState<string>("");
+	const [activeSection, setActiveSection] = useState<SettingsSectionEnum>(SettingsSectionEnum.None);
 
 	useEffect(() => {
 		refreshUserData();
 	}, []);
 
 	useEffect(() => {
-		setActiveTab(searchParams.get("tab"));
+		setActiveTab(searchParams.get("tab") || "");
 	}, [searchParams.get("tab")]);
 
 	function showSectionHandler(section: SettingsSectionEnum): void {
@@ -45,7 +44,7 @@ export default function Settings() {
 		getUserConfig()
 			.then(response => {
 				const data = response.data;
-				setData(prevVal => {
+				setData(() => {
 					return {
 						firstName: data.first_name,
 						lastName: data.last_name,
@@ -106,7 +105,6 @@ export default function Settings() {
 					{
 						activeTab === SettingsTab.Security &&
 						<LoginSecurity
-							data={data}
 							showSectionHandler={showSectionHandler}
 							clearSectionHandler={clearSectionHandler}
 							activeSection={activeSection}

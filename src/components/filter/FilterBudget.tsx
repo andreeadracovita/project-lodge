@@ -6,7 +6,7 @@ import "rc-slider/assets/index.css";
 import { useAuth } from "components/security/AuthContext";
 
 export default function FilterBudget({ lowestPrice, highestPrice }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [rangeValue, setRangeValue] = useState([parseInt(searchParams.get("plow")), parseInt(searchParams.get("phigh"))]);
 	

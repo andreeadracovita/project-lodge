@@ -7,7 +7,7 @@ import { getIsPropertyWishlisted, toggleWishlistProperty } from "api/BackendApiS
 import { useAuth } from "components/security/AuthContext";
 
 export default function WishlistIcon({ itemId, isPreview }) {
-	const authContext = useAuth();
+	const authContext: any = useAuth();
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {

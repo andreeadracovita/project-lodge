@@ -10,7 +10,7 @@ import { updateProperty } from "api/BackendApiService";
 export default function FormPartReview({ input, propertyId }) {
 	const navigate = useNavigate();
 	
-	function onSubmit(event) {
+	function onSubmit(event: any) {
 		event.preventDefault();
 
 		const submitter = event.nativeEvent.submitter.name;

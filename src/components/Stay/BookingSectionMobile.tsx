@@ -12,7 +12,7 @@ export default function BookingSectionMobile({price, maxGuests}) {
 			<div
 				id="bookingCardModal"
 				className="modal fade"
-				tabIndex="-1"
+				tabIndex={-1}
 				aria-labelledby="bookingCardModalLabel"
 				aria-hidden="true"
 			>

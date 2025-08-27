@@ -4,8 +4,26 @@ import { SettingsSectionEnum } from "../SettingsSectionEnum";
 import { formClassNames } from "../formClassNames";
 import { updateUser } from "api/BackendApiService";
 import FormError from "components/common/FormError";
+import { useAuth } from "components/security/AuthContext";
 
-export default function NameForm({ firstNameValue, lastNameValue, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
+type NameFormProps = {
+	firstNameValue: string | undefined,
+	lastNameValue: string | undefined,
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	refreshUserData: any
+};
+
+export default function NameForm({
+	firstNameValue,
+	lastNameValue,
+	isFocused,
+	showSectionHandler,
+	clearSectionHandler,
+	refreshUserData
+}: NameFormProps) {
+	const authContext: any = useAuth();
 	const [input, setInput] = useState({
 		firstName: firstNameValue,
 		lastName: lastNameValue
@@ -29,7 +47,7 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 		}
 	}, [isFocused]);
 
-	function handleChange(event): void {
+	function handleChange(event: any): void {
 		const { name, value } = event.target;
 		setInput(prevVal => {
 			return {
@@ -39,7 +57,7 @@ export default function NameForm({ firstNameValue, lastNameValue, isFocused, sho
 		});
 	}
 
-	function handleSubmit(event: Event): void {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		updateUser({ first_name: input.firstName, last_name: input.lastName })
 			.then(response => {
