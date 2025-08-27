@@ -5,7 +5,15 @@ import Calendar from "components/calendar/Calendar";
 import CountrySelect from "components/common/CountrySelect";
 import { dayMonYear } from "utils/dateUtils";
 
-export default function SearchMobile({input, handleCountryChange, handleChange, onCalendarClick, onSearchClicked}) {
+type SearchMobileProps = {
+	input: any,
+	handleCountryChange: any,
+	handleChange: any,
+	onCalendarClick: any,
+	onSearchClicked: any
+};
+
+export default function SearchMobile({ input, handleCountryChange, handleChange, onCalendarClick, onSearchClicked }: SearchMobileProps) {
 
 	return (
 		<div>

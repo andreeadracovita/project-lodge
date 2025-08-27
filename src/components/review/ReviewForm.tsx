@@ -6,15 +6,19 @@ import StarRating from "./StarRating";
 import { addReviewForBookingId } from "api/BackendApiService";
 import FormError from "components/common/FormError";
 
-export default function ReviewForm({ propertyId }) {
+type ReviewFormProps = {
+	propertyId: number
+};
+
+export default function ReviewForm({ propertyId }: ReviewFormProps) {
 	const navigate = useNavigate();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [input, setInput] = useState({
 		rating: 0,
 		title: "",
 		body: ""
 	});
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 	const bookingId = searchParams.get("booking_id");
 
 	function handleChange(event: any) {
@@ -56,7 +60,7 @@ export default function ReviewForm({ propertyId }) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<label className="mt-10">How do you rate your overall experience? <span className="text-red">*</span></label>
-			<StarRating name="rating" value={input.rating} handleChange={handleChange} />
+			<StarRating value={input.rating} handleChange={handleChange} />
 
 			<label htmlFor="title" className="mt-10">Short description</label>
 			<input
@@ -75,7 +79,7 @@ export default function ReviewForm({ propertyId }) {
 				name="body"
 				value={input.body}
 				onChange={handleChange}
-				rows="3"
+				rows={3}
 				className="form-control w-75"
 			>
 				Your review here ...

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Map } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
@@ -9,25 +8,33 @@ import { ListItemType } from "components/list/ListItemType";
 import MapView from "components/map/MapView";
 import Search from "components/search/Search";
 
+type SearchResultsListViewProps = {
+	items: any[],
+	nightsCount: number | undefined,
+	priceRange: number[],
+	geo: any,
+	setIsFullscreenMap: any
+};
+
 export default function SearchResultsListView({
 	items,
 	nightsCount,
 	priceRange,
 	geo,
 	setIsFullscreenMap
-}) {
-	const [searchParams, setSearchParams] = useSearchParams();
+}: SearchResultsListViewProps) {
+	const [searchParams] = useSearchParams();
 
 	const countString = `${items.length} ${items.length > 1 ? "results" : "result"}`;
 	const checkInParam = searchParams.get("check_in");
 	const checkOutParam = searchParams.get("check_out");
-	const guests = parseInt(searchParams.get("guests"));
+	const guests = parseInt(searchParams.get("guests") || "1");
 	const city = searchParams.get("city");
 
 	function getLocationString() {
 		let locationString = "";
 		if (searchParams.get("country")) {
-			locationString = countries().getLabel(searchParams.get("country"));
+			locationString = countries().getLabel(searchParams.get("country") || "");
 		}
 
 		const city = searchParams.get("city");
@@ -51,6 +58,11 @@ export default function SearchResultsListView({
 							zoom={14}
 							points={[]}
 							isEditable={false}
+							updatePinPosition={undefined}
+							updateIdsMap={undefined}
+							handleHighlightItem={undefined}
+							shouldShowText={undefined}
+							priceMap={undefined}
 						/>
 						<span
 							className="btn-pill position-absolute top-50 start-50 translate-middle"
@@ -80,6 +92,7 @@ export default function SearchResultsListView({
 							nightsCount={nightsCount}
 							cols={3}
 							isCompact={false}
+							setNeedsRefresh={undefined}
 						/>
 					</div>
 				</div>

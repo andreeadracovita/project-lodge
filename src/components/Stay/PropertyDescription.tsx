@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
 
 import AvailabilitySection from "./AvailabilitySection";
 import { getAllFeatures, getAllExperiences } from "api/BackendApiService";
@@ -7,13 +6,13 @@ import Feature from "components/common/Feature";
 import MapView from "components/map/MapView";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
-export default function PropertyDescription({property}) {
+type PropertyDescriptionProps = {
+	property: any
+};
+
+export default function PropertyDescription({ property }: PropertyDescriptionProps) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const checkIn = searchParams.get("check_in");
-	const checkOut = searchParams.get("check_out");
 
 	useEffect(() => {
 		getAllFeatures()
@@ -55,8 +54,8 @@ export default function PropertyDescription({property}) {
 			<h2 className="section-heading">Features</h2>
 			<div className="mt-10">
 				{
-					property.features_ids.map((id, i) => {
-						const foundFeature = features.find(feat => feat.id == id);
+					property.features_ids.map((id: number, i: number) => {
+						const foundFeature: any = features.find((feat: any) => feat.id == id);
 						if (foundFeature) {
 							return <span key={i} className="mt-10"><Feature name={foundFeature.name} isLarge={true} /></span>
 						}
@@ -76,8 +75,8 @@ export default function PropertyDescription({property}) {
 			<h2 className="section-heading">Experiences around</h2>
 			<div className="mt-10">
 				{
-					property.experiences_ids.map((id, i) => {
-						const foundExperience = experiences.find(exp => exp.id == id);
+					property.experiences_ids.map((id: number, i: number) => {
+						const foundExperience: any = experiences.find((exp: any) => exp.id == id);
 						if (foundExperience) {
 							return <span key={i} className="features-list-item">
 								{capitalizeFirstLetter(foundExperience.name)}
@@ -95,6 +94,13 @@ export default function PropertyDescription({property}) {
 					center={[property.geo.x, property.geo.y]}
 					zoom={14}
 					points={[[property.geo.x, property.geo.y]]}
+					boundingbox={undefined}
+					isEditable={false}
+					updatePinPosition={undefined}
+					updateIdsMap={undefined}
+					handleHighlightItem={undefined}
+					shouldShowText={undefined}
+					priceMap={undefined}
 				/>
 			</div>
 		</>

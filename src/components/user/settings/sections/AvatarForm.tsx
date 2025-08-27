@@ -2,29 +2,34 @@ import { useState } from "react";
 
 import "./AvatarForm.css";
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import { formClassNames } from "../formClassNames";
 import Avatar from "components/user/Avatar";
 import { updateUser, uploadAvatar } from "api/BackendApiService";
 import { useAuth } from "components/security/AuthContext";
 
-export default function AvatarForm({ isFocused, showSectionHandler, clearSectionHandler }) {
+type AvatarFormProps = {
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any
+};
+
+export default function AvatarForm({ isFocused, showSectionHandler, clearSectionHandler }: AvatarFormProps) {
 	const authContext: any = useAuth();
-	const [avatarUrl, setAvatarUrl] = useState();
+	const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined);
 
 	function handleAvatarClick(): void {
 		showSectionHandler(SettingsSectionEnum.Avatar);
-		document.getElementById("avatar-input").click();
+		document.getElementById("avatar-input")?.click();
 	}
 
 	function handleUpload(event: any): void {
 		const files = Array.from(event.target.files);
 		if (files.length > 0) {
-			const tempUrl = URL.createObjectURL(files[0]);
+			const tempUrl = URL.createObjectURL(files[0] as Blob);
 			setAvatarUrl(tempUrl);
 		}
 	}
 
-	async function handleSubmit(event: any): void {
+	async function handleSubmit(event: any): Promise<void> {
 		event.preventDefault();
 
 		const files = event.target.avatar.files;
@@ -54,7 +59,7 @@ export default function AvatarForm({ isFocused, showSectionHandler, clearSection
 
 	function handleDismissClick(): void {
 		clearSectionHandler();
-		setAvatarUrl(null);
+		setAvatarUrl(undefined);
 	}
 	
 	return (

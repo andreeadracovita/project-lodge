@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 
 import "./StayPageReviewItem.css";
-import { getPropertyById, getUserNameAndAvatar } from "api/BackendApiService";
-import PropertyAvatar from "components/common/PropertyAvatar";
+import { getUserNameAndAvatar } from "api/BackendApiService";
 import Rating from "components/common/Rating";
 import Avatar from "components/user/Avatar";
 import { yearDashMonthDashDay } from "utils/dateUtils";
 
-export default function StayPageReviewItem({ reviewData, isCompact }) {
+type StayPageReviewItemProps = {
+	reviewData: any,
+	isCompact: boolean | undefined
+};
+
+export default function StayPageReviewItem({ reviewData, isCompact }: StayPageReviewItemProps) {
 	const [user, setUser] = useState({
 		img_url: null,
 		first_name: "Deleted"
@@ -31,7 +35,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }) {
 				{
 					user &&
 					<div className="d-flex col-3">
-						<Avatar url={user.img_url} size={40} firstName={user.first_name} />
+						<Avatar url={user.img_url || undefined} size={40} firstName={user.first_name} previewAvatar={undefined} />
 						<div className="ms-2">
 							<div className="text-bold">{user.first_name}</div>
 							<div className="text-muted">{yearDashMonthDashDay(new Date(reviewData.created_at))}</div>
@@ -55,7 +59,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }) {
 				{
 					user &&
 					<div className="d-flex">
-						<Avatar url={user.img_url} size={40} firstName={user.first_name} />
+						<Avatar url={user.img_url || undefined} size={40} firstName={user.first_name} previewAvatar={undefined} />
 						<div className="ms-2">
 							<div className="text-bold">{user.first_name}</div>
 							<div className="text-muted">{yearDashMonthDashDay(new Date(reviewData.created_at))}</div>

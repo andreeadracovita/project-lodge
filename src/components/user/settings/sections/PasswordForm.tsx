@@ -16,7 +16,7 @@ export default function PasswordForm({ isFocused, showSectionHandler, clearSecti
 		oldPassword: "",
 		newPassword: ""
 	});
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	function handleChange(event: any): void {
 		const { name, value } = event.target;

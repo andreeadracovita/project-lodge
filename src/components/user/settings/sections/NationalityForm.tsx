@@ -16,7 +16,7 @@ type NationalityFormProps = {
 
 export default function NationalityForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }: NationalityFormProps) {
 	const [countryCode, setCountryCode] = useState(value);
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	useEffect(() => {
 		setCountryCode(value);

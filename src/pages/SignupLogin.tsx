@@ -27,7 +27,7 @@ export default function SignupLogin() {
 		lastName: "",
 		password: ""
 	});
-	const [errors, setErrors] = useState<Array<string>>([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	function onBackClicked() {
 		setFormState(FormState.Email);

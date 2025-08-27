@@ -13,8 +13,8 @@ import { convertToPreferredCurrency } from "utils/conversionUtils";
 import { getNightsCount } from "utils/dateUtils";
 
 type Geo = {
-	coordinate: Array<number>,
-	boundingbox: Array<number> | null
+	coordinate: number[],
+	boundingbox: number[] | null
 };
 
 export default function SearchResults() {

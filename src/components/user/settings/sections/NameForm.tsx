@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import { formClassNames } from "../formClassNames";
+import { formClassNames } from "../FormClassNames";
 import { updateUser } from "api/BackendApiService";
 import FormError from "components/common/FormError";
 import { useAuth } from "components/security/AuthContext";
@@ -28,7 +28,7 @@ export default function NameForm({
 		firstName: firstNameValue,
 		lastName: lastNameValue
 	});
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	useEffect(() => {
 		setInput({

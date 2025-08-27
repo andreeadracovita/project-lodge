@@ -6,7 +6,11 @@ import "./CurrentTrip.css";
 import { checkInTimes, checkOutTimes, fileStorage } from "utils/constants";
 import { weekdayMonYear } from "utils/dateUtils";
 
-export default function CurrentTrip({ item }) {
+type CurrentTripProps = {
+	item: any
+};
+
+export default function CurrentTrip({ item }: CurrentTripProps) {
 	const googleMapsLink = `https://www.google.com/maps/place/${item.geo.x}N+${item.geo.y}E`;
 	const checkIn = weekdayMonYear(new Date(item.check_in));
 	const checkOut = weekdayMonYear(new Date(item.check_out));

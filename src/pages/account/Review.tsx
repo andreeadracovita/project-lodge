@@ -54,7 +54,6 @@ export default function Review() {
 						guests={1}
 						nightsCount={1}
 						isCompact={true}
-						hidePrice={true}
 						hideWishlist={false}
 					/>
 				</div>

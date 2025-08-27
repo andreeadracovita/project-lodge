@@ -16,12 +16,12 @@ type Geo = {
 };
 
 export type PropertyItem = {
-	id: string,
+	id: number,
 	title: string,
 	city: string,
 	country: string,
-	geo: Geo,
-	price: string,
+	geo: Geo | undefined,
+	price_night_site: string,
 	rating?: number,
 	images_url_array: Array[]
 };
@@ -33,7 +33,6 @@ type PropertyListItemProps = {
 	checkIn: string; // formatted string 2025-04-10
 	checkOut: string; // formatted string 2025-04-10
 	nightsCount: number;
-	hidePrice: boolean;
 	hideWishlist: boolean;
 	isCompact: boolean;
 };
@@ -45,7 +44,6 @@ export default function PropertyListItem({
 	checkIn,
 	checkOut,
 	nightsCount,
-	hidePrice,
 	hideWishlist,
 	isCompact
 }: PropertyListItemProps) {

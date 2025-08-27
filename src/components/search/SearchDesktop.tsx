@@ -5,7 +5,15 @@ import Calendar from "components/calendar/Calendar";
 import CountrySelect from "components/common/CountrySelect";
 import { dayMonYear } from "utils/dateUtils";
 
-export default function SearchDesktop({input, handleCountryChange, handleChange, onCalendarClick, onSearchClicked}) {
+type SearchDesktopProps = {
+	input: any,
+	handleCountryChange: any,
+	handleChange: any,
+	onCalendarClick: any,
+	onSearchClicked: any
+};
+
+export default function SearchDesktop({ input, handleCountryChange, handleChange, onCalendarClick, onSearchClicked }: SearchDesktopProps) {
 
 	return (
 		<div>

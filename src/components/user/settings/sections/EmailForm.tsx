@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import { formClassNames } from "../formClassNames";
+import { formClassNames } from "../FormClassNames";
 import { updateUser } from "api/BackendApiService";
 import FormError from "components/common/FormError";
 
-export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }) {
+type EmailFormProps = {
+	value: string | undefined,
+	isFocused: boolean,
+	showSectionHandler: any,
+	clearSectionHandler: any,
+	refreshUserData: any
+};
+
+export default function EmailForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }: EmailFormProps) {
 	const [email, setEmail] = useState(value);
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	useEffect(() => {
 		setEmail(value);

@@ -3,10 +3,18 @@ import { ChevronRight } from "react-bootstrap-icons";
 
 import { uploadPhotos, updateProperty } from "api/BackendApiService";
 import FormError from "components/common/FormError";
-import PropertyPhotoGrid from "components/Stay/PropertyPhotoGrid";
+import PropertyPhotoGrid from "components/stay/PropertyPhotoGrid";
 
-export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }) {
-	const [errors, setErrors] = useState([]);
+type FormPartPhotosProps = {
+	input: any,
+	propertyId: number | undefined,
+	handleChangePhotos: any,
+	setImagesUrlArray: any,
+	advanceState: any
+};
+
+export default function FormPartPhotos({ input, propertyId, handleChangePhotos, setImagesUrlArray, advanceState }: FormPartPhotosProps) {
+	const [errors, setErrors] = useState<string[]>([]);
 
 	function handleChange(event: any) {
 		// Check for file limit
@@ -67,7 +75,7 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 				type="file"
 				className="form-control rounded-pill w-50"
 				name="photos"
-				multiple="multiple"
+				multiple={true}
 				onChange={handleChange}
 				accept="image/png, image/jpeg"
 			/>

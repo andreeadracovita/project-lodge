@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "ol/ol.css";
 import Map from "ol/map";
-import View from "ol/view";
+import View from "ol/View";
 import TileLayer from "ol/layer/tile";
-import OSM from "ol/source/osm";
+import OSM from "ol/source/OSM";
 import {useGeographic} from "ol/proj";
 import VectorSource from "ol/source/Vector.js";
 import VectorLayer from "ol/layer/Vector.js";
 import Point from "ol/geom/Point.js";
-import Overlay from "ol/Overlay.js";
 import Fill from "ol/style/Fill.js";
 import Stroke from "ol/style/Stroke.js";
 import Style from "ol/style/Style.js";
@@ -18,11 +17,25 @@ import Feature from "ol/Feature.js";
 import {defaults as defaultInteractions} from "ol/interaction/defaults.js";
 import PointerInteraction from "ol/interaction/Pointer.js";
 import RegularShape from "ol/style/RegularShape.js";
-import * as olProj from "ol/proj";
 import * as olExtent from "ol/extent";
 
 import "./MapView.css";
 import { genericMapCenter } from "utils/constants";
+
+type MapViewProps = {
+	id: string,
+	height: any,
+	center: any,
+	zoom: any,
+	boundingbox: any,
+	points: any,
+	isEditable: boolean,
+	updatePinPosition: any,
+	updateIdsMap: any,
+	handleHighlightItem: any,
+	shouldShowText: any,
+	priceMap: any
+};
 
 // Center = [long, lat]
 // Points [] array of 2 number pairs [[lat, long], [lat, long], ...]
@@ -39,39 +52,44 @@ export default function MapView({
 	handleHighlightItem,
 	shouldShowText,
 	priceMap
-}) {
+}: MapViewProps) {
 	class Drag extends PointerInteraction {
+		coordinate_: any;
+		feature_: any;
+		cursor_: any;
+		previousCursor_: any;
+
 		constructor() {
 			super({
 				handleDownEvent: handleDownEvent,
 				handleDragEvent: handleDragEvent,
 				handleMoveEvent: handleMoveEvent,
 				handleUpEvent: handleUpEvent,
-		});
+			});
 
-		/**
-		* @type {import('ol/coordinate.js').Coordinate}
-		* @private
-		*/
-		this.coordinate_ = null;
+			/**
+			* @type {import('ol/coordinate.js').Coordinate}
+			* @private
+			*/
+			this.coordinate_ = null;
 
-		/**
-		* @type {string|undefined}
-		* @private
-		*/
-		this.cursor_ = 'pointer';
+			/**
+			* @type {string|undefined}
+			* @private
+			*/
+			this.cursor_ = "pointer";
 
-		/**
-		* @type {Feature}
-		* @private
-		*/
-		this.feature_ = null;
+			/**
+			* @type {Feature}
+			* @private
+			*/
+			this.feature_ = null;
 
-		/**
-		* @type {string|undefined}
-		* @private
-		*/
-		this.previousCursor_ = undefined;
+			/**
+			* @type {string|undefined}
+			* @private
+			*/
+			this.previousCursor_ = undefined;
 		}
 	}
 
@@ -82,7 +100,7 @@ export default function MapView({
 	function handleDownEvent(evt: any) {
 		const map = evt.map;
 
-		const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+		const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature: any) {
 			return feature;
 		});
 
@@ -114,7 +132,7 @@ export default function MapView({
 	function handleMoveEvent(evt: any) {
 		if (this.cursor_) {
 			const map = evt.map;
-			const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+			const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature: any) {
 				return feature;
 			});
 			const element = evt.map.getTargetElement();
@@ -133,7 +151,7 @@ export default function MapView({
 	/**
 	 * @return {boolean} `false` to stop the drag sequence.
 	 */
-	function handleUpEvent(evt: any) {
+	function handleUpEvent(_evt: any) {
 		updatePinPosition([this.coordinate_[1], this.coordinate_[0]]);
 		this.coordinate_ = null;
 		this.feature_ = null;
@@ -233,7 +251,7 @@ export default function MapView({
 					source: new VectorSource({
 						features: features,
 					}),
-					style: function (feature) {
+					style: function (feature: any) {
 						if (shouldShowText) {
 							priceTagStyle[1]
 								.getText()
@@ -246,7 +264,7 @@ export default function MapView({
 		});
 
 		// Compute width as 100% of its parent
-		const width = document.getElementById(id)?.parentElement.clientWidth;
+		const width = document.getElementById(id)?.parentElement?.clientWidth;
 		map.setSize([width, height]);
 
 		if (boundingbox) {
@@ -263,15 +281,15 @@ export default function MapView({
 		}
 
 		if (handleHighlightItem) {
-			let selected = null;
-			map.on("pointerup", function (e) {
+			let selected: any = null;
+			map.on("pointerup", function (event: any) {
 				if (selected !== null) {
 					// selected.setStyle(undefined);
 					selected = null;
 				}
 
-				map.forEachFeatureAtPixel(e.pixel, function (f) {
-					selected = f;
+				map.forEachFeatureAtPixel(event.pixel, function (feature: any) {
+					selected = feature;
 					handleHighlightItem(selected.ol_uid);
 					return true;
 				});
@@ -279,7 +297,7 @@ export default function MapView({
 		}
 		
 		return () => {
-			map.setTarget(null);
+			map.setTarget(undefined);
 		};
 	  }, [center, points, boundingbox]);
 

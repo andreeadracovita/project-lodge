@@ -1,7 +1,14 @@
 import { fileStorage } from "utils/constants";
 import "./Avatar.css";
 
-export default function Avatar({ url, size, previewAvatar, firstName }) {
+type AvatarProps = {
+	url: string | undefined,
+	size: number,
+	previewAvatar: string | undefined,
+	firstName: string | undefined
+};
+
+export default function Avatar({ url, size, previewAvatar, firstName }: AvatarProps) {
 
 	return (
 		<>

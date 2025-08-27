@@ -1,8 +1,17 @@
+import * as icons from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 import { Icon } from "components/common/Icon";
 
-export default function AccountCard({ iconName, iconSize, title, desc, url }) {
+type AccountCardProps = {
+	iconName: keyof typeof icons,
+	iconSize: number,
+	title: string,
+	desc: string,
+	url: string
+};
+
+export default function AccountCard({ iconName, iconSize, title, desc, url }: AccountCardProps) {
 
 	return (
 		<Link to={url}>

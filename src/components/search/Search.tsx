@@ -1,21 +1,17 @@
-import { Country, City }  from "country-state-city";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./Search.css";
 import SearchDesktop from "./SearchDesktop";
 import SearchMobile from "./SearchMobile";
-import Calendar from "components/calendar/Calendar";
-import CountrySelect from "components/common/CountrySelect";
-import { dayMonYear } from "utils/dateUtils";
 
 export default function Search() {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [input, setInput] = useState({
+	const [input, setInput] = useState<any>({
 		country: searchParams.get("country") ?? "",
 		city: searchParams.get("city") ?? "",
 		checkIn: searchParams.get("check_in") ?? "",
@@ -24,7 +20,7 @@ export default function Search() {
 	});
 
 	useEffect(() => {
-		setInput(prevValue => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				checkIn: searchParams.get("check_in")
@@ -33,7 +29,7 @@ export default function Search() {
 	}, [searchParams.get("check_in")]);
 
 	useEffect(() => {
-		setInput(prevValue => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				checkOut: searchParams.get("check_out")
@@ -43,11 +39,11 @@ export default function Search() {
 
 	function onSearchClicked() {
 		if (!input.country) {
-			document.getElementById("country").focus();
+			document.getElementById("country")?.focus();
 			return;
 		}
 		if (!input.checkIn || !input.checkOut) {
-			document.getElementById("date-range").focus();
+			document.getElementById("date-range")?.focus();
 			return;
 		}
 		if (location.pathname === "/search-results") {
@@ -65,7 +61,7 @@ export default function Search() {
 	function handleChange(event: any) {
 		const { value, name } = event.target;
 
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value
@@ -73,8 +69,8 @@ export default function Search() {
 		});
 	}
 
-	function handleCountryChange(value) {
-		setInput((prevValue) => {
+	function handleCountryChange(value: string) {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				country: value

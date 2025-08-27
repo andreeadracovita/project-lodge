@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { SettingsSectionEnum } from "../SettingsSectionEnum";
-import { formClassNames } from "../formClassNames";
+import { formClassNames } from "../FormClassNames";
 import { updateUser } from "api/BackendApiService";
 import FormError from "components/common/FormError";
 import { useAuth } from "components/security/AuthContext";
@@ -17,7 +17,7 @@ type LanguageFormProps = {
 export default function LanguageForm({ value, isFocused, showSectionHandler, clearSectionHandler }: LanguageFormProps) {
 	const authContext: any = useAuth();
 	const [language, setLanguage] = useState(authContext.language);
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	useEffect(() => {
 		if (value !== null && value !== "") {

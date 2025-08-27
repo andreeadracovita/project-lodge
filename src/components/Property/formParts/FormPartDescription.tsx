@@ -8,6 +8,17 @@ import FormError from "components/common/FormError";
 import Multiselect from "components/common/Multiselect";
 import { featuresIconMap } from "utils/mappings";
 
+type FormPartDescriptionProps = {
+	isEditable: boolean,
+	showButton: boolean,
+	input: any,
+	propertyId: number | undefined,
+	handleChange: any,
+	handleChangeFeatureMultiselect: any,
+	handleChangeExperienceMultiselect: any,
+	advanceState: any
+};
+
 export default function FormPartDescription({
 	isEditable,
 	showButton,
@@ -17,10 +28,10 @@ export default function FormPartDescription({
 	handleChangeFeatureMultiselect,
 	handleChangeExperienceMultiselect,
 	advanceState
-}) {
+}: FormPartDescriptionProps) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	useEffect(() => {
 		getAllFeatures()
@@ -94,7 +105,7 @@ export default function FormPartDescription({
 				value={input.description}
 				readOnly={!isEditable}
 				onChange={isEditable ? handleChange : undefined}
-				rows="3"
+				rows={3}
 				required
 			>
 				Describe your property here
@@ -192,6 +203,7 @@ export default function FormPartDescription({
 					selectedIds={input.experiencesIds}
 					handleChange={handleChangeExperienceMultiselect}
 					isEditable={isEditable}
+					iconMap={undefined}
 				/>
 			</div>
 			<FormError errors={errors} />

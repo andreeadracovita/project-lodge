@@ -7,8 +7,13 @@ import PropertyAvatar from "components/common/PropertyAvatar";
 import Rating from "components/common/Rating";
 import { yearDashMonthDashDay } from "utils/dateUtils";
 
-export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
-	const [property, setProperty] = useState();
+type UserPageReviewItemProps = {
+	reviewData: any,
+	setNeedsRefresh: any
+};
+
+export default function UserPageReviewItem({ reviewData, setNeedsRefresh }: UserPageReviewItemProps) {
+	const [property, setProperty] = useState<any>();
 
 	useEffect(() => {
 		getPropertyById(reviewData.property_id)
@@ -22,7 +27,7 @@ export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 			});
 	}, []);
 
-	function deleteReview() {
+	function deleteReview(): void {
 		deleteReviewById(reviewData.id)
 			.then(response => {
 				if (response.status === 200) {
@@ -47,7 +52,7 @@ export default function UserPageReviewItem({ reviewData, setNeedsRefresh }) {
 						<div>{property.title}</div>
 						<h2 className="title-text">{reviewData.title}</h2>
 						<div className="d-flex align-items-center">
-							<Rating score={reviewData.rating} />
+							<Rating score={reviewData.rating} reviewsNo={undefined} />
 							<div className="ms-2">Reviewed on: {yearDashMonthDashDay(new Date(reviewData.created_at))}</div>
 						</div>
 						<div className="mt-6">{reviewData.body}</div>

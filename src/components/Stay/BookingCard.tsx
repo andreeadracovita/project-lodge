@@ -8,25 +8,29 @@ import { useAuth } from "components/security/AuthContext";
 import { getNightsCount, dayMonYear } from "utils/dateUtils";
 import { convertToPreferredCurrency } from "utils/conversionUtils";
 
-export default function BookingCard({price, maxGuests}) {
+type BookingCardProps = {
+	price: number,
+	maxGuests: number
+};
+
+export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 	const authContext: any = useAuth();
 	const navigate = useNavigate();
 	const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
 	const [nightsCount, setNightsCount] = useState(0);
-	const [siteTotalPrice, setSiteTotalPrice] = useState(0);
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [input, setInput] = useState({
 		checkIn: undefined,
 		checkOut: undefined,
-		guests: Math.min(searchParams.get("guests"), maxGuests) ?? 1
+		guests: searchParams.get("guests") ? Math.min(parseInt(searchParams.get("guests")!), maxGuests) : 1
 	});
 
 	useEffect(() => {
 		const checkInParam = searchParams.get("check_in");
 		const checkOutParam = searchParams.get("check_out");
 		if (!checkInParam && !checkOutParam) {
-			setInput(prevValue => {
+			setInput((prevValue: any) => {
 				return {
 					...prevValue,
 					checkIn: undefined,
@@ -37,7 +41,7 @@ export default function BookingCard({price, maxGuests}) {
 		}
 
 		if (checkInParam) {
-			setInput(prevValue => {
+			setInput((prevValue: any) => {
 				return {
 					...prevValue,
 					checkIn: new Date(checkInParam),
@@ -54,7 +58,6 @@ export default function BookingCard({price, maxGuests}) {
 		setNightsCount(tempNightCount);
 
 		const tempSiteTotalPrice = price * tempNightCount;
-		setSiteTotalPrice(tempSiteTotalPrice);
 		setConvertedTotalPrice(convertToPreferredCurrency(tempSiteTotalPrice, authContext.exchangeRate));
 	}, [searchParams.get("check_in"), searchParams.get("check_out")]);
 
@@ -77,7 +80,7 @@ export default function BookingCard({price, maxGuests}) {
 		const checkIn = searchParams.get("check_in");
 		const checkOut = searchParams.get("check_out");
 		if (!checkIn || !checkOut) {
-			document.getElementById("date-range").focus();
+			document.getElementById("date-range")?.focus();
 			return;
 		}
 		navigate(`/book?id=${searchParams.get("id")}&guests=${input.guests}&check_in=${searchParams.get("check_in")}&check_out=${searchParams.get("check_out")}`);

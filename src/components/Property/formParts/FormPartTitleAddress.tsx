@@ -1,4 +1,3 @@
-import axios from "axios";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { ChevronRight } from "react-bootstrap-icons";
@@ -16,6 +15,17 @@ import FormError from "components/common/FormError";
 import MapView from "components/map/MapView";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
+type FormPartTitleAddressProps = {
+	isEditable: boolean,
+	showButton: boolean,
+	input: any,
+	propertyId: number | undefined,
+	setPropertyId: any,
+	handleChange: any,
+	handleChangeCountry: any,
+	advanceState: any
+};
+
 export default function FormPartTitleAddress({
 	isEditable,
 	showButton,
@@ -25,11 +35,11 @@ export default function FormPartTitleAddress({
 	handleChange,
 	handleChangeCountry,
 	advanceState
-}) {
+}: FormPartTitleAddressProps) {
 	const [buildingTypes, setBuildingTypes] = useState([]);
 	const [rentalTypes, setRentalTypes] = useState([]);
-	const [geoCoords, setGeoCoords] = useState();
-	const [errors, setErrors] = useState([]);
+	const [geoCoords, setGeoCoords] = useState<number[] | undefined>();
+	const [errors, setErrors] = useState<string[]>([]);
 	let pickedGeo = input.geo ?? [];
 
 	useEffect(() => {
@@ -61,7 +71,7 @@ export default function FormPartTitleAddress({
 			});
 	}, []);
 
-	function setPickedGeo(coords) {
+	function setPickedGeo(coords: number[]) {
 		pickedGeo = coords;
 	}
 
@@ -210,12 +220,12 @@ export default function FormPartTitleAddress({
 				className={stylingFormControl100}
 				name="buildingType"
 				value={input.buildingType ?? 1}
-				readOnly={!isEditable}
+				disabled={!isEditable}
 				onChange={handleChange}
 				required
 			>
 				{
-					buildingTypes.map(type => 
+					buildingTypes.map((type: any) => 
 						<option key={type.id} value={type.id}>{capitalizeFirstLetter(type.name)}</option>
 					)
 				}
@@ -228,12 +238,12 @@ export default function FormPartTitleAddress({
 				className={stylingFormControl100}
 				name="rentalType"
 				value={input.rentalType ?? 1}
-				readOnly={!isEditable}
+				disabled={!isEditable}
 				onChange={handleChange}
 				required
 			>
 				{
-					rentalTypes.map(type => 
+					rentalTypes.map((type: any) => 
 						<option key={type.id} value={type.id}>{capitalizeFirstLetter(type.name)}</option>
 					)
 				}
@@ -294,6 +304,11 @@ export default function FormPartTitleAddress({
 							points={[geoCoords]}
 							isEditable={true}
 							updatePinPosition={setPickedGeo}
+							boundingbox={undefined}
+							updateIdsMap={undefined}
+							handleHighlightItem={undefined}
+							shouldShowText={undefined}
+							priceMap={undefined}
 						/>
 						<div>Drag pin on map to your property's location</div>
 					</div>

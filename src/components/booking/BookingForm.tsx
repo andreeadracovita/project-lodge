@@ -19,7 +19,7 @@ export default function BookingForm() {
 		countryCode: "",
 		phoneNo: ""
 	});
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState<string[]>([]);
 
 	function handleChange(event: any) {
 		const { name, value } = event.target;

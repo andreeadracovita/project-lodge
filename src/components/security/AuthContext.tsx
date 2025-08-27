@@ -6,12 +6,31 @@ import { executeJwtAuthenticationService } from "api/AuthenticationApiService";
 import { getUserConfig, getExchangeRateForTarget, updateUser } from "api/BackendApiService";
 import { defaultLanguage, siteCurrency } from "utils/constants";
 
-export const AuthContext = createContext();
+type AuthProviderProps = {
+	children: any
+};
+
+type AuthContextType = {
+	isAuthenticated: boolean,
+	login: any,
+	setUserConfig: any,
+	setSessionCurrency: any,
+	logout: any,
+	email: any,
+	firstName: any,
+	token: any,
+	currency: any,
+	language: any,
+	avatar: any,
+	exchangeRate: any
+};
+
+export const AuthContext = createContext<AuthContextType | null>(null);
 export const useAuth = () => useContext(AuthContext);
 
-export default function AuthProvider({ children }) {
+export default function AuthProvider({ children }: AuthProviderProps) {
 	const navigate = useNavigate();
-	const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem("lodgeIsAuthenticated"));
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(sessionStorage.getItem("lodgeIsAuthenticated") === "true");
 	const [token, setToken] = useState(sessionStorage.getItem("lodgeToken"));
 
 	// User details
@@ -49,7 +68,7 @@ export default function AuthProvider({ children }) {
 			});
 	}, [(new Date().toDateString() !== exchangeDay)]);
 
-	async function setUserConfig() {
+	async function setUserConfig(): Promise<void> {
 		try {
 			const response = await getUserConfig();
 			if (response.status === 200) {
@@ -69,7 +88,7 @@ export default function AuthProvider({ children }) {
 				}
 
 				if (language !== null) {
-					setLanguage();
+					setLanguage(language);
 					sessionStorage.setItem("lodgeLanguage", language);
 				}
 			}
@@ -78,7 +97,7 @@ export default function AuthProvider({ children }) {
 		}
 	}
 
-	async function login(email, password) {
+	async function login(email: string, password: string): Promise<boolean> {
 		try {
 			const response = await executeJwtAuthenticationService(email, password);
 
@@ -86,7 +105,7 @@ export default function AuthProvider({ children }) {
 				const jwtToken = "Bearer " + response.data.token;
 
 				setIsAuthenticated(true);
-				sessionStorage.setItem("lodgeIsAuthenticated", true);
+				sessionStorage.setItem("lodgeIsAuthenticated", "true");
 
 				setEmail(email);
 				sessionStorage.setItem("lodgeEmail", email);
@@ -136,7 +155,7 @@ export default function AuthProvider({ children }) {
 		sessionStorage.removeItem("lodgeLanguage");
 	}
 
-	function setSessionCurrency(value, forceRefresh) {
+	function setSessionCurrency(value: string, forceRefresh: boolean) {
 		if (isAuthenticated) {
 			updateUser({ currency: value })
 				.then(async () => {

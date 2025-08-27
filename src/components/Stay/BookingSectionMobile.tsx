@@ -1,6 +1,11 @@
 import BookingCard from "./BookingCard";
 
-export default function BookingSectionMobile({price, maxGuests}) {
+type BookingSectionMobileProps = {
+	price: number,
+	maxGuests: number
+};
+
+export default function BookingSectionMobile({ price, maxGuests }: BookingSectionMobileProps) {
 	
 	return (
 		<>

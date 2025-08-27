@@ -4,14 +4,23 @@ import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 
 import "./PhotoModal.css";
 
-export default function PhotoModal({ urlArray, initial }) {
-	const [activeSlide, setActiveSlide] = useState(initial);
+type PhotoModalProps = {
+	id: string,
+	urlArray: string[],
+	initial: number | undefined
+};
+
+export default function PhotoModal({ id, urlArray, initial }: PhotoModalProps) {
+	const [activeSlide, setActiveSlide] = useState<number | undefined>(initial);
 
 	useEffect(() => {
 		setActiveSlide(initial);
 	}, [initial])
 
 	function decrementActiveSlide() {
+		if (!activeSlide) {
+			return;
+		}
 		if (activeSlide - 1 < 0) {
 			setActiveSlide(urlArray.length - 1);
 		} else {
@@ -20,6 +29,9 @@ export default function PhotoModal({ urlArray, initial }) {
 	}
 
 	function incrementActiveSlide() {
+		if (!activeSlide) {
+			return;
+		}
 		if (activeSlide + 1 > urlArray.length - 1) {
 			setActiveSlide(0);
 		} else {
@@ -29,7 +41,7 @@ export default function PhotoModal({ urlArray, initial }) {
 	
 	return (
 		<div
-			id="photos-modal"
+			id={id}
 			className="modal fade"
 			tabIndex={-1}
 			aria-labelledby="photosModalLabel"
@@ -44,7 +56,7 @@ export default function PhotoModal({ urlArray, initial }) {
 						<div id="photo-carousel" className="carousel slide" data-bs-pause="true">
 							<div className="carousel-inner">
 							{
-								urlArray.map((url, i) => {
+								urlArray.map((url: string, i: number) => {
 									const className = classNames(
 										"carousel-item",
 										{
@@ -76,7 +88,7 @@ export default function PhotoModal({ urlArray, initial }) {
 						</div>
 						<div id="thumbnails-container" className="mt-1 d-flex">
 						{
-							urlArray.map((url, i) => 
+							urlArray.map((url: string, i: number) => 
 								<img
 									key={i}
 									src={url}

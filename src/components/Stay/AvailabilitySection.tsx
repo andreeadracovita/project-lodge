@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 
-import Calendar from "components/Calendar/Calendar";
+import Calendar from "components/calendar/Calendar";
 import { dayMonYear } from "utils/dateUtils";
 
 export default function AvailabilitySection() {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [checkIn, setCheckIn] = useState(new Date());
-	const [checkOut, setCheckOut] = useState(new Date());
+	const [searchParams] = useSearchParams();
+	const [checkIn, setCheckIn] = useState<Date | null>(null);
+	const [checkOut, setCheckOut] = useState<Date | null>(null);
 
 	useEffect(() => {
 		const checkInString = searchParams.get("check_in");

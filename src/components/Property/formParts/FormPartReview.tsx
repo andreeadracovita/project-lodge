@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 import FormPartTitleAddress from "./FormPartTitleAddress";
 import FormPartDescription from "./FormPartDescription";
-import FormPartPhotos from "./FormPartPhotos";
 import FormPartPricing from "./FormPartPricing";
 import { updateProperty } from "api/BackendApiService";
 
-export default function FormPartReview({ input, propertyId }) {
+type FormPartReviewProps = {
+	input: any,
+	propertyId: number | undefined
+};
+
+export default function FormPartReview({ input, propertyId }: FormPartReviewProps) {
 	const navigate = useNavigate();
 	
 	function onSubmit(event: any) {
@@ -39,19 +43,23 @@ export default function FormPartReview({ input, propertyId }) {
 				isEditable={false}
 				showButton={false}
 				input={input}
-				handleChange={() => {}}
-				onButtonClicked={() => {}}
+				handleChange={undefined}
+				propertyId={undefined}
+				advanceState={undefined}
+				setPropertyId={undefined}
+				handleChangeCountry={undefined}
 			/>
 
 			<h2 className="section-heading mt-10">Description</h2>
 			<FormPartDescription
 				isEditable={false}
 				showButton={false}
-				showUnselectedFeatures={false}
 				input={input}
-				handleChange={() => {}}
-				onButtonClicked={() => {}}
-				handleChangeMultiselect={() => {}}
+				handleChange={undefined}
+				handleChangeFeatureMultiselect={undefined}
+				handleChangeExperienceMultiselect={undefined}
+				propertyId={undefined}
+				advanceState={undefined}
 			/>
 
 			<h2 className="section-heading mt-10">Pricing</h2>
@@ -59,8 +67,9 @@ export default function FormPartReview({ input, propertyId }) {
 				isEditable={false}
 				showButton={false}
 				input={input}
-				handleChange={() => {}}
-				onButtonClicked={() => {}}
+				handleChange={undefined}
+				propertyId={undefined}
+				advanceState={undefined}
 			/>
 
 			<form onSubmit={onSubmit}>

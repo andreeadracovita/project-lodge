@@ -4,12 +4,18 @@ import { ChevronRight } from "react-bootstrap-icons";
 
 import { updateProperty } from "api/BackendApiService";
 import FormError from "components/common/FormError";
-import { useAuth } from "components/security/AuthContext";
 
-export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }) {
-	const authContext: any = useAuth();
-	const currency = authContext.currency;
-	const [errors, setErrors] = useState([]);
+type FormPartPricingProps = {
+	isEditable: boolean,
+	showButton: boolean,
+	input: any,
+	propertyId: number | undefined,
+	handleChange: any,
+	advanceState: any
+};
+
+export default function FormPartPricing({ isEditable, showButton, input, propertyId, handleChange, advanceState }: FormPartPricingProps) {
+	const [errors, setErrors] = useState<string[]>([]);
 
 	const stylingFormControl = classNames(
 		"form-control",

@@ -1,10 +1,8 @@
-import axios from "axios";
 import classNames from "classnames";
-import countryToCurrency from "country-to-currency";
+import countryToCurrency, { type Countries } from "country-to-currency";
 import { useState, useEffect } from "react";
 import { CheckCircle, Icon1Circle, Icon2Circle, Icon3Circle, Icon4Circle, Icon5Circle } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
-import countries from "react-select-country-list";
 
 import "./EditPropertyForm.css";
 import FormBackButton from "./FormBackButton";
@@ -16,11 +14,12 @@ import FormPartReview from "./formParts/FormPartReview";
 import PropertyListItem from "components/list/PropertyListItem";
 import { getPropertyById } from "api/BackendApiService";
 import { fileStorage } from "utils/constants";
+import { yearDashMonthDashDay } from "utils/dateUtils";
 
 export default function EditPropertyForm() {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [propertyId, setPropertyId] = useState();
-	const [input, setInput] = useState({
+	const [searchParams] = useSearchParams();
+	const [propertyId, setPropertyId] = useState<number | undefined>();
+	const [input, setInput] = useState<any>({
 		title: "",
 		city: "",
 		country: "",
@@ -46,7 +45,6 @@ export default function EditPropertyForm() {
 	});
 	const [imagesUrlArray, setImagesUrlArray] = useState([]);
 	const [pageTitle, setPageTitle] = useState("List your property");
-	const [endButtonText, setEndButtonText] = useState("Publish property");
 
 	const previewCheckIn = new Date();
 	let previewCheckOut = new Date()
@@ -56,7 +54,7 @@ export default function EditPropertyForm() {
 		// Editing an existing property
 		const propId = searchParams.get("id");
 		if (propId) {
-			setPropertyId(propId);
+			setPropertyId(parseInt(propId));
 			getPropertyById(propId)
 				.then(response => {
 					const data = response.data;
@@ -79,7 +77,7 @@ export default function EditPropertyForm() {
 							bathrooms: data.bathrooms ?? 1,
 							featuresIds: data.features_ids ?? [],
 							experiencesIds: data.experiences_ids ?? [],
-							photos: photos ? photos.map(url => fileStorage + url) : [],
+							photos: photos ? photos.map((url: string) => fileStorage + url) : [],
 							priceNight: data.price_night_local ?? 0,
 							isListed: data.is_listed ?? false,
 							localCurrency: data.local_currency ?? ""
@@ -107,10 +105,10 @@ export default function EditPropertyForm() {
 		setFormState(formState - 1);
 	}
 
-	function handleChange(event: any) {
+	function handleChange(event: any): void {
 		const { value, name } = event.target;
 
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value
@@ -118,9 +116,8 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	function handleChangeCountry(value) {
-		const countryLabel = countries().getLabel(value);
-		setInput((prevValue) => {
+	function handleChangeCountry(value: Countries): void {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				country: value,
@@ -129,11 +126,11 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	async function handleChangePhotos(event: any) {
+	async function handleChangePhotos(event: any): Promise<void> {
 		const fileArray = Array.from(event.target.files);
-		const urls = fileArray.map((photo) => URL.createObjectURL(photo));
+		const urls = fileArray.map((url: any) => URL.createObjectURL(url as Blob));
 
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				photos: urls
@@ -141,16 +138,16 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	function handleChangeMultiselect(event: any, name: string) {
+	function handleChangeMultiselect(event: any, name: string): void {
 		const item = parseInt(event.target.id);
 
 		let newValues = input[name];
 		if (newValues.includes(item)) {
-			newValues = newValues.filter(val => val !== item);
+			newValues = newValues.filter((val: number) => val !== item);
 		} else {
 			newValues.push(item);
 		}
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: newValues
@@ -158,7 +155,7 @@ export default function EditPropertyForm() {
 		});
 	}
 
-	function getClassName(state) {
+	function getClassName(state: number): string {
 		return classNames(
 			"text-bold",
 			"d-flex",
@@ -248,12 +245,11 @@ export default function EditPropertyForm() {
 							<FormPartDescription
 								isEditable={true}
 								showButton={true}
-								showUnselectedFeatures={true}
 								input={input}
 								propertyId={propertyId}
 								handleChange={handleChange}
-								handleChangeFeatureMultiselect={(event) => handleChangeMultiselect(event, "featuresIds")}
-								handleChangeExperienceMultiselect={(event) => handleChangeMultiselect(event, "experiencesIds")}
+								handleChangeFeatureMultiselect={(event: any) => handleChangeMultiselect(event, "featuresIds")}
+								handleChangeExperienceMultiselect={(event: any) => handleChangeMultiselect(event, "experiencesIds")}
 								advanceState={advanceState}
 							/>
 						</div>
@@ -268,8 +264,6 @@ export default function EditPropertyForm() {
 						<FormBackButton onButtonClicked={onBackClicked} />
 						<h1 className="page-heading">Showcase your property</h1>
 						<FormPartPhotos
-							isEditable={true}
-							showButton={true}
 							input={input}
 							propertyId={propertyId}
 							handleChangePhotos={handleChangePhotos}
@@ -308,7 +302,6 @@ export default function EditPropertyForm() {
 								<FormPartReview
 									input={input}
 									propertyId={propertyId}
-									submitButtonText={endButtonText}
 								/>
 							</div>
 							<div className="col-6">
@@ -322,13 +315,15 @@ export default function EditPropertyForm() {
 												city: input.city,
 												country: input.country,
 												price_night_site: input.priceNight,
-												images_url_array: imagesUrlArray
+												images_url_array: imagesUrlArray,
+												geo: undefined
 											}}
-											checkIn={previewCheckIn}
-											checkOut={previewCheckOut}
+											checkIn={yearDashMonthDashDay(previewCheckIn)}
+											checkOut={yearDashMonthDashDay(previewCheckOut)}
 											nightsCount={1}
 											guests={1}
 											isCompact={true}
+											hideWishlist={false}
 										/>
 									</div>
 								</div>

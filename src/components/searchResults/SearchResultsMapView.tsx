@@ -8,47 +8,49 @@ import { ListItemType } from "components/list/ListItemType";
 import MapView from "components/map/MapView";
 import { useAuth } from "components/security/AuthContext";
 
+type SearchResultsMapViewProps = {
+	items: any,
+	nightsCount: number | undefined,
+	geo: any,
+	setIsFullscreenMap: any
+};
+
 export default function SearchResultsMapView({
 	items,
 	nightsCount,
 	geo,
 	setIsFullscreenMap
-}) {
+}: SearchResultsMapViewProps) {
 	const authContext: any = useAuth();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 
-	const [points, setPoints] = useState([]);
-	const [showFullscreenMap, setShowFullscreenMap] = useState(false);
+	const [points, setPoints] = useState<any[]>([]);
 	const olIdToCardIdMap = new Map();
 	const olIdToPriceMap = new Map();
 	const checkInParam = searchParams.get("check_in");
 	const checkOutParam = searchParams.get("check_out");
-	const guests = parseInt(searchParams.get("guests"));
+	const guests = parseInt(searchParams.get("guests") || "1");
 
 	useEffect(() => {
 		if (!items || items.length === 0) {
 			return;
 		}
-		const pointsArr = [];
-		items.map(p => {
+		const pointsArr: any[] = [];
+		items.map((p: any) => {
 			pointsArr.push([p.geo.x, p.geo.y]);
 		});
 		setPoints(pointsArr);
 	}, [items]);
 
-	function updateIdsMap(idArray) {
+	function updateIdsMap(idArray: number[]): void {
 		for (let i = 0; i < idArray.length; i++) {
 			olIdToCardIdMap.set(idArray[i], `small-prop-` + items[i].id);
 			olIdToPriceMap.set(idArray[i], items[i].price_total_converted + " " + authContext.currency);
 		}
 	}
 
-	function handleHighlightItem(olId) {
-		document.getElementById(olIdToCardIdMap.get(olId)).focus();
-	}
-
-	function handleShowMapClick() {
-		setShowFullscreenMap(true);
+	function handleHighlightItem(olId: number): void {
+		document.getElementById(olIdToCardIdMap.get(olId))?.focus();
 	}
 	
 	return (
@@ -71,6 +73,8 @@ export default function SearchResultsMapView({
 							guests={guests}
 							nightsCount={nightsCount}
 							cols={1}
+							setNeedsRefresh={undefined}
+							isCompact={undefined}
 						/>
 					</div>
 				</div>
@@ -87,6 +91,7 @@ export default function SearchResultsMapView({
 						handleHighlightItem={handleHighlightItem}
 						shouldShowText={true}
 						priceMap={olIdToPriceMap}
+						updatePinPosition={undefined}
 					/>
 				</div>
 			</div>
