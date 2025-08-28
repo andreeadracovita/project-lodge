@@ -18,7 +18,7 @@ export default function Review() {
 			return;
 		}
 
-		getAuthorizationForReview(bookingId)
+		getAuthorizationForReview(parseInt(bookingId))
 			.then(responseAuth => {
 				const data = responseAuth.data;
 				if (data && data.isAuthorized) {

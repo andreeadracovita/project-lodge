@@ -8,7 +8,7 @@ import { updateProperty } from "api/BackendApiService";
 
 type FormPartReviewProps = {
 	input: any,
-	propertyId: number | undefined
+	propertyId: number
 };
 
 export default function FormPartReview({ input, propertyId }: FormPartReviewProps) {
@@ -44,7 +44,7 @@ export default function FormPartReview({ input, propertyId }: FormPartReviewProp
 				showButton={false}
 				input={input}
 				handleChange={undefined}
-				propertyId={undefined}
+				propertyId={propertyId}
 				advanceState={undefined}
 				setPropertyId={undefined}
 				handleChangeCountry={undefined}
@@ -58,7 +58,7 @@ export default function FormPartReview({ input, propertyId }: FormPartReviewProp
 				handleChange={undefined}
 				handleChangeFeatureMultiselect={undefined}
 				handleChangeExperienceMultiselect={undefined}
-				propertyId={undefined}
+				propertyId={propertyId}
 				advanceState={undefined}
 			/>
 
@@ -68,7 +68,7 @@ export default function FormPartReview({ input, propertyId }: FormPartReviewProp
 				showButton={false}
 				input={input}
 				handleChange={undefined}
-				propertyId={undefined}
+				propertyId={propertyId}
 				advanceState={undefined}
 			/>
 

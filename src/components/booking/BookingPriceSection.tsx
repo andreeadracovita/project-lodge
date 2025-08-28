@@ -5,12 +5,18 @@ import { useAuth } from "components/security/AuthContext";
 import { getNightsCount } from "utils/dateUtils";
 import { convertToPreferredCurrency } from "utils/conversionUtils";
 
-export default function BookingPriceSection({ item }) {
+type BookingPriceSectionProps = {
+	item: any
+};
+
+export default function BookingPriceSection({ item }: BookingPriceSectionProps) {
 	const authContext: any = useAuth();
 	const [searchParams] = useSearchParams();
-	const checkInDate = new Date(searchParams.get("check_in"));
-	const checkOutDate = new Date(searchParams.get("check_out"));
-	const nightsCount = getNightsCount(checkInDate, checkOutDate);
+	const checkInParam = searchParams.get("check_in");
+	const checkOutParam = searchParams.get("check_out");
+	const checkInDate = checkInParam ? new Date(checkInParam) : undefined;
+	const checkOutDate = checkOutParam ? new Date(checkOutParam) : undefined;
+	const nightsCount = checkInParam && checkOutParam ? getNightsCount(checkInDate, checkOutDate) : 0;
 	const localTotalPrice = item.price_night_local * nightsCount;
 	const siteTotalPrice = item.price_night_site * nightsCount;
 	const convertedTotalPrice = convertToPreferredCurrency(siteTotalPrice, authContext.exchangeRate);

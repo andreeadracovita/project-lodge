@@ -60,7 +60,7 @@ export default function HostingDashboard() {
 				<h2 className="section-container section-heading">Your reservations</h2>
 				<div id="reservations-tabs" className="mt-10">
 					{
-						tabs.map((tab, i) =>
+						tabs.map((tab: ReservationsTab, i: number) =>
 							<ReservationTabItem
 								key={i}
 								tab={tab}

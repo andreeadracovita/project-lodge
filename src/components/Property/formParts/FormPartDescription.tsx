@@ -12,7 +12,7 @@ type FormPartDescriptionProps = {
 	isEditable: boolean,
 	showButton: boolean,
 	input: any,
-	propertyId: number | undefined,
+	propertyId: number,
 	handleChange: any,
 	handleChangeFeatureMultiselect: any,
 	handleChangeExperienceMultiselect: any,

@@ -7,14 +7,7 @@ import { fileStorage } from "utils/constants";
 import { dayMonYear } from "utils/dateUtils";
 
 type BookingListItemProp = {
-	id: number,
-	img: string,
-	title: string,
-	city: string,
-	country: string,
-	check_in: string,
-	check_out: string,
-	pin_code: string
+	item: any
 };
 
 export default function BookingListItem({item}: BookingListItemProp) {

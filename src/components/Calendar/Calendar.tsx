@@ -12,9 +12,9 @@ export default function Calendar() {
 	const propertyId = searchParams.get("id");
 	
 	// Left calendar sheet
-	const [firstDate, setFirstDate] = useState(() => getFirstDate());
+	const [firstDate, setFirstDate] = useState<Date>(() => getFirstDate());
 	// Right calendar sheet
-	const [secondDate, setSecondDate] = useState(() => getNextMonth(firstDate));
+	const [secondDate, setSecondDate] = useState<Date>(() => getNextMonth(firstDate));
 	// Use to switch between check-in and out selections
 	const [isRangePicked, setIsRangePicked] = useState(true);
 
@@ -30,7 +30,7 @@ export default function Calendar() {
 			return;
 		}
 
-		getPropertyAvailability(propertyId, checkIn, checkOut)
+		getPropertyAvailability(parseInt(propertyId), checkIn, checkOut)
 			.then(response => {
 				if (response?.data?.available === false) {
 					clearSelection();
@@ -41,7 +41,7 @@ export default function Calendar() {
 			});
 	}, []);
 
-	function getFirstDate() {
+	function getFirstDate(): Date {
 		const checkIn = searchParams.get("check_in");
 
 		if (checkIn) {
@@ -50,15 +50,15 @@ export default function Calendar() {
 		return new Date();
 	}
 
-	function getPrevMonth(date) {
+	function getPrevMonth(date: Date): Date {
 		return date.getMonth() === 0 ? new Date(date.getFullYear() - 1, 11, 1) : new Date(date.getFullYear(), date.getMonth() - 1, 1);
 	}
 
-	function getNextMonth(date) {
+	function getNextMonth(date: Date): Date {
 		return date.getMonth() === 11 ? new Date(date.getFullYear() + 1, 0, 1) : new Date(date.getFullYear(), date.getMonth() + 1, 1);
 	}
 
-	function decrementMonth() {
+	function decrementMonth(): void {
 		// Do not decrement past current month
 		const today = new Date();
 		if (firstDate.getFullYear() === today.getFullYear() && firstDate.getMonth() === today.getMonth()) {
@@ -68,12 +68,12 @@ export default function Calendar() {
 		setFirstDate(() => getPrevMonth(firstDate));
 	}
 
-	function incrementMonth() {
+	function incrementMonth(): void {
 		setFirstDate(secondDate);
 		setSecondDate(() => getNextMonth(secondDate));
 	}
 
-	async function pickDate(date) {
+	async function pickDate(date: Date) {
 		const checkIn = searchParams.get("check_in");
 		if (isRangePicked || (checkIn && date <= new Date(checkIn))) {
 			// Start a new range
@@ -83,8 +83,8 @@ export default function Calendar() {
 			setIsRangePicked(false);
 		} else {
 			const checkOut = yearDashMonthDashDay(date);
-			if (propertyId) {
-				const response = await getPropertyAvailability(propertyId, checkIn, checkOut);
+			if (propertyId && checkIn && checkOut) {
+				const response = await getPropertyAvailability(parseInt(propertyId), checkIn, checkOut);
 				if (response?.data?.available === false) {
 					return;
 				}
@@ -112,6 +112,7 @@ export default function Calendar() {
 					chevronLeft={true}
 					chevronRight={false}
 					onLeftChevronClicked={decrementMonth}
+					onRightChevronClicked={undefined}
 					onDateClicked={pickDate}
 				/>
 			</div>
@@ -121,6 +122,7 @@ export default function Calendar() {
 					year={secondDate.getFullYear()}
 					chevronLeft={false}
 					chevronRight={true}
+					onLeftChevronClicked={undefined}
 					onRightChevronClicked={incrementMonth}
 					onDateClicked={pickDate}
 				/>

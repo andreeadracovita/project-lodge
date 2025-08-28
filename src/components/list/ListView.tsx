@@ -6,9 +6,20 @@ import HostingPropertyListItem from "./HostingPropertyListItem";
 import { ListItemType } from "./ListItemType";
 import PropertyListItem from "./PropertyListItem";
 import SmallPropertyListItem from "./SmallPropertyListItem";
-import { yearDashMonthDashDay } from "utils/dateUtils";
 
-export default function ListView({ listItemType, items, checkIn, checkOut, nightsCount, guests, cols, setNeedsRefresh, isCompact }) {
+type ListViewProps = {
+	listItemType: ListItemType,
+	items: any,
+	checkIn?: string,
+	checkOut?: string,
+	nightsCount?: number,
+	guests?: number,
+	cols: number,
+	setNeedsRefresh: any,
+	isCompact?: boolean
+};
+
+export default function ListView({ listItemType, items, checkIn, checkOut, nightsCount, guests, cols, setNeedsRefresh, isCompact }: ListViewProps) {
 
 	const gridClassNames = classNames(
 		"row",
@@ -24,7 +35,7 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 		`row-cols-${cols}`
 	);
 
-	function renderItemByType(item) {
+	function renderItemByType(item: any) {
 		switch (listItemType) {
 			case ListItemType.Property:
 				return <PropertyListItem
@@ -33,8 +44,9 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 					checkIn={checkIn}
 					checkOut={checkOut}
 					guests={guests}
-					nightsCount={nightsCount}
-					isCompact={isCompact}
+					nightsCount={nightsCount || 1}
+					isCompact={isCompact || false}
+					hideWishlist={false}
 				/>;
 			case ListItemType.Destination:
 				return <DestinationListItem
@@ -53,7 +65,7 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 					checkIn={checkIn}
 					checkOut={checkOut}
 					guests={guests}
-					nightsCount={nightsCount}
+					nightsCount={nightsCount || 1}
 				/>;
 			default: return;
 		}
@@ -62,7 +74,7 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 	return (
 		<div className={ listItemType !== ListItemType.Destination ? gridClassNames : destinationGridClassNames }>
 		{
-			items.map((item, i) =>
+			items.map((item: number, i: number) =>
 				<div key={i} className="col">
 					{ renderItemByType(item) }
 				</div>

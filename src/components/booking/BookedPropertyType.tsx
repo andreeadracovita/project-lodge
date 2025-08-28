@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 
 import { getAllPropertyTypes, getAllRentalTypes } from "api/BackendApiService";
 
-export default function BookedPropertyType({ rentalTypeId, buildingTypeId }) {
+type BookedPropertyTypeProps = {
+	rentalTypeId: number,
+	buildingTypeId: number
+};
+
+export default function BookedPropertyType({ rentalTypeId, buildingTypeId }: BookedPropertyTypeProps) {
 	const [rentalTypes, setRentalTypes] = useState([]);
 	const [propertyTypes, setPropertyTypes] = useState([]);
 
@@ -24,11 +29,11 @@ export default function BookedPropertyType({ rentalTypeId, buildingTypeId }) {
 	}, []);
 
 	function getBookedProperty(): string {
-		const currentRentalType = rentalTypes.find(type => type.id === rentalTypeId);
+		const currentRentalType: any = rentalTypes.find((type: any) => type.id === rentalTypeId);
 		if (currentRentalType?.name === "room") {
 			return "room";
 		}
-		const currentPropertyType = propertyTypes.find(type => type.id === buildingTypeId);
+		const currentPropertyType: any = propertyTypes.find((type: any) => type.id === buildingTypeId);
 		if (currentPropertyType) {
 			return currentPropertyType.name;
 		}

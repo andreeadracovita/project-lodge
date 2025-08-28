@@ -9,10 +9,10 @@ import { getPropertiesByUserId, updateProperty } from "api/BackendApiService";
  */
 export default function HostingCalendarSettings() {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [hostedProperties, setHostedProperties] = useState([]);
-	const [selectedProp, setSelectedProp] = useState();
+	const [hostedProperties, setHostedProperties] = useState<any[]>([]);
+	const [selectedProp, setSelectedProp] = useState<any>();
 
-	const [priceInput, setPriceInput] = useState();
+	const [priceInput, setPriceInput] = useState<number | undefined>();
 	const [showEdit, setShowEdit] = useState(false);
 
 	useEffect(() => {
@@ -24,7 +24,7 @@ export default function HostingCalendarSettings() {
 					const firstPropId = data[0].id;
 					searchParams.set("id", firstPropId);
 					setSearchParams(searchParams);
-					const foundPropWithId = data.find(p => p.id == firstPropId);
+					const foundPropWithId: any = data.find((p: any) => p.id == firstPropId);
 					setSelectedProp(foundPropWithId);
 					setPriceInput(foundPropWithId.price_night_local);
 				}
@@ -34,10 +34,10 @@ export default function HostingCalendarSettings() {
 			});
 	}, []);
 
-	function handlePropertyClick(id) {
-		searchParams.set("id", id);
+	function handlePropertyClick(id: number) {
+		searchParams.set("id", String(id));
 		setSearchParams(searchParams);
-		setSelectedProp(hostedProperties.find(p => p.id == id));
+		setSelectedProp(hostedProperties.find((p: any) => p.id == id));
 	}
 
 	function savePrice() {
@@ -46,7 +46,7 @@ export default function HostingCalendarSettings() {
 		})
 			.then(() => {
 				setShowEdit(false);
-				window.location.reload(false);
+				window.location.reload();
 			})
 			.catch((error) => {
 				console.error(error);
@@ -57,15 +57,15 @@ export default function HostingCalendarSettings() {
 		<div className="border-section">
 			<div className="text-bold">Selected property</div>
 			{
-				hostedProperties.length > 0 && selectedProp &&
+				(hostedProperties.length > 0 && selectedProp !== undefined) &&
 				<div>
 					<div className="dropdown">
 						<div id="dropdown-properties" role="button" className="btn-pill-outline mt-10" data-bs-toggle="dropdown">
-							{selectedProp?.title}
+							{selectedProp.title}
 						</div>
 						
 						<ul className="dropdown-menu dropdown-menu-start text-small">
-							{hostedProperties.map((p, i) => {
+							{hostedProperties.map((p: any, i: number) => {
 								return <li
 									key={i}
 									className="dropdown-item cursor-pointer"
@@ -87,17 +87,17 @@ export default function HostingCalendarSettings() {
 								className="form-control rounded-pill"
 								name="price"
 								value={priceInput}
-								onChange={(e) => setPriceInput(e.target.value)}
+								onChange={(event: any) => setPriceInput(event.target.value)}
 								required
 							/>
-							<div>{selectedProp?.local_currency}</div>
+							<div>{selectedProp.local_currency}</div>
 							<div className="mt-6 btn-text-underline" onClick={() => setShowEdit(false)}>Dismiss</div>
 							<div className="btn-text-underline" onClick={savePrice}>Save</div>
 						</div>
 						: <div>
-							<div className="property-card-price text-bold">{selectedProp?.price_night_local} {selectedProp?.local_currency}</div>
+							<div className="property-card-price text-bold">{selectedProp.price_night_local} {selectedProp.local_currency}</div>
 							<div className="btn-text-underline" onClick={() => {
-								setPriceInput(selectedProp?.price_night_local);
+								setPriceInput(selectedProp.price_night_local);
 								setShowEdit(true);
 							}}>Edit price</div>
 						</div>

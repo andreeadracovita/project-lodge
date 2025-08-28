@@ -78,7 +78,7 @@ export default function CurrencyForm({ value, isFocused, showSectionHandler, cle
 								onChange={handleChange}
 							>
 								{
-									availableCurrencies.map((currency, i) => 
+									availableCurrencies.map((currency: string, i: number) => 
 										<option key={i} value={currency}>{currency}</option>
 									)
 								}

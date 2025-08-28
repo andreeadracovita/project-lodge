@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom";
-import countries from "react-select-country-list";
 
 import { fileStorage } from "utils/constants";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
-type PlaceType = {
-	name: string;
-	url: string;
-};
-
 type PlaceTypeItemProps = {
-	item: PlaceType;
+	item: any;
 	checkIn: string; // formatted string 2025-04-10
 	checkOut: string; // formatted string 2025-04-10
 	guests: number;

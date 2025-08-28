@@ -155,6 +155,9 @@ export default function FormPartTitleAddress({
 	 * Update existing property
 	 */
 	async function patchProperty() {
+		if (!propertyId) {
+			return;
+		}
 		const payload = {
 			title: input.title,
 			geo: { x: pickedGeo[0], y: pickedGeo[1] },

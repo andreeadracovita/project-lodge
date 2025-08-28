@@ -31,7 +31,7 @@ export default function ReservationTabItem({ tab, activeTab, itemsCount, setActi
 		}
 	}
 
-	function getTabClassName(tab) {
+	function getTabClassName() {
 		return classNames(
 			"features-list-item",
 			"cursor-pointer",
@@ -43,8 +43,8 @@ export default function ReservationTabItem({ tab, activeTab, itemsCount, setActi
 
 	return (
 		<span
-			className={getTabClassName(tab)}
-			onClick={() => handleTabClick(tab)}
+			className={getTabClassName()}
+			onClick={() => handleTabClick()}
 		>
 			{getTabName()}
 		</span>

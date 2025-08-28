@@ -1,9 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-export default function CountrySelect({ id, initialValue, handleFormChange }) {
-	const [value, setValue] = useState();
+type CountrySelectProps = {
+	id: string,
+	initialValue?: string,
+	handleFormChange: any
+};
+
+export default function CountrySelect({ id, initialValue, handleFormChange }: CountrySelectProps) {
+	const [value, setValue] = useState<any>();
 	const options = useMemo(() => countryList().getData(), []);
 
 	useEffect(() => {
@@ -15,7 +21,7 @@ export default function CountrySelect({ id, initialValue, handleFormChange }) {
 		}
 	}, [initialValue]);
 
-	const changeHandler = value => {
+	const changeHandler = (value: any) => {
 		setValue(value);
 		handleFormChange(value.value);
 	}

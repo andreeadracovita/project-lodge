@@ -14,7 +14,7 @@ type ExperiencesFormProps = {
 
 export default function ExperiencesForm({ value, isFocused, showSectionHandler, clearSectionHandler, refreshUserData }: ExperiencesFormProps) {
 	const [experiencesIds, setExperiencesIds] = useState<number[]>([]);
-	const [experiences, setExperiences] = useState();
+	const [experiences, setExperiences] = useState<string[]>();
 
 	useEffect(() => {
 		getAllExperiences()
@@ -76,13 +76,16 @@ export default function ExperiencesForm({ value, isFocused, showSectionHandler, 
 					<label htmlFor="currency">Experiences</label>
 				</div>
 				<div className="col-8">
-					<Multiselect
-						options={experiences}
-						selectedIds={experiencesIds}
-						handleChange={handleChange}
-						isEditable={isFocused}
-						iconMap={undefined}
-					/>
+					{
+						experiences &&
+						<Multiselect
+							options={experiences}
+							selectedIds={experiencesIds}
+							handleChange={handleChange}
+							isEditable={isFocused}
+							iconMap={undefined}
+						/>
+					}
 				</div>
 				<div className="col-2 d-flex justify-content-end align-items-start">
 					{

@@ -10,7 +10,7 @@ import Search from "components/search/Search";
 
 type SearchResultsListViewProps = {
 	items: any[],
-	nightsCount: number | undefined,
+	nightsCount?: number,
 	priceRange: number[],
 	geo: any,
 	setIsFullscreenMap: any
@@ -26,10 +26,10 @@ export default function SearchResultsListView({
 	const [searchParams] = useSearchParams();
 
 	const countString = `${items.length} ${items.length > 1 ? "results" : "result"}`;
-	const checkInParam = searchParams.get("check_in");
-	const checkOutParam = searchParams.get("check_out");
+	const checkInParam = searchParams.get("check_in") || undefined;
+	const checkOutParam = searchParams.get("check_out") || undefined;
 	const guests = parseInt(searchParams.get("guests") || "1");
-	const city = searchParams.get("city");
+	const city = searchParams.get("city") || undefined;
 
 	function getLocationString() {
 		let locationString = "";

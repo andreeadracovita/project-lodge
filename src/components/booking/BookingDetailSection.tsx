@@ -4,12 +4,18 @@ import BookedPropertyType from "components/booking/BookedPropertyType";
 import { checkInTimes, checkOutTimes } from "utils/constants";
 import { weekdayMonYear, getNightsCount } from "utils/dateUtils";
 
-export default function BookingDetailSection({ item }) {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const checkInDate = new Date(searchParams.get("check_in"));
-	const checkOutDate = new Date(searchParams.get("check_out"));
-	const nightsCount = getNightsCount(checkInDate, checkOutDate);
-	const guestsNo = searchParams.get("guests");
+type BookingDetailSectionProps = {
+	item: any
+};
+
+export default function BookingDetailSection({ item }: BookingDetailSectionProps) {
+	const [searchParams] = useSearchParams();
+	const checkInParam = searchParams.get("check_in");
+	const checkOutParam = searchParams.get("check_out");
+	const checkInDate = checkInParam ? new Date(checkInParam) : undefined;
+	const checkOutDate = checkOutParam ? new Date(checkOutParam) : undefined;
+	const nightsCount: number = checkInParam && checkOutParam ? getNightsCount(checkInDate, checkOutDate) : 0;
+	const guestsNo: number = parseInt(searchParams.get("guests") || "0");
 	
 	return (
 		<div className="border-section">
@@ -17,13 +23,13 @@ export default function BookingDetailSection({ item }) {
 			<div className="mt-10 d-flex justify-content-between">
 				<div>
 					<div>Check-in</div>
-					<div className="text-bold property-card-heading">{weekdayMonYear(checkInDate)}</div>
+					<div className="text-bold property-card-heading">{checkInDate ? weekdayMonYear(checkInDate) : ""}</div>
 					<div className="text-muted">{checkInTimes}</div>
 				</div>
 				<div className="vr"></div>
 				<div>
 					<div>Check-out</div>
-					<div className="text-bold property-card-heading">{weekdayMonYear(checkOutDate)}</div>
+					<div className="text-bold property-card-heading">{checkOutDate ? weekdayMonYear(checkOutDate) : ""}</div>
 					<div className="text-muted">{checkOutTimes}</div>
 				</div>
 			</div>

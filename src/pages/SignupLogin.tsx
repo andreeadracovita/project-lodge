@@ -57,7 +57,7 @@ export default function SignupLogin() {
 	function handleChange(event: any) {
 		const { value, name } = event.target;
 
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value

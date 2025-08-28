@@ -3,17 +3,21 @@ import { useSearchParams } from "react-router";
 
 import { authorizeBookingAccess } from "api/BackendApiService";
 
-export default function BookingUnauthGate({ setShowGate }) {
-	const [searchParams, setSearchParams] = useSearchParams();
+type BookingUnauthGateProps = {
+	setShowGate: any
+};
+
+export default function BookingUnauthGate({ setShowGate }: BookingUnauthGateProps) {
+	const [searchParams] = useSearchParams();
 	const [input, setInput] = useState({
-		confirmationNo: searchParams.get("id"),
-		pinCode: searchParams.get("pin")
+		confirmationNo: searchParams.get("id") || undefined,
+		pinCode: searchParams.get("pin") || undefined
 	});
 
 	function handleChange(event: any) {
 		const { value, name } = event.target;
 
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value

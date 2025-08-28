@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
 
-export default function PasswordInput({ id, name, value, handleChange }) {
+type PasswordInputProps = {
+	id: string,
+	name: string,
+	value: string,
+	handleChange: any
+};
+
+export default function PasswordInput({ id, name, value, handleChange }: PasswordInputProps) {
 	const [type, setType] = useState("password");
 
 	function handleTypeToggle() {

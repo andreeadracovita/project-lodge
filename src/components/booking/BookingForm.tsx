@@ -23,7 +23,7 @@ export default function BookingForm() {
 
 	function handleChange(event: any) {
 		const { name, value } = event.target;
-		setInput(prevValue => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value
@@ -31,8 +31,8 @@ export default function BookingForm() {
 		});
 	}
 
-	function handleCountryChange(value) {
-		setInput((prevValue) => {
+	function handleCountryChange(value: string) {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				countryCode: value

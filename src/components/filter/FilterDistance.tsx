@@ -1,4 +1,10 @@
-export default function FilterDistance({ filterData, city, handleInputChange }) {
+type FilterDistanceProps = {
+	filterData: any,
+	city: string,
+	handleInputChange: any
+};
+
+export default function FilterDistance({ filterData, city, handleInputChange }: FilterDistanceProps) {
 	
 	return (
 		<div id="distance">

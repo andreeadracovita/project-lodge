@@ -17,11 +17,12 @@ export default function Booking() {
 	useEffect(() => {
 		if (!bookingId) {
 			navigate("/");
+			return;
 		}
 		// Show gate when: user is unauthenticated -> pre-fill form with search query info
 		// If booking email does not match auth user email
 		if (authContext.isAuthenticated) {
-			checkViewBookingAuthorization(bookingId)
+			checkViewBookingAuthorization(parseInt(bookingId))
 				.then(response => {
 					// Booking email matches authenticated user email
 					if (response.data?.authorized === true) {

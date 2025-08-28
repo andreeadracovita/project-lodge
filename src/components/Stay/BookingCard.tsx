@@ -64,7 +64,7 @@ export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 	function handleChange(event: any) {
 		const { name, value } = event.target;
 		
-		setInput(prevValue => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value

@@ -28,8 +28,8 @@ export default function EditPropertyForm() {
 		geo: null,
 
 		description: "",
-		buildingType: 1,
-		rentalType: 1,
+		buildingTypeId: 1,
+		rentalTypeId: 1,
 		guests: 1,
 		beds: 1,
 		bedrooms: 1,
@@ -55,7 +55,7 @@ export default function EditPropertyForm() {
 		const propId = searchParams.get("id");
 		if (propId) {
 			setPropertyId(parseInt(propId));
-			getPropertyById(propId)
+			getPropertyById(parseInt(propId))
 				.then(response => {
 					const data = response.data;
 					if (data) {
@@ -67,8 +67,8 @@ export default function EditPropertyForm() {
 							street: data.street,
 							streetNo: data.street_no,
 							geo: [Number(data.geo.x), Number(data.geo.y)],
-							buildingType: data.building_type_id,
-							rentalType: data.rental_type_id,
+							buildingTypeId: data.building_type_id,
+							rentalTypeId: data.rental_type_id,
 
 							description: data.description ?? "",
 							guests: data.guests ?? 1,
@@ -237,7 +237,7 @@ export default function EditPropertyForm() {
 					</div>
 				}
 				{
-					formState === 1 &&
+					(formState === 1 && propertyId) &&
 					<div id="state-describe" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
@@ -259,7 +259,7 @@ export default function EditPropertyForm() {
 					</div>
 				}
 				{
-					formState === 2 &&
+					(formState === 2 && propertyId) &&
 					<div id="state-photos">
 						<FormBackButton onButtonClicked={onBackClicked} />
 						<h1 className="page-heading">Showcase your property</h1>
@@ -273,7 +273,7 @@ export default function EditPropertyForm() {
 					</div>
 				}
 				{
-					formState === 3 &&
+					(formState === 3 && propertyId) &&
 					<div id="state-pricing" className="row">
 						<div className="col-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
@@ -293,7 +293,7 @@ export default function EditPropertyForm() {
 					</div>
 				}
 				{
-					formState === 4 &&
+					(formState === 4 && propertyId) &&
 					<div>
 						<div id="state-review" className="row">
 							<div className="col-6">
@@ -316,7 +316,9 @@ export default function EditPropertyForm() {
 												country: input.country,
 												price_night_site: input.priceNight,
 												images_url_array: imagesUrlArray,
-												geo: undefined
+												geo: { x: 0, y: 0 },
+												rental_type: "",
+												property_type: ""
 											}}
 											checkIn={yearDashMonthDashDay(previewCheckIn)}
 											checkOut={yearDashMonthDashDay(previewCheckOut)}

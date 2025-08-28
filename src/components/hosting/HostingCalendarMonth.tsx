@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router";
-import classNames from "classnames";
 
 import HostingCalendarDay from "./HostingCalendarDay";
 import { getBookedByPropertyIdForDate } from "api/BackendApiService";
 import { yearDashMonthDashDay } from "utils/dateUtils";
 
-export default function HostingCalendarMonth({ id, month, year }) {
+type HostingCalendarMonthProps = {
+	id: number,
+	month: number,
+	year: number
+};
+
+export default function HostingCalendarMonth({ id, month, year }: HostingCalendarMonthProps) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 	const monthNames = [
 		"January",
@@ -23,23 +28,23 @@ export default function HostingCalendarMonth({ id, month, year }) {
 		"December"
 	];
 
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [bookedDates, setBookedDates] = useState([]);
+	const [searchParams] = useSearchParams();
+	// const [bookedDates, setBookedDates] = useState([]);
 	const propertyId = searchParams.get("id");
 
 	useEffect(() => {
 		if (!propertyId) {
 			return;
 		}
-		getBookedByPropertyIdForDate(propertyId, yearDashMonthDashDay(new Date(year, month, 1)))
-			.then(response => {
-				const newBookedRanges = response.data.map(entry => {
-					return {
-						check_in: new Date(entry.check_in),
-						check_out: new Date(entry.check_out)
-					}
-				});
-				setBookedDates(newBookedRanges);
+		getBookedByPropertyIdForDate(parseInt(propertyId), yearDashMonthDashDay(new Date(year, month, 1)))
+			.then(() => {
+				// const newBookedRanges = response.data.map(entry => {
+				// 	return {
+				// 		check_in: new Date(entry.check_in),
+				// 		check_out: new Date(entry.check_out)
+				// 	}
+				// });
+				// setBookedDates(newBookedRanges);
 			})
 			.catch(error => {
 				console.error(error);
@@ -54,23 +59,23 @@ export default function HostingCalendarMonth({ id, month, year }) {
 	const lastDay = (new Date(year, month + 1, 0)).getDate();
 
 	return (
-		<div id={id} className="mt-10">
+		<div id={String(id)} className="mt-10">
 			<div>
 				<div className="page-heading">
 					{monthNames[month]} {year !== new Date().getFullYear() ? year : "" }
 				</div>
 				<div className="days-grid mt-2">
-					{weekDays.map((day, i) => 
+					{weekDays.map((day: string, i: number) => 
 						<span key={i} className="col day-initial text-center">{day}</span>
 					)}
 				</div>
 			</div>
 			<div>
 				<div className="days-grid mt-2">
-					{[...Array(dayPadding)].map((_, index) => (
+					{[...Array(dayPadding)].map((_: any, index: number) => (
 				        <span key={index}></span>
 				    ))}
-					{[...Array(lastDay)].map((_, index) => (
+					{[...Array(lastDay)].map((_: any, index: number) => (
 				        <HostingCalendarDay
 				        	key={year * 10000 + month * 100 + index + 1}
 				        	id={year * 10000 + month * 100 + index + 1}

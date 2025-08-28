@@ -8,25 +8,27 @@ import { ListItemType } from "components/list/ListItemType";
 type CarouselViewProps = {
 	id: string;
 	listItemType: ListItemType;
-	items: Array;
+	items: any[];
 	checkIn: string; // formatted string 2025-04-10
 	checkOut: string; // formatted string 2025-04-10
+	nightsCount: number;
 	guests: number;
 };
 
 export default function CarouselView({ id, listItemType, items, checkIn, checkOut, nightsCount, guests }: CarouselViewProps) {
 
-	function renderItemByType(item) {
+	function renderItemByType(item: any) {
 		switch (listItemType) {
 			case ListItemType.Property:
 				return <PropertyListItem
-					isPreview={false}
 					item={item}
 					checkIn={checkIn}
 					checkOut={checkOut}
 					guests={guests}
 					nightsCount={nightsCount}
 					isCompact={true}
+					hideWishlist={false}
+					isPreview={false}
 				/>;
 			case ListItemType.PlaceType:
 				return <PlaceTypeItem
@@ -45,7 +47,7 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 				<div className="carousel-item active">
 					<div className="d-flex p-2">
 					{
-						items.slice(0, 4).map((item, i) =>
+						items.slice(0, 4).map((item: any, i: number) =>
 							<div key={i} className="col-3 pe-2">
 								{ renderItemByType(item) }
 							</div>
@@ -58,7 +60,7 @@ export default function CarouselView({ id, listItemType, items, checkIn, checkOu
 					<div className="carousel-item">
 						<div className="d-flex p-2">
 						{
-							items.slice(4, 8).map((item, i) =>
+							items.slice(4, 8).map((item: any, i: number) =>
 								<div key={i} className="col-3 pe-2">
 									{ renderItemByType(item) }
 								</div>

@@ -1,6 +1,11 @@
 import { fileStorage } from "utils/constants";
 
-export default function PropertyAvatar({ url, size }) {
+type PropertyAvatarProps = {
+	url: string,
+	size: number
+}
+
+export default function PropertyAvatar({ url, size }: PropertyAvatarProps) {
 	
 	return (
 		<img

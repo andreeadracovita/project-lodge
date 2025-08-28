@@ -1,4 +1,9 @@
-export default function FilterBedsRooms({ filterData, handleInputChange }) {
+type FilterBedsRoomsProps = {
+	filterData: any,
+	handleInputChange: any
+};
+
+export default function FilterBedsRooms({ filterData, handleInputChange }: FilterBedsRoomsProps) {
 	
 	return (
 		<div id="beds-rooms">

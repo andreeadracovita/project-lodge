@@ -8,13 +8,11 @@ import { useAuth } from "components/security/AuthContext";
 import { fileStorage } from "utils/constants";
 import { convertToPreferredCurrency } from "utils/conversionUtils";
 
-import type { PropertyItem } from "./PropertyListItem";
-
-type PropertyListItemProps = {
-	item: PropertyItem;
-	guests: number;
-	checkIn: string; // formatted string 2025-04-10
-	checkOut: string; // formatted string 2025-04-10
+type SmallPropertyListItemProps = {
+	item: any;
+	guests?: number;
+	checkIn?: string; // formatted string 2025-04-10
+	checkOut?: string; // formatted string 2025-04-10
 	nightsCount: number;
 };
 
@@ -24,17 +22,16 @@ export default function SmallPropertyListItem({
 	checkIn,
 	checkOut,
 	nightsCount
-}) {
+}: SmallPropertyListItemProps) {
 	const authContext: any = useAuth();
 
 	const linkPath = `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`;
-	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : undefined;
 
 	const siteCurrencyTotalPrice = item.price_night_site * nightsCount;
 	const convertedTotalPrice = Math.ceil(convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate));
 
 	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
-	const guestsString = guests ? ", " + guests + (guests > 1 ? " guests" : " guest") : undefined;
 	const priceString = convertedTotalPrice + " " + authContext.currency;
 
 	return (
@@ -60,7 +57,7 @@ export default function SmallPropertyListItem({
 						</div>
 					</div>
 				</Link>
-				<WishlistIcon itemId={item.id} />
+				<WishlistIcon itemId={item.id} isPreview={false} />
 			</div>
 		</div>
 	)

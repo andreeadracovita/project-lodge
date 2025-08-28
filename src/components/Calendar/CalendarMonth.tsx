@@ -7,10 +7,20 @@ import CalendarDay from "./CalendarDay";
 import { getBookedByPropertyIdForDate } from "api/BackendApiService";
 import { yearDashMonthDashDay } from "utils/dateUtils";
 
+type CalendarMonthProps = {
+	month: number,
+	year: number,
+	chevronLeft: boolean,
+	chevronRight: boolean,
+	onLeftChevronClicked: any,
+	onRightChevronClicked: any,
+	onDateClicked: any
+};
+
 /*
 	Month: 0 - 11
 */
-export default function CalendarMonth({month, year, chevronLeft, chevronRight, onLeftChevronClicked, onRightChevronClicked, onDateClicked}) {
+export default function CalendarMonth({ month, year, chevronLeft, chevronRight, onLeftChevronClicked, onRightChevronClicked, onDateClicked }: CalendarMonthProps) {
 	const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 	const monthNames = [
 		"January",
@@ -27,9 +37,9 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 		"December"
 	];
 
-	const [checkIn, setCheckIn] = useState();
-	const [checkOut, setCheckOut] = useState();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [checkIn, setCheckIn] = useState<Date | undefined>();
+	const [checkOut, setCheckOut] = useState<Date | undefined>();
+	const [searchParams] = useSearchParams();
 	const [bookedDates, setBookedDates] = useState([]);
 	const propertyId = searchParams.get("id");
 
@@ -37,9 +47,9 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 		if (!propertyId) {
 			return;
 		}
-		getBookedByPropertyIdForDate(propertyId, yearDashMonthDashDay(new Date(year, month, 1)))
+		getBookedByPropertyIdForDate(parseInt(propertyId), yearDashMonthDashDay(new Date(year, month, 1)))
 			.then(response => {
-				const newBookedRanges = response.data.map(entry => {
+				const newBookedRanges = response.data.map((entry: any) => {
 					return {
 						check_in: new Date(entry.check_in),
 						check_out: new Date(entry.check_out)
@@ -91,17 +101,17 @@ export default function CalendarMonth({month, year, chevronLeft, chevronRight, o
 					</div>
 				</div>
 				<div className="days-grid mt-2">
-					{weekDays.map((day, i) => 
+					{weekDays.map((day: string, i: number) => 
 						<span key={i} className="col day-initial text-center">{day}</span>
 					)}
 				</div>
 			</div>
 			<div>
 				<div className="days-grid mt-2">
-					{[...Array(dayPadding)].map((_, index) => (
+					{[...Array(dayPadding)].map((_: any, index: number) => (
 				        <span key={index}></span>
 				    ))}
-					{[...Array(lastDay)].map((_, index) => 
+					{[...Array(lastDay)].map((_: any, index: number) => 
 				        <CalendarDay
 				        	key={index}
 				        	year={year}

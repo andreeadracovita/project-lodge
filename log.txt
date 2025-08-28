@@ -1,0 +1,37 @@
+
+> project-lodge@0.0.0 build
+> tsc -b && vite build
+
+src/components/hosting/HostingCalendarSettings.tsx(38,26): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/components/map/MapView.tsx(108,4): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(109,4): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(119,38): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(120,38): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(122,20): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(125,3): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(126,3): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(133,7): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(140,33): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(141,6): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(142,29): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(144,15): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(145,28): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(146,5): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(155,22): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(155,43): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(156,3): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(157,3): error TS2683: 'this' implicitly has type 'any' because it does not have a type annotation.
+src/components/map/MapView.tsx(218,9): error TS7034: Variable 'features' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/components/map/MapView.tsx(220,10): error TS7034: Variable 'olIds' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/components/map/MapView.tsx(221,19): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/components/map/MapView.tsx(224,24): error TS2339: Property 'ol_uid' does not exist on type 'Feature<Point>'.
+src/components/map/MapView.tsx(228,18): error TS7005: Variable 'olIds' implicitly has an 'any[]' type.
+src/components/map/MapView.tsx(252,17): error TS7005: Variable 'features' implicitly has an 'any[]' type.
+src/components/map/MapView.tsx(256,8): error TS2531: Object is possibly 'null'.
+src/components/map/MapView.tsx(268,16): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/components/map/MapView.tsx(279,61): error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/components/map/MapView.tsx(285,11): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'string' is not assignable to parameter of type '("change" | "error" | "propertychange" | "postrender" | "change:layergroup" | "change:size" | "change:target" | "change:view" | "singleclick" | "click" | "dblclick" | "pointerdrag" | ... 7 more ... | "rendercomplete")[]'.

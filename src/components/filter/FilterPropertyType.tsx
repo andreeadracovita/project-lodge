@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { getAllPropertyTypes } from "api/BackendApiService";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
-export default function FilterPropertyType({ filterData, updateMultiselectParams }) {
+type FilterPropertyTypeProps = {
+	filterData: any,
+	updateMultiselectParams: any
+};
+
+export default function FilterPropertyType({ filterData, updateMultiselectParams }: FilterPropertyTypeProps) {
 	const [propertyTypes, setPropertyTypes] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +26,7 @@ export default function FilterPropertyType({ filterData, updateMultiselectParams
 			<div className="text-bold">Property type</div>
 			<div className="mt-10">
 			{
-				propertyTypes.map((ptype, i) => 
+				propertyTypes.map((ptype: any, i: number) => 
 					<div key={i} className="form-check">
 						<input
 							id={"ptype-" + ptype.name}

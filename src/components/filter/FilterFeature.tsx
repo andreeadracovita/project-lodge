@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { getAllFeatures } from "api/BackendApiService";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
-export default function FilterFeature({ filterData, updateMultiselectParams }) {
+type FilterFeatureProps = {
+	filterData: any,
+	updateMultiselectParams: any
+};
+
+export default function FilterFeature({ filterData, updateMultiselectParams }: FilterFeatureProps) {
 	const [features, setFeatures] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +26,7 @@ export default function FilterFeature({ filterData, updateMultiselectParams }) {
 			<div className="text-bold">Features</div>
 			<div className="mt-10">
 			{
-				features.map((feat, i) => 
+				features.map((feat: any, i: number) => 
 					<div key={i} className="form-check">
 						<input
 							id={"feat-" + feat.name}

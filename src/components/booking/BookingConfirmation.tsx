@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import countries from "react-select-country-list";
 
-import { getAllFeatures, getBookingById, getPropertyById, cancelBooking } from "api/BackendApiService";
+import { getBookingById, getPropertyById, cancelBooking } from "api/BackendApiService";
 import BookedPropertyType from "components/booking/BookedPropertyType";
 import MapView from "components/map/MapView";
 import { checkInTimes, checkOutTimes } from "utils/constants";
@@ -20,19 +20,18 @@ type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus];
 export default function BookingConfirmation() {
 	const navigate = useNavigate();
 
-	const [booking, setBooking] = useState();
-	const [property, setProperty] = useState();
+	const [booking, setBooking] = useState<any>();
+	const [property, setProperty] = useState<any>();
 	const [searchParams] = useSearchParams();
 	const bookingId = searchParams.get("id");
 	const pinCode = searchParams.get("pin");
-	const [showCancel, setShowCancel] = useState(true);
-	const [status, setStatus] = useState("");
-	const [googleMapsLink, setGoogleMapsLink] = useState("");
-	const [features, setFeatures] = useState([]);
+	const [showCancel, setShowCancel] = useState<boolean>(true);
+	const [status, setStatus] = useState<string>("");
+	const [googleMapsLink, setGoogleMapsLink] = useState<string>("");
 
 	useEffect(() => {
 		if (bookingId && pinCode) {
-			getBookingById(bookingId, pinCode)
+			getBookingById(parseInt(bookingId), pinCode)
 				.then(response => {
 					const data = response.data;
 
@@ -52,26 +51,16 @@ export default function BookingConfirmation() {
 					setShowCancel(data.booking_status !== "cancelled");
 
 					if (data.booking_status_id === 3) {
-						setStatus(BookingStatus.cancelled);
+						setStatus(BookingStatus.Cancelled);
 					} else {
 						const today = new Date();
-						const checkIn = new Date(data.check_in);
 						const checkOut = new Date(data.check_out);
 						if (today <= checkOut) {
-							setStatus(BookingStatus.confirmed);
+							setStatus(BookingStatus.Confirmed);
 						} else {
-							setStatus(BookingStatus.completed);
+							setStatus(BookingStatus.Completed);
 							setShowCancel(false);
 						}
-					}
-				})
-				.catch(error => {
-					console.error(error);
-				});
-			getAllFeatures()
-				.then(response => {
-					if (response.data) {
-						setFeatures(response.data);
 					}
 				})
 				.catch(error => {
@@ -186,6 +175,13 @@ export default function BookingConfirmation() {
 							center={[property.geo.x, property.geo.y]}
 							zoom={15}
 							points={[[property.geo.x, property.geo.y]]}
+							boundingbox={undefined}
+							isEditable={false}
+							updatePinPosition={undefined}
+							updateIdsMap={undefined}
+							handleHighlightItem={undefined}
+							shouldShowText={undefined}
+							priceMap={undefined}
 						/>
 					</div>
 					{

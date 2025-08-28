@@ -7,7 +7,6 @@ import { useAuth } from "components/security/AuthContext";
 import Rating from "components/common/Rating";
 import { fileStorage } from "utils/constants";
 import { convertToPreferredCurrency } from "utils/conversionUtils";
-import { yearDashMonthDashDay } from "utils/dateUtils";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
 type Geo = {
@@ -20,18 +19,24 @@ export type PropertyItem = {
 	title: string,
 	city: string,
 	country: string,
-	geo: Geo | undefined,
-	price_night_site: string,
+	geo: Geo,
+	price_night_site: number,
 	rating?: number,
-	images_url_array: Array[]
+	images_url_array: string[],
+	bathrooms?: number,
+	bedrooms?: number,
+	beds?: number,
+	rental_type: string,
+	property_type: string
+	reviews_no?: number
 };
 
 type PropertyListItemProps = {
-	isPreview: boolean;
 	item: PropertyItem;
-	guests: number;
-	checkIn: string; // formatted string 2025-04-10
-	checkOut: string; // formatted string 2025-04-10
+	isPreview: boolean;
+	guests?: number;
+	checkIn?: string; // formatted string 2025-04-10
+	checkOut?: string; // formatted string 2025-04-10
 	nightsCount: number;
 	hideWishlist: boolean;
 	isCompact: boolean;
@@ -53,7 +58,7 @@ export default function PropertyListItem({
 		? `/stay?id=${item.id}&guests=${guests ? guests : 1}&check_in=${checkIn}&check_out=${checkOut}`
 		: "#";
 
-	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : undefined;
 	
 	const siteCurrencyTotalPrice = item.price_night_site * nightsCount;
 	const convertedTotalPrice = Math.ceil(convertToPreferredCurrency(siteCurrencyTotalPrice, authContext.exchangeRate));
@@ -63,9 +68,9 @@ export default function PropertyListItem({
 	const priceString = (isPreview ? Math.round(siteCurrencyTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
 
 	const isRoom = item.rental_type === "room";
-	const bedsString = item.beds + (parseInt(item.beds) > 1 ? " beds" : " bed");
-	const bedroomsString = item.bedrooms + (parseInt(item.bedrooms) > 1 ? " bedrooms" : " bedroom");
-	const bathroomsString = item.bathrooms + (parseInt(item.bathrooms) > 1 ? " bathrooms" : " bathroom");
+	const bedsString = item.beds ? item.beds + (item.beds > 1 ? " beds" : " bed") : "";
+	const bedroomsString = item.bedrooms ? item.bedrooms + (item.bedrooms > 1 ? " bedrooms" : " bedroom") : "";
+	const bathroomsString = item.bathrooms ? item.bathrooms + (item.bathrooms > 1 ? " bathrooms" : " bathroom") : "";
 
 	return (
 		<div className="position-relative">

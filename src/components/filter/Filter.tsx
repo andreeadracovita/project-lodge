@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Eraser } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
@@ -11,10 +11,16 @@ import FilterFeature from "./FilterFeature";
 import FilterExperience from "./FilterExperience";
 import FilterDistance from "./FilterDistance";
 
-export default function Filter({ city, lowestPrice, highestPrice }) {
+type FilterProps = {
+	city?: string,
+	lowestPrice?: number,
+	highestPrice?: number
+};
+
+export default function Filter({ city, lowestPrice, highestPrice }: FilterProps) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [filter, setFilter] = useState({
+	const [filter, setFilter] = useState<any>({
 		beds: searchParams.get("beds") ?? 1,
 		bedrooms: searchParams.get("bedrooms") ?? 1,
 		bathrooms: searchParams.get("bathrooms") ?? 1,
@@ -27,7 +33,7 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 
 	function handleInputChange(event: any) {
 		const { name, value } = event.target;
-		setFilter(prevValue => {
+		setFilter((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value
@@ -39,15 +45,15 @@ export default function Filter({ city, lowestPrice, highestPrice }) {
 
 	function updateMultiselectParams(event: any) {
 		const { name, value } = event.target;
-		const item = parseInt(event.target.value);
+		const item = parseInt(value);
 
 		let newValues = filter[name];
 		if (newValues.includes(item)) {
-			newValues = newValues.filter(val => val !== item);
+			newValues = newValues.filter((val: number) => val !== item);
 		} else {
 			newValues.push(item);
 		}
-		setFilter(prevValue => {
+		setFilter((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: newValues

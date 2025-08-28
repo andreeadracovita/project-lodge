@@ -1,15 +1,22 @@
 import classNames from "classnames";
-import { useState } from "react";
 
 import { capitalizeFirstLetter } from "utils/stringUtils";
+
+type MultiselectProps = {
+	options: string[],
+	selectedIds: number[],
+	handleChange: any,
+	isEditable: boolean,
+	iconMap?: any
+};
 
 /**
  * Options are an array of objects with id and name: [ {id, name}, {id, name}, ...];
  * Examples: Features, Experiences
  */
-export default function Multiselect({ options, selectedIds, handleChange, isEditable, iconMap }) {
+export default function Multiselect({ options, selectedIds, handleChange, isEditable, iconMap }: MultiselectProps) {
 
-	function isIdSelected(id) {
+	function isIdSelected(id: number): boolean {
 		if (!selectedIds) {
 			return false;
 		}
@@ -23,8 +30,8 @@ export default function Multiselect({ options, selectedIds, handleChange, isEdit
 			<>
 				<div id="selected" className="d-flex flex-wrap">
 				{
-					selectedIds.map((id) => {
-						const found = options.find(opt => opt.id == id);
+					selectedIds.map((id: number) => {
+						const found: any = options.find((opt: any) => opt.id == id);
 						if (found) {
 							return <div
 								key={found.id}
@@ -51,7 +58,7 @@ export default function Multiselect({ options, selectedIds, handleChange, isEdit
 					isEditable &&
 					<div id="unselected" className="d-flex flex-wrap">
 						{
-							options && options.map(opt => 
+							options && options.map((opt: any) => 
 								<div
 									key={opt.id}
 									id={opt.id}

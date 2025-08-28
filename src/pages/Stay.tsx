@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { GeoAltFill } from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
@@ -15,11 +16,16 @@ import { fileStorage } from "utils/constants";
 export default function Stay() {
 	const [searchParams] = useSearchParams();
 	const [property, setProperty] = useState<any>();
+	const navigate = useNavigate();
 
 	const id = searchParams.get("id");
 
 	useEffect(() => {
-		getPropertyById(id)
+		if (!id) {
+			navigate("/");
+			return;
+		}
+		getPropertyById(parseInt(id))
 			.then(response => {
 				if (response.data) {
 					setProperty(response.data);

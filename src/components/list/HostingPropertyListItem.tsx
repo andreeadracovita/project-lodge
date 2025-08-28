@@ -5,14 +5,14 @@ import { deletePropertyById, updateProperty } from "api/BackendApiService";
 import { fileStorage } from "utils/constants";
 
 type HostingPropertyListItemProps = {
-	item: PropertyItem,
-	setNeedsRefresh: () => void
+	item: any,
+	setNeedsRefresh: any
 };
 
 // Component used for rendering a compact property item
 export default function HostingPropertyListItem({ item, setNeedsRefresh }: HostingPropertyListItemProps) {
 	const navigate = useNavigate();
-	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : null;
+	const imgUrl = item.images_url_array?.length > 0 ? fileStorage + item.images_url_array[0] : undefined;
 
 	function handleDeleteClick() {
 		deletePropertyById(item.id)

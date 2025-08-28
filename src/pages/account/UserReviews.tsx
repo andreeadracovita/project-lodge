@@ -36,7 +36,7 @@ export default function UserReviews() {
 			<h1 className="page-heading">Reviews</h1>
 			<div>
 			{
-				reviews.map((review, i) => <UserPageReviewItem key={i} reviewData={review} setNeedsRefresh={setNeedsRefresh} />)
+				reviews.map((review: any, i: number) => <UserPageReviewItem key={i} reviewData={review} setNeedsRefresh={setNeedsRefresh} />)
 			}
 			</div>
 		</div>

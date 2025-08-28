@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 import { getCalendarBookingsForPropertyId } from "api/BackendApiService";
 import HostingCalendarMonth from "components/hosting/HostingCalendarMonth";
 
-function createBookedTag(dayElementId, tagText) {
+function createBookedTag(dayElementId: number, tagText: string) {
 	const dayElement = document.getElementById(`${dayElementId}`);
 	if (dayElement) {
 		const tag = document.createElement("div");
@@ -20,7 +20,7 @@ function createBookedTag(dayElementId, tagText) {
 	}
 }
 
-function attachBookingTagsToDays(bookings) {
+function attachBookingTagsToDays(bookings: any[]) {
 	for (let booking of bookings) {
 		const checkIn = new Date(booking.check_in);
 		const checkInId = checkIn.getFullYear() * 10000 + checkIn.getMonth() * 100 + checkIn.getDate();
@@ -47,14 +47,12 @@ function attachBookingTagsToDays(bookings) {
  * - Check-out
  */
 export default function HostingCalendarView() {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const [selectedPropId, setSelectedPropId] = useState();
-	const [bookings, setBookings] = useState([]);
+	const [searchParams] = useSearchParams();
+	const [selectedPropId, setSelectedPropId] = useState<number | undefined>();
 	const [isFocused, setIsFocused] = useState(false);
 
 	const currentYear = new Date().getFullYear();
 	const currentMonth = new Date().getMonth();
-	const years = [currentYear - 1, currentYear, currentYear + 1];
 	const months = [];
 	for (let year = currentYear - 1; year < currentYear + 2; year++) {
 		for (let m = 0; m < 12; m++) {
@@ -64,19 +62,17 @@ export default function HostingCalendarView() {
 
 	useEffect(() => {
 		setIsFocused(true);
-		focusToday(currentYear, currentMonth);
+		focusToday();
 	}, [!isFocused && document.getElementById(`${currentYear*100+currentMonth}`)]);
 
 	useEffect(() => {
-		setSelectedPropId(searchParams.get("id"));
-	}, [searchParams.get("id") && searchParams.get("id") !== selectedPropId]);
+		setSelectedPropId(searchParams.get("id") ? parseInt(searchParams.get("id") || "0") : undefined);
+	}, [searchParams.get("id") && parseInt(searchParams.get("id") || "0") !== selectedPropId]);
 
 	useEffect(() => {
 		if (selectedPropId) {
 			getCalendarBookingsForPropertyId(selectedPropId)
 				.then(response => {
-					setBookings(response.data);
-
 					// Clear previously attached divs by className
 					const bookedElements = Array.from(document.getElementsByClassName("booked-tag"));
 					if (bookedElements.length > 0) {

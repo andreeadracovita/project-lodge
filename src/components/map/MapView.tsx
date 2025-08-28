@@ -24,9 +24,9 @@ import { genericMapCenter } from "utils/constants";
 
 type MapViewProps = {
 	id: string,
-	height: any,
+	height: number,
 	center: any,
-	zoom: any,
+	zoom: number,
 	boundingbox: any,
 	points: any,
 	isEditable: boolean,
@@ -60,12 +60,13 @@ export default function MapView({
 		previousCursor_: any;
 
 		constructor() {
-			super({
-				handleDownEvent: handleDownEvent,
-				handleDragEvent: handleDragEvent,
-				handleMoveEvent: handleMoveEvent,
-				handleUpEvent: handleUpEvent,
-			});
+			// super({
+			// 	handleDownEvent: handleDownEvent,
+			// 	handleDragEvent: handleDragEvent,
+			// 	handleMoveEvent: handleMoveEvent,
+			// 	handleUpEvent: handleUpEvent,
+			// });
+			super();
 
 			/**
 			* @type {import('ol/coordinate.js').Coordinate}
@@ -91,71 +92,71 @@ export default function MapView({
 			*/
 			this.previousCursor_ = undefined;
 		}
-	}
 
-	/**
-	 * @param {import('ol/MapBrowserEvent.js').default} evt Map browser event.
-	 * @return {boolean} `true` to start the drag sequence.
-	 */
-	function handleDownEvent(evt: any) {
-		const map = evt.map;
-
-		const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature: any) {
-			return feature;
-		});
-
-		if (feature) {
-			this.coordinate_ = evt.coordinate;
-			this.feature_ = feature;
-		}
-
-		return !!feature;
-	}
-
-	/**
-	 * @param {import('ol/MapBrowserEvent.js').default} evt Map browser event.
-	 */
-	function handleDragEvent(evt: any) {
-		const deltaX = evt.coordinate[0] - this.coordinate_[0];
-		const deltaY = evt.coordinate[1] - this.coordinate_[1];
-
-		const geometry = this.feature_.getGeometry();
-		geometry.translate(deltaX, deltaY);
-
-		this.coordinate_[0] = evt.coordinate[0];
-		this.coordinate_[1] = evt.coordinate[1];
-	}
-
-	/**
-	 * @param {import('ol/MapBrowserEvent.js').default} evt Event.
-	 */
-	function handleMoveEvent(evt: any) {
-		if (this.cursor_) {
+		/**
+		 * @param {import('ol/MapBrowserEvent.js').default} evt Map browser event.
+		 * @return {boolean} `true` to start the drag sequence.
+		 */
+		public handleDownEvent(evt: any) {
 			const map = evt.map;
+
 			const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature: any) {
 				return feature;
 			});
-			const element = evt.map.getTargetElement();
+
 			if (feature) {
-				if (element.style.cursor != this.cursor_) {
-					this.previousCursor_ = element.style.cursor;
-					element.style.cursor = this.cursor_;
+				this.coordinate_ = evt.coordinate;
+				this.feature_ = feature;
+			}
+
+			return !!feature;
+		}
+
+		/**
+		 * @param {import('ol/MapBrowserEvent.js').default} evt Map browser event.
+		 */
+		public handleDragEvent(evt: any) {
+			const deltaX = evt.coordinate[0] - this.coordinate_[0];
+			const deltaY = evt.coordinate[1] - this.coordinate_[1];
+
+			const geometry = this.feature_.getGeometry();
+			geometry.translate(deltaX, deltaY);
+
+			this.coordinate_[0] = evt.coordinate[0];
+			this.coordinate_[1] = evt.coordinate[1];
+		}
+
+		/**
+		 * @param {import('ol/MapBrowserEvent.js').default} evt Event.
+		 */
+		public handleMoveEvent(evt: any) {
+			if (this.cursor_) {
+				const map = evt.map;
+				const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature: any) {
+					return feature;
+				});
+				const element = evt.map.getTargetElement();
+				if (feature) {
+					if (element.style.cursor != this.cursor_) {
+						this.previousCursor_ = element.style.cursor;
+						element.style.cursor = this.cursor_;
+					}
+				} else if (this.previousCursor_ !== undefined) {
+					element.style.cursor = this.previousCursor_;
+					this.previousCursor_ = undefined;
 				}
-			} else if (this.previousCursor_ !== undefined) {
-				element.style.cursor = this.previousCursor_;
-				this.previousCursor_ = undefined;
 			}
 		}
-	}
 
-	/**
-	 * @return {boolean} `false` to stop the drag sequence.
-	 */
-	function handleUpEvent(_evt: any) {
-		updatePinPosition([this.coordinate_[1], this.coordinate_[0]]);
-		this.coordinate_ = null;
-		this.feature_ = null;
-		return false;
+		/**
+		 * @return {boolean} `false` to stop the drag sequence.
+		 */
+		public handleUpEvent(_evt: any) {
+			updatePinPosition([this.coordinate_[1], this.coordinate_[0]]);
+			this.coordinate_ = null;
+			this.feature_ = null;
+			return false;
+		}
 	}
 
 	// If markCenter, create singular pin to position location on map with drag action
@@ -172,7 +173,7 @@ export default function MapView({
 		}),
 	});
 
-	const priceTagStyle = [
+	const priceTagStyle: any = [
 		new Style({
 			image: new RegularShape({
 				fill: new Fill({
@@ -199,15 +200,6 @@ export default function MapView({
 		})
 	];
 
-	// const labelStyle = new Style({
-	// 	text: new Text({
-	// 		font: 'bold 13px Calibri,sans-serif',
-	// 		fill: new Fill({
-	// 			color: '#fff',
-	// 		}),
-	// 	}),
-	// });
-
 	useEffect(() => {
 		if (!id) {
 			return;
@@ -215,12 +207,12 @@ export default function MapView({
 
 		useGeographic();
 
-		const features = [];
+		const features: any[] = [];
 		if (points.length > 0) {
-			const olIds = [];
-			points.forEach(p => {
+			const olIds: any = [];
+			points.forEach((p: any[]) => {
 				const point = new Point([p[1], p[0]]);
-				const feature = new Feature(point);
+				const feature: any = new Feature(point);
 				olIds.push(feature.ol_uid);
 				features.push(feature);
 			});
@@ -229,7 +221,7 @@ export default function MapView({
 			}
 		}
 
-		let style = [];
+		let style: any[] = [];
 		if (shouldShowText) {
 			style = priceTagStyle;
 		} else {
@@ -252,7 +244,7 @@ export default function MapView({
 						features: features,
 					}),
 					style: function (feature: any) {
-						if (shouldShowText) {
+						if (shouldShowText && priceTagStyle.length > 1) {
 							priceTagStyle[1]
 								.getText()
 								.setText([priceMap.get(feature.ol_uid), '']);
@@ -265,35 +257,34 @@ export default function MapView({
 
 		// Compute width as 100% of its parent
 		const width = document.getElementById(id)?.parentElement?.clientWidth;
-		map.setSize([width, height]);
-
+		if (width && height) {
+			map.setSize([width, height]);
+		}
+		
 		if (boundingbox) {
 			var view = map.getView();
-			// Extent: minx, miny, maxx, maxy
-			// view.fit(boundingbox, {padding: [0, 0, 0, 0]});
 			const min = [boundingbox[2], boundingbox[0]];
 			const max = [boundingbox[3], boundingbox[1]];
 			var boundingExtent = olExtent.boundingExtent([min, max]);
-			// let res = view.getResolution();
-			view.fit(boundingExtent); //, map.getSize(), {padding: [0, 0, 0, 0]}
-			const res = view.getResolutionForExtent(boundingExtent, [width, height]);
+			view.fit(boundingExtent);
+			const res = view.getResolutionForExtent(boundingExtent, [width || 0, height]);
 			view.setResolution(res);
 		}
 
 		if (handleHighlightItem) {
-			let selected: any = null;
-			map.on("pointerup", function (event: any) {
-				if (selected !== null) {
-					// selected.setStyle(undefined);
-					selected = null;
-				}
+			// let selected: any = null;
+			// map.on("pointerup", function (event: any) {
+			// 	if (selected !== null) {
+			// 		selected = null;
+			// 	}
 
-				map.forEachFeatureAtPixel(event.pixel, function (feature: any) {
-					selected = feature;
-					handleHighlightItem(selected.ol_uid);
-					return true;
-				});
-			});
+			// 	map.forEachFeatureAtPixel(event.pixel, function (feature: any) {
+			// 		selected = feature;
+			// 		handleHighlightItem(selected.ol_uid);
+			// 		return true;
+			// 	});
+			// });
+			console.log("Clicked");
 		}
 		
 		return () => {

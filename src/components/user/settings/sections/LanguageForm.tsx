@@ -8,7 +8,7 @@ import { useAuth } from "components/security/AuthContext";
 import { availableLanguages } from "utils/constants";
 
 type LanguageFormProps = {
-	value: string | undefined,
+	value?: string,
 	isFocused: boolean,
 	showSectionHandler: any,
 	clearSectionHandler: any
@@ -16,7 +16,7 @@ type LanguageFormProps = {
 
 export default function LanguageForm({ value, isFocused, showSectionHandler, clearSectionHandler }: LanguageFormProps) {
 	const authContext: any = useAuth();
-	const [language, setLanguage] = useState(authContext.language);
+	const [language, setLanguage] = useState<string | undefined>(authContext.language);
 	const [errors, setErrors] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -42,7 +42,7 @@ export default function LanguageForm({ value, isFocused, showSectionHandler, cle
 
 	function handleSubmit(event: any): void {
 		event.preventDefault();
-		updateUser({ language: language })
+		updateUser({ language })
 			.then(() => {
 				if (errors) {
 					setErrors(errors);
@@ -76,7 +76,7 @@ export default function LanguageForm({ value, isFocused, showSectionHandler, cle
 								onChange={handleChange}
 							>
 								{
-									availableLanguages.map((l, i) => 
+									availableLanguages.map((l: any, i: number) => 
 										<option key={i} value={l.value}>{l.label}</option>
 									)
 								}
@@ -86,8 +86,8 @@ export default function LanguageForm({ value, isFocused, showSectionHandler, cle
 						: <span>
 							{
 								value 
-								? availableLanguages.find(l => l.value === value)?.label
-								: availableLanguages.find(l => l.value === authContext.language)?.label
+								? availableLanguages.find((l: any) => l.value === value)?.label
+								: availableLanguages.find((l: any) => l.value === authContext.language)?.label
 							}
 						</span>
 					}

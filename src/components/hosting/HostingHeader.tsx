@@ -4,17 +4,20 @@ import { Link } from "react-router-dom";
 export const HostingTab = {
 	Dashboard: "Dashboard",
 	Calendar: "Calendar",
-	Properties: "Properties",
-	Messages: "Messages"
+	Properties: "Properties"
 } as const;
 export type HostingTab = (typeof HostingTab)[keyof typeof HostingTab];
 
-export default function HostingHeader({ current }) {
+type HostingHeaderProps = {
+	current: HostingTab
+};
+
+export default function HostingHeader({ current }: HostingHeaderProps) {
 	function getClassNames(tab: HostingTab) {
 		return classNames(
 			"btn-pill-hover-only",
+			"me-4",
 			{
-				"me-4": tab !== HostingTab.Messages,
 				"selected-tab": current === tab
 			}
 		);

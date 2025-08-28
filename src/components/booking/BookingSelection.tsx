@@ -7,12 +7,15 @@ import BookingDetailSection from "components/booking/BookingDetailSection";
 import BookingPriceSection from "components/booking/BookingPriceSection";
 
 export default function BookingSelection() {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [property, setProperty] = useState();
 	const propertyId = searchParams.get("id");
 
 	useEffect(() => {
-		getPropertyById(propertyId)
+		if (!propertyId) {
+			return;
+		}
+		getPropertyById(parseInt(propertyId))
 			.then(response => {
 				if (response.data) {
 					setProperty(response.data);

@@ -1,6 +1,11 @@
 import { capitalizeFirstLetter } from "utils/stringUtils";
+import { featuresIconMap } from "utils/mappings";
 
-export default function Feature({ name, isLarge }) {
+type FeatureProps = {
+	name: string
+};
+
+export default function Feature({ name }: FeatureProps) {
 	
 	return (
 		<span className="d-flex align-items-center">

@@ -10,9 +10,9 @@ type DestinationItem = {
 
 type DestinationListItemProps = {
 	item: DestinationItem;
-	checkIn: string; // formatted string 2025-04-10
-	checkOut: string; // formatted string 2025-04-10
-	guests: number;
+	checkIn?: string; // formatted string 2025-04-10
+	checkOut?: string; // formatted string 2025-04-10
+	guests?: number;
 };
 
 export default function DestinationListItem({ item, checkIn, checkOut, guests }: DestinationListItemProps) {

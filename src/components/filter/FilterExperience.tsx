@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { getAllExperiences } from "api/BackendApiService";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
-export default function FilterExperience({ filterData, updateMultiselectParams }) {
+type FilterExperienceProps = {
+	filterData: any,
+	updateMultiselectParams: any
+};
+
+export default function FilterExperience({ filterData, updateMultiselectParams }: FilterExperienceProps) {
 	const [experiences, setExperiences] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +26,7 @@ export default function FilterExperience({ filterData, updateMultiselectParams }
 			<div className="text-bold">Experiences in the area</div>
 			<div className="mt-10">
 			{
-				experiences.map((exp, i) => 
+				experiences.map((exp: any, i: number) => 
 					<div key={i} className="form-check">
 						<input
 							id={"exp-" + exp.name}

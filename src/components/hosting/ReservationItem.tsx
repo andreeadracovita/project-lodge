@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 
 import { weekdayMonYear } from "utils/dateUtils";
 
-export default function ReservationItem({ item }) {
+type ReservationItemProps = {
+	item: any
+};
+
+export default function ReservationItem({ item }: ReservationItemProps) {
 	
 	return (
 		<Link to={`/booking?id=${item.id}&pin=${item.pin_code}`}>

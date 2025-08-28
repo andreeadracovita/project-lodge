@@ -21,10 +21,10 @@ export default function ReviewForm({ propertyId }: ReviewFormProps) {
 	const [errors, setErrors] = useState<string[]>([]);
 	const bookingId = searchParams.get("booking_id");
 
-	function handleChange(event: any) {
+	function handleChange(event: any): void {
 		const { value, name } = event.target;
 
-		setInput((prevValue) => {
+		setInput((prevValue: any) => {
 			return {
 				...prevValue,
 				[name]: value
@@ -32,7 +32,7 @@ export default function ReviewForm({ propertyId }: ReviewFormProps) {
 		});
 	}
 
-	function handleSubmit(event: any) {
+	function handleSubmit(event: any): void {
 		event.preventDefault();
 		if (!bookingId) {
 			return;
@@ -43,7 +43,7 @@ export default function ReviewForm({ propertyId }: ReviewFormProps) {
 			body: input.body,
 			property_id: propertyId
 		};
-		addReviewForBookingId(bookingId, payload)
+		addReviewForBookingId(parseInt(bookingId), payload)
 			.then(response => {
 				const errors = response.data.errors;
 				if (errors) {

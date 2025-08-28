@@ -73,6 +73,7 @@ export default function Home() {
 							checkIn={checkInParam}
 							checkOut={checkOutParam}
 							guests={guests}
+							nightsCount={nightsCount}
 						/>
 					</div>
 					<div className="d-block d-md-none">
@@ -100,7 +101,7 @@ export default function Home() {
 						checkOut={checkOutParam}
 						guests={guests}
 						cols={4}
-						nightsCount={undefined}
+						nightsCount={nightsCount}
 						setNeedsRefresh={undefined}
 						isCompact={undefined}
 					/>
@@ -114,6 +115,7 @@ export default function Home() {
 						items={propertyTypes}
 						checkIn={checkInParam}
 						checkOut={checkOutParam}
+						nightsCount={nightsCount}
 						guests={guests}
 					/>
 				</div>

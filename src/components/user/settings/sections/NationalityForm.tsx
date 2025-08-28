@@ -7,7 +7,7 @@ import FormError from "components/common/FormError";
 import { updateUser } from "api/BackendApiService";
 
 type NationalityFormProps = {
-	value: string | null,
+	value?: string,
 	isFocused: boolean,
 	showSectionHandler: any,
 	clearSectionHandler: any,

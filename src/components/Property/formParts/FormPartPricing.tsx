@@ -9,7 +9,7 @@ type FormPartPricingProps = {
 	isEditable: boolean,
 	showButton: boolean,
 	input: any,
-	propertyId: number | undefined,
+	propertyId: number,
 	handleChange: any,
 	advanceState: any
 };

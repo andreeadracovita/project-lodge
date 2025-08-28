@@ -1,12 +1,18 @@
 import classNames from "classnames";
-import { useEffect } from "react";
 
 import "./HostingCalendarDay.css";
 import { compareDates } from "utils/dateUtils";
 
-export default function HostingCalendarDay({ id, year, month, day }) {
+type HostingCalendarDayProps = {
+	id: number,
+	year: number,
+	month: number,
+	day: number
+};
 
-	function isPastDate(dayIndex) {
+export default function HostingCalendarDay({ id, year, month, day }: HostingCalendarDayProps) {
+
+	function isPastDate(dayIndex: number) {
 		const date = new Date(year, month, dayIndex);
 		if (compareDates(date, new Date()) < 0) {
 			return true;
@@ -27,7 +33,7 @@ export default function HostingCalendarDay({ id, year, month, day }) {
 	
 	return (
 		<div
-			id={id}
+			id={String(id)}
 			className={containerClass}
 		>
 			<div className="w-100 d-flex justify-content-between">

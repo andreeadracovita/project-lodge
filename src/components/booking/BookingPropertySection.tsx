@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
 import countries from "react-select-country-list";
 
 import { getAllFeatures } from "api/BackendApiService";
 import Rating from "components/common/Rating";
 import Feature from "components/common/Feature";
 
-export default function BookingPropertySection({ item }) {
-	const [searchParams, setSearchParams] = useSearchParams();
+type BookingPropertySectionProps = {
+	item: any
+};
+
+export default function BookingPropertySection({ item }: BookingPropertySectionProps) {
 	const [features, setFeatures] = useState([]);
 
 	useEffect(() => {
@@ -31,11 +33,11 @@ export default function BookingPropertySection({ item }) {
 			</div>
 			<div id="features-section" className="mt-6 d-flex flex-wrap">
 				{
-					item.features_ids.map((id, i) => {
-						const foundFeature = features.find(feat => feat.id == id);
+					item.features_ids.map((id: number, i: number) => {
+						const foundFeature: any = features.find((feat: any) => feat.id == id);
 						if (foundFeature) {
 							return <div key={i} className="me-2">
-								<Feature name={foundFeature.name} isLarge={false} />
+								<Feature name={foundFeature.name} />
 							</div>
 						}
 					})

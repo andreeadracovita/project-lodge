@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { getAllRentalTypes } from "api/BackendApiService";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 
-export default function FilterRentalType({ filterData, updateMultiselectParams }) {
+type FilterRentalTypeProps = {
+	filterData: any,
+	updateMultiselectParams: any
+};
+
+export default function FilterRentalType({ filterData, updateMultiselectParams }: FilterRentalTypeProps) {
 	const [rentalTypes, setRentalTypes] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +26,7 @@ export default function FilterRentalType({ filterData, updateMultiselectParams }
 			<div className="text-bold">Rental type</div>
 			<div className="mt-10">
 			{
-				rentalTypes.map((rtype, i) => 
+				rentalTypes.map((rtype: any, i: number) => 
 					<div key={i} className="form-check">
 						<input
 							id={"rtype-" + rtype.name}

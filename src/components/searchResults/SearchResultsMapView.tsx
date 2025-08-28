@@ -27,8 +27,8 @@ export default function SearchResultsMapView({
 	const [points, setPoints] = useState<any[]>([]);
 	const olIdToCardIdMap = new Map();
 	const olIdToPriceMap = new Map();
-	const checkInParam = searchParams.get("check_in");
-	const checkOutParam = searchParams.get("check_out");
+	const checkInParam = searchParams.get("check_in") || undefined;
+	const checkOutParam = searchParams.get("check_out") || undefined;
 	const guests = parseInt(searchParams.get("guests") || "1");
 
 	useEffect(() => {

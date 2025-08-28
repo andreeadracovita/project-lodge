@@ -4,7 +4,12 @@ import "./ReservationsSection.css";
 import { ReservationsTab } from "components/hosting/ReservationTab";
 import ReservationItem from "components/hosting/ReservationItem";
 
-export default function ReservationsSection({ tab, items }) {
+type ReservationsSectionProps = {
+	tab: ReservationsTab,
+	items: any[]
+};
+
+export default function ReservationsSection({ tab, items }: ReservationsSectionProps) {
 	
 	function getFreeMessage() {
 		if (items.length === 0) {
@@ -31,7 +36,7 @@ export default function ReservationsSection({ tab, items }) {
 				items.length > 0 &&
 				<div className="row row-cols-4">
 					{
-						items.map((item, i) => {
+						items.map((item: any, i: number) => {
 							return <ReservationItem key={i} item={item} />
 						})
 					}

@@ -7,7 +7,7 @@ import PropertyPhotoGrid from "components/stay/PropertyPhotoGrid";
 
 type FormPartPhotosProps = {
 	input: any,
-	propertyId: number | undefined,
+	propertyId: number,
 	handleChangePhotos: any,
 	setImagesUrlArray: any,
 	advanceState: any

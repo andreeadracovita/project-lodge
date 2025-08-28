@@ -57,7 +57,7 @@ export default function PropertyDescription({ property }: PropertyDescriptionPro
 					property.features_ids.map((id: number, i: number) => {
 						const foundFeature: any = features.find((feat: any) => feat.id == id);
 						if (foundFeature) {
-							return <span key={i} className="mt-10"><Feature name={foundFeature.name} isLarge={true} /></span>
+							return <span key={i} className="mt-10"><Feature name={foundFeature.name} /></span>
 						}
 					})
 				}

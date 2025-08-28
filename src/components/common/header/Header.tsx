@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Header.css";
@@ -29,7 +28,7 @@ export default function Header() {
 							</div>
 							<ul className="dropdown-menu dropdown-menu-end text-small">
 							{
-								availableCurrencies.map((currency, i) => 
+								availableCurrencies.map((currency: string, i: number) => 
 									<li key={i}>
 										<span
 											className="dropdown-item cursor-pointer"
@@ -52,7 +51,7 @@ export default function Header() {
 							<div className="dropdown">
 								<div id="dropdown-button" role="button" className="d-flex rounded-pill user-account-button px-2 py-1" data-bs-toggle="dropdown">
 									<object data="/icons/menu.svg" type="image/svg+xml" width="32" height="32" role="img" aria-label="menu icon"></object>
-									<Avatar size={32} url={authContext.avatar} firstName={authContext.firstName} />
+									<Avatar size={32} url={authContext.avatar} firstName={authContext.firstName} previewAvatar={undefined} />
 								</div>
 								
 								<ul className="dropdown-menu dropdown-menu-end text-small">
