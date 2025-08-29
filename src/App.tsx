@@ -1,30 +1,30 @@
 import { Routes, Route } from "react-router-dom";
 
-import AuthProvider from "./components/security/AuthContext";
-import RequireAuth from "./components/security/RequireAuth";
-import Header from "./components/common/header/Header";
-import Footer from "./components/common/Footer";
+import AuthProvider from "components/security/AuthContext";
+import RequireAuth from "components/security/RequireAuth";
+import Header from "components/common/header/Header";
+import Footer from "components/common/Footer";
 
-import Home from "./pages/Home";
-import Stay from "./pages/Stay";
-import Book from "./pages/Book";
-import Booking from "./pages/Booking";
-import SearchResults from "./pages/SearchResults";
-import SignupLogin from "./pages/SignupLogin";
+import Home from "pages/Home";
+import Stay from "pages/Stay";
+import Book from "pages/Book";
+import Booking from "pages/Booking";
+import SearchResults from "pages/SearchResults";
+import SignupLogin from "pages/SignupLogin";
 
-import Account from "./pages/account/Account";
-import Settings from "./pages/account/Settings";
-import Trips from "./pages/account/Trips";
-import Wishlist from "./pages/account/Wishlist";
-import Review from "./pages/account/Review";
-import UserReviews from "./pages/account/UserReviews";
+import Account from "pages/account/Account";
+import Settings from "pages/account/Settings";
+import Trips from "pages/account/Trips";
+import Wishlist from "pages/account/Wishlist";
+import Review from "pages/account/Review";
+import UserReviews from "pages/account/UserReviews";
 
-import HostingDashboard from "./pages/hosting/HostingDashboard";
-import Properties from "./pages/hosting/Properties";
-import PropertyEdit from "./pages/hosting/PropertyEdit";
-import HostingCalendar from "./pages/hosting/HostingCalendar";
+import HostingDashboard from "pages/hosting/HostingDashboard";
+import Properties from "pages/hosting/Properties";
+import PropertyEdit from "pages/hosting/PropertyEdit";
+import HostingCalendar from "pages/hosting/HostingCalendar";
 
-import NoMatch from "./pages/NoMatch";
+import NoMatch from "pages/NoMatch";
 
 import "./App.css";
 
