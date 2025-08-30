@@ -104,6 +104,16 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 			if (response.status === 200) {
 				const jwtToken = "Bearer " + response.data.token;
 
+				apiClient.interceptors.request.use(
+					config => {
+						config.headers.authorization = jwtToken;
+						return config;
+					},
+					error => {
+						return Promise.reject(error);
+					}
+				);
+
 				setIsAuthenticated(true);
 				sessionStorage.setItem("lodgeIsAuthenticated", "true");
 
@@ -113,12 +123,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 				setToken(jwtToken);
 				sessionStorage.setItem("lodgeToken", jwtToken);
 
-				apiClient.interceptors.request.use(
-					(config) => {
-						config.headers.Authorization = jwtToken;
-						return config;
-					}
-				)
 				await setUserConfig();
 
 				return true;
