@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import "ol/ol.css";
-import Map from "ol/map";
-import View from "ol/View";
-import TileLayer from "ol/layer/tile";
-import OSM from "ol/source/OSM";
-import {useGeographic} from "ol/proj";
+import Map from "ol/Map.js";
+import View from "ol/View.js";
+import TileLayer from "ol/layer/Tile.js";
+import OSM from "ol/source/OSM.js";
+import { useGeographic } from "ol/proj.js";
 import VectorSource from "ol/source/Vector.js";
 import VectorLayer from "ol/layer/Vector.js";
 import Point from "ol/geom/Point.js";
@@ -14,10 +14,10 @@ import Style from "ol/style/Style.js";
 import CircleStyle from "ol/style/Circle.js";
 import Text from "ol/style/Text.js";
 import Feature from "ol/Feature.js";
-import {defaults as defaultInteractions} from "ol/interaction/defaults.js";
+import { defaults as defaultInteractions } from "ol/interaction/defaults.js";
 import PointerInteraction from "ol/interaction/Pointer.js";
 import RegularShape from "ol/style/RegularShape.js";
-import * as olExtent from "ol/extent";
+import * as olExtent from "ol/extent.js";
 
 import "./MapView.css";
 import { genericMapCenter } from "utils/constants";
