@@ -1,0 +1,7 @@
+.selected-feature {
+	background-color: var(--light-brand-color);
+}
+
+.selectable-item {
+  cursor: pointer;
+}

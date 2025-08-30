@@ -1,0 +1,53 @@
+.cursor-pointer:hover {
+	cursor: pointer;
+}
+
+.day-initial {
+	color: var(--medium-grey);
+}
+
+.days-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.calendar-day {
+	display: flex;
+	justify-content: center;
+}
+
+.start-end-checked {
+	display: block;
+	background: var(--brand-color);
+	border-radius: 50rem;
+	width: 100%;
+	color: white;
+}
+
+.start-highlight {
+	border-bottom-left-radius: 50rem;
+	border-top-left-radius: 50rem;
+	background: var(--light-brand-color);
+}
+
+.end-highlight {
+	border-bottom-right-radius: 50rem;
+	border-top-right-radius: 50rem;
+	background: var(--light-brand-color);
+}
+
+.highlight {
+	background: var(--light-brand-color);
+}
+
+.day-selection-highlight:hover {
+	display: block;
+	background: var(--light-brand-color);
+	border-radius: 50rem;
+	width: 100%;
+}
+
+.unavailable {
+	color: var(--light-grey);
+	text-decoration: line-through;
+}

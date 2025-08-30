@@ -1,0 +1,26 @@
+.photo-carousel-item {
+	height: 600px;
+}
+
+.carousel-inner {
+	text-align: center;
+}
+
+#photos-modal .modal-dialog {
+	min-width: 96%;
+}
+
+#photos-modal .carousel-item img {
+	display: block;
+	margin: auto;
+}
+
+#thumbnails-container {
+	overflow-x: scroll;
+}
+
+.thumbnail {
+	height: 100px;
+	object-fit: cover;
+	cursor: pointer;
+}
