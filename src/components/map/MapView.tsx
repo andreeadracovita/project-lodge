@@ -272,19 +272,18 @@ export default function MapView({
 		}
 
 		if (handleHighlightItem) {
-			// let selected: any = null;
-			// map.on("pointerup", function (event: any) {
-			// 	if (selected !== null) {
-			// 		selected = null;
-			// 	}
+			let selected: any = null;
+			map.on("click", function (event: any) {
+				if (selected !== null) {
+					selected = null;
+				}
 
-			// 	map.forEachFeatureAtPixel(event.pixel, function (feature: any) {
-			// 		selected = feature;
-			// 		handleHighlightItem(selected.ol_uid);
-			// 		return true;
-			// 	});
-			// });
-			console.log("Clicked");
+				map.forEachFeatureAtPixel(event.pixel, function (feature: any) {
+					selected = feature;
+					handleHighlightItem(selected.ol_uid);
+					return true;
+				});
+			});
 		}
 		
 		return () => {
