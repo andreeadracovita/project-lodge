@@ -22,7 +22,6 @@ export default function UserReviews() {
 			setNeedsRefresh(false);
 			getAllReviewsByLoggedUser()
 				.then(response => {
-					console.log("refresh reviews");
 					setReviews(response.data);
 				})
 				.catch(error => {

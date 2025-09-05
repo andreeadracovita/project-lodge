@@ -46,13 +46,13 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 	const [exchangeRate, setExchangeRate] = useState(0.5);
 	const [exchangeDay, setExchangeDay] = useState((new Date()).toDateString());
 
-	if (isAuthenticated !== null) {
+	if (isAuthenticated === true) {
 		apiClient.interceptors.request.use(
 			(config) => {
-				config.headers.Authorization = token;
+				config.headers.authorization = token;
 				return config;
 			}
-		)
+		);
 	}
 
 	useEffect(() => {
@@ -68,7 +68,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 			});
 	}, [(new Date().toDateString() !== exchangeDay)]);
 
-	async function setUserConfig(): Promise<void> {
+	async function setUserConfig(): Promise<boolean> {
 		try {
 			const response = await getUserConfig();
 			if (response.status === 200) {
@@ -91,9 +91,12 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 					setLanguage(language);
 					sessionStorage.setItem("lodgeLanguage", language);
 				}
+				return true;
 			}
+			return false;
 		} catch (error) { 
 			console.error(error);
+			return false;
 		}
 	}
 
@@ -114,18 +117,21 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 					}
 				);
 
-				setIsAuthenticated(true);
-				sessionStorage.setItem("lodgeIsAuthenticated", "true");
+				const isConfiged = await setUserConfig();
+				if (isConfiged) {
+					setIsAuthenticated(true);
+					sessionStorage.setItem("lodgeIsAuthenticated", "true");
 
-				setEmail(email);
-				sessionStorage.setItem("lodgeEmail", email);
+					setEmail(email);
+					sessionStorage.setItem("lodgeEmail", email);
 
-				setToken(jwtToken);
-				sessionStorage.setItem("lodgeToken", jwtToken);
-
-				await setUserConfig();
-
-				return true;
+					setToken(jwtToken);
+					sessionStorage.setItem("lodgeToken", jwtToken);
+					
+					return true;
+				} else {
+					return false;
+				}
 			} else {
 				return false;
 			}
