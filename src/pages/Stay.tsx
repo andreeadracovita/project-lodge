@@ -45,7 +45,7 @@ export default function Stay() {
 	return (
 		<>
 			{
-				property &&
+				(id && property) &&
 				<div>
 					<div className="container section-container">
 						<div className="row">
@@ -67,11 +67,11 @@ export default function Stay() {
 							<div className="col-6 position-relative">
 								{
 									!property.is_listed &&
-									<WishlistIcon itemId={id} isPreview={true} />
+									<WishlistIcon itemId={parseInt(id)} isPreview={true} />
 								}
 								{
 									property.is_listed &&
-									<WishlistIcon itemId={id} isPreview={false} />
+									<WishlistIcon itemId={parseInt(id)} isPreview={false} />
 								}
 							</div>
 						</div>
