@@ -32,6 +32,7 @@ export default function ListView({ listItemType, items, checkIn, checkOut, night
 
 	const destinationGridClassNames = classNames(
 		"row",
+		"g-2",
 		`row-cols-${cols}`
 	);
 

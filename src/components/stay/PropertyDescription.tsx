@@ -72,7 +72,7 @@ export default function PropertyDescription({ property }: PropertyDescriptionPro
 				</>
 			}
 			<hr />
-			<h2 className="section-heading">Experiences around</h2>
+			<h2 className="section-heading">Experiences in the area</h2>
 			<div className="mt-10">
 				{
 					property.experiences_ids.map((id: number, i: number) => {

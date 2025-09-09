@@ -9,6 +9,7 @@ import PropertyPhotoGrid from "components/stay/PropertyPhotoGrid";
 import PropertyDescription from "components/stay/PropertyDescription";
 import PropertyReviews from "components/stay/PropertyReviews";
 import BookingCard from "components/stay/BookingCard";
+import WishlistIcon from "components/list/WishlistIcon";
 import BookingSectionMobile from "components/stay/BookingSectionMobile";
 import Rating from "components/common/Rating";
 import { fileStorage } from "utils/constants";
@@ -47,20 +48,32 @@ export default function Stay() {
 				property &&
 				<div>
 					<div className="container section-container">
-						<div>
-							{
-								!property.is_listed &&
-								<div className="text-muted mb-2">
-									UNPUBLISHED
-								</div>
-							}
-							<h1 className="page-heading">{property.title}</h1>
-							<p>
-								<GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
-							</p>
-							<span className="cursor-pointer" onClick={scrollToReviews}>
-								<Rating score={property.rating} reviewsNo={property.reviews_no} />
-							</span>
+						<div className="row">
+							<div className="col-6">
+								{
+									!property.is_listed &&
+									<div className="text-muted mb-2">
+										UNPUBLISHED
+									</div>
+								}
+								<h1 className="page-heading">{property.title}</h1>
+								<p>
+									<GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
+								</p>
+								<span className="cursor-pointer" onClick={scrollToReviews}>
+									<Rating score={property.rating} reviewsNo={property.reviews_no} />
+								</span>
+							</div>
+							<div className="col-6 position-relative">
+								{
+									!property.is_listed &&
+									<WishlistIcon itemId={id} isPreview={true} />
+								}
+								{
+									property.is_listed &&
+									<WishlistIcon itemId={id} isPreview={false} />
+								}
+							</div>
 						</div>
 						<div className="mt-3">
 							<PropertyPhotoGrid
