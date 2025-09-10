@@ -63,8 +63,8 @@ export default function Settings() {
 
 	return (
 		<div className="container section-container">
-			<div className="row">
-				<div className="col-4">
+			<div className="row g-2">
+				<div className="col-12 col-md-4">
 					<div id="settings-nav" className="border-section">
 						<SettingsNav
 							iconName="PersonGear"
@@ -91,7 +91,7 @@ export default function Settings() {
 						/>
 					</div>
 				</div>
-				<div id="settings-main" className="col-8">
+				<div id="settings-main" className="col-12 col-md-8">
 					{
 						activeTab === SettingsTab.Details &&
 						<PersonalDetails

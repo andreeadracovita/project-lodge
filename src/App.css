@@ -83,6 +83,10 @@ a {
 svg {
   pointer-events: none;
 }
+
+object {
+  pointer-events: none;
+}
 /* End: Tag overrides --------------------------------------------------------- */
 
 /* Start: Bootstrap overrides ------------------------------------------------- */

@@ -16,8 +16,8 @@ export default function Account() {
 
 			<div className="section-container">
 				<h2 className="section-heading">Account and preferences</h2>
-				<div className="row g-4">
-					<div className="col-4">
+				<div className="mt-6 row g-2">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="PersonGear"
 							iconSize={iconSize}
@@ -26,7 +26,7 @@ export default function Account() {
 							url={`/myaccount/settings?tab=${SettingsTab.Details}`}
 						/>
 					</div>
-					<div className="col-4">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="ShieldLock"
 							iconSize={iconSize}
@@ -35,7 +35,7 @@ export default function Account() {
 							url={`/myaccount/settings?tab=${SettingsTab.Security}`}
 						/>
 					</div>
-					<div className="col-4">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="Sliders"
 							iconSize={iconSize}
@@ -44,7 +44,7 @@ export default function Account() {
 							url={`/myaccount/settings?tab=${SettingsTab.Preferences}`}
 						/>
 					</div>
-					<div className="col-4">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="Trash3"
 							iconSize={iconSize}
@@ -58,8 +58,8 @@ export default function Account() {
 
 			<div className="section-container">
 				<h2 className="section-heading">Travel activity</h2>
-				<div className="row">
-					<div className="col-4">
+				<div className="mt-6 row g-2">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="Suitcase"
 							iconSize={iconSize}
@@ -68,7 +68,7 @@ export default function Account() {
 							url="/trips"
 						/>
 					</div>
-					<div className="col-4">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="Heart"
 							iconSize={iconSize}
@@ -77,7 +77,7 @@ export default function Account() {
 							url="/wishlist"
 						/>
 					</div>
-					<div className="col-4">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="ChatLeftText"
 							iconSize={iconSize}
@@ -91,8 +91,8 @@ export default function Account() {
 
 			<div className="section-container">
 				<h2 className="section-heading">Hosting</h2>
-				<div className="row">
-					<div className="col-4">
+				<div className="mt-6 row">
+					<div className="col-12 col-md-4">
 						<AccountCard
 							iconName="HouseGear"
 							iconSize={iconSize}

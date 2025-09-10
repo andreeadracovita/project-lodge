@@ -30,17 +30,34 @@ export default function Wishlist() {
 	return (
 		<div className="container section-container">
 			<h1 className="page-heading">Wishlist</h1>
-			<ListView
-				listItemType={ListItemType.Property}
-				items={properties}
-				checkIn={checkInParam}
-				checkOut={checkOutParam}
-				nightsCount={nightsCount}
-				cols={4}
-				isCompact={true}
-				guests={undefined}
-				setNeedsRefresh={undefined}
-			/>
+			<div className="d-none d-md-block m-2">
+				{/*Desktop*/}
+				<ListView
+					listItemType={ListItemType.Property}
+					items={properties}
+					checkIn={checkInParam}
+					checkOut={checkOutParam}
+					nightsCount={nightsCount}
+					cols={4}
+					isCompact={true}
+					guests={undefined}
+					setNeedsRefresh={undefined}
+				/>
+			</div>
+			<div className="d-block d-md-none m-2">
+				{/*Mobile*/}
+				<ListView
+					listItemType={ListItemType.SmallProperty}
+					items={properties}
+					checkIn={checkInParam}
+					checkOut={checkOutParam}
+					nightsCount={nightsCount}
+					cols={1}
+					isCompact={false}
+					guests={undefined}
+					setNeedsRefresh={undefined}
+				/>
+			</div>
 		</div>
 	);
 }

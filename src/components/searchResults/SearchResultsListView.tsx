@@ -125,20 +125,20 @@ export default function SearchResultsListView({
 						<Map color="white" />
 					</span>
 				</div>
-				<div className="dropdown mt-2">
-					<div id="dropdown-button" role="button" data-bs-toggle="dropdown" data-bs-auto-close="false">
-						<span className="btn-pill-outline">Filters <FilterIcon size={24} /></span>
-					</div>
-					<div className="dropdown-menu dropdown-menu-start">
-						<Filter
-							city={city}
-							lowestPrice={priceRange[0]}
-							highestPrice={priceRange[1]}
-						/>
-					</div>
-				</div>
 				<div className="m-2">
 					<h1 className="page-heading">{getLocationString()}: {countString} found</h1>
+					<div className="dropdown mt-2">
+						<div id="dropdown-button" role="button" data-bs-toggle="dropdown" data-bs-auto-close="false">
+							<span className="btn-pill-outline">Filters <FilterIcon size={24} /></span>
+						</div>
+						<div className="dropdown-menu dropdown-menu-start">
+							<Filter
+								city={city}
+								lowestPrice={priceRange[0]}
+								highestPrice={priceRange[1]}
+							/>
+						</div>
+					</div>
 					<div className="mt-10">
 						<ListView
 							listItemType={ListItemType.SmallProperty}
