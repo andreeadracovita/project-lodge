@@ -9,11 +9,11 @@ export default function HostingCalendar() {
 			<HostingHeader current={HostingTab.Calendar} />
 			
 			<div className="section-container">
-				<div className="section-container row">
-					<div className="col-3">
+				<div className="section-container row g-2">
+					<div className="col-12 col-md-3">
 						<HostingCalendarSettings />
 					</div>
-					<div className="col-9">
+					<div className="col-12 col-md-9">
 						<HostingCalendarView />
 					</div>
 				</div>

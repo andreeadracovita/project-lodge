@@ -161,7 +161,7 @@ export default function EditPropertyForm() {
 			"d-flex",
 			"align-items-center",
 			{
-				"brand-font-color": formState > state
+				"brand-font-color": formState >= state
 			}
 		);
 	}
@@ -175,7 +175,7 @@ export default function EditPropertyForm() {
 						? <CheckCircle size={24} />
 						: <Icon1Circle size={24} />
 					}
-					<span className="ms-2">Title and address</span>
+					<span className="ms-2 d-none d-md-block">Title and address</span>
 				</div>
 				<div style={{ width: "50px"}}><hr /></div>
 				<div className={getClassName(1)}>
@@ -184,7 +184,7 @@ export default function EditPropertyForm() {
 						? <CheckCircle size={24} />
 						: <Icon2Circle size={24} />
 					}
-					<span className="ms-2">Description</span>
+					<span className="ms-2 d-none d-md-block">Description</span>
 				</div>
 				<div style={{ width: "50px"}}><hr /></div>
 				<div className={getClassName(2)}>
@@ -193,7 +193,7 @@ export default function EditPropertyForm() {
 						? <CheckCircle size={24} />
 						: <Icon3Circle size={24} />
 					}
-					<span className="ms-2">Photos</span>
+					<span className="ms-2 d-none d-md-block">Photos</span>
 				</div>
 				<div style={{ width: "50px"}}><hr /></div>
 				<div className={getClassName(3)}>
@@ -202,7 +202,7 @@ export default function EditPropertyForm() {
 						? <CheckCircle size={24} />
 						: <Icon4Circle size={24} />
 					}
-					<span className="ms-2">Pricing</span>
+					<span className="ms-2 d-none d-md-block">Pricing</span>
 				</div>
 				<div style={{ width: "50px"}}><hr /></div>
 				<div className={getClassName(4)}>
@@ -211,14 +211,14 @@ export default function EditPropertyForm() {
 						? <CheckCircle size={24} />
 						: <Icon5Circle size={24} />
 					}
-					<span className="ms-2">Review</span>
+					<span className="ms-2 d-none d-md-block">Review</span>
 				</div>
 			</div>
 			<div className="section-container">
 				{
 					formState === 0 &&
 					<div id="state-title-address" className="row">
-						<div className="col-6">
+						<div className="col-12 col-md-6">
 							<h1 className="page-heading">{ pageTitle }</h1>
 							<FormPartTitleAddress
 								isEditable={true}
@@ -231,7 +231,7 @@ export default function EditPropertyForm() {
 								advanceState={advanceState}
 							/>
 						</div>
-						<div className="col-6">
+						<div className="d-none d-md-block col-md-6">
 							<img src="/graphics/add-property-house.jpg" className="add-property-img" />
 						</div>
 					</div>
@@ -239,7 +239,7 @@ export default function EditPropertyForm() {
 				{
 					(formState === 1 && propertyId) &&
 					<div id="state-describe" className="row">
-						<div className="col-6">
+						<div className="col-12 col-md-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
 							<h1 className="page-heading">Describe your property</h1>
 							<FormPartDescription
@@ -253,7 +253,7 @@ export default function EditPropertyForm() {
 								advanceState={advanceState}
 							/>
 						</div>
-						<div className="col-6">
+						<div className="d-none d-md-block col-md-6">
 							<img src="/graphics/add-property-room.jpg" className="add-property-img" />
 						</div>
 					</div>
@@ -275,7 +275,7 @@ export default function EditPropertyForm() {
 				{
 					(formState === 3 && propertyId) &&
 					<div id="state-pricing" className="row">
-						<div className="col-6">
+						<div className="col-12 col-md-6">
 							<FormBackButton onButtonClicked={onBackClicked} />
 							<h1 className="page-heading">Pricing</h1>
 							<FormPartPricing
@@ -287,7 +287,7 @@ export default function EditPropertyForm() {
 								advanceState={advanceState}
 							/>
 						</div>
-						<div className="col-6">
+						<div className="d-none d-md-block col-md-6">
 							<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
 						</div>
 					</div>
@@ -296,7 +296,7 @@ export default function EditPropertyForm() {
 					(formState === 4 && propertyId) &&
 					<div>
 						<div id="state-review" className="row">
-							<div className="col-6">
+							<div className="col-12 col-md-6">
 								<FormBackButton onButtonClicked={onBackClicked} />
 								<h1 className="page-heading">Review your property</h1>
 								<FormPartReview
@@ -304,7 +304,7 @@ export default function EditPropertyForm() {
 									propertyId={propertyId}
 								/>
 							</div>
-							<div className="col-6">
+							<div className="d-none d-md-block col-md-6">
 								<div className="col-6 pt-5 ms-5 sticky">
 									<div id="preview">
 										<PropertyListItem
