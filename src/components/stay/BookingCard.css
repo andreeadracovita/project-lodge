@@ -1,3 +1,11 @@
 #booking-card .form-field {
 	border: 1px solid #adb5bd;
 }
+
+#calendar-dropdown-booking-desktop {
+	min-width: 500px;
+}
+
+#calendar-dropdown-booking-mobile {
+	min-width: 300px;
+}

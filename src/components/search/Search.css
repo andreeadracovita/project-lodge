@@ -6,3 +6,11 @@
 #search-icon {
   stroke: white;
 }
+
+#calendar-dropdown-desktop {
+  min-width: 500px;
+}
+
+#calendar-dropdown-mobile {
+  min-width: 300px;
+}

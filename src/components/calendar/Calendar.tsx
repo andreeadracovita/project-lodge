@@ -7,7 +7,11 @@ import CalendarMonth from "./CalendarMonth";
 import { getPropertyAvailability } from "api/BackendApiService";
 import { yearDashMonthDashDay } from "utils/dateUtils";
 
-export default function Calendar() {
+type CalendarProps = {
+	showSingleMonth: boolean
+};
+
+export default function Calendar({ showSingleMonth }: CalendarProps) {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const propertyId = searchParams.get("id");
 	
@@ -104,29 +108,48 @@ export default function Calendar() {
 	}
 
 	return (
-		<div id="calendar" className="row g-5">
-			<div className="col-6">
-				<CalendarMonth
-					month={firstDate.getMonth()}
-					year={firstDate.getFullYear()}
-					chevronLeft={true}
-					chevronRight={false}
-					onLeftChevronClicked={decrementMonth}
-					onRightChevronClicked={undefined}
-					onDateClicked={pickDate}
-				/>
-			</div>
-			<div className="col-6">
-				<CalendarMonth
-					month={secondDate.getMonth()}
-					year={secondDate.getFullYear()}
-					chevronLeft={false}
-					chevronRight={true}
-					onLeftChevronClicked={undefined}
-					onRightChevronClicked={incrementMonth}
-					onDateClicked={pickDate}
-				/>
-			</div>
+		<div id="calendar" className="row">
+			{
+				showSingleMonth &&
+				<div className="col-12">
+					<CalendarMonth
+						month={firstDate.getMonth()}
+						year={firstDate.getFullYear()}
+						chevronLeft={true}
+						chevronRight={true}
+						onLeftChevronClicked={decrementMonth}
+						onRightChevronClicked={incrementMonth}
+						onDateClicked={pickDate}
+					/>
+				</div>
+			}
+			{
+				!showSingleMonth &&
+				<>
+					<div className="col-6">
+						<CalendarMonth
+							month={firstDate.getMonth()}
+							year={firstDate.getFullYear()}
+							chevronLeft={true}
+							chevronRight={false}
+							onLeftChevronClicked={decrementMonth}
+							onRightChevronClicked={undefined}
+							onDateClicked={pickDate}
+						/>
+					</div>
+					<div className="col-6">
+						<CalendarMonth
+							month={secondDate.getMonth()}
+							year={secondDate.getFullYear()}
+							chevronLeft={false}
+							chevronRight={true}
+							onLeftChevronClicked={undefined}
+							onRightChevronClicked={incrementMonth}
+							onDateClicked={pickDate}
+						/>
+					</div>
+				</>
+			}
 			<div className="mt-10 d-flex align-items-center cursor-pointer" onClick={clearSelection}>
 				<Eraser size={20} />
 				<span className="ms-1">Clear selection</span>

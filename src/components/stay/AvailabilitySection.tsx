@@ -32,7 +32,7 @@ export default function AvailabilitySection() {
 					checkIn !== null && checkOut !== null &&
 					<p className="text-muted">{dayMonYear(checkIn)} — {dayMonYear(checkOut)}</p>
 				}
-				<Calendar />
+				<Calendar showSingleMonth={false} />
 			</div>
 		</>
 	);

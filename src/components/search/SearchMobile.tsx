@@ -1,4 +1,4 @@
-import { GeoAlt, CalendarRange, People, Search } from "react-bootstrap-icons";
+import { GeoAlt, CalendarRange, People, Search, XLg } from "react-bootstrap-icons";
 
 import "./SearchMobile.css";
 import Calendar from "components/calendar/Calendar";
@@ -45,17 +45,22 @@ export default function SearchMobile({ input, handleCountryChange, handleChange,
 					<CalendarRange size={24} />
 					<div
 						id="date-range"
-						className="dropdown-center d-flex align-items-center cursor-pointer focusable rounded-pill"
+						className="dropdown d-flex align-items-center cursor-pointer focusable rounded-pill"
 						tabIndex={0}
 					>
-						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown">
+						<div id="dropdown-toggle" className="d-flex px-2 py-1" data-bs-toggle="dropdown" data-bs-auto-close="true">
 							<span className="me-2">{input.checkIn ? dayMonYear(new Date(input.checkIn)) : "Check-in"}</span>
 							—
 							<span className="ms-2">{input.checkOut ? dayMonYear(new Date(input.checkOut)) : "Check-out"}</span>
 						</div>
 						
-						<div className="dropdown-menu p-3" onClick={onCalendarClick}>
-							<Calendar />
+						<div id="calendar-dropdown-mobile" className="dropdown-menu p-3">
+							<div className="d-flex justify-content-end">
+								<XLg size={24} />
+							</div>
+							<div className="mt-1" onClick={onCalendarClick}>
+								<Calendar showSingleMonth={true} />
+							</div>
 						</div>
 					</div>
 				</div>

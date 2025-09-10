@@ -1,3 +1,4 @@
+import { XLg } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +95,7 @@ export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 			</p>
 			<form>
 				<div className="form-field rounded-pill d-flex px-4 py-2 w-100">
-					<div id="date-range" className="dropdown-center w-100 cursor-pointer focusable rounded-pill" tabIndex={0}>
+					<div id="date-range" className="dropdown w-100 cursor-pointer focusable rounded-pill" data-bs-auto-close="true" tabIndex={0}>
 						<div id="dropdown-toggle" className="d-flex align-items-center justify-content-between" data-bs-toggle="dropdown">
 							<span className="me-2">
 								<span className="d-block">{input.checkIn && "Check-in"}</span>
@@ -107,8 +108,18 @@ export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 							</span>
 						</div>
 						
-						<div className="dropdown-menu p-3" onClick={onCalendarClick}>
-							<Calendar />
+						<div className="dropdown-menu p-3">
+							<div id="calendar-dropdown-booking-desktop" className="d-none d-md-block" onClick={onCalendarClick}>
+								<Calendar showSingleMonth={false} />
+							</div>
+							<div id="calendar-dropdown-booking-mobile" className="d-block d-md-none">
+								<div className="d-flex justify-content-end">
+									<XLg size={24} />
+								</div>
+								<div onClick={onCalendarClick}>
+									<Calendar showSingleMonth={true} />
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

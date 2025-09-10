@@ -56,8 +56,8 @@ export default function SearchDesktop({ input, handleCountryChange, handleChange
 							<span className="ms-2">{input.checkOut ? dayMonYear(new Date(input.checkOut)) : "Check-out"}</span>
 						</div>
 						
-						<div className="dropdown-menu p-3" onClick={onCalendarClick}>
-							<Calendar />
+						<div id="calendar-dropdown-desktop" className="dropdown-menu p-3" onClick={onCalendarClick}>
+							<Calendar showSingleMonth={false} />
 						</div>
 					</div>
 				</div>

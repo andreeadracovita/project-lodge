@@ -93,11 +93,11 @@ export default function CalendarMonth({ month, year, chevronLeft, chevronRight, 
 			<div>
 				<div className="d-flex">
 					<div className="col-2">
-						{chevronLeft && <span className="cursor-pointer"><ChevronLeft onClick={onLeftChevronClicked} /></span>}
+						{chevronLeft && <span className="cursor-pointer" onClick={onLeftChevronClicked}><ChevronLeft /></span>}
 					</div>
 					<div className="col-8 text-center">{monthNames[month]} {year}</div>
 					<div className="col-2 d-flex justify-content-end">
-						{chevronRight && <span className="cursor-pointer"><ChevronRight onClick={onRightChevronClicked} /></span>}
+						{chevronRight && <span className="cursor-pointer" onClick={onRightChevronClicked}><ChevronRight /></span>}
 					</div>
 				</div>
 				<div className="days-grid mt-2">
