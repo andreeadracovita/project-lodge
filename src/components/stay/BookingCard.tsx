@@ -138,9 +138,18 @@ export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 						onChange={handleChange}
 					/>
 				</div>
-				<button type="button" className="btn-pill w-100 mt-3" onClick={handleBookClick}>
-					Book
-				</button>
+				<div className="d-none d-md-block">
+					{/*Desktop*/}
+					<button type="button" className="btn-pill w-100 mt-3" onClick={handleBookClick}>
+						Book
+					</button>
+				</div>
+				<div className="d-block d-md-none">
+					{/*Mobile*/}
+					<button type="button" className="btn-pill w-100 mt-3" onClick={handleBookClick} data-bs-dismiss="modal">
+						Book
+					</button>
+				</div>
 			</form>
 		</div>
 	)

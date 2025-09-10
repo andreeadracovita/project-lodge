@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CreditCard, CurrencyExchange } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 
@@ -10,6 +11,7 @@ type BookingPriceSectionProps = {
 };
 
 export default function BookingPriceSection({ item }: BookingPriceSectionProps) {
+	const [showDetails, setShowDetails] = useState<boolean>(false);
 	const authContext: any = useAuth();
 	const [searchParams] = useSearchParams();
 	const checkInParam = searchParams.get("check_in");
@@ -29,19 +31,31 @@ export default function BookingPriceSection({ item }: BookingPriceSectionProps) 
 				<div>In property currency: { localTotalPrice } { item.local_currency }</div>
 			</div>
 			<div className="mt-10">
-				<h3 className="property-card-heading">Price information</h3>
-				<div className="mt-10 row">
-					<div className="col-2 d-flex align-items-center">
-						<CurrencyExchange size={24} />
+				{
+					showDetails &&
+					<div className="mb-2">
+						<h3 className="property-card-heading">Price information</h3>
+						<div className="mt-10 row">
+							<div className="col-2 d-flex align-items-center">
+								<CurrencyExchange size={24} />
+							</div>
+							<div className="col-10">This price is converted to show you the approximate cost in { authContext.currency }. You'll pay in { item.local_currency }. The exchange rate may change before you pay.</div>
+						</div>
+						<div className="mt-10 row">
+							<div className="col-2 d-flex align-items-center">
+								<CreditCard size={24} />
+							</div>
+							<div className="col-10">Bear in mind that your card issuer may charge you a foreign transaction fee.</div>
+						</div>
 					</div>
-					<div className="col-10">This price is converted to show you the approximate cost in { authContext.currency }. You'll pay in { item.local_currency }. The exchange rate may change before you pay.</div>
-				</div>
-				<div className="mt-10 row">
-					<div className="col-2 d-flex align-items-center">
-						<CreditCard size={24} />
-					</div>
-					<div className="col-10">Bear in mind that your card issuer may charge you a foreign transaction fee.</div>
-				</div>
+				}
+				<button className="btn-pill-outline" onClick={() => setShowDetails(!showDetails)}>
+					{
+						showDetails
+						? <span>Hide details</span>
+						: <span>Show details</span>
+					}
+				</button>
 			</div>
 		</div>
 	);

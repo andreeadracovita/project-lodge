@@ -20,7 +20,7 @@ export default function Book() {
 					<ChevronLeft size={24} /><span className="ms-2">Back</span>
 				</div>
 			</Link>
-			<div className="section-container row">
+			<div className="d-none d-md-block section-container row">
 				<div className="col-2 text-bold d-flex align-items-center">
 					<CheckCircle size={24} />
 					<span className="ms-2">Your selection</span>
@@ -37,10 +37,10 @@ export default function Book() {
 				</div>
 			</div>
 			<div className="row section-container">
-				<div className="col-4">
+				<div className="col-12 col-md-4">
 					<BookingSelection />
 				</div>
-				<div className="col-8">
+				<div className="col-12 col-md-8">
 					<div className="border-section">
 						<BookingForm />
 					</div>
