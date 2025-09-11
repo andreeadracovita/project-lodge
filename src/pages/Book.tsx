@@ -17,7 +17,7 @@ export default function Book() {
 		<div className="container section-container">
 			<Link to={ linkPath }>
 				<div className="text-bold d-flex align-items-center">
-					<ChevronLeft size={24} /><span className="ms-2">Back</span>
+					<ChevronLeft size={24} /><span className="ms-2">Back to accommodation page</span>
 				</div>
 			</Link>
 			<div className="d-none d-md-flex section-container row">

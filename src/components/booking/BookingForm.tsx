@@ -128,7 +128,7 @@ export default function BookingForm() {
 				<hr />
 
 				<h2 className="section-heading">Address</h2>
-				<label htmlFor="address">Street and street number <span className="text-red">*</span></label>
+				<label htmlFor="address">Street name and number <span className="text-red">*</span></label>
 				<input
 					id="address"
 					type="text"

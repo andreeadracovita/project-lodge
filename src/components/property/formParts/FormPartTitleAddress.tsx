@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
-import { ChevronRight } from "react-bootstrap-icons";
+import { ChevronRight, GeoAltFill } from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
 import {
@@ -322,7 +322,10 @@ export default function FormPartTitleAddress({
 				}
 				{
 					isEditable && !geoCoords &&
-					<button className="btn-pill mt-10" type="button" onClick={handleLocateClick}>Locate on map</button>
+					<button className="btn-pill-outline mt-10 d-flex align-items-center justify-content-center" type="button" onClick={handleLocateClick}>
+						<span className="me-1">Locate on map</span>
+						<GeoAltFill />
+					</button>
 				}
 				
 			</div>
