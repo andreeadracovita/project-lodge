@@ -69,7 +69,23 @@ export default function SearchResults() {
 			.catch(error => {
 				console.error(error);
 			});
+	}, [
+		searchParams.get("check_in"),
+		searchParams.get("check_out"),
+		searchParams.get("country"),
+		searchParams.get("city"),
+		searchParams.get("guests"),
+		searchParams.get("ptype"),
+		searchParams.get("rtype"),
+		searchParams.get("beds"),
+		searchParams.get("bedrooms"),
+		searchParams.get("bathrooms"),
+		searchParams.get("feat"),
+		searchParams.get("exp"),
+		searchParams.get("dist")
+	]);
 
+	useEffect(() => {
 		// Update geolocation
 		const country = searchParams.get("country");
 		const city = searchParams.get("city");
@@ -79,7 +95,7 @@ export default function SearchResults() {
 			address += city;
 		}
 		if (country) {
-			address += countries().getLabel(country);
+			address += "+" + countries().getLabel(country);
 		}
 		
 		if (address !== "") {
@@ -102,21 +118,7 @@ export default function SearchResults() {
 					console.error(error);
 				});
 		}
-	}, [
-		searchParams.get("country"),
-		searchParams.get("city"),
-		searchParams.get("check_in"),
-		searchParams.get("check_out"),
-		searchParams.get("guests"),
-		searchParams.get("ptype"),
-		searchParams.get("rtype"),
-		searchParams.get("beds"),
-		searchParams.get("bedrooms"),
-		searchParams.get("bathrooms"),
-		searchParams.get("feat"),
-		searchParams.get("exp"),
-		searchParams.get("dist")
-	]);
+	}, [searchParams.get("country"), searchParams.get("city")]);
 
 	function computeMinMaxPrice() {
 		if (properties.length > 0) {
@@ -167,6 +169,11 @@ export default function SearchResults() {
 
 	// AuthContext exchangeRate may be fetched later from DB
 	useEffect(() => {
+		if (properties.length === 0) {
+			setBudgetProperties(properties);
+			setPriceRange([0, 0]);
+			return;
+		}
 		computeMinMaxPrice();
 		computeBudgetProperties();
 	}, [authContext.exchangeRate, properties]);

@@ -20,7 +20,7 @@ export default function Book() {
 					<ChevronLeft size={24} /><span className="ms-2">Back</span>
 				</div>
 			</Link>
-			<div className="d-none d-md-block section-container row">
+			<div className="d-none d-md-flex section-container row">
 				<div className="col-2 text-bold d-flex align-items-center">
 					<CheckCircle size={24} />
 					<span className="ms-2">Your selection</span>

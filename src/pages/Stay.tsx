@@ -13,11 +13,13 @@ import WishlistIcon from "components/list/WishlistIcon";
 import BookingSectionMobile from "components/stay/BookingSectionMobile";
 import Rating from "components/common/Rating";
 import { fileStorage } from "utils/constants";
+import { capitalizeFirstLetter } from "utils/stringUtils";
 
 export default function Stay() {
 	const [searchParams] = useSearchParams();
 	const [property, setProperty] = useState<any>();
 	const navigate = useNavigate();
+	const [propertyTypeString, setPropertyTypeString] = useState<string>("");
 
 	const id = searchParams.get("id");
 
@@ -28,8 +30,15 @@ export default function Stay() {
 		}
 		getPropertyById(parseInt(id))
 			.then(response => {
-				if (response.data) {
-					setProperty(response.data);
+				const data = response.data;
+				if (data) {
+					if (data.rental_type === "room") {
+						setPropertyTypeString(capitalizeFirstLetter(data.building_type) + " room");
+					} else {
+						setPropertyTypeString("Entire " + data.building_type);
+					}
+					
+					setProperty(data);
 				}
 			})
 			.catch(error => {
@@ -57,6 +66,7 @@ export default function Stay() {
 									</div>
 								}
 								<h1 className="page-heading">{property.title}</h1>
+								<p className="text-bold">{propertyTypeString}</p>
 								<p>
 									<GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
 								</p>

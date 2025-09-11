@@ -25,7 +25,7 @@ export default function SearchResultsListView({
 }: SearchResultsListViewProps) {
 	const [searchParams] = useSearchParams();
 
-	const countString = `${items.length} ${items.length > 1 ? "results" : "result"}`;
+	const countString = `${items.length} ${items.length === 1 ? "result" : "results"}`;
 	const checkInParam = searchParams.get("check_in") || undefined;
 	const checkOutParam = searchParams.get("check_out") || undefined;
 	const guests = parseInt(searchParams.get("guests") || "1");
