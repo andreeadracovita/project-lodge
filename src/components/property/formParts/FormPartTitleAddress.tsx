@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronRight } from "react-bootstrap-icons";
 import countries from "react-select-country-list";
 
@@ -40,12 +40,12 @@ export default function FormPartTitleAddress({
 	const [rentalTypes, setRentalTypes] = useState([]);
 	const [geoCoords, setGeoCoords] = useState<number[] | undefined>();
 	const [errors, setErrors] = useState<string[]>([]);
-	let pickedGeo = input.geo ?? [];
+	const pickedGeo = useRef(input.geo ?? []);
 
 	useEffect(() => {
 		if (input.geo) {
 			setGeoCoords(input.geo);
-			pickedGeo = input.geo;
+			setPickedGeo(input.geo);
 		}
 	}, [input.geo]);
 
@@ -72,7 +72,7 @@ export default function FormPartTitleAddress({
 	}, []);
 
 	function setPickedGeo(coords: number[]) {
-		pickedGeo = coords;
+		pickedGeo.current = coords;
 	}
 
 	const stylingFormControl100 = classNames(
@@ -96,14 +96,18 @@ export default function FormPartTitleAddress({
 				if (response.data.length > 0) {
 					setErrors([]);
 					const data = response.data[0];
-					setGeoCoords([Number(data.lat), Number(data.lon)]);
+					const geo = [Number(data.lat), Number(data.lon)];
+					setPickedGeo(geo);
+					setGeoCoords(geo);
 				} else {
 					getGeolocation(input.city + "+" + countryLabel)
 						.then(response => {
 							if (response.data.length > 0) {
 								setErrors([]);
 								const data = response.data[0];
-								setGeoCoords([Number(data.lat), Number(data.lon)]);
+								const geo = [Number(data.lat), Number(data.lon)];
+								setPickedGeo(geo);
+								setGeoCoords(geo);
 							} else {
 								setErrors(["No geographical location identified for given address. Check if city and country are correct."]);
 							}
@@ -124,13 +128,13 @@ export default function FormPartTitleAddress({
 	async function createProperty() {
 		const payload = {
 			title: input.title,
-			geo: { x: pickedGeo[0], y: pickedGeo[1] },
+			geo: { x: pickedGeo.current[0], y: pickedGeo.current[1] },
 			city: input.city,
 			country: input.country,
 			street: input.street,
 			street_no: input.streetNo,
-			building_type_id: parseInt(input.buildingType),
-			rental_type_id: parseInt(input.rentalType),
+			building_type_id: parseInt(input.buildingTypeId),
+			rental_type_id: parseInt(input.rentalTypeId),
 			local_currency: input.localCurrency
 		};
 		createNewProperty(payload)
@@ -160,11 +164,11 @@ export default function FormPartTitleAddress({
 		}
 		const payload = {
 			title: input.title,
-			geo: { x: pickedGeo[0], y: pickedGeo[1] },
+			geo: { x: pickedGeo.current[0], y: pickedGeo.current[1] },
 			city: input.city,
 			country: input.country,
-			building_type_id: parseInt(input.buildingType),
-			rental_type_id: parseInt(input.rentalType),
+			building_type_id: parseInt(input.buildingTypeId),
+			rental_type_id: parseInt(input.rentalTypeId),
 			street: input.street,
 			street_no: input.streetNo,
 			local_currency: input.localCurrency
@@ -221,8 +225,8 @@ export default function FormPartTitleAddress({
 			<select
 				id="buildingType"
 				className={stylingFormControl100}
-				name="buildingType"
-				value={input.buildingType ?? 1}
+				name="buildingTypeId"
+				value={input.buildingTypeId ?? 1}
 				disabled={!isEditable}
 				onChange={handleChange}
 				required
@@ -239,8 +243,8 @@ export default function FormPartTitleAddress({
 			<select
 				id="rentalType"
 				className={stylingFormControl100}
-				name="rentalType"
-				value={input.rentalType ?? 1}
+				name="rentalTypeId"
+				value={input.rentalTypeId ?? 1}
 				disabled={!isEditable}
 				onChange={handleChange}
 				required
