@@ -27,9 +27,9 @@
 ## Web Application Structure
 
 Our web application is built according to the following structure:
-- Vite & React Front-end (current repo)
-- [Node.js Back-end](https://github.com/andreeadracovita/project-lodge-db-rest-api)
-- PostgreSQL database: Database diagram [here](#) ...to add...
+- Vite & React Frontend (current repo)
+- [Link to Lodge Backend REST API](https://github.com/andreeadracovita/project-lodge-db-rest-api)
+- PostgreSQL database: [Link to database diagram](#)
 
 ## Running the Web Application
 
@@ -45,11 +45,15 @@ Pre-requisite: Node.js
 
 ## Development Planning
 
-... Link to planning.md ...
+[Link go planning document](docs/planning.md)
 
 ## Design
 
 [Link to design document](docs/Lodge-design.pdf)
+
+## E2E Testing
+
+... document describing test flows ...
 
 ## Improvements and Future Development
 
