@@ -1,5 +1,27 @@
 # Lodge - Accommodation Booking Web App
 
+Booking Web Application featuring accommodation publishing and rental services.
+Technologies: Node.js, React.js, TypeScript, backend REST API & React frontend.
+
+## Web Application Structure
+
+Our web application is built according to the following structure:
+- Vite & React Frontend (current repo)
+- [Link to Lodge Backend REST API](https://github.com/andreeadracovita/project-lodge-db-rest-api)
+- PostgreSQL database: [Link to database diagram](#)
+
+## Running the Web Application
+
+Pre-requisite: Node.js
+
+`npm install`
+
+`npm run dev`
+
+## Additional APIs
+
+- [Open Layer](https://openlayers.org/) to enhance the user's experience with map graphics.
+
 ## Features
 
 - Signed up and unauthenticated users can browse and book listed accommodations.
@@ -23,25 +45,6 @@
 - Authenticated routes
 - JWT for protected routes
 - Authorizing edits: for property editing, user settings' update, the user's credentials need to match the resource's owner
-
-## Web Application Structure
-
-Our web application is built according to the following structure:
-- Vite & React Frontend (current repo)
-- [Link to Lodge Backend REST API](https://github.com/andreeadracovita/project-lodge-db-rest-api)
-- PostgreSQL database: [Link to database diagram](#)
-
-## Running the Web Application
-
-Pre-requisite: Node.js
-
-`npm install`
-
-`npm run dev`
-
-## Additional APIs
-
-- [Open Layer](https://openlayers.org/) to enhance the user's experience with map graphics.
 
 ## Development Planning
 
