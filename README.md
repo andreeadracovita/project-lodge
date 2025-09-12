@@ -1,4 +1,4 @@
-# Lodge - Accommodation Listing & Booking Web Application
+# Lodge - Accommodation Booking Web App
 
 ## Features
 
