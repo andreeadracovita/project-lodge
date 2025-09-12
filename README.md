@@ -53,7 +53,7 @@ Pre-requisite: Node.js
 
 ## E2E Testing
 
-... document describing test flows ...
+[Link to E2E tests document](docs/testing.md)
 
 ## Improvements and Future Development
 
