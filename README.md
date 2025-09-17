@@ -46,9 +46,13 @@ Pre-requisite: Node.js
 - JWT for protected routes
 - Authorizing edits: for property editing, user settings' update, the user's credentials need to match the resource's owner
 
+## Database Design
+
+[Link to database diagram](docs/db-diagram.pdf)
+
 ## Development Planning
 
-[Link go planning document](docs/planning.md)
+[Link to planning document](docs/planning.md)
 
 ## Design
 
