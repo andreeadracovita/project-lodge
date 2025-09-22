@@ -104,12 +104,6 @@ export const getAllExperiences
 export const getBookingById
 	= (id: number, pin: string) => apiClient.get(`/booking?id=${id}&pin=${pin}`);
 
-export const getBookingsByEmail
-	= (email: string) => apiClient.get(`/booking/user-id/${email}`);
-
-export const getBookingsByPropertyId
-	= (propertyId: number) => apiClient.get(`/booking/property-id/${propertyId}`);
-
 export const createBooking
 	= (payload: any) => apiClient.post("/booking/new", payload);
 

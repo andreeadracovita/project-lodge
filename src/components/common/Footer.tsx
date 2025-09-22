@@ -25,8 +25,9 @@ export default function Footer() {
 								<small>© {currentYear} {siteName}</small>
 							</div>
 							<div className="col-6 text-end">
-								<div>Contact</div>
+								<div className="text-bold">Contact</div>
 								<div>Email: andreea.d.racovita@gmail.com</div>
+								<div>Github: <a href="https://github.com/andreeadracovita">github.com/andreeadracovita</a></div>
 							</div>
 						</div>
 					</div>
