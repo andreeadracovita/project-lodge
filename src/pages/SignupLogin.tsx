@@ -67,7 +67,8 @@ export default function SignupLogin() {
 
 	async function handleLogin() {
 		if (await authContext.login(input.email, input.password)) {
-			navigate(location?.pathname || "/");
+			const path = location?.pathname === "/signup-login" ? "/" : location.pathname;
+			navigate(path);
 		} else {
 			setErrors(["Incorrect email and password combination"]);
 		}

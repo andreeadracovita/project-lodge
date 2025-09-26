@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { apiClient } from "api/ApiClient";
 import { executeJwtAuthenticationService } from "api/AuthenticationApiService";
@@ -29,7 +28,6 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }: AuthProviderProps) {
-	const navigate = useNavigate();
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(sessionStorage.getItem("lodgeIsAuthenticated") === "true");
 	const [token, setToken] = useState(sessionStorage.getItem("lodgeToken"));
 
@@ -141,8 +139,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 	}
 
 	function logout() {
-		navigate("/");
-		
 		setIsAuthenticated(false);
 		sessionStorage.removeItem("lodgeIsAuthenticated");
 
@@ -163,6 +159,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
 		setLanguage(defaultLanguage);
 		sessionStorage.removeItem("lodgeLanguage");
+
+		window.location.reload();
 	}
 
 	function setSessionCurrency(value: string, forceRefresh: boolean) {
