@@ -1,33 +1,40 @@
 import {
 	Luggage,
 	Snow,
-	Feather,
 	Wind,
-	CupHot,
 	Tv,
-	Droplet,
-	Justify,
-	TriangleHalf,
 	Tsunami,
 	Water,
-	WindowDock,
 	PCircle,
 	Wifi
 } from "react-bootstrap-icons";
+import { FaDesktop, FaHotTub, FaMountain, FaPaw } from "react-icons/fa";
+import { BiSolidFridge } from "react-icons/bi";
+import { GiHighGrass } from "react-icons/gi";
+import { MdOutdoorGrill } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
+import { PiCookingPotFill } from "react-icons/pi";
+import { RiTreeFill } from "react-icons/ri";
+import { BsCupHotFill } from "react-icons/bs";
 
 export const featuresIconMap = new Map<string, any>([
 	["free WiFi", <Wifi />],
 	["free parking", <PCircle />],
-	["kitchen", <WindowDock />],
+	["kitchen", <PiCookingPotFill />],
 	["lake view", <Water />],
 	["sea view", <Tsunami />],
-	["mountain view", <TriangleHalf />],
-	["BBQ facilities", <Justify />],
-	["gym equipment", <Droplet />],
+	["mountain view", <FaMountain />],
+	["garden view", <RiTreeFill />],
+	["BBQ facilities", <MdOutdoorGrill />],
+	["gym equipment", <CgGym />],
 	["TV", <Tv />],
-	["coffee/tea maker", <CupHot />],
+	["tea/coffee maker", <BsCupHotFill />],
 	["patio", <Wind />],
-	["garden", <Feather />],
+	["garden", <GiHighGrass />],
 	["AC", <Snow />],
-	["luggage storage", <Luggage />]
+	["luggage storage", <Luggage />],
+	["hot tub/Jacuzzi", <FaHotTub />],
+	["refrigerator", <BiSolidFridge />],
+	["dedicated workspace", <FaDesktop />],
+	["pets allowed", <FaPaw />]
 ]);

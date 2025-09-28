@@ -28,7 +28,8 @@ export type PropertyItem = {
 	beds?: number,
 	rental_type: string,
 	property_type: string
-	reviews_no?: number
+	reviews_no?: number,
+	local_currency?: string
 };
 
 type PropertyListItemProps = {
@@ -65,7 +66,10 @@ export default function PropertyListItem({
 
 	const nightsString = nightsCount + (nightsCount > 1 ? " nights" : " night");
 	const guestsString = guests ? ", " + guests + (guests > 1 ? " guests" : " guest") : undefined;
-	const priceString = (isPreview ? Math.round(siteCurrencyTotalPrice * 100) / 100 : convertedTotalPrice) + " " + authContext.currency;
+	const priceString =
+		isPreview
+		? item.price_night_site + " " + item.local_currency
+		: convertedTotalPrice + " " + authContext.currency;
 
 	const isRoom = item.rental_type === "room";
 	const bedsString = item.beds ? item.beds + (item.beds > 1 ? " beds" : " bed") : "";

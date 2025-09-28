@@ -23,8 +23,8 @@ export default function Home() {
 	const currentDayIndex = checkIn.getDay();
 	checkIn.setDate(checkIn.getDate() + 6 - currentDayIndex);
 	// Sunday, 1 night total
-	const checkOut = new Date();
-	checkOut.setDate(checkIn.getDate() + 1);
+	const checkOut = new Date(checkIn);
+	checkOut.setDate(checkOut.getDate() + 1);
 
 	const checkInParam = yearDashMonthDashDay(checkIn);
 	const checkOutParam = yearDashMonthDashDay(checkOut);

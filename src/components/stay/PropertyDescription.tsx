@@ -13,6 +13,7 @@ type PropertyDescriptionProps = {
 export default function PropertyDescription({ property }: PropertyDescriptionProps) {
 	const [features, setFeatures] = useState([]);
 	const [experiences, setExperiences] = useState([]);
+	const [showAllFeatures, setShowAllFeatures] = useState(false);
 
 	useEffect(() => {
 		getAllFeatures()
@@ -43,27 +44,27 @@ export default function PropertyDescription({ property }: PropertyDescriptionPro
 	return (
 		<>
 			<h2 className="section-heading">About this property</h2>
-			<div className="mt-10">
-				{property.description.replace('\n', <br />)}
+			<div className="mt-10 display-linebreak">
+				{property.description}
 			</div>
-			<div className="mt-6">Max {guestsString}</div>
-			<div className="mt-6">{bedsString}, {bedroomsString}, {bathroomsString}</div>
+			<div className="mt-10 text-bold">Max {guestsString}</div>
+			<div className="mt-6 text-bold">{bedsString}, {bedroomsString}, {bathroomsString}</div>
 			{/*<div className="btn-pill-outline mt-6">Show more</div>
 			<div className="btn-pill-outline mt-6">Show less</div>*/}
 			<hr />
 			<h2 className="section-heading">Features</h2>
-			<div className="mt-10">
+			<div className="mt-10 row row-cols-2">
 				{
-					property.features_ids.map((id: number, i: number) => {
+					property.features_ids.slice(0, showAllFeatures ? property.features_ids.length : 6).map((id: number, i: number) => {
 						const foundFeature: any = features.find((feat: any) => feat.id == id);
 						if (foundFeature) {
-							return <span key={i} className="mt-10"><Feature name={foundFeature.name} /></span>
+							return <span key={i} className="mt-10 col"><Feature name={foundFeature.name} /></span>
 						}
 					})
 				}
 			</div>
-			{/*<div className="btn-pill-outline mt-6">Show more</div>
-			<div className="btn-pill-outline mt-6">Show less</div>*/}
+			{ !showAllFeatures && <div className="btn-pill-outline mt-6" onClick={() => setShowAllFeatures(true)}>Show more</div> }
+			{ showAllFeatures && <div className="btn-pill-outline mt-6" onClick={() => setShowAllFeatures(false)}>Show less</div> }
 			{
 				property.is_listed &&
 				<>

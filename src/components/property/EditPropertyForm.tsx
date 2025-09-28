@@ -11,8 +11,8 @@ import FormPartDescription from "./formParts/FormPartDescription";
 import FormPartPhotos from "./formParts/FormPartPhotos";
 import FormPartPricing from "./formParts/FormPartPricing";
 import FormPartReview from "./formParts/FormPartReview";
-import PropertyListItem from "components/list/PropertyListItem";
 import { getPropertyById } from "api/BackendApiService";
+import PropertyListItem from "components/list/PropertyListItem";
 import { fileStorage } from "utils/constants";
 import { yearDashMonthDashDay } from "utils/dateUtils";
 
@@ -318,7 +318,8 @@ export default function EditPropertyForm() {
 												images_url_array: imagesUrlArray,
 												geo: { x: 0, y: 0 },
 												rental_type: "",
-												property_type: ""
+												property_type: "",
+												local_currency: input.localCurrency
 											}}
 											checkIn={yearDashMonthDashDay(previewCheckIn)}
 											checkOut={yearDashMonthDashDay(previewCheckOut)}

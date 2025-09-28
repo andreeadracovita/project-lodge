@@ -90,7 +90,7 @@ export default function Stay() {
 								urlArray={property.images_url_array ? property.images_url_array.map((url: string) => fileStorage + url) : []}
 							/>
 						</div>
-						<div className="mt-5 row">
+						<div className="mt-10 row">
 							<div className="col-12 col-md-8">
 								<PropertyDescription property={property} />
 							</div>

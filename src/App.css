@@ -231,7 +231,7 @@ object {
   border: 1px solid var(--medium-grey);
   border-radius: 50rem;
   min-width: 60px;
-  margin: 6px 10px;
+  margin: 2px 2px;
   /*margin-inline-end: 0.25rem;*/
   text-align: center;
   padding: 6px 10px;
@@ -446,4 +446,8 @@ object {
 #reservations-tabs {
   display: flex;
   flex-wrap: nowrap;
+}
+
+.display-linebreak {
+  white-space: pre-line;
 }
