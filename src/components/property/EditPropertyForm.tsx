@@ -232,7 +232,7 @@ export default function EditPropertyForm() {
 							/>
 						</div>
 						<div className="d-none d-md-block col-md-6">
-							<img src="/graphics/add-property-house.jpg" className="add-property-img" />
+							<img src="/graphics/add-property-house.png" className="add-property-img" />
 						</div>
 					</div>
 				}
@@ -254,7 +254,7 @@ export default function EditPropertyForm() {
 							/>
 						</div>
 						<div className="d-none d-md-block col-md-6">
-							<img src="/graphics/add-property-room.jpg" className="add-property-img" />
+							<img src="/graphics/add-property-room.png" className="add-property-img" />
 						</div>
 					</div>
 				}
@@ -288,7 +288,7 @@ export default function EditPropertyForm() {
 							/>
 						</div>
 						<div className="d-none d-md-block col-md-6">
-							<img src="/graphics/add-property-pricing-1.jpg" className="add-property-img" />
+							<img src="/graphics/add-property-pricing.png" className="add-property-img" />
 						</div>
 					</div>
 				}
