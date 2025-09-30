@@ -32,7 +32,7 @@ export default function SearchResultsListView({
 	const city = searchParams.get("city") || undefined;
 
 	function getLocationString() {
-		let locationString = "";
+		let locationString;
 		if (searchParams.get("country")) {
 			locationString = countries().getLabel(searchParams.get("country") || "");
 		}
@@ -41,7 +41,10 @@ export default function SearchResultsListView({
 		if (city) {
 			locationString = city + ", " + locationString;
 		}
-		return locationString;
+		if (locationString) {
+			return locationString + ":";
+		}
+		return "";
 	}
 	
 	return (
@@ -83,7 +86,7 @@ export default function SearchResultsListView({
 						</div>
 					</div>
 					<div className="ms-2">
-						<h1 className="page-heading">{getLocationString()}: {countString} found</h1>
+						<h1 className="page-heading">{getLocationString()} {countString} found</h1>
 						<div className="mt-10">
 							<ListView
 								listItemType={ListItemType.Property}
@@ -126,7 +129,7 @@ export default function SearchResultsListView({
 					</span>
 				</div>
 				<div className="m-2">
-					<h1 className="page-heading">{getLocationString()}: {countString} found</h1>
+					<h1 className="page-heading">{getLocationString()} {countString} found</h1>
 					<div className="dropdown mt-2">
 						<div id="dropdown-button" role="button" data-bs-toggle="dropdown" data-bs-auto-close="false">
 							<span className="btn-pill-outline">Filters <FilterIcon size={24} /></span>
