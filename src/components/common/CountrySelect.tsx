@@ -27,6 +27,6 @@ export default function CountrySelect({ id, initialValue, handleFormChange }: Co
 	}
 	
 	return (
-		<Select id={id} options={options} value={value} onChange={changeHandler} />
+		<Select id={id} options={options} value={value} onChange={changeHandler} placeholder={"Country"} />
 	);
 }
