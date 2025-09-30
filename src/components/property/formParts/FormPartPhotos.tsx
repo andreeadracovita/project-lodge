@@ -73,10 +73,11 @@ export default function FormPartPhotos({ input, propertyId, handleChangePhotos, 
 			}
 
 			<label htmlFor="main-photo" className="text-bold mt-3">Add photos</label>
-			<div className="mb-3">The first photo will be displayed in search results</div>
+			<div>The first photo will be displayed in search results.</div>
+			<div className="text-muted">To show images in the desired order, choose ordering "none" in the selection window.</div>
 			<input
 				type="file"
-				className="form-control rounded-pill w-50"
+				className="form-control rounded-pill w-50 mt-10"
 				name="photos"
 				multiple={true}
 				onChange={handleChange}
