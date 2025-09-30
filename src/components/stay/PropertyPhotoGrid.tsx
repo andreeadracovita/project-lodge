@@ -100,7 +100,7 @@ export default function PropertyPhotoGrid({ urlArray }: PropertyPhotoGridProps) 
 				</div>
 			</div>
 			
-			<PhotoModal id="photo-modal" urlArray={urlArray} initial={targetPhoto} />
+			<PhotoModal id="photos-modal" urlArray={urlArray} initial={targetPhoto} />
 		</div>
 	)
 }
