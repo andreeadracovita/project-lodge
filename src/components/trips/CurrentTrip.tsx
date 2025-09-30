@@ -42,7 +42,7 @@ export default function CurrentTrip({ item }: CurrentTripProps) {
 							<div className="mt-6 text-muted">{checkOutTimes}</div>
 						</div>
 					</div>
-					<Link to={`/booking?id=${item.booking_id}&pin=${item.pin_code}`}>
+					<Link to={`/booking?id=${item.booking_id}&pin=${item.pin}`}>
 						<div className="mt-10 btn-pill">See booking confirmation</div>
 					</Link>
 				</div>

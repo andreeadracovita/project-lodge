@@ -72,7 +72,7 @@ export default function BookingForm() {
 				}
 				if (response.data) {
 					const bookingId = response.data.id;
-					const pinCode = response.data.pin_code;
+					const pinCode = response.data.pin;
 					navigate(`/booking?id=${bookingId}&pin=${pinCode}`);
 				}
 			})

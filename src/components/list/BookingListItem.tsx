@@ -12,7 +12,7 @@ type BookingListItemProp = {
 
 export default function BookingListItem({item}: BookingListItemProp) {
 	const [showReviewButton, setShowReviewButton] = useState(false);
-	const bookingPath = `/booking?id=${item.booking_id}&pin=${item.pin_code}`;
+	const bookingPath = `/booking?id=${item.booking_id}&pin=${item.pin}`;
 
 	useEffect(() => {
 		// Can review only non-cancelled bookings
