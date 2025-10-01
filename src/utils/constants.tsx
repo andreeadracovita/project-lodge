@@ -28,10 +28,10 @@ export const checkOutTimes = "06:00 — 10:00";
 
 // Landing images
 export const landingImages = [
-	"landing_0.jpg",
-	"landing_1.jpg",
-	"landing_2.jpg",
-	"landing_3.jpg"
+	"landing_0.png",
+	"landing_1.png",
+	"landing_2.png",
+	"landing_3.png"
 ];
 
 // Trending destinations for home page

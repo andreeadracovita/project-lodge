@@ -209,7 +209,6 @@ object {
 }
 
 #landing-greeting-section-container {
-  box-shadow: 10px 0px 10px black inset, -10px 0px 10px black inset;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
