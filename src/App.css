@@ -450,3 +450,10 @@ object {
 .display-linebreak {
   white-space: pre-line;
 }
+
+.cover-image {
+  object-fit: cover;
+  height: 170px;
+  width: 100%;
+  border-radius: var(--border-radius);
+}

@@ -45,30 +45,37 @@ export default function HostingPropertyListItem({ item, setNeedsRefresh }: Hosti
 	}
 
 	return (
-		<div className="row">
+		<div className="card-item w-100 row">
 			<div className="col-6">
-				<img src={imgUrl} className="list-item-photo" />
+				<img src={imgUrl} className="cover-image" />
 			</div>
 			<div className="col-6">
-				<p className="text-bold">{item.title}</p>
-				<p>{item.city}, {countries().getLabel(item.country)}</p>
+				<div className="property-card-heading">{item.title}</div>
+				<div>{item.city}, {countries().getLabel(item.country)}</div>
 				{
 					item.is_listed &&
-					<p className="text-bold">Listed</p>
+					<div className="text-bold">Listed</div>
 				}
+				<div className="mt-6">
 				{
 					item.is_listed
-					? <div>
-						<span className="btn-text-underline" onClick={handleEditClick}>Edit</span>
-						<span className="btn-text-underline" onClick={handleViewClick}>View</span>
-						<span className="btn-text-underline" onClick={handleUnpublishClick}>Unpublish</span>
-					</div>
-					: <div>
-						<span className="btn-text-underline" onClick={handleEditClick}>Edit to publish</span>
-						<span className="btn-text-underline" onClick={handleViewClick}>Preview</span>
-						<span className="btn-text-underline" onClick={handleDeleteClick}>Delete</span>
-					</div>
+					? <span className="btn-text-underline" onClick={handleViewClick}>View</span>
+					: <span className="btn-text-underline" onClick={handleViewClick}>Preview</span>
 				}
+				</div>
+				<div className="mt-4">
+				{
+					item.is_listed
+					? <>
+						<span className="btn-pill d-inline-block" onClick={handleEditClick}>Edit</span>
+						<span className="btn-pill-outline ms-1" onClick={handleUnpublishClick}>Unpublish</span>
+					</>
+					: <>
+						<span className="btn-pill d-inline-block" onClick={handleEditClick}>Edit to publish</span>
+						<span className="btn-pill-outline ms-1" onClick={handleDeleteClick}>Delete</span>
+					</>
+				}
+				</div>
 			</div>
 		</div>
 	)

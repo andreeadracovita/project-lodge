@@ -41,16 +41,17 @@ export default function BookingListItem({item}: BookingListItemProp) {
 			<div className="card-item w-100 row">
 				<div className="col-4">
 					<Link to={bookingPath}>
-						<img src={fileStorage + item.images_url_array[0]} className="list-item-photo" />
+						<img src={fileStorage + item.images_url_array[0]} className="cover-image" style={{height:"105px"}} />
 					</Link>
 				</div>
+				
 				<div className="col-8">
 					<Link to={bookingPath}>
 						<span className="d-block text-bold">{item.title}</span>
 						<span className="d-block">{item.city}, {countries().getLabel(item.country)}</span>
 						<span className="d-block text-muted">{dayMonYear(new Date(item.check_in))} — {dayMonYear(new Date(item.check_out))}</span>
 					</Link>
-					<span className="d-block mt-6">
+					<span className="d-inline-block mt-6">
 					{
 						showReviewButton &&
 						<Link to={`/review?booking_id=${item.booking_id}`} className="btn-pill">Review</Link>

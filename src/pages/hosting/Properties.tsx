@@ -33,7 +33,7 @@ export default function Properties() {
 					<ListView
 						listItemType={ListItemType.HostingProperty}
 						items={hostedProperties}
-						cols={3}
+						cols={2}
 						setNeedsRefresh={setNeedsRefresh}
 						checkIn={undefined}
 						checkOut={undefined}
