@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { createBooking } from "api/BackendApiService";
 import CountrySelect from "components/common/CountrySelect";
 import FormError from "components/common/FormError";
+import { useAuth } from "components/security/AuthContext";
 
 export default function BookingForm() {
 	const navigate = useNavigate();
+	const authContext: any = useAuth();
 	const [searchParams] = useSearchParams();
 	const [input, setInput] = useState({
 		firstName: "",
@@ -20,6 +22,18 @@ export default function BookingForm() {
 		phoneNo: ""
 	});
 	const [errors, setErrors] = useState<string[]>([]);
+
+	useEffect(() => {
+		if (authContext.isAuthenticated) {
+			setInput((prevValue: any) => {
+				return {
+					...prevValue,
+					firstName: authContext.firstName,
+					email: authContext.email
+				}
+			});
+		}
+	}, [authContext.isAuthenticated]);
 
 	function handleChange(event: any) {
 		const { name, value } = event.target;
