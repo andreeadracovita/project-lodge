@@ -18,7 +18,7 @@ export default function PhotoModal({ id, urlArray, initial }: PhotoModalProps) {
 	}, [initial])
 
 	function decrementActiveSlide() {
-		if (!activeSlide) {
+		if (activeSlide === undefined) {
 			return;
 		}
 		if (activeSlide - 1 < 0) {
@@ -29,7 +29,7 @@ export default function PhotoModal({ id, urlArray, initial }: PhotoModalProps) {
 	}
 
 	function incrementActiveSlide() {
-		if (!activeSlide) {
+		if (activeSlide === undefined) {
 			return;
 		}
 		if (activeSlide + 1 > urlArray.length - 1) {
