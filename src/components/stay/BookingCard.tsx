@@ -68,7 +68,7 @@ export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 		setInput((prevValue: any) => {
 			return {
 				...prevValue,
-				[name]: value
+				[name]: name === "guests" ? Math.min(value, maxGuests) : value
 			};
 		});
 	}
@@ -127,13 +127,12 @@ export default function BookingCard({ price, maxGuests }: BookingCardProps ) {
 					<label htmlFor="guests">Guests</label>
 					<input
 						id="guests"
-						type="number"
-						className="form-control search-field rounded-pill w-25 ms-2"
+						type="text"
+						pattern="[0-9]*"
+						className="form-control search-field rounded-pill ms-2 number-field"
 						placeholder="Guests"
 						aria-label="number of guests"
 						name="guests"
-						max={maxGuests}
-						min={1}
 						value={input.guests}
 						onChange={handleChange}
 					/>
