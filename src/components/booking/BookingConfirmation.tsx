@@ -94,7 +94,7 @@ export default function BookingConfirmation() {
 					<div className="text-muted">{status.toUpperCase()}</div>
 					<h1 className="page-heading">Your accommodation booking</h1>
 					
-					<div className="mt-10 border-section highlight w-25">
+					<div className="d-inline-block mt-10 border-section highlight">
 						<div>Confirmation number: <span className="text-bold">{bookingId}</span></div>
 						<div className="mt-6">PIN code: <span className="text-bold">{pinCode}</span></div>
 					</div>
