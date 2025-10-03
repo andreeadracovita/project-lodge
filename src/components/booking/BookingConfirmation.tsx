@@ -40,7 +40,7 @@ export default function BookingConfirmation() {
 							if (response.data) {
 								const propData = response.data;
 								setProperty(propData);
-								setGoogleMapsLink(`https://www.google.com/maps/place/${propData.geo.x}N+${propData.geo.y}E`);
+								setGoogleMapsLink(`https://www.google.com/maps/place/${propData.geo.x}+${propData.geo.y}`);
 							}
 						})
 						.catch(error => {

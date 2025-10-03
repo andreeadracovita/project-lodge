@@ -11,7 +11,7 @@ type CurrentTripProps = {
 };
 
 export default function CurrentTrip({ item }: CurrentTripProps) {
-	const googleMapsLink = `https://www.google.com/maps/place/${item.geo.x}N+${item.geo.y}E`;
+	const googleMapsLink = `https://www.google.com/maps/place/${item.geo.x}+${item.geo.y}`;
 	const checkIn = weekdayMonYear(new Date(item.check_in));
 	const checkOut = weekdayMonYear(new Date(item.check_out));
 	
