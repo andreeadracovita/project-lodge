@@ -29,19 +29,23 @@ export default function Properties() {
 
 			<div className="section-container">
 				<h1 className="page-heading">Properties</h1>
-				<div className="mt-10">
-					<ListView
-						listItemType={ListItemType.HostingProperty}
-						items={hostedProperties}
-						cols={2}
-						setNeedsRefresh={setNeedsRefresh}
-						checkIn={undefined}
-						checkOut={undefined}
-						nightsCount={undefined}
-						guests={undefined}
-						isCompact={undefined}
-					/>
-				</div>
+				{
+					hostedProperties.length === 0
+					? <div className="mt-10">You have no managed properties.</div>
+					: <div className="mt-10">
+						<ListView
+							listItemType={ListItemType.HostingProperty}
+							items={hostedProperties}
+							cols={2}
+							setNeedsRefresh={setNeedsRefresh}
+							checkIn={undefined}
+							checkOut={undefined}
+							nightsCount={undefined}
+							guests={undefined}
+							isCompact={undefined}
+						/>
+					</div>
+				}
 			</div>
 		</div>
 	);

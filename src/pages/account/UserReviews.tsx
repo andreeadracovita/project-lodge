@@ -33,11 +33,16 @@ export default function UserReviews() {
 	return (
 		<div className="container section-container">
 			<h1 className="page-heading">Reviews</h1>
-			<div>
 			{
-				reviews.map((review: any, i: number) => <UserPageReviewItem key={i} reviewData={review} setNeedsRefresh={setNeedsRefresh} />)
+				reviews.length === 0
+				? <div className="mt-10">You haven't reviewed any property yet.</div>
+				: <div className="mt-10">
+				{
+					reviews.map((review: any, i: number) => <UserPageReviewItem key={i} reviewData={review} setNeedsRefresh={setNeedsRefresh} />)
+				}
+				</div>
 			}
-			</div>
+			
 		</div>
 	);
 }

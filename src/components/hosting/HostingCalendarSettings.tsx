@@ -57,6 +57,10 @@ export default function HostingCalendarSettings() {
 		<div className="border-section">
 			<div className="text-bold">Selected property</div>
 			{
+				hostedProperties.length === 0 &&
+				<div className="mt-10">You have no managed properties.</div>
+			}
+			{
 				(hostedProperties.length > 0 && selectedProp !== undefined) &&
 				<div>
 					<div className="dropdown">

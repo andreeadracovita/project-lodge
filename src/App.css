@@ -411,7 +411,7 @@ object {
 }
 
 #calendar-sheet {
-  height: 750px;
+  height: 600px;
   overflow: scroll;
 }
 
