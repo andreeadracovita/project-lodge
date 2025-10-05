@@ -1,3 +1,10 @@
 #detailedReviewModal .modal-dialog {
 	min-width: 700px;
 }
+
+.clamp-lines-3 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}

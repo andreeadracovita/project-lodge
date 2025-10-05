@@ -29,7 +29,9 @@ export default function PropertyReviews({ property }: PropertyReviewsProps) {
 			</div>
 			<div className="mt-6 row row-cols-3">
 			{
-				reviews.slice(0, 3).map((review: any, i: number) => <StayPageReviewItem key={i} reviewData={review} isCompact={true} />)
+				reviews.slice(0, 3).map((review: any, i: number) => 
+					<StayPageReviewItem key={i} reviewData={review} isCompact={true} />
+				)
 			}
 			</div>
 			{

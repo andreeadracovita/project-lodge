@@ -66,7 +66,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }: StayPageRe
 						</div>
 					</div>
 				}
-				<div className="mt-6">{reviewData.body}</div>
+				<div className="mt-6 clamp-lines-3">{reviewData.body}</div>
 				<div className="mt-10 btn-text-underline" data-bs-toggle="modal" data-bs-target="#detailedReviewModal">Read more</div>
 				<div
 					id="detailedReviewModal"
