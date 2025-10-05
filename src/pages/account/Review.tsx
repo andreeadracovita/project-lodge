@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
-import { getAuthorizationForReview, getPropertyById } from "api/BackendApiService";
+import { getAuthorizationForReview, getBookingById, getPropertyById } from "api/BackendApiService";
 import ReviewForm from "components/review/ReviewForm";
 import PropertyListItem from "components/list/PropertyListItem";
+import { getNightsCount } from "utils/dateUtils";
 
 export default function Review() {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	const bookingId = searchParams.get("booking_id");
+	const pin = searchParams.get("pin");
 	const [property, setProperty] = useState<any>();
+	const [bookingDetails, setBookingDetails] = useState<any>();
+	const [nightsCount, setNightsCount] = useState<number>(1);
 
 	useEffect(() => {
-		if (!bookingId) {
+		if (!bookingId || !pin) {
 			navigate("/");
 			return;
 		}
@@ -32,6 +36,17 @@ export default function Review() {
 						.catch(error => {
 							console.error(error);
 						});
+					getBookingById(parseInt(bookingId), pin)
+						.then(response => {
+							const data = response.data;
+							if (data) {
+								setBookingDetails(data);
+								setNightsCount(getNightsCount(new Date(data.check_in), new Date(data.check_out)));
+							}
+						})
+						.catch(error => {
+							console.error(error);
+						});
 				}
 			})
 			.catch(error => {
@@ -43,18 +58,21 @@ export default function Review() {
 	return (
 		<div className="container section-container">
 		{
-			property &&
+			(property && bookingDetails) &&
 			<div className="row">
 				<div className="col-3">
 					<PropertyListItem
 						isPreview={true}
-						item={property}
+						item={{
+							...property,
+							price_night_site: bookingDetails.amount
+						}}
 						checkIn={""}
 						checkOut={""}
-						guests={1}
-						nightsCount={1}
+						guests={bookingDetails.guests}
+						nightsCount={nightsCount}
 						isCompact={true}
-						hideWishlist={false}
+						hideWishlist={true}
 					/>
 				</div>
 				<div className="col-9">

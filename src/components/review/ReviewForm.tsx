@@ -27,7 +27,7 @@ export default function ReviewForm({ propertyId }: ReviewFormProps) {
 		setInput((prevValue: any) => {
 			return {
 				...prevValue,
-				[name]: value
+				[name]: name === "rating" ? parseInt(value) : value
 			}
 		});
 	}

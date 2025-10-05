@@ -54,7 +54,7 @@ export default function BookingListItem({item}: BookingListItemProp) {
 					<span className="d-inline-block mt-6">
 					{
 						showReviewButton &&
-						<Link to={`/review?booking_id=${item.booking_id}`} className="btn-pill">Review</Link>
+						<Link to={`/review?booking_id=${item.booking_id}&pin=${item.pin}`} className="btn-pill">Review</Link>
 					}
 					</span>
 				</div>
