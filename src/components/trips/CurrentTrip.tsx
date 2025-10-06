@@ -46,7 +46,7 @@ export default function CurrentTrip({ item }: CurrentTripProps) {
 						<div className="mt-10 btn-pill">See booking confirmation</div>
 					</Link>
 				</div>
-				<div>
+				<div className="d-none d-md-block">
 					<img id="trip-card-photo" src={fileStorage + item.images_url_array[0]}/>
 				</div>
 			</div>
