@@ -49,13 +49,13 @@ export default function BookingPriceSection({ item }: BookingPriceSectionProps) 
 						</div>
 					</div>
 				}
-				<button className="btn-pill-outline" onClick={() => setShowDetails(!showDetails)}>
+				<div className="btn-pill-outline" onClick={() => setShowDetails(!showDetails)}>
 					{
 						showDetails
 						? <span>Hide details</span>
 						: <span>Show details</span>
 					}
-				</button>
+				</div>
 			</div>
 		</div>
 	);
