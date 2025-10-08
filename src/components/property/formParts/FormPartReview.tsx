@@ -1,4 +1,4 @@
-import { ChevronRight } from "react-bootstrap-icons";
+import { CheckCircleFill, ChevronRight, XCircleFill } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 import FormPartTitleAddress from "./FormPartTitleAddress";
@@ -72,6 +72,29 @@ export default function FormPartReview({ input, propertyId }: FormPartReviewProp
 				advanceState={undefined}
 			/>
 
+			{
+				(input.photos.length === 0 || !(input.priceNight > 0)) &&
+				<div className="mt-10">
+					<div className="alert alert-warning" role="alert">
+						To publish a property:<br />
+						
+						{
+							input.photos.length === 0
+							? <XCircleFill size={14} color="#CC0000" />
+							: <CheckCircleFill size={14} color="green" />
+						}
+						<span className="ms-1">it must contain at least one photo</span><br />
+						
+						{
+							input.priceNight > 0
+							? <CheckCircleFill size={14} color="green" />
+							: <XCircleFill size={14} color="#CC0000" />
+						}
+						<span className="ms-1">price must be higher than 0</span>
+					</div>
+				</div>
+			}
+
 			<form onSubmit={onSubmit}>
 				<div className="d-flex my-5">
 					<button
@@ -89,6 +112,7 @@ export default function FormPartReview({ input, propertyId }: FormPartReviewProp
 							type="submit"
 							name="publish"
 							className="btn-pill ms-2"
+							disabled={input.photos.length === 0 || !(input.priceNight > 0)}
 						>
 							Save and publish property <ChevronRight />
 						</button>

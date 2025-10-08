@@ -294,6 +294,11 @@ object {
   color: white;
 }
 
+.btn-pill:disabled {
+  background: var(--medium-grey);
+  pointer-events: none;
+}
+
 .btn-pill:hover {
   background: var(--darker-brand-color);
 }
