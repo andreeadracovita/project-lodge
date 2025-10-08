@@ -12,11 +12,10 @@ import { fileStorage } from "utils/constants";
 export default function ActivityMonitor() {
 	const authContext: any = useAuth();
 	const navigate = useNavigate();
-	const [hasActivityMonitorAccess, setHasActivityMonitorAccess] = useState(false);
 
 	const [properties, setProperties] = useState([]);
 	const [showAlert, setShowAlert] = useState(false);
-	let propToDelete;
+	let propToDelete: undefined | number;
 
 	useEffect(() => {
 		if (!authContext.isAuthenticated) {
@@ -27,7 +26,6 @@ export default function ActivityMonitor() {
 		authorizeAdmin()
 			.then(response => {
 				if (response.data.authorized && response.data.authorized === true) {
-					setHasActivityMonitorAccess(true);
 					getAllPropertiesAsAdmin()
 						.then(propertiesResponse => {
 							setProperties(propertiesResponse.data);
@@ -84,7 +82,7 @@ export default function ActivityMonitor() {
 								<td><Link to={`/stay?id=${prop.id}`}>{prop.title}</Link></td>
 								<td>{prop.host_email}</td>
 								<td>{
-									prop.images_url_array.map((url: any, index) =>
+									prop.images_url_array.map((url: any, index: number) =>
 										<img key={index} src={fileStorage + url} className="thumbnail-image me-1" />
 									)
 								}</td>
