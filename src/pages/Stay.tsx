@@ -25,13 +25,13 @@ export default function Stay() {
 
 	useEffect(() => {
 		if (!id) {
-			navigate("/");
+			navigate("/not-found");
 			return;
 		}
 		getPropertyById(parseInt(id))
 			.then(response => {
 				const data = response.data;
-				if (data) {
+				if (data.id) {
 					if (data.rental_type === "room") {
 						setPropertyTypeString(capitalizeFirstLetter(data.building_type) + " room");
 					} else {
@@ -39,6 +39,8 @@ export default function Stay() {
 					}
 					
 					setProperty(data);
+				} else {
+					navigate("/not-found");
 				}
 			})
 			.catch(error => {

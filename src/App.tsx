@@ -13,6 +13,7 @@ import SearchResults from "pages/SearchResults";
 import SignupLogin from "pages/SignupLogin";
 
 import Account from "pages/account/Account";
+import ActivityMonitor from "pages/account/ActivityMonitor";
 import Settings from "pages/account/Settings";
 import Trips from "pages/account/Trips";
 import Wishlist from "pages/account/Wishlist";
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
             <Route path="/myaccount/reviews" element={<RequireAuth><UserReviews /></RequireAuth>} />
             <Route path="/review" element={<RequireAuth><Review /></RequireAuth>} />
+            <Route path="/activity-monitor" element={<RequireAuth><ActivityMonitor /></RequireAuth>} />
 
             <Route path="/hosting" element={<RequireAuth><HostingDashboard /></RequireAuth>} />
             <Route path="/hosting/properties" element={<RequireAuth><Properties /></RequireAuth>} />

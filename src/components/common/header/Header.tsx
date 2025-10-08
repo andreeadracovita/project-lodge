@@ -1,12 +1,31 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Header.css";
+import { authorizeAdmin } from "api/BackendApiService";
 import { useAuth } from "components/security/AuthContext";
 import Avatar from "components/user/Avatar";
 import { availableCurrencies, siteName } from "utils/constants";
 
 export default function Header() {
 	const authContext: any = useAuth();
+	const [hasActivityMonitorAccess, setHasActivityMonitorAccess] = useState(false);
+
+	useEffect(() => {
+		if (!authContext.isAuthenticated) {
+			return;
+		}
+
+		authorizeAdmin()
+			.then(response => {
+				if (response.data.authorized && response.data.authorized === true) {
+					setHasActivityMonitorAccess(true);
+				}
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	}, [authContext.isAuthenticated]);
 
 	function logoutClicked() {
 		authContext.logout();
@@ -41,7 +60,11 @@ export default function Header() {
 							}
 							</ul>
 						</div>
-						<Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
+						{
+							hasActivityMonitorAccess
+							? <Link to="/activity-monitor" className="me-4 btn-pill">Activity monitor</Link>
+							: <Link to="/hosting/property/add" className="me-4 btn-pill">List a property</Link>
+						}
 						{
 							!authContext.isAuthenticated &&
 							<Link to="/signup-login" className="me-4 btn-pill">Sign up or log in</Link>

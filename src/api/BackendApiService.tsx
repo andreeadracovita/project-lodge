@@ -1,6 +1,16 @@
 import { apiClient } from "./ApiClient";
 
-// Misc
+// Admin ----------------------------------------------------------------------
+export const authorizeAdmin
+	= () => apiClient.get("/admin/authorize");
+
+export const getAllPropertiesAsAdmin
+	= () => apiClient.get("/admin/properties");
+
+export const deletePropertyWithIdAsAdmin
+	= (id: number) => apiClient.delete(`/admin/property/${id}`);
+
+// Misc -----------------------------------------------------------------------
 export const getExchangeRateForTarget
 	= (target: string) => apiClient(`/misc/exchange-rate?target=${target}`);
 

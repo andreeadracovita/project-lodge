@@ -457,3 +457,9 @@ object {
   width: 100%;
   border-radius: var(--border-radius);
 }
+
+.thumbnail-image {
+  height: 50px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
