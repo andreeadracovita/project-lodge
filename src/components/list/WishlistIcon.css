@@ -2,13 +2,11 @@
 	background-color: white;
 	padding: 5px;
 	border-radius: 50%;
-	top: 16px;
-	right: 16px;
 	border: 1px solid var(--light-grey);
 }
 
 .outline-heart-icon {
-	stroke: #0D0D0D;
+	stroke: var(--brand-color);
 }
 
 .heart-icon {
@@ -18,4 +16,9 @@
 .heart-icon:hover {
 	stroke: none;
 	fill: pink;
+}
+
+.top-right-position {
+	top: 16px;
+	right: 16px;
 }

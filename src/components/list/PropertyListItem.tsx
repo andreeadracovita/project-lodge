@@ -115,7 +115,7 @@ export default function PropertyListItem({
 					</div>
 				</div>
 			</Link>
-			{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} /> }
+			{ !hideWishlist && <WishlistIcon isPreview={isPreview} itemId={item.id} isRelative={true} /> }
 		</div>
 	);
 }

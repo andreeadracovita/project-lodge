@@ -59,31 +59,33 @@ export default function Stay() {
 				(id && property) &&
 				<div>
 					<div className="container section-container">
+						<div>
+							{
+								!property.is_listed &&
+								<div className="text-muted mb-2">
+									UNPUBLISHED
+								</div>
+							}
+							<h1 className="page-heading">{property.title}</h1>
+							<p className="text-bold">{propertyTypeString}</p>
+							<p>
+								<GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
+							</p>
+						</div>
 						<div className="row">
 							<div className="col-6">
-								{
-									!property.is_listed &&
-									<div className="text-muted mb-2">
-										UNPUBLISHED
-									</div>
-								}
-								<h1 className="page-heading">{property.title}</h1>
-								<p className="text-bold">{propertyTypeString}</p>
-								<p>
-									<GeoAltFill size={24}/> {property.street}, {property.street_no} {property.city}, {countries().getLabel(property.country)}
-								</p>
 								<span className="cursor-pointer" onClick={scrollToReviews}>
 									<Rating score={property.rating} reviewsNo={property.reviews_no} />
 								</span>
 							</div>
-							<div className="col-6 position-relative">
+							<div className="col-6 d-flex justify-content-end">
 								{
 									!property.is_listed &&
-									<WishlistIcon itemId={parseInt(id)} isPreview={true} />
+									<WishlistIcon itemId={parseInt(id)} isPreview={true} isRelative={false} />
 								}
 								{
 									property.is_listed &&
-									<WishlistIcon itemId={parseInt(id)} isPreview={false} />
+									<WishlistIcon itemId={parseInt(id)} isPreview={false} isRelative={false} />
 								}
 							</div>
 						</div>

@@ -57,7 +57,7 @@ export default function SmallPropertyListItem({
 						</div>
 					</div>
 				</Link>
-				<WishlistIcon itemId={item.id} isPreview={false} />
+				<WishlistIcon itemId={item.id} isPreview={false} isRelative={true} />
 			</div>
 		</div>
 	)

@@ -8,10 +8,11 @@ import { useAuth } from "components/security/AuthContext";
 
 type WishlistIconProps = {
 	itemId: number,
-	isPreview: boolean
+	isPreview: boolean,
+	isRelative: boolean
 };
 
-export default function WishlistIcon({ itemId, isPreview }: WishlistIconProps) {
+export default function WishlistIcon({ itemId, isPreview, isRelative }: WishlistIconProps) {
 	const authContext: any = useAuth();
 	const [isFavorite, setIsFavorite] = useState(false);
 
@@ -51,9 +52,19 @@ export default function WishlistIcon({ itemId, isPreview }: WishlistIconProps) {
 			"outline-heart-icon": !isFavorite && !isPreview
 		}
 	);
+
+	const wishlistIconClass = classNames(
+		"white-circle",
+		"cursor-pointer",
+		{
+			"position-absolute": isRelative,
+			"top-right-position": isRelative,
+			"d-inline-block": !isRelative
+		}
+	);
 	
 	return (
-		<div className="white-circle position-absolute cursor-pointer" onClick={handleHeartClick}>
+		<div className={wishlistIconClass} onClick={handleHeartClick}>
 			<HeartFill
 				size={20}
 				color={isFavorite || isPreview ? "#ff3131" : "white"}
