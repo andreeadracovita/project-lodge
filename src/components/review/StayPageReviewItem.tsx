@@ -29,9 +29,15 @@ export default function StayPageReviewItem({ reviewData, isCompact }: StayPageRe
 			});
 	}, []);
 
+	const ratingStars = [];
+	for (let i = 0; i < reviewData.rating; i++) {
+        ratingStars.push(<span key={i}>★</span>);
+    }
+	
+
 	function renderDetailedReview() {
 		return (
-			<div className="mt-10 row">
+			<div className="row">
 				{
 					user &&
 					<div className="d-flex col-3">
@@ -55,7 +61,7 @@ export default function StayPageReviewItem({ reviewData, isCompact }: StayPageRe
 		<>
 		{
 			isCompact &&
-			<div className="mt-10 col border-section">
+			<div className="col p-3">
 				{
 					user &&
 					<div className="d-flex">
@@ -66,6 +72,8 @@ export default function StayPageReviewItem({ reviewData, isCompact }: StayPageRe
 						</div>
 					</div>
 				}
+				{ratingStars}
+				<div className="mt-6 text-bold">{reviewData.title}</div>
 				<div className="mt-6 clamp-lines-3">{reviewData.body}</div>
 				<div className="mt-10 btn-text-underline" data-bs-toggle="modal" data-bs-target="#detailedReviewModal">Read more</div>
 				<div

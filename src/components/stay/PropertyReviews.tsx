@@ -27,9 +27,9 @@ export default function PropertyReviews({ property }: PropertyReviewsProps) {
 			<div className="mt-10">
 				<Rating score={property.rating} reviewsNo={property.reviews_no} />
 			</div>
-			<div className="mt-6 row row-cols-3">
+			<div className="mt-10 row row-cols-1 row-cols-md-3 g-1">
 			{
-				reviews.slice(0, 3).map((review: any, i: number) => 
+				reviews.slice(0, 3).map((review: any, i: number) =>
 					<StayPageReviewItem key={i} reviewData={review} isCompact={true} />
 				)
 			}
